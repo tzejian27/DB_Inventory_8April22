@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Inventory_step4"
+    android:orientation="vertical"
+    android:layout_margin="20dp">
+
+    <TextView
+        android:textColor="@color/blue"
+        android:id="@+id/txt_new_house"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/inventory"
+        android:textSize="80px"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="70dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp">
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/tv_Inventory_TotalQty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/totalqty"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/textView_Inventory_TotalQty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/total_quantity"
+            android:layout_weight="6"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:textColor="@color/blue"
+        android:id="@+id/txt_input_barcode4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/input_barcode"
+        android:textSize="50px"
+        android:layout_marginBottom="10dp"/>
+
+    <EditText
+        android:background="@drawable/blue_border"
+        android:paddingLeft="20dp"
+        android:id="@+id/editText_Inventory_barcode"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="@string/enter_scan_barcode"
+        android:inputType="textPersonName"
+        android:layout_marginBottom="30dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp">
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/tv_inventory_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/quantity"
+            android:width="100dp"/>
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/textView_Inventory_Qty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inventory_s_quantity"
+            android:layout_weight="6"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp">
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/tv_Inventory_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:width="100dp"/>
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/textView_Inventory_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inventory_s_name"
+            android:layout_weight="6"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp">
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/tv_Inventory_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price"
+            android:width="100dp"/>
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/textView_Inventory_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inventory_s_price"
+            android:layout_weight="6"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp">
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/tv_Inventory_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cost"
+            android:width="100dp"/>
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/textView_Inventory_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inventory_s_cost"
+            android:layout_weight="6"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <Button
+            android:backgroundTint="@color/blue"
+            android:textColor="@color/white"
+            android:id="@+id/btn_Inventory_esc"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_weight="1"
+            android:text="@string/esc"
+            android:width="300dp"/>
+
+        <Button
+            android:backgroundTint="@color/blue"
+            android:textColor="@color/white"
+            android:id="@+id/btn_Inventory_enter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_weight="1"
+            android:text="@string/enter"
+            android:width="300dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/drawable-anydpi/ic_action_back.xml" value="0.2335" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/drawable-anydpi/ic_action_search.xml" value="0.2335" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/drawable-mdpi/grey_border.xml" value="0.1" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1495" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/drawable-xxhdpi/blue_border.xml" value="0.1" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1495" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_create_user.xml" value="0.338768115942029" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_delete_house.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_generate_inventory.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_generate_txt.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_home_page.xml" value="0.3269927536231884" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_delete.xml" value="0.18059777102330293" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_list.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_list2.xml" value="0.37135416666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_menu.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_modify.xml" value="0.37135416666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_new_goods.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_new_house.xml" value="0.18" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_setting.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory.xml" value="0.15" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory__list.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory_data_clear.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory_delete_confirm.xml" value="0.37135416666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory_list.xml" value="0.2611464968152866" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory_list2.xml" value="0.18" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory_step2.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory_step3.xml" value="0.2265193370165746" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory_step4.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory_step5.xml" value="0.25076452599388377" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_item_spec.xml" value="0.2554517133956386" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_item_spec_modify.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_maintain_user.xml" value="0.338768115942029" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_new_goods_step2.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_search.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_search_house.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_stock_adjustment_home.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_wireless_export.xml" value="0.33061594202898553" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/house_list_item.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/inventory_recycle_list_item.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1495" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1585" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

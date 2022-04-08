@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.db_inventory">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_iconnn"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_iconnn"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.DB_Inventory">
+        <activity
+            android:name=".Access_Right"
+            android:exported="false" />
+        <activity
+            android:name=".Create_User"
+            android:exported="false" />
+        <activity
+            android:name=".Maintain_User"
+            android:exported="false" />
+        <activity
+            android:name=".Wireless_Export"
+            android:exported="false" />
+        <activity
+            android:name=".Inventory_List2"
+            android:exported="false" />
+        <activity
+            android:name=".Search"
+            android:exported="false" />
+        <activity
+            android:name=".House_List2"
+            android:exported="false" />
+        <activity
+            android:name=".Search_House"
+            android:exported="false" />
+        <activity
+            android:name=".Inventory_Delete_Confirm"
+            android:exported="false" />
+        <activity
+            android:name=".Item_Spec_Modify"
+            android:exported="false" />
+        <activity
+            android:name=".Item_Spec"
+            android:exported="false" />
+        <activity
+            android:name=".Delete_House"
+            android:exported="false" />
+        <activity
+            android:name=".House_Modify"
+            android:exported="false" />
+        <activity
+            android:name=".New_Goods_step2"
+            android:exported="false" />
+        <activity
+            android:name=".Inventory_step5"
+            android:exported="false" />
+        <activity
+            android:name=".Inventory_step3"
+            android:exported="false" />
+        <activity
+            android:name=".Inventory_step4"
+            android:exported="false" />
+        <activity
+            android:name=".Inventory_step2"
+            android:exported="false" />
+        <activity
+            android:name=".Inventory_Data_Clear"
+            android:exported="false" />
+        <activity
+            android:name=".Inventory_List"
+            android:exported="false" />
+        <activity
+            android:name=".House_Menu"
+            android:exported="false" />
+        <activity
+            android:name=".House_New_House"
+            android:exported="false" />
+        <activity
+            android:name=".Inventory"
+            android:exported="false" />
+        <activity
+            android:name=".House_New_Goods"
+            android:exported="false" />
+        <activity
+            android:name=".House_Setting"
+            android:exported="false" />
+        <activity
+            android:name=".Generate_Txt"
+            android:exported="false" />
+        <activity
+            android:name=".House_Delete"
+            android:exported="false" />
+        <activity
+            android:name=".House_List"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Home_Page"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
