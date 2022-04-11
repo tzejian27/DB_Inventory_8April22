@@ -35,7 +35,10 @@
         <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_item_spec.xml" value="0.2554517133956386" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_item_spec_modify.xml" value="0.22" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_login_menu.xml" value="0.33061594202898553" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_login_user.xml" value="0.33061594202898553" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_main_menu.xml" value="0.33061594202898553" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_maintain_user.xml" value="0.338768115942029" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_new_goods_step2.xml" value="0.22" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_search.xml" value="0.25" />
@@ -44,6 +47,7 @@
         <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_wireless_export.xml" value="0.33061594202898553" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/house_list_item.xml" value="0.33" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/inventory_recycle_list_item.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/user_recycle_list.xml" value="0.36186594202898553" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1495" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1585" />
       </map>

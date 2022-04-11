@@ -47,7 +47,9 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 Toast.makeText(getApplicationContext(),"Sales Order still under construction",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_maintain_user:
-                Toast.makeText(getApplicationContext(),"Maintain User still under construction",Toast.LENGTH_SHORT).show();
+                Intent intent2MaintainUser = new Intent(Home_Page.this, Maintain_User.class);
+                startActivity(intent2MaintainUser);
+                //Toast.makeText(getApplicationContext(),"Maintain User still under construction",Toast.LENGTH_SHORT).show();
                 break;
         }
     }

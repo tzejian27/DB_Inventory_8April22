@@ -6,63 +6,49 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Login extends AppCompatActivity {
+public class Login_user extends AppCompatActivity {
 
     Button btnLogin;
     EditText txtName, txtPw;
     public static String username;
-
     private ProgressBar progressbar_main;
-
     DatabaseReference LoginRef;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_user);
 
-        //This is login for admin
-        setTitle("LoginPage (Admin)");
-        txtName = findViewById(R.id.name_login);
-        txtPw=findViewById(R.id.pass_login);
+        //This is login for user
+        setTitle("LoginPage (User)");
+        txtName = findViewById(R.id.name_login_user);
+        txtPw=findViewById(R.id.pass_login_user);
 
-        btnLogin=findViewById(R.id.btn_login);
+        btnLogin=findViewById(R.id.btn_login_user);
 
-        progressbar_main=(ProgressBar)findViewById(R.id.progressbar_main);
+        progressbar_main=(ProgressBar)findViewById(R.id.progressbar_main_user);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Login();
+                User_Login();
             }
         });
-
-        //if already register, no need to login every time
-        FirebaseAuth mAuth;
-        mAuth=FirebaseAuth.getInstance();
-        if(mAuth.getCurrentUser()!=null){
-            startActivity(new Intent(getApplicationContext(),Home_Page.class));
-        }
-
-
     }
 
-    private void Login() {
+    public void User_Login(){
         String Username=txtName.getText().toString().trim();
         String Password=txtPw.getText().toString().trim();
 
@@ -81,7 +67,7 @@ public class Login extends AppCompatActivity {
 
         progressbar_main.setVisibility(View.VISIBLE);
 
-        LoginRef= FirebaseDatabase.getInstance().getReference().child("Users").child("Admin");
+        LoginRef= FirebaseDatabase.getInstance().getReference().child("Users").child("User");
         LoginRef.child(Username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -90,7 +76,7 @@ public class Login extends AppCompatActivity {
 
                     if (Password.equals(pwd)){
                         username=Username;
-                        Intent intent = new Intent(Login.this, Home_Page.class);
+                        Intent intent = new Intent(getApplicationContext(), Home_Page.class);
                         intent.putExtra(Username, username);
                         startActivity(intent);
                         finish();
@@ -99,11 +85,11 @@ public class Login extends AppCompatActivity {
                         progressbar_main.setVisibility(View.INVISIBLE);
                         Toast.makeText(getApplicationContext(),"Login Successfully", Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(Login.this,"Password incorrect ...",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Password incorrect ...",Toast.LENGTH_SHORT).show();
                         progressbar_main.setVisibility(View.INVISIBLE);
                     }
                 }else{
-                    Toast.makeText(Login.this,"Username incorrect ...",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Username incorrect ...",Toast.LENGTH_SHORT).show();
                     progressbar_main.setVisibility(View.INVISIBLE);
                 }
             }
@@ -114,6 +100,7 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

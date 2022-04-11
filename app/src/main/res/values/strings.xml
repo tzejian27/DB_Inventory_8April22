@@ -88,4 +88,6 @@
     <string name="user_list">User List</string>
     <string name="create">Create</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="role">Role:</string>
+    <string name="role1">Role</string>
 </resources>
