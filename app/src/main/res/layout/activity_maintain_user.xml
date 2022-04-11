@@ -34,7 +34,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:orientation="vertical">
 
         <TextView
@@ -48,21 +48,21 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:id="@+id/recycleView_User"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/admin_list"
             android:textColor="#FF7043"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:id="@+id/recycleView_Admin"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="5dp"/>
 
     </LinearLayout>
 

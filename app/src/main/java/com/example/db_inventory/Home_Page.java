@@ -1,6 +1,7 @@
 package com.example.db_inventory;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
 
     Button btn_home_home, btn_stock_adjustment;
     Button btn_sales_order, btn_maintain_users;
+    CardView cardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +24,19 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         btn_stock_adjustment=findViewById(R.id.btn_stock_adjustment);
         btn_sales_order=findViewById(R.id.btn_sales_order);
         btn_maintain_users=findViewById(R.id.btn_maintain_user);
+        cardView=findViewById(R.id.cv_maintain_user);
+
+
 
         btn_home_home.setOnClickListener(this);
         btn_stock_adjustment.setOnClickListener(this);
         btn_sales_order.setOnClickListener(this);
+        String users=getIntent().getStringExtra("Users");
+        if(users != null && users.equals("User")){
+            btn_maintain_users.setClickable(false);
+            btn_maintain_users.setVisibility(View.INVISIBLE);
+            cardView.setVisibility(View.INVISIBLE);
+        }
         btn_maintain_users.setOnClickListener(this);
 
 
@@ -47,8 +58,8 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 Toast.makeText(getApplicationContext(),"Sales Order still under construction",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_maintain_user:
-                Intent intent2MaintainUser = new Intent(Home_Page.this, Maintain_User.class);
-                startActivity(intent2MaintainUser);
+                    Intent intent2MaintainUser = new Intent(Home_Page.this, Maintain_User.class);
+                    startActivity(intent2MaintainUser);
                 //Toast.makeText(getApplicationContext(),"Maintain User still under construction",Toast.LENGTH_SHORT).show();
                 break;
         }

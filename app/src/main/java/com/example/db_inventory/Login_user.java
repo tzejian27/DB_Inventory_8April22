@@ -76,8 +76,10 @@ public class Login_user extends AppCompatActivity {
 
                     if (Password.equals(pwd)){
                         username=Username;
+                        String users="User";
                         Intent intent = new Intent(getApplicationContext(), Home_Page.class);
                         intent.putExtra(Username, username);
+                        intent.putExtra("Users", users);
                         startActivity(intent);
                         finish();
                         txtName.setText("");
