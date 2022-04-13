@@ -30,7 +30,7 @@
             android:id="@+id/tv_Inventory_TotalQty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/total_quantity"
+            android:text="Total Quantity"
             android:layout_weight="1"/>
 
         <TextView
@@ -82,15 +82,15 @@
             android:layout_weight="1"
             android:text="@string/cancel"/>
 
-        <Button
-            android:backgroundTint="@color/blue"
-            android:textColor="@color/white"
-            android:id="@+id/btn_Inventory_step5_add"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="@string/add"
-            android:layout_margin="5dp"
-            android:layout_weight="1"/>
+<!--        <Button-->
+<!--            android:backgroundTint="@color/blue"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:id="@+id/btn_Inventory_step5_add"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:text="@string/add"-->
+<!--            android:layout_margin="5dp"-->
+<!--            android:layout_weight="1"/>-->
 
         <Button
             android:backgroundTint="@color/blue"

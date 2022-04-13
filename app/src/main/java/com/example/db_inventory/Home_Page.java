@@ -13,6 +13,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
 
     Button btn_home_home, btn_stock_adjustment;
     Button btn_sales_order, btn_maintain_users;
+    Button btn_stockIn, btn_stockOut;
     CardView cardView;
 
     @Override
@@ -25,6 +26,12 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         btn_sales_order=findViewById(R.id.btn_sales_order);
         btn_maintain_users=findViewById(R.id.btn_maintain_user);
         cardView=findViewById(R.id.cv_maintain_user);
+
+        btn_stockIn=findViewById(R.id.btn_stock_in);
+        btn_stockOut=findViewById(R.id.btn_stock_out);
+
+        btn_stockIn.setOnClickListener(this);
+        btn_stockOut.setOnClickListener(this);
 
 
 
@@ -61,6 +68,13 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                     Intent intent2MaintainUser = new Intent(Home_Page.this, Maintain_User.class);
                     startActivity(intent2MaintainUser);
                 //Toast.makeText(getApplicationContext(),"Maintain User still under construction",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn_stock_in:
+                Intent intent2HouseList = new Intent(Home_Page.this, House_List.class);
+                startActivity(intent2HouseList);
+                break;
+            case R.id.btn_stock_out:
+                Toast.makeText(getApplicationContext(),"Stock Out still under construction",Toast.LENGTH_SHORT).show();
                 break;
         }
     }

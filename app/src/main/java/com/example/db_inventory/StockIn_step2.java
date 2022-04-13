@@ -21,10 +21,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Inventory_step3 extends AppCompatActivity {
+public class StockIn_step2 extends AppCompatActivity {
 
     Button b1,b2;
-    EditText e1,e2;
+    EditText e1,e2,e3;
     DatabaseReference databaseReference,databaseReference2, newGoodRef;
     int TotalQty=0;
     String Quantity="0";
@@ -37,13 +37,14 @@ public class Inventory_step3 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inventory_step3);
+        setContentView(R.layout.activity_stock_in_step2);
 
-        b1 = (Button)findViewById(R.id.btn_back3);
-        b2= (Button)findViewById(R.id.btn_next3);
-        e1=(EditText)findViewById(R.id.editText_Inventory_price);
-        e2=(EditText)findViewById(R.id.editText_Inventory_cost);
+        b1=(Button)findViewById(R.id.btn_inventory_back2_SI);
+        b2=(Button)findViewById(R.id.btn_inventory_next2_SI);
 
+        e1=(EditText)findViewById(R.id.editText_Inventory_name_SI);
+        e2=(EditText)findViewById(R.id.editText_Inventory_price_SI);
+        e3=(EditText)findViewById(R.id.editText_Inventory_cost_SI);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
         currentDateandTime = sdf.format(new Date());
@@ -51,10 +52,9 @@ public class Inventory_step3 extends AppCompatActivity {
         Intent intent = getIntent();
         final String key = intent.getStringExtra("Key");
         final String name = intent.getStringExtra("name");
-        final String barcode = intent.getStringExtra("barcode");
+
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
-
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -69,34 +69,31 @@ public class Inventory_step3 extends AppCompatActivity {
             }
         });
 
-
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Inventory_step3.this, Inventory_step2.class);
-                intent.putExtra("Key", key);
-                intent.putExtra("name", name);
-                intent.putExtra("barcode", barcode);
+                Intent intent = new Intent(StockIn_step2.this, House_List.class);
                 startActivity(intent);
                 finish();
             }
         });
 
+
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {                
+            public void onClick(View v) {
                 Intent intent = getIntent();
                 String barcode = intent.getStringExtra("barcode");
-                String itemName = intent.getStringExtra("itemName");
-                String price = e1.getText().toString().trim();
-                String cost = e2.getText().toString().trim();
+                String itemName = e1.getText().toString().trim();
+                String price = e2.getText().toString().trim();
+                String cost = e3.getText().toString().trim();
                 databaseReference2=FirebaseDatabase.getInstance().getReference("House").child(key).push();
                 databaseReference2.keepSynced(true);
                 key2 = databaseReference2.getKey();
                 k = (maxid-3);
 
                 totaltype =Long.toString(k);
-                
+
                 if(TextUtils.isEmpty(price)){
                     e1.setError("Required Field...");
                     return;
@@ -130,7 +127,7 @@ public class Inventory_step3 extends AppCompatActivity {
 
                 databaseReference.child("TotalType").setValue(totaltype);
 
-                Intent page = new Intent(Inventory_step3.this, Inventory_step4.class);
+                Intent page = new Intent(StockIn_step2.this, StockIn_step3.class);
                 page.putExtra("barcode", barcode);
                 page.putExtra("Key", key);
                 page.putExtra("Key2", key2);
@@ -142,5 +139,9 @@ public class Inventory_step3 extends AppCompatActivity {
 
             }
         });
+
+
+
+
     }
 }

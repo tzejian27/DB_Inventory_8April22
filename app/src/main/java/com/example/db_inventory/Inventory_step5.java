@@ -48,7 +48,7 @@ public class Inventory_step5 extends AppCompatActivity {
         e1=(EditText)findViewById(R.id.editText_Inventory_step5_Qty);
 
         b1=(Button)findViewById(R.id.btn_Inventory_step5_cancel);
-        b2=(Button)findViewById(R.id.btn_Inventory_step5_add);
+        //b2=(Button)findViewById(R.id.btn_Inventory_step5_add);
         b3=(Button)findViewById(R.id.btn_Inventory_step5_change);
 
         databaseReference= FirebaseDatabase.getInstance().getReference("House").child(key);
@@ -81,7 +81,7 @@ public class Inventory_step5 extends AppCompatActivity {
             }
         });
 
-        b2.setOnClickListener(new View.OnClickListener() {
+        /*b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String qty = e1.getText().toString().trim();
@@ -130,7 +130,7 @@ public class Inventory_step5 extends AppCompatActivity {
                     Toast.makeText(Inventory_step5.this, "Add Successfully !!!", Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        });*/
 
         b3.setOnClickListener(new View.OnClickListener() {
             @Override

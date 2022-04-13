@@ -41,9 +41,9 @@
     <string name="input_price">Input price :</string>
     <string name="enter_price">Enter price</string>
     <string name="totalqty">TotalQty :</string>
-    <string name="total_quantity">total quantity</string>
+    <string name="total_quantity">Total qty</string>
     <string name="quantity">Quantity :</string>
-    <string name="inventory_s_quantity">Inventory\'s quantity</string>
+    <string name="inventory_s_quantity">Inventory\'s qty</string>
     <string name="name">Name :</string>
     <string name="price">Price :</string>
     <string name="cost">Cost :</string>

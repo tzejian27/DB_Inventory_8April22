@@ -45,7 +45,7 @@ public class House_List extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2home = new Intent(House_List.this, MainActivity.class);
+                Intent intent2home = new Intent(House_List.this, Home_Page.class);
                 startActivity(intent2home);
             }
         });
@@ -91,7 +91,7 @@ public class House_List extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         super.onBackPressed();
-        Intent intent = new Intent(House_List.this, MainActivity.class);
+        Intent intent = new Intent(House_List.this, Home_Page.class);
         startActivity(intent);
         finish();
 
