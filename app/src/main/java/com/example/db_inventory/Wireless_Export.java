@@ -106,6 +106,41 @@ public class Wireless_Export extends AppCompatActivity {
 
     }
 
+    private void FetchAll(){
+
+        DatabaseReference houseRef2 = FirebaseDatabase.getInstance().getReference("House");
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    //creating an object and setting to display
+                    HouseInventory houses = new HouseInventory();
+                    houses.setBarcode(snapshot.child("Barcode").getValue().toString());
+                    houses.setQuantity(snapshot.child("Quantity").getValue().toString());
+                    houses.setItemName(snapshot.child("ItemName").getValue().toString());
+                    houses.setHouseKey(snapshot.child("HouseKey").getValue().toString());
+                    houses.setPrice(snapshot.child("Price").getValue().toString());
+                    houses.setCost(snapshot.child("Cost").getValue().toString());
+                    houses.setDate_and_Time(snapshot.child("Date_and_Time").getValue().toString());
+                    houses.setKey2(snapshot.child("Key").getValue().toString());
+
+                    Log.d("House", "HouseKey: " + houses.getHouseKey());
+
+                    /* The error before was cause by giving incorrect data type
+                    You were adding an object of type House yet the arraylist expects obejct of type DisabledUsers
+                     */
+                    houseInventoryList.add(houses);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        houseRef2.addListenerForSingleValueEvent(eventListener);
+    }
+
     private void fetchHouseInventory() {
         Intent intent = getIntent();
         final String nameFile = intent.getStringExtra("name");
