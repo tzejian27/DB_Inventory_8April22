@@ -40,10 +40,13 @@ public class House_New_House extends AppCompatActivity {
         btn_cancel=findViewById(R.id.btn_cancel);
         btn_enter=findViewById(R.id.btn_enter);
 
+        String users=getIntent().getStringExtra("Users");
+
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent2home = new Intent(House_New_House.this, MainActivity.class);
+                intent2home.putExtra("Users", users);
                 startActivity(intent2home);
             }
         });
@@ -64,6 +67,7 @@ public class House_New_House extends AppCompatActivity {
 
     private void add() {
         String name = edt_house_name.getText().toString().trim();
+        String users=getIntent().getStringExtra("Users");
         myRef.child("Name").orderByChild("Name").equalTo(name).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -95,6 +99,7 @@ public class House_New_House extends AppCompatActivity {
                     Intent intent = new Intent(House_New_House.this, House_Menu.class);
                     intent.putExtra("name", name);
                     intent.putExtra("Key",key);
+                    intent.putExtra("Users", users);
                     startActivity(intent);
                     finish();
                     //         }

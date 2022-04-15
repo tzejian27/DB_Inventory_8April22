@@ -44,7 +44,7 @@
             android:id="@+id/txt_edit_spec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/edit_spec"
+            android:text="@string/disable_edit_spec"
             android:textSize="50px"
             android:layout_weight="5"/>
 

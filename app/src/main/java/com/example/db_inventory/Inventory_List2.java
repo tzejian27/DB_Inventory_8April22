@@ -49,6 +49,7 @@ public class Inventory_List2 extends AppCompatActivity {
         Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
+        String users=getIntent().getStringExtra("Users");
 
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +57,7 @@ public class Inventory_List2 extends AppCompatActivity {
                 Intent page = new Intent(Inventory_List2.this,House_Menu.class);
                 page.putExtra("name",name);
                 page.putExtra("Key",key);
+                page.putExtra("Users", users);
                 startActivity(page);
                 finish();
             }
@@ -79,6 +81,7 @@ public class Inventory_List2 extends AppCompatActivity {
     @Override
     public void onStart(){
         super.onStart();
+        String users=getIntent().getStringExtra("Users");
 
 
         Intent intent = getIntent();
@@ -120,6 +123,7 @@ public class Inventory_List2 extends AppCompatActivity {
                                     intent.putExtra("Key2",key2);
                                     intent.putExtra("name",name);
                                     intent.putExtra("Barcode", model.getBarcode());
+                                    intent.putExtra("Users", users);
                                     startActivity(intent);
                                     finish();
 
@@ -129,6 +133,7 @@ public class Inventory_List2 extends AppCompatActivity {
                                     intent.putExtra("Key",key);
                                     intent.putExtra("Key2",key2);
                                     intent.putExtra("name",name);
+                                    intent.putExtra("Users", users);
                                     startActivity(intent);
                                 }
                                 if (position == 2){
@@ -137,6 +142,7 @@ public class Inventory_List2 extends AppCompatActivity {
                                     intent.putExtra("barcode",barcode);
                                     intent.putExtra("Key2",key2);
                                     intent.putExtra("Key",key);
+                                    intent.putExtra("Users", users);
                                     startActivity(intent);
                                     finish();
                                 }

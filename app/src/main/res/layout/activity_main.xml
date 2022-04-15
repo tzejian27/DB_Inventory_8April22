@@ -60,7 +60,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/new_house"
-                    android:background="@color/blue"
+                    android:backgroundTint="@color/blue"
                     android:textStyle="bold"/>
 
 
@@ -93,7 +93,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/house_list"
-                    android:background="@color/blue"
+                    android:backgroundTint="@color/blue"
                     android:textStyle="bold"/>
 
 
@@ -126,7 +126,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/generate_excel"
-                    android:background="@color/blue"
+                    android:backgroundTint="@color/blue"
                     android:textStyle="bold"/>
 
 
@@ -159,7 +159,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/setting"
-                    android:background="@color/blue"
+                    android:backgroundTint="@color/blue"
                     android:textStyle="bold"/>
 
 
@@ -192,7 +192,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/new_goods"
-                    android:background="@color/blue"
+                    android:backgroundTint="@color/blue"
                     android:textStyle="bold"/>
 
 
@@ -225,7 +225,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/to_be_update"
-                    android:background="@color/blue"
+                    android:backgroundTint="@color/blue"
                     android:textStyle="bold"/>
 
 

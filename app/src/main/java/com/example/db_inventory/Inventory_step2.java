@@ -31,6 +31,7 @@ public class Inventory_step2 extends AppCompatActivity {
         final String key2 = intent.getStringExtra("Key2");
         String barcode = intent.getStringExtra("barcode");
         final String name = intent.getStringExtra("name");
+        String users=getIntent().getStringExtra("Users");
 
         databaseReference= FirebaseDatabase.getInstance().getReference("House").child(key);
 
@@ -43,6 +44,7 @@ public class Inventory_step2 extends AppCompatActivity {
                 Intent intent = new Intent(Inventory_step2.this,Inventory.class);
                 intent.putExtra("Key", key);
                 intent.putExtra("name", name);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }
@@ -65,6 +67,7 @@ public class Inventory_step2 extends AppCompatActivity {
                     intent.putExtra("itemName", itemName);
                     intent.putExtra("Key",key);
                     intent.putExtra("name",name);
+                    intent.putExtra("Users", users);
                     startActivity(intent);
                     finish();
                 }

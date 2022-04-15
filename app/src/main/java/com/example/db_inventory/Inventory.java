@@ -80,6 +80,8 @@ public class Inventory extends AppCompatActivity {
         name = intent.getStringExtra("name");
         key = intent.getStringExtra("Key");
 
+        String users=getIntent().getStringExtra("Users");
+
 
         //Barcode Scanning
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -111,6 +113,7 @@ public class Inventory extends AppCompatActivity {
                 Intent intent = new Intent(Inventory.this,House_Menu.class);
                 intent.putExtra("name",name);
                 intent.putExtra("Key",key);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }
@@ -131,6 +134,7 @@ public class Inventory extends AppCompatActivity {
 
     private void add() {
         final String barcode = edt_barcode.getText().toString().trim();
+        String users=getIntent().getStringExtra("Users");
         // final String barcode1 = e1.getText().toString().trim();
         //final String barcode_ref = barcode1 + "/";
 
@@ -200,6 +204,7 @@ public class Inventory extends AppCompatActivity {
                                     page.putExtra("name", name);
                                     page.putExtra("Key", key);
                                     page.putExtra("Key2", key2);
+                                    page.putExtra("Users", users);
                                     startActivity(page);
                                     finish();
                                     //     }else{
@@ -226,6 +231,7 @@ public class Inventory extends AppCompatActivity {
                                                 intent.putExtra("barcode", barcode);
                                                 intent.putExtra("name",name);
                                                 intent.putExtra("Key",key);
+                                                intent.putExtra("Users", users);
                                                 startActivity(intent);
                                             }else{
 
@@ -255,6 +261,7 @@ public class Inventory extends AppCompatActivity {
                                                 intent.putExtra("name",name);
                                                 intent.putExtra("Key",key);
                                                 intent.putExtra("Key2",key2);
+                                                intent.putExtra("Users", users);
                                                 startActivity(intent);
                                             }
                                             Toast.makeText(Inventory.this, "Data Save", Toast.LENGTH_SHORT).show();
@@ -284,6 +291,7 @@ public class Inventory extends AppCompatActivity {
                                                 intent.putExtra("name",name);
                                                 intent.putExtra("Key", key);
                                                 intent.putExtra("Key2", inventory_key);
+                                                intent.putExtra("Users", users);
                                                 startActivity(intent);
                                                 finish();
                                             }
@@ -324,10 +332,13 @@ public class Inventory extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+        String users=getIntent().getStringExtra("Users");
+
         super.onBackPressed();
         Intent intent = new Intent(Inventory.this,House_Menu.class);
         intent.putExtra("name",name);
         intent.putExtra("Key",key);
+        intent.putExtra("Users", users);
         startActivity(intent);
         finish();
 

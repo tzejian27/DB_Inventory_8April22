@@ -152,21 +152,26 @@ public class Generate_Txt extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    NewGoods newGoods = new NewGoods();
+                    if(snapshot.exists()){
+                        NewGoods newGoods = new NewGoods();
 
-                    newGoods.setName(dataSnapshot.child("Name").getValue().toString());
-                    //If fatal exception at here, that mean some good miss their barcode (Firebase)
-                    newGoods.setBarcode(dataSnapshot.child("Barcode").getValue().toString());
-                    newGoods.setCost(dataSnapshot.child("Cost").getValue().toString());
-                    newGoods.setPrice(dataSnapshot.child("Price").getValue().toString());
+                        newGoods.setName(dataSnapshot.child("Name").getValue().toString());
+                        //If fatal exception at here, that mean some good miss their barcode (Firebase)
+                        newGoods.setBarcode(dataSnapshot.child("Barcode").getValue().toString());
+                        newGoods.setCost(dataSnapshot.child("Cost").getValue().toString());
+                        newGoods.setPrice(dataSnapshot.child("Price").getValue().toString());
 
 
-                    Log.d("New_Goods", "Name: " + newGoods.getName());
-                    Log.d("New_Goods", "Barcode: " + newGoods.getBarcode());
-                    Log.d("New_Goods", "Cost: " + newGoods.getCost());
-                    Log.d("New_Goods", "Price: " + newGoods.getPrice());
+                        Log.d("New_Goods", "Name: " + newGoods.getName());
+                        Log.d("New_Goods", "Barcode: " + newGoods.getBarcode());
+                        Log.d("New_Goods", "Cost: " + newGoods.getCost());
+                        Log.d("New_Goods", "Price: " + newGoods.getPrice());
 
-                    newGoodsList.add(newGoods);
+                        newGoodsList.add(newGoods);
+                    }else{
+                        Toast.makeText(getApplicationContext(),"Something is missing", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
 
@@ -364,8 +369,10 @@ public class Generate_Txt extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+        String users=getIntent().getStringExtra("Users");
         super.onBackPressed();
         Intent intent = new Intent(Generate_Txt.this, MainActivity.class);
+        intent.putExtra("Users", users);
         startActivity(intent);
         finish();
 

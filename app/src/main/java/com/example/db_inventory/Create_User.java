@@ -58,6 +58,8 @@ public class Create_User extends AppCompatActivity {
         // Apply the adapter to the spinner
         role.setAdapter(addRole);
 
+        String users=getIntent().getStringExtra("Users");
+
         btn_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,6 +114,7 @@ public class Create_User extends AppCompatActivity {
                                     et_pass2.setText("");
 
                                     Intent intent2MaintainUser = new Intent(getApplicationContext(), Maintain_User.class);
+                                    intent2MaintainUser.putExtra("Users", users);
                                     startActivity(intent2MaintainUser);
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Account already exist", Toast.LENGTH_SHORT).show();
@@ -144,6 +147,7 @@ public class Create_User extends AppCompatActivity {
                                     et_pass2.setText("");
 
                                     Intent intent2MaintainUser = new Intent(getApplicationContext(), Maintain_User.class);
+                                    intent2MaintainUser.putExtra("Users", users);
                                     startActivity(intent2MaintainUser);
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Account already exist", Toast.LENGTH_SHORT).show();
@@ -170,6 +174,7 @@ public class Create_User extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent2MaintainUser = new Intent(getApplicationContext(), Maintain_User.class);
+                intent2MaintainUser.putExtra("Users", users);
                 startActivity(intent2MaintainUser);
             }
         });
@@ -178,8 +183,10 @@ public class Create_User extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        String users=getIntent().getStringExtra("Users");
         super.onBackPressed();
         Intent intent2back = new Intent(getApplicationContext(), Maintain_User.class);
+        intent2back.putExtra("Users", users);
         startActivity(intent2back);
     }
 }

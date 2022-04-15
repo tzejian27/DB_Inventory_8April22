@@ -80,6 +80,7 @@ public class Login_user extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), Home_Page.class);
                         intent.putExtra(Username, username);
                         intent.putExtra("Users", users);
+                        intent.putExtra("Role", "user");
                         startActivity(intent);
                         finish();
                         txtName.setText("");

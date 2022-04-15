@@ -41,11 +41,14 @@ public class House_List extends AppCompatActivity {
 
         btn_back=findViewById(R.id.imageView_house_back);
         btn_search=(ImageView)findViewById(R.id.imageView_house_search);
+        String users=getIntent().getStringExtra("Users");
+
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2home = new Intent(House_List.this, Home_Page.class);
+                Intent intent2home = new Intent(House_List.this, MainActivity.class);
+                intent2home.putExtra("Users", users);
                 startActivity(intent2home);
             }
         });
@@ -54,6 +57,7 @@ public class House_List extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent page= new Intent(House_List.this,Search_House.class);
+                page.putExtra("Users", users);
                 startActivity(page);
 
             }
@@ -90,8 +94,10 @@ public class House_List extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+        String users=getIntent().getStringExtra("Users");
         super.onBackPressed();
-        Intent intent = new Intent(House_List.this, Home_Page.class);
+        Intent intent = new Intent(House_List.this, MainActivity.class);
+        intent.putExtra("Users", users);
         startActivity(intent);
         finish();
 

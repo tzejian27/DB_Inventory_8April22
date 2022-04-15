@@ -86,6 +86,8 @@ public class Item_Spec_Modify extends AppCompatActivity {
             }
         });
 
+        String users=getIntent().getStringExtra("Users");
+
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +126,7 @@ public class Item_Spec_Modify extends AppCompatActivity {
                     Intent page = new Intent(Item_Spec_Modify.this,Item_Spec.class);
                     page.putExtra("Key",key);
                     page.putExtra("Key2",key2);
+                    page.putExtra("Users", users);
                     startActivity(page);
                     finish();
                     Toast.makeText(Item_Spec_Modify.this, "Modify Successfully !", Toast.LENGTH_SHORT).show();

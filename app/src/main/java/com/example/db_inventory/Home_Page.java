@@ -33,17 +33,13 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         btn_stockIn.setOnClickListener(this);
         btn_stockOut.setOnClickListener(this);
 
-
-
         btn_home_home.setOnClickListener(this);
         btn_stock_adjustment.setOnClickListener(this);
         btn_sales_order.setOnClickListener(this);
+
         String users=getIntent().getStringExtra("Users");
-        if(users != null && users.equals("User")){
-            btn_maintain_users.setClickable(false);
-            btn_maintain_users.setVisibility(View.INVISIBLE);
-            cardView.setVisibility(View.INVISIBLE);
-        }
+
+
         btn_maintain_users.setOnClickListener(this);
 
 
@@ -51,9 +47,12 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
+        String users=getIntent().getStringExtra("Users");
         switch (view.getId()){
+
             case R.id.btn_House_intent:
                 Intent intent2house = new Intent(Home_Page.this, MainActivity.class);
+                intent2house.putExtra("Users", users);
                 startActivity(intent2house);
                 break;
             case R.id.btn_stock_adjustment:
@@ -65,12 +64,20 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 Toast.makeText(getApplicationContext(),"Sales Order still under construction",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_maintain_user:
+                if(users != null && users.equals("Admin")){
                     Intent intent2MaintainUser = new Intent(Home_Page.this, Maintain_User.class);
+                    intent2MaintainUser.putExtra("Users", users);
                     startActivity(intent2MaintainUser);
+                }else{
+                    Toast.makeText(Home_Page.this, "You are not authorized to execute, Please Login as admin", Toast.LENGTH_LONG).show();
+                }
+
+
                 //Toast.makeText(getApplicationContext(),"Maintain User still under construction",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_stock_in:
                 Intent intent2HouseList = new Intent(Home_Page.this, House_List_Stock_In.class);
+                intent2HouseList.putExtra("Users", users);
                 startActivity(intent2HouseList);
                 break;
             case R.id.btn_stock_out:
@@ -82,7 +89,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent2login = new Intent(Home_Page.this, Login.class);
+        Intent intent2login = new Intent(Home_Page.this, Login_Menu.class);
         startActivity(intent2login);
     }
 }

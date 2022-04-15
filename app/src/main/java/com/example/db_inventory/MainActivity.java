@@ -54,28 +54,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        String users=getIntent().getStringExtra("Users");
         switch (view.getId()){
             case R.id.btn_new_house:
                 Intent intent2new_house = new Intent(MainActivity.this, House_New_House.class);
+                intent2new_house.putExtra("Users", users);
                 startActivity(intent2new_house);
                 break;
             case R.id.btn_house_list:
                 Intent intent2house_list = new Intent(MainActivity.this, House_List.class);
+                intent2house_list.putExtra("Users", users);
                 startActivity(intent2house_list);
                 break;
             case R.id.btn_house_delete:
-                Toast.makeText(this, "Function Already Moved to House List!!!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "New Function will be Update in the future", Toast.LENGTH_LONG).show();
                 break;
                 //Intent intent2house_delete = new Intent(MainActivity.this, House_Delete.class);
                 //startActivity(intent2house_delete);
             case R.id.btn_gen_txt:
 
                 Intent intent2house_generate = new Intent(MainActivity.this, Generate_Txt.class);
+                intent2house_generate.putExtra("Users", users);
                 startActivity(intent2house_generate);
                 //Toast.makeText(this, "Coming Soon!!!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_house_setting:
                 Intent intent2house_setting = new Intent(MainActivity.this, House_Setting.class);
+                intent2house_setting.putExtra("Users", users);
                 startActivity(intent2house_setting);
                 break;
             case R.id.btn_new_goods:
@@ -91,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(MainActivity.this,"New Good is Disable", Toast.LENGTH_SHORT).show();
                         }else if (s1.equals("Enable")){
                             Intent intent2new_goods = new Intent(MainActivity.this, House_New_Goods.class);
+                            intent2new_goods.putExtra("Users", users);
                             startActivity(intent2new_goods);
                         }
                     }
@@ -110,11 +116,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
+        String users=getIntent().getStringExtra("Users");
 
         super.onBackPressed();
         Intent page = new Intent(MainActivity.this, Home_Page.class);
         page.putExtra("name", name);
         page.putExtra("Key", key);
+        page.putExtra("Users", users);
         startActivity(page);
         finish();
     }

@@ -51,6 +51,8 @@ public class Inventory_Delete_Confirm extends AppCompatActivity {
         databaseReference= FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
 
+        String users=getIntent().getStringExtra("Users");
+
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -94,6 +96,7 @@ public class Inventory_Delete_Confirm extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String users=getIntent().getStringExtra("Users");
                 t_type= Integer.parseInt(totaltype);
                 sum = t_type -1;
                 sum2 =Integer.toString( sum);
@@ -111,6 +114,7 @@ public class Inventory_Delete_Confirm extends AppCompatActivity {
                 intent.putExtra("name",name);
                 intent.putExtra("Key",key);
                 intent.putExtra("Key2",key2);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
 

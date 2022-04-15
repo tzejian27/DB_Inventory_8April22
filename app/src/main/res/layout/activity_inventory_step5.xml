@@ -13,7 +13,7 @@
         android:id="@+id/txt_modify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/modify"
+        android:text="Modify Qty"
         android:textSize="80px"
         android:layout_marginTop="18dp"
         android:layout_marginBottom="70dp"

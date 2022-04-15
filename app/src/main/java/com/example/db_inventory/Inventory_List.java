@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -30,14 +31,14 @@ import java.util.List;
 
 public class Inventory_List extends AppCompatActivity {
 
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference,switchRef;
     RecyclerView recyclerView;
     ImageView iv_back, iv_search;
     String barcode;
     String totaltype;
     int t_type;
     int sum;
-    String sum2;
+    String sum2, switch1;
     InventoryList_Adapter InventoryList_Adapter;
     List<Inventory_class> postList;
 
@@ -56,6 +57,7 @@ public class Inventory_List extends AppCompatActivity {
         Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
+        String users=getIntent().getStringExtra("Users");
 
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +65,7 @@ public class Inventory_List extends AppCompatActivity {
                 Intent page = new Intent(Inventory_List.this, House_Menu.class);
                 page.putExtra("name", name);
                 page.putExtra("Key", key);
+                page.putExtra("Users", users);
                 startActivity(page);
                 finish();
             }
@@ -74,6 +77,7 @@ public class Inventory_List extends AppCompatActivity {
                 Intent intent = new Intent(Inventory_List.this,Search.class);
                 intent.putExtra("name",name);
                 intent.putExtra("Key",key);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }
@@ -81,6 +85,7 @@ public class Inventory_List extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
+        switchRef=FirebaseDatabase.getInstance().getReference("Switch");
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -95,10 +100,23 @@ public class Inventory_List extends AppCompatActivity {
             }
         });
 
+        switchRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                switch1=snapshot.child("NoNeed").getValue().toString().trim();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     public void onStart() {
         super.onStart();
+        String users=getIntent().getStringExtra("Users");
 
         // final String name = getActivity().getIntent().getExtras().get("visit_hairstylist").toString();
         Intent intent = getIntent();
@@ -136,13 +154,17 @@ public class Inventory_List extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int position) {
                                 if (position == 0) {
-
-                                    Intent intent = new Intent(Inventory_List.this, Item_Spec.class);
-                                    intent.putExtra("Key", key);
-                                    intent.putExtra("Key2", key2);
-                                    intent.putExtra("name", name);
-                                    intent.putExtra("Barcode", model.getBarcode());
-                                    startActivity(intent);
+                                    if(switch1.equals("Need")){
+                                        Intent intent = new Intent(Inventory_List.this, Item_Spec.class);
+                                        intent.putExtra("Key", key);
+                                        intent.putExtra("Key2", key2);
+                                        intent.putExtra("name", name);
+                                        intent.putExtra("Barcode", model.getBarcode());
+                                        intent.putExtra("Users", users);
+                                        startActivity(intent);
+                                    }else{
+                                        Toast.makeText(getApplicationContext(),"Edit Spec is Not Allowed", Toast.LENGTH_SHORT).show();
+                                    }
 
 
                                 }
@@ -151,6 +173,7 @@ public class Inventory_List extends AppCompatActivity {
                                     intent.putExtra("Key", key);
                                     intent.putExtra("Key2", key2);
                                     intent.putExtra("name", name);
+                                    intent.putExtra("Users", users);
                                     startActivity(intent);
                                 }
                                 if (position == 2) {
@@ -161,6 +184,7 @@ public class Inventory_List extends AppCompatActivity {
                                     intent.putExtra("barcode", model.getBarcode());
                                     intent.putExtra("Key", key);
                                     intent.putExtra("Key2", key2);
+                                    intent.putExtra("Users", users);
                                     startActivity(intent);
                                 }
 
@@ -228,6 +252,7 @@ public class Inventory_List extends AppCompatActivity {
     }
 
     public void onBackPressed(){
+        String users=getIntent().getStringExtra("Users");
         Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
@@ -236,6 +261,7 @@ public class Inventory_List extends AppCompatActivity {
         Intent page = new Intent(Inventory_List.this, House_Menu.class);
         page.putExtra("name", name);
         page.putExtra("Key", key);
+        page.putExtra("Users", users);
         startActivity(page);
         finish();
 

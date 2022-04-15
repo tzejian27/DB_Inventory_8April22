@@ -35,11 +35,14 @@ public class New_Goods_step2 extends AppCompatActivity {
         databaseReference= FirebaseDatabase.getInstance().getReference("New_Goods");
         databaseReference.keepSynced(true);
 
+        String users=getIntent().getStringExtra("Users");
+
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(New_Goods_step2.this,House_New_Goods.class);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }
@@ -84,6 +87,7 @@ public class New_Goods_step2 extends AppCompatActivity {
                 //       if (task.isSuccessful()) {
                 Toast.makeText(New_Goods_step2.this, "Data Save", Toast.LENGTH_SHORT).show();
                 Intent page = new Intent(New_Goods_step2.this, MainActivity.class);
+                page.putExtra("Users", users);
                 startActivity(page);
                 finish();
                 //       }else{

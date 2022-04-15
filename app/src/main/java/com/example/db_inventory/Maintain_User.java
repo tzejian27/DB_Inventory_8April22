@@ -62,10 +62,14 @@ public class Maintain_User extends AppCompatActivity {
         adminRef=FirebaseDatabase.getInstance().getReference("Users").child("Admin");
         adminRef.keepSynced(true);
 
+        String users=getIntent().getStringExtra("Users");
+
         btn_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent2_create_User=new Intent(getApplicationContext(), Create_User.class);
+                intent2_create_User.putExtra("Users", users);
+
                 startActivity(intent2_create_User);
             }
         });
@@ -74,6 +78,7 @@ public class Maintain_User extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent2_create_User=new Intent(getApplicationContext(), Access_Right.class);
+                intent2_create_User.putExtra("Users", users);
                 startActivity(intent2_create_User);
             }
         });
@@ -158,7 +163,9 @@ public class Maintain_User extends AppCompatActivity {
 
     public void onBackPressed() {
         super.onBackPressed();
+        String users=getIntent().getStringExtra("Users");
         Intent intent2homepage = new Intent(getApplicationContext(), Home_Page.class);
+        intent2homepage.putExtra("Users", users);
         startActivity(intent2homepage);
     }
 }

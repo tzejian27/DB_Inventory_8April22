@@ -36,10 +36,13 @@ public class House_Modify extends AppCompatActivity {
         databaseReference= FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
 
+        String users=getIntent().getStringExtra("Users");
+
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(House_Modify.this,House_List.class);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }
@@ -55,6 +58,7 @@ public class House_Modify extends AppCompatActivity {
                 //     if (task.isSuccessful()) {
                 Toast.makeText(House_Modify.this, "Modified Successfully ! ", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(House_Modify.this, House_List.class);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
                 //     }else{

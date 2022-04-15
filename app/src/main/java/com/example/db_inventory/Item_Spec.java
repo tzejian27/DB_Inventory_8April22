@@ -55,12 +55,15 @@ public class Item_Spec extends AppCompatActivity {
             }
         });
 
+        String users=getIntent().getStringExtra("Users");
+
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Item_Spec.this,Inventory_List.class);
                 intent.putExtra("Key",key);
+                intent.putExtra("Users", users);
                 //  startActivity(intent);
                 finish();
             }
@@ -73,6 +76,7 @@ public class Item_Spec extends AppCompatActivity {
                 intent.putExtra("Key",key);
                 intent.putExtra("Key2",key2);
                 intent.putExtra("Barcode1",barcode);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }

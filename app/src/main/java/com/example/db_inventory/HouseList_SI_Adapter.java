@@ -1,5 +1,7 @@
 package com.example.db_inventory;
 
+import static android.content.Intent.getIntent;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -70,8 +72,8 @@ public class HouseList_SI_Adapter extends RecyclerView.Adapter<HouseList_SI_Adap
                         builder.setItems(option, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
-
                                 if (position==0){
+
                                     Intent intent=new Intent(mContext,Stock_In_Scan.class);
                                     intent.putExtra("Key",key);
                                     intent.putExtra("name",name);
@@ -90,9 +92,6 @@ public class HouseList_SI_Adapter extends RecyclerView.Adapter<HouseList_SI_Adap
             }
         });
     }
-
-
-
 
 
     @Override

@@ -94,6 +94,7 @@ public class Login extends AppCompatActivity {
                         Intent intent = new Intent(Login.this, Home_Page.class);
                         intent.putExtra(Username, username);
                         intent.putExtra("Users", users);
+                        intent.putExtra("Role", "admin");
                         startActivity(intent);
                         finish();
                         txtName.setText("");

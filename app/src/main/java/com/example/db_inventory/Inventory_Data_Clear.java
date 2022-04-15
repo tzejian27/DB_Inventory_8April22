@@ -32,6 +32,8 @@ public class Inventory_Data_Clear extends AppCompatActivity {
         databaseReference= FirebaseDatabase.getInstance().getReference("House");
         databaseReference.keepSynced(true);
 
+        String users=getIntent().getStringExtra("Users");
+
 
 
         b1.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +42,7 @@ public class Inventory_Data_Clear extends AppCompatActivity {
                 Intent intent = new Intent(Inventory_Data_Clear.this,House_Menu.class);
                 intent.putExtra("name",name);
                 intent.putExtra("Key",key);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }
@@ -55,6 +58,7 @@ public class Inventory_Data_Clear extends AppCompatActivity {
 
                 Toast.makeText(Inventory_Data_Clear.this, "Delete Successful ! !", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Inventory_Data_Clear.this,MainActivity.class);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }
@@ -65,11 +69,13 @@ public class Inventory_Data_Clear extends AppCompatActivity {
         Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
+        String users=getIntent().getStringExtra("Users");
 
         super.onBackPressed();
         Intent page = new Intent(Inventory_Data_Clear.this, House_Menu.class);
         page.putExtra("name", name);
         page.putExtra("Key", key);
+        page.putExtra("Users", users);
         startActivity(page);
         finish();
 

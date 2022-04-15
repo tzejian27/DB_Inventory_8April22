@@ -248,8 +248,11 @@ public class Wireless_Export extends AppCompatActivity {
 
         }
 
+        String users=getIntent().getStringExtra("Users");
+
         Intent intent = getIntent();
         final String nameFile = intent.getStringExtra("name");
+        intent.putExtra("Users", users);
 
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
         currentDateandTime2 = sdf.format(new Date());
@@ -283,6 +286,7 @@ public class Wireless_Export extends AppCompatActivity {
     }
 
     public void onBackPressed(){
+        String users=getIntent().getStringExtra("Users");
         Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
@@ -291,6 +295,7 @@ public class Wireless_Export extends AppCompatActivity {
         Intent page = new Intent(Wireless_Export.this, House_Menu.class);
         page.putExtra("name", name);
         page.putExtra("Key", key);
+        page.putExtra("Users", users);
         startActivity(page);
         finish();
 

@@ -61,6 +61,7 @@ public class House_List2 extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
+        String users=getIntent().getStringExtra("Users");
 
         FirebaseRecyclerOptions<House_list_class> houseAdapter = new FirebaseRecyclerOptions.Builder<House_list_class>()
                 .setQuery(databaseReference.orderByChild("Name").equalTo(name), House_list_class.class)
@@ -92,6 +93,7 @@ public class House_List2 extends AppCompatActivity {
                                     Intent intent=new Intent(House_List2.this,House_Menu.class);
                                     intent.putExtra("Key",key);
                                     intent.putExtra("name",name);
+                                    intent.putExtra("Users", users);
                                     startActivity(intent);
                                     finish();
 
@@ -99,6 +101,8 @@ public class House_List2 extends AppCompatActivity {
                                 if (position == 1){
                                     Intent intent=new Intent(House_List2.this,House_Modify.class);
                                     intent.putExtra("Key",key);
+                                    intent.putExtra("name",name);
+                                    intent.putExtra("Users", users);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -106,6 +110,7 @@ public class House_List2 extends AppCompatActivity {
                                     Intent intent=new Intent(House_List2.this,Stock_In_Scan.class);
                                     intent.putExtra("Key",key);
                                     intent.putExtra("name",name);
+                                    intent.putExtra("Users", users);
                                     startActivity(intent);
                                 }
 

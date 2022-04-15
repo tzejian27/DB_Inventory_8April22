@@ -124,6 +124,7 @@ public class StockIn_step3 extends AppCompatActivity {
         });
 
         b1.setOnClickListener(new View.OnClickListener() {
+            String users=getIntent().getStringExtra("Users");
             @Override
             public void onClick(View v) {
 
@@ -132,20 +133,24 @@ public class StockIn_step3 extends AppCompatActivity {
                 intent.putExtra("Key",key);
                 intent.putExtra("Key2",key2);
                 intent.putExtra("name",name);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }
         });
 
         b3.setOnClickListener(new View.OnClickListener() {
+            String users=getIntent().getStringExtra("Users");
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StockIn_step3.this, Home_Page.class);
+                intent.putExtra("Users", users);
                 startActivity(intent);
             }
         });
 
         b2.setOnClickListener(new View.OnClickListener() {
+            String users=getIntent().getStringExtra("Users");
             @Override
             public void onClick(View v) {
                 final String qty = e2_quantity_in.getText().toString().trim();
@@ -196,5 +201,14 @@ public class StockIn_step3 extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        String users=getIntent().getStringExtra("Users");
+        super.onBackPressed();
+        Intent intent = new Intent(StockIn_step3.this, Home_Page.class);
+        intent.putExtra("Users", users);
+        startActivity(intent);
     }
 }

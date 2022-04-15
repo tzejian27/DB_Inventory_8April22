@@ -1,9 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Access_Right">
+    tools:context=".Access_Right"
+    android:orientation="vertical"
+    android:layout_margin="20dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/txt_create_nh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create new house"
+            android:textSize="50px"
+            android:layout_weight="5"/>
+
+        <Switch
+
+            android:id="@+id/switch_new_house"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/txt_edit_spec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_spec"
+            android:textSize="50px"
+            android:layout_weight="5"/>
+
+        <Switch
+
+            android:id="@+id/switch_edit_spec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/txt_data_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data Clear"
+            android:textSize="50px"
+            android:layout_weight="5"/>
+
+        <Switch
+
+            android:id="@+id/switch_data_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_access_right_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue"
+        android:text="@string/confirm"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="200dp"/>
+
+
+</LinearLayout>

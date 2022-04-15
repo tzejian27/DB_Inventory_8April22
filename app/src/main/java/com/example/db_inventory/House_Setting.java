@@ -107,12 +107,15 @@ public class House_Setting extends AppCompatActivity {
             }
         });
 
+        String users=getIntent().getStringExtra("Users");
+
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 databaseReference.child("Disable").setValue(Switch).toString().trim();
                 databaseReference.child("NoNeed").setValue(Switch2).toString().trim();
                 Intent page= new Intent(House_Setting.this, MainActivity.class);
+                page.putExtra("Users", users);
                 page.putExtra("Switch",Switch);
                 startActivity(page);
             }
@@ -121,8 +124,10 @@ public class House_Setting extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+        String users=getIntent().getStringExtra("Users");
         super.onBackPressed();
         Intent intent = new Intent(House_Setting.this, MainActivity.class);
+        intent.putExtra("Users", users);
         startActivity(intent);
         finish();
 

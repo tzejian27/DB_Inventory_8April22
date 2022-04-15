@@ -38,10 +38,13 @@ public class Delete_House extends AppCompatActivity {
         databaseReference= FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
 
+        String users=getIntent().getStringExtra("Users");
+
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Delete_House.this,House_List.class);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }
@@ -56,6 +59,7 @@ public class Delete_House extends AppCompatActivity {
                 //     if (task.isSuccessful()) {
                 Toast.makeText(Delete_House.this, "Delete Successful ! !", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Delete_House.this,MainActivity.class);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
 

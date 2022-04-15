@@ -67,6 +67,7 @@ public class Inventory_step5 extends AppCompatActivity {
 
             }
         });
+        String users=getIntent().getStringExtra("Users");
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +77,7 @@ public class Inventory_step5 extends AppCompatActivity {
                 intent.putExtra("name",name);
                 intent.putExtra("Key",key);
                 intent.putExtra("Key2",key2);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }
@@ -165,6 +167,7 @@ public class Inventory_step5 extends AppCompatActivity {
                                 intent.putExtra("Key2",key2);
                                 intent.putExtra("barcode", barcode);
                                 intent.putExtra("name",name);
+                                intent.putExtra("Users", users);
                                 startActivity(intent);
                                 finish();
 
@@ -177,6 +180,7 @@ public class Inventory_step5 extends AppCompatActivity {
                                 intent.putExtra("Key2",key2);
                                 intent.putExtra("barcode", barcode);
                                 intent.putExtra("name",name);
+                                intent.putExtra("Users", users);
                                 startActivity(intent);
                                 finish();
 
@@ -189,6 +193,7 @@ public class Inventory_step5 extends AppCompatActivity {
                                 intent.putExtra("Key2",key2);
                                 intent.putExtra("barcode", barcode);
                                 intent.putExtra("name",name);
+                                intent.putExtra("Users", users);
                                 startActivity(intent);
                                 finish();
                             }

@@ -69,10 +69,13 @@ public class StockIn_step2 extends AppCompatActivity {
             }
         });
 
+        String users=getIntent().getStringExtra("Users");
+
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StockIn_step2.this, House_List_Stock_In.class);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }
@@ -127,18 +130,28 @@ public class StockIn_step2 extends AppCompatActivity {
 
                 databaseReference.child("TotalType").setValue(totaltype);
 
+                String users=getIntent().getStringExtra("Users");
+
                 Intent page = new Intent(StockIn_step2.this, StockIn_step3.class);
                 page.putExtra("barcode", barcode);
                 page.putExtra("Key", key);
                 page.putExtra("Key2", key2);
                 page.putExtra("name",name);
+                page.putExtra("Users", users);
                 startActivity(page);
                 finish();
-
-
 
             }
         });
 
+    }
+    @Override
+    public void onBackPressed() {
+        String users=getIntent().getStringExtra("Users");
+        super.onBackPressed();
+        Intent intent = new Intent(StockIn_step2.this, House_List_Stock_In.class);
+        intent.putExtra("Users", users);
+        startActivity(intent);
+        finish();
     }
 }

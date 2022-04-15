@@ -69,6 +69,8 @@ public class Inventory_step3 extends AppCompatActivity {
             }
         });
 
+        String users=getIntent().getStringExtra("Users");
+
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +79,7 @@ public class Inventory_step3 extends AppCompatActivity {
                 intent.putExtra("Key", key);
                 intent.putExtra("name", name);
                 intent.putExtra("barcode", barcode);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }
@@ -135,6 +138,7 @@ public class Inventory_step3 extends AppCompatActivity {
                 page.putExtra("Key", key);
                 page.putExtra("Key2", key2);
                 page.putExtra("name",name);
+                page.putExtra("Users", users);
                 startActivity(page);
                 finish();
 

@@ -71,12 +71,15 @@ public class House_New_Goods extends AppCompatActivity{
         scanReader = new ScanReader(this);
         scanReader.init();
 
+        String users=getIntent().getStringExtra("Users");
+
 
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(House_New_Goods.this,MainActivity.class);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }
@@ -105,6 +108,7 @@ public class House_New_Goods extends AppCompatActivity{
                     Intent intent = new Intent(House_New_Goods.this, New_Goods_step2.class);
                     intent.putExtra("barcode", barcode);
                     intent.putExtra("name", name);
+                    intent.putExtra("Users", users);
                     startActivity(intent);
                     finish();
                 }
@@ -116,8 +120,10 @@ public class House_New_Goods extends AppCompatActivity{
 
     @Override
     public void onBackPressed(){
+        String users=getIntent().getStringExtra("Users");
         super.onBackPressed();
         Intent intent = new Intent(House_New_Goods.this, MainActivity.class);
+        intent.putExtra("Users", users);
         startActivity(intent);
         finish();
 

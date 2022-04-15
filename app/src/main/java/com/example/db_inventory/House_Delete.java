@@ -60,10 +60,13 @@ public class House_Delete extends AppCompatActivity {
         btn_back=findViewById(R.id.imageView_delete_back);
         btn_search=findViewById(R.id.imageView_delete_search);
 
+        String users=getIntent().getStringExtra("Users");
+
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent2home = new Intent(House_Delete.this, MainActivity.class);
+                intent2home.putExtra("Users", users);
                 startActivity(intent2home);
             }
         });
@@ -102,9 +105,11 @@ public class House_Delete extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+        String users=getIntent().getStringExtra("Users");
         super.onBackPressed();
         Intent intent = new Intent(House_Delete.this, MainActivity.class);
         startActivity(intent);
+        intent.putExtra("Users", users);
         finish();
 
     }

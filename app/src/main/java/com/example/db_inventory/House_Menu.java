@@ -34,12 +34,16 @@ public class House_Menu extends AppCompatActivity {
         b6=(Button)findViewById(R.id.btn_export_Inventory);
         b6.setVisibility(View.INVISIBLE);
 
+        String users=getIntent().getStringExtra("Users");
+
+
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(House_Menu.this,Inventory.class);
                 intent.putExtra("name", t1.getText());
                 intent.putExtra("Key",key);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }
@@ -51,6 +55,7 @@ public class House_Menu extends AppCompatActivity {
                 Intent intent = new Intent(House_Menu.this,Inventory_List.class);
                 intent.putExtra("name", t1.getText());
                 intent.putExtra("Key",key);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }
@@ -63,6 +68,7 @@ public class House_Menu extends AppCompatActivity {
                 Intent intent = new Intent(House_Menu.this,Wireless_Export.class);
                 intent.putExtra("name", t1.getText());
                 intent.putExtra("Key",key);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }
@@ -74,6 +80,7 @@ public class House_Menu extends AppCompatActivity {
                 Intent intent = new Intent(House_Menu.this,Inventory_Data_Clear.class);
                 intent.putExtra("name", t1.getText());
                 intent.putExtra("Key",key);
+                intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
             }

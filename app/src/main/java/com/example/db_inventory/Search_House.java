@@ -36,6 +36,9 @@ public class Search_House extends AppCompatActivity {
             }
         });
 
+        String users=getIntent().getStringExtra("Users");
+
+
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,6 +49,7 @@ public class Search_House extends AppCompatActivity {
                 }else{
                     Intent page =new Intent(Search_House.this,House_List2.class);
                     page.putExtra("name",name);
+                    page.putExtra("Users", users);
                     startActivity(page);
                     finish();
                 }
