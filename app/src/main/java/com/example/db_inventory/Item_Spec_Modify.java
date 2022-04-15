@@ -99,6 +99,7 @@ public class Item_Spec_Modify extends AppCompatActivity {
                 if (name.isEmpty() && price.isEmpty() && cost.isEmpty()) {
                     Toast.makeText(Item_Spec_Modify.this, "Please enter name , price and cost ", Toast.LENGTH_SHORT).show();
                 }else{
+                    //Not sure need or not
                     databaseReference2=FirebaseDatabase.getInstance().getReference("New_Goods").child(barcode);
                     databaseReference2.keepSynced(true);
                     databaseReference2.child("Name").setValue(name);
@@ -113,6 +114,13 @@ public class Item_Spec_Modify extends AppCompatActivity {
                     //  @Override
                     //      public void onComplete(@NonNull Task<Void> task) {
                     //          if (task.isSuccessful()){
+
+                    //Update the spec price also when it was modify
+                    databaseReference.child("ItemName").setValue(name);
+                    databaseReference.child("Price").setValue(price);
+                    databaseReference.child("Cost").setValue(cost);
+
+
                     Intent page = new Intent(Item_Spec_Modify.this,Item_Spec.class);
                     page.putExtra("Key",key);
                     page.putExtra("Key2",key2);

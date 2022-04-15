@@ -6,14 +6,16 @@ public class NewGoods {
     private String name;
     private String price;
     private String cost;
+    private String quantity;
 
     public NewGoods(){}
 
-    public NewGoods(String barcode, String name, String price, String cost) {
+    public NewGoods(String barcode, String name, String price, String cost, String quantity) {
         this.barcode = barcode;
         this.name = name;
         this.price = price;
         this.cost = cost;
+        this.quantity = quantity;
     }
 
     public String getBarcode() {
@@ -46,5 +48,13 @@ public class NewGoods {
 
     public void setCost(String cost) {
         this.cost = cost;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 }

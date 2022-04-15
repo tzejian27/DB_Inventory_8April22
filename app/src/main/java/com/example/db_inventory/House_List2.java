@@ -79,7 +79,7 @@ public class House_List2 extends AppCompatActivity {
                     public void onClick(View v) {
                         final String key = getRef(position).getKey();
                         CharSequence option[]=new CharSequence[]{
-                                "Enter","Modify"
+                                "Enter","Modify","Stock In"
                         };
 
                         AlertDialog.Builder builder =new AlertDialog.Builder(House_List2.this);
@@ -102,6 +102,13 @@ public class House_List2 extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
                                 }
+                                if (position==2){
+                                    Intent intent=new Intent(House_List2.this,Stock_In_Scan.class);
+                                    intent.putExtra("Key",key);
+                                    intent.putExtra("name",name);
+                                    startActivity(intent);
+                                }
+
                             }
                         });
                         builder.show();

@@ -90,4 +90,5 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="role">Role:</string>
     <string name="role1">Role</string>
+    <string name="cost1">Cost</string>
 </resources>

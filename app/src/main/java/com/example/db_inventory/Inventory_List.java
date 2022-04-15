@@ -119,6 +119,7 @@ public class Inventory_List extends AppCompatActivity {
                 viewHolder.setItemName(model.getItemName());
                 viewHolder.setDate_and_Time(model.getDate_and_Time());
                 viewHolder.setPrice(model.getPrice());
+                viewHolder.setCost(model.getCost());
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -216,6 +217,11 @@ public class Inventory_List extends AppCompatActivity {
         public void setPrice(String price) {
             TextView Price = (TextView) mView.findViewById(R.id.textView_InventoryList_Price);
             Price.setText(price);
+        }
+
+        public void setCost(String cost) {
+            TextView Cost = (TextView) mView.findViewById(R.id.textView_InventoryList_Cost);
+            Cost.setText(cost);
         }
 
 

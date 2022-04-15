@@ -70,7 +70,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 //Toast.makeText(getApplicationContext(),"Maintain User still under construction",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_stock_in:
-                Intent intent2HouseList = new Intent(Home_Page.this, House_List.class);
+                Intent intent2HouseList = new Intent(Home_Page.this, House_List_Stock_In.class);
                 startActivity(intent2HouseList);
                 break;
             case R.id.btn_stock_out:

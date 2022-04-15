@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DB_Inventory">
         <activity
+            android:name=".House_List_Stock_In"
+            android:exported="false" />
+        <activity
             android:name=".StockIn_step3"
             android:exported="false" />
         <activity

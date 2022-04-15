@@ -72,7 +72,7 @@ public class StockIn_step2 extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StockIn_step2.this, House_List.class);
+                Intent intent = new Intent(StockIn_step2.this, House_List_Stock_In.class);
                 startActivity(intent);
                 finish();
             }
@@ -139,9 +139,6 @@ public class StockIn_step2 extends AppCompatActivity {
 
             }
         });
-
-
-
 
     }
 }

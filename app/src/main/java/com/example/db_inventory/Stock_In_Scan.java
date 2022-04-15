@@ -105,7 +105,7 @@ public class Stock_In_Scan extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Stock_In_Scan.this,House_List.class);
+                Intent intent = new Intent(Stock_In_Scan.this,House_List_Stock_In.class);
                 intent.putExtra("name",name);
                 intent.putExtra("Key",key);
                 startActivity(intent);
@@ -325,7 +325,7 @@ public class Stock_In_Scan extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         super.onBackPressed();
-        Intent intent = new Intent(Stock_In_Scan.this,House_List.class);
+        Intent intent = new Intent(Stock_In_Scan.this,House_List_Stock_In.class);
         intent.putExtra("name",name);
         intent.putExtra("Key",key);
         startActivity(intent);
