@@ -31,6 +31,7 @@ public class House_List2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_list2);
+        setTitle("House List");
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView_Inventory_List);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

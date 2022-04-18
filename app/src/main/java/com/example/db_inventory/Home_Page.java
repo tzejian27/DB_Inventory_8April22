@@ -56,6 +56,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 startActivity(intent2house);
                 break;
             case R.id.btn_stock_adjustment:
+                //stock adjustment help calculate the quantity of stock on hand compare with book quantity
                 Toast.makeText(getApplicationContext(),"Stock adjustment still under construction",Toast.LENGTH_SHORT).show();
                 //Intent intent2stock_adjust = new Intent(Home_Page.this, Stock_Adjustment_Home.class);
                 //startActivity(intent2stock_adjust);
@@ -64,24 +65,29 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 Toast.makeText(getApplicationContext(),"Sales Order still under construction",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_maintain_user:
+                //maintain user are only access by the admin
                 if(users != null && users.equals("Admin")){
                     Intent intent2MaintainUser = new Intent(Home_Page.this, Maintain_User.class);
                     intent2MaintainUser.putExtra("Users", users);
                     startActivity(intent2MaintainUser);
                 }else{
+                    //when there is not admin role received then show error message where not allowed user to enter
                     Toast.makeText(Home_Page.this, "You are not authorized to execute, Please Login as admin", Toast.LENGTH_LONG).show();
                 }
-
-
-                //Toast.makeText(getApplicationContext(),"Maintain User still under construction",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_stock_in:
+                //allowed business to aware their storage
+                //it record the quantity of stock coming in
                 Intent intent2HouseList = new Intent(Home_Page.this, House_List_Stock_In.class);
                 intent2HouseList.putExtra("Users", users);
                 startActivity(intent2HouseList);
                 break;
             case R.id.btn_stock_out:
-                Toast.makeText(getApplicationContext(),"Stock Out still under construction",Toast.LENGTH_SHORT).show();
+                Intent intent2HouseList2 = new Intent(Home_Page.this, House_List_Stock_Out.class);
+                intent2HouseList2.putExtra("Users", users);
+                startActivity(intent2HouseList2);
+                //record the quantity of stock going out
+                //Toast.makeText(getApplicationContext(),"Stock Out still under construction",Toast.LENGTH_SHORT).show();
                 break;
         }
     }

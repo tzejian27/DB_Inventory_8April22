@@ -19,6 +19,8 @@ public class Login_Menu extends AppCompatActivity {
         btn_admin=findViewById(R.id.btn_admin_login);
         btn_user=findViewById(R.id.btn_user_login);
 
+        //intent to the admin login page
+        //only admin are allowed to make modify on maintain user
         btn_admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -27,6 +29,7 @@ public class Login_Menu extends AppCompatActivity {
             }
         });
 
+        //intent to the user login page
         btn_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

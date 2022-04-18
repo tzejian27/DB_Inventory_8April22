@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Inventory extends AppCompatActivity {
+public class Stock_Out_Scan extends AppCompatActivity {
 
     EditText edt_barcode;
     Button btn_back,btn_next;
@@ -36,7 +36,6 @@ public class Inventory extends AppCompatActivity {
     String Quantity = "0";
     String currentDateandTime;
     String Name ;
-    String Barcode;
     String Price;
     String Cost;
     String name ;
@@ -51,7 +50,6 @@ public class Inventory extends AppCompatActivity {
     private String barcodeStr;
     ScanReader scanReader;
 
-
     private BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -64,15 +62,14 @@ public class Inventory extends AppCompatActivity {
         }
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inventory);
+        setContentView(R.layout.activity_stock_out_scan);
 
-        edt_barcode=(EditText)findViewById(R.id.editText_barcode);
-        btn_back=(Button)findViewById(R.id.btn_inventory_back);
-        btn_next=(Button)findViewById(R.id.btn_inventory_next);
+        edt_barcode=(EditText)findViewById(R.id.editText_barcode_SO);
+        btn_back=(Button)findViewById(R.id.btn_inventory_back_SO);
+        btn_next=(Button)findViewById(R.id.btn_inventory_next_SO);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
         currentDateandTime = sdf.format(new Date());
@@ -80,9 +77,6 @@ public class Inventory extends AppCompatActivity {
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
         key = intent.getStringExtra("Key");
-
-        String users=getIntent().getStringExtra("Users");
-
 
         //Barcode Scanning
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -107,11 +101,14 @@ public class Inventory extends AppCompatActivity {
 
             }
         });
+        String users=getIntent().getStringExtra("Users");
 
         btn_back.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Inventory.this,House_Menu.class);
+                Intent intent = new Intent(Stock_Out_Scan.this,House_List_Stock_Out.class);
                 intent.putExtra("name",name);
                 intent.putExtra("Key",key);
                 intent.putExtra("Users", users);
@@ -125,15 +122,16 @@ public class Inventory extends AppCompatActivity {
             public void onClick(View v) {
                 String barcode = edt_barcode.getText().toString().trim();
                 if(barcode.isEmpty()){
-                    Toast.makeText(Inventory.this, "Please enter/scan barcode  ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Stock_Out_Scan.this, "Please enter/scan barcode  ", Toast.LENGTH_SHORT).show();
                 }else{
-                    add();
+                    Toast.makeText(Stock_Out_Scan.this, "Still under construction  ", Toast.LENGTH_SHORT).show();
+                    //add();
                 }
             }
         });
     }
 
-    private void add() {
+    /*private void add() {
         final String barcode = edt_barcode.getText().toString().trim();
         String users=getIntent().getStringExtra("Users");
         // final String barcode1 = e1.getText().toString().trim();
@@ -161,7 +159,6 @@ public class Inventory extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot3) {
                                 if(dataSnapshot2.exists() && !dataSnapshot3.exists()) {
-                                    Barcode=dataSnapshot.child("Barcode").getValue().toString().trim();
                                     Name = dataSnapshot.child("Name").getValue().toString().trim();
                                     Price = dataSnapshot.child("Price").getValue().toString().trim();
                                     Cost= dataSnapshot.child("Cost").getValue().toString().trim();
@@ -201,7 +198,7 @@ public class Inventory extends AppCompatActivity {
                                     //   @Override
                                     //     public void onComplete(@NonNull Task<Void> task) {
                                     //     if (task.isSuccessful()){
-                                    Intent page = new Intent(Inventory.this,Inventory_step4.class);
+                                    Intent page = new Intent(Stock_Out_Scan.this,StockIn_step3.class);
                                     page.putExtra("barcode", barcode);
                                     page.putExtra("name", name);
                                     page.putExtra("Key", key);
@@ -229,7 +226,7 @@ public class Inventory extends AppCompatActivity {
 
                                             if (s1.equals("Need")){
                                                 String barcode = edt_barcode.getText().toString().trim();
-                                                Intent intent = new Intent(Inventory.this, Inventory_step2.class);
+                                                Intent intent = new Intent(Stock_Out_Scan.this, StockIn_step2.class);
                                                 intent.putExtra("barcode", barcode);
                                                 intent.putExtra("name",name);
                                                 intent.putExtra("Key",key);
@@ -258,7 +255,7 @@ public class Inventory extends AppCompatActivity {
                                                 databaseReference3.updateChildren(dataMap);
                                                 databaseReference.child("TotalType").setValue(totaltype);
 
-                                                Intent intent = new Intent(Inventory.this, Inventory_step4.class);
+                                                Intent intent = new Intent(Stock_Out_Scan.this, StockIn_step3.class);
                                                 intent.putExtra("barcode", barcode);
                                                 intent.putExtra("name",name);
                                                 intent.putExtra("Key",key);
@@ -266,7 +263,7 @@ public class Inventory extends AppCompatActivity {
                                                 intent.putExtra("Users", users);
                                                 startActivity(intent);
                                             }
-                                            Toast.makeText(Inventory.this, "Data Save", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Stock_Out_Scan.this, "Data Save", Toast.LENGTH_SHORT).show();
                                             finish();
                                         }
 
@@ -288,7 +285,7 @@ public class Inventory extends AppCompatActivity {
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                                                 inventory_key = childSnapshot.getKey();
-                                                Intent intent = new Intent(Inventory.this,Inventory_step4.class);
+                                                Intent intent = new Intent(Stock_Out_Scan.this,StockIn_step3.class);
                                                 intent.putExtra("barcode", barcode);
                                                 intent.putExtra("name",name);
                                                 intent.putExtra("Key", key);
@@ -330,14 +327,15 @@ public class Inventory extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
+
+
 
     @Override
     public void onBackPressed(){
         String users=getIntent().getStringExtra("Users");
-
         super.onBackPressed();
-        Intent intent = new Intent(Inventory.this,House_Menu.class);
+        Intent intent = new Intent(Stock_Out_Scan.this,House_List_Stock_Out.class);
         intent.putExtra("name",name);
         intent.putExtra("Key",key);
         intent.putExtra("Users", users);
@@ -345,6 +343,4 @@ public class Inventory extends AppCompatActivity {
         finish();
 
     }
-
-
 }

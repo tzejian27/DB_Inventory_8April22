@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,17 +88,37 @@ public class HouseList_Adapter extends RecyclerView.Adapter<HouseList_Adapter.My
 
                                 }
                                 if (position==2){
-                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("House");
-                                    reference.child(key).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    CharSequence option2[]=new CharSequence[]{
+                                            "Delete", "Cancel"
+                                    };
+                                    AlertDialog.Builder deleteBuilder = new AlertDialog.Builder(mContext);
+                                    deleteBuilder.setTitle("Are you confirm to delete the house?");
+                                    deleteBuilder.setItems(option2, new DialogInterface.OnClickListener() {
                                         @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()){
-                                                Toast.makeText(mContext, "Deleted  successfully", Toast.LENGTH_SHORT).show();
-                                            }else {
-                                                Toast.makeText(mContext, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            if (i==0){
+                                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("House");
+                                                reference.child(key).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()){
+                                                            Toast.makeText(mContext, "Deleted  successfully", Toast.LENGTH_SHORT).show();
+                                                        }else {
+                                                            Toast.makeText(mContext, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                });
                                             }
+
+                                            if (i==1){
+                                                dialog.cancel();
+                                            }
+
+
                                         }
                                     });
+                                    deleteBuilder.show();
+
                                 }
                             }
                         });

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
+         <TextView
             android:textColor="@color/blue"
             android:id="@+id/txt_create_nh"
             android:layout_width="wrap_content"
@@ -82,6 +82,112 @@
             android:layout_weight="1"/>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/txt_stock_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stock In"
+            android:textSize="50px"
+            android:layout_weight="5"/>
+
+        <Switch
+
+            android:id="@+id/switch_stock_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/txt_SO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stock Out"
+            android:textSize="50px"
+            android:layout_weight="5"/>
+
+        <Switch
+
+            android:id="@+id/switch_SO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/txt_modify_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modify/Delete"
+            android:textSize="50px"
+            android:layout_weight="5"/>
+
+        <Switch
+
+            android:id="@+id/switch_modify_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:textColor="@color/blue"
+            android:id="@+id/txt_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Setting"
+            android:textSize="50px"
+            android:layout_weight="5"/>
+
+        <Switch
+
+            android:id="@+id/switch_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
+
 
 
     <Button

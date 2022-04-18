@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DB_Inventory">
         <activity
+            android:name=".Stock_Out_Scan"
+            android:exported="false" />
+        <activity
+            android:name=".House_List_Stock_Out"
+            android:exported="false" />
+        <activity
             android:name=".House_List_Stock_In"
             android:exported="false" />
         <activity

@@ -79,6 +79,8 @@ public class Login extends AppCompatActivity {
             return;
         }
 
+        //show the progress when button is clicked
+        //where users can view their login progress
         progressbar_main.setVisibility(View.VISIBLE);
 
         LoginRef= FirebaseDatabase.getInstance().getReference().child("Users").child("Admin");

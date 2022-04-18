@@ -95,7 +95,7 @@ public class Create_User extends AppCompatActivity {
                     et_pass1.requestFocus();
                 } else {
                     if (roleSP.equals("admin")) {
-                        adminRef.addValueEventListener(new ValueEventListener() {
+                        adminRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (!snapshot.child(username).exists()) {
@@ -128,7 +128,7 @@ public class Create_User extends AppCompatActivity {
                         });
 
                     } else if (roleSP.equals("user")) {
-                        usersRef.addValueEventListener(new ValueEventListener() {
+                        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (!snapshot.child(username).exists()) {
@@ -137,9 +137,10 @@ public class Create_User extends AppCompatActivity {
                                     dataMap1.put("Password", pass1);
                                     dataMap1.put("Role", roleSP);
 
-                                    Map dataMap2 = new HashMap();
-                                    dataMap2.put(nameRef + "/", dataMap1);
-                                    usersRef.updateChildren(dataMap2);
+
+                                    /*Map dataMap2 = new HashMap();
+                                    dataMap2.put(nameRef , dataMap1);*/
+                                    usersRef.child(username).updateChildren(dataMap1);
 
                                     //Set text as empty after success
                                     et_username.setText("");
@@ -149,6 +150,7 @@ public class Create_User extends AppCompatActivity {
                                     Intent intent2MaintainUser = new Intent(getApplicationContext(), Maintain_User.class);
                                     intent2MaintainUser.putExtra("Users", users);
                                     startActivity(intent2MaintainUser);
+
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Account already exist", Toast.LENGTH_SHORT).show();
                                 }

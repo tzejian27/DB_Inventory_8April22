@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,24 +22,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class House_List_Stock_In extends AppCompatActivity {
+public class House_List_Stock_Out extends AppCompatActivity {
 
     ImageView btn_back, btn_search;
     DatabaseReference databaseReference;
     RecyclerView recyclerView;
-    //com.example.db_inventory.HouseList_SI_Adapter HouseList_SI_Adapter;
     List<House_list_class> postList;
     private String post_key="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_house_list_stock_in);
+        setContentView(R.layout.activity_house_list_stock_out);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_House_SI);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_House_SO);
         LinearLayoutManager layoutManagerHouse = new LinearLayoutManager(this);
         layoutManagerHouse.setStackFromEnd(true);
         layoutManagerHouse.setReverseLayout(true);
@@ -51,15 +47,15 @@ public class House_List_Stock_In extends AppCompatActivity {
         databaseReference= FirebaseDatabase.getInstance().getReference("House");
         databaseReference.keepSynced(true);
 
-        btn_back=findViewById(R.id.imageView_house_back_SI);
-        btn_search=(ImageView)findViewById(R.id.imageView_house_search_SI);
+        btn_back=findViewById(R.id.imageView_house_back_SO);
+        btn_search=(ImageView)findViewById(R.id.imageView_house_search_SO);
 
         String users=getIntent().getStringExtra("Users");
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2home = new Intent(House_List_Stock_In.this, Home_Page.class);
+                Intent intent2home = new Intent(House_List_Stock_Out.this, Home_Page.class);
                 intent2home.putExtra("Users", users);
                 startActivity(intent2home);
             }
@@ -68,7 +64,7 @@ public class House_List_Stock_In extends AppCompatActivity {
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent page= new Intent(House_List_Stock_In.this,Search_House.class);
+                Intent page= new Intent(House_List_Stock_Out.this,Search_House.class);
                 page.putExtra("Users", users);
                 startActivity(page);
 
@@ -86,9 +82,9 @@ public class House_List_Stock_In extends AppCompatActivity {
                 .setLifecycleOwner(this)
                 .build();
 
-        FirebaseRecyclerAdapter<House_list_class, HouseViewHolder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<House_list_class, HouseViewHolder>(houseAdapter) {
+        FirebaseRecyclerAdapter<House_list_class, House_List_Stock_Out.HouseViewHolder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<House_list_class, House_List_Stock_Out.HouseViewHolder>(houseAdapter) {
             @Override
-            protected void onBindViewHolder(@NonNull HouseViewHolder holder, int position, @NonNull House_list_class model) {
+            protected void onBindViewHolder(@NonNull House_List_Stock_Out.HouseViewHolder holder, int position, @NonNull House_list_class model) {
                 holder.Name.setText(model.getName());
                 holder.TotalQty.setText(model.getTotalQty());
                 holder.Total_type.setText(model.getTotalType());
@@ -105,7 +101,7 @@ public class House_List_Stock_In extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 final String name = dataSnapshot.child("Name").getValue().toString().trim();
 
-                                Intent intent=new Intent(getApplicationContext(),Stock_In_Scan.class);
+                                Intent intent=new Intent(getApplicationContext(),Stock_Out_Scan.class);
                                 intent.putExtra("Key",key);
                                 intent.putExtra("name",name);
                                 intent.putExtra("Users", users);
@@ -124,9 +120,9 @@ public class House_List_Stock_In extends AppCompatActivity {
 
             @NonNull
             @Override
-            public HouseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            public House_List_Stock_Out.HouseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.house_list_item,parent,false);
-                return new HouseViewHolder(view);
+                return new House_List_Stock_Out.HouseViewHolder(view);
             }
         };
 
@@ -134,6 +130,7 @@ public class House_List_Stock_In extends AppCompatActivity {
         firebaseRecyclerAdapter.startListening();
 
     }
+
 
 
     public class HouseViewHolder extends RecyclerView.ViewHolder {
@@ -160,7 +157,7 @@ public class House_List_Stock_In extends AppCompatActivity {
     public void onBackPressed(){
         String users=getIntent().getStringExtra("Users");
         super.onBackPressed();
-        Intent intent = new Intent(House_List_Stock_In.this, Home_Page.class);
+        Intent intent = new Intent(House_List_Stock_Out.this, Home_Page.class);
         intent.putExtra("Users", users);
         startActivity(intent);
         finish();

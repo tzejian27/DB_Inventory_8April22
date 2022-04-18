@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
 public class Login_user extends AppCompatActivity {
 
     Button btnLogin;
@@ -65,18 +66,26 @@ public class Login_user extends AppCompatActivity {
             return;
         }
 
+        //show the progress when button is clicked
+        //where users can view their login progress
         progressbar_main.setVisibility(View.VISIBLE);
 
         LoginRef= FirebaseDatabase.getInstance().getReference().child("Users").child("User");
+
+        //match the username and get the password for the current username
         LoginRef.child(Username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //check isn't the username exist
                 if (snapshot.exists()){
                     String pwd=snapshot.child("Password").getValue().toString();
 
+                    //matching the password
                     if (Password.equals(pwd)){
                         username=Username;
                         String users="User";
+                        //passing needed data to the home page
+                        //role will be used by application to check whether user are allowed with the function
                         Intent intent = new Intent(getApplicationContext(), Home_Page.class);
                         intent.putExtra(Username, username);
                         intent.putExtra("Users", users);
