@@ -1,14 +1,14 @@
 package com.example.db_inventory;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,12 +23,12 @@ import java.util.Map;
 
 public class Inventory_step3 extends AppCompatActivity {
 
-    Button b1,b2;
-    EditText e1,e2;
-    DatabaseReference databaseReference,databaseReference2, newGoodRef;
-    int TotalQty=0;
-    String Quantity="0";
-    long maxid=0;
+    Button b1, b2;
+    EditText e1, e2;
+    DatabaseReference databaseReference, databaseReference2, newGoodRef;
+    int TotalQty = 0;
+    String Quantity = "0";
+    long maxid = 0;
     long k;
     String currentDateandTime;
     String key2;
@@ -39,10 +39,10 @@ public class Inventory_step3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory_step3);
 
-        b1 = (Button)findViewById(R.id.btn_back3);
-        b2= (Button)findViewById(R.id.btn_next3);
-        e1=(EditText)findViewById(R.id.editText_Inventory_price);
-        e2=(EditText)findViewById(R.id.editText_Inventory_cost);
+        b1 = findViewById(R.id.btn_back3);
+        b2 = findViewById(R.id.btn_next3);
+        e1 = findViewById(R.id.editText_Inventory_price);
+        e2 = findViewById(R.id.editText_Inventory_cost);
 
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
@@ -59,8 +59,8 @@ public class Inventory_step3 extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists())
-                    maxid=(dataSnapshot.getChildrenCount());
+                if (dataSnapshot.exists())
+                    maxid = (dataSnapshot.getChildrenCount());
             }
 
             @Override
@@ -69,7 +69,7 @@ public class Inventory_step3 extends AppCompatActivity {
             }
         });
 
-        String users=getIntent().getStringExtra("Users");
+        String users = getIntent().getStringExtra("Users");
 
 
         b1.setOnClickListener(new View.OnClickListener() {
@@ -87,42 +87,42 @@ public class Inventory_step3 extends AppCompatActivity {
 
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {                
+            public void onClick(View v) {
                 Intent intent = getIntent();
                 String barcode = intent.getStringExtra("barcode");
                 String itemName = intent.getStringExtra("itemName");
                 String price = e1.getText().toString().trim();
                 String cost = e2.getText().toString().trim();
-                databaseReference2=FirebaseDatabase.getInstance().getReference("House").child(key).push();
+                databaseReference2 = FirebaseDatabase.getInstance().getReference("House").child(key).push();
                 databaseReference2.keepSynced(true);
                 key2 = databaseReference2.getKey();
-                k = (maxid-3);
+                k = (maxid - 3);
 
-                totaltype =Long.toString(k);
-                
-                if(TextUtils.isEmpty(price)){
+                totaltype = Long.toString(k);
+
+                if (TextUtils.isEmpty(price)) {
                     e1.setError("Required Field...");
                     return;
                 }
 
-                if(TextUtils.isEmpty(cost)){
+                if (TextUtils.isEmpty(cost)) {
                     e2.setError("Required Field...");
                     return;
                 }
 
 
                 Map dataMap = new HashMap();
-                dataMap.put("HouseKey",key);
-                dataMap.put("Barcode",barcode);
-                dataMap.put("ItemName",itemName);
-                dataMap.put("Price",price);
-                dataMap.put("Cost",cost);
-                dataMap.put("Quantity",Quantity);
-                dataMap.put("Key",key2);
-                dataMap.put("Date_and_Time",currentDateandTime);
+                dataMap.put("HouseKey", key);
+                dataMap.put("Barcode", barcode);
+                dataMap.put("ItemName", itemName);
+                dataMap.put("Price", price);
+                dataMap.put("Cost", cost);
+                dataMap.put("Quantity", Quantity);
+                dataMap.put("Key", key2);
+                dataMap.put("Date_and_Time", currentDateandTime);
 
                 //Store Data to "New_Goods" at the same time
-                newGoodRef=FirebaseDatabase.getInstance().getReference("New_Goods").child(barcode);
+                newGoodRef = FirebaseDatabase.getInstance().getReference("New_Goods").child(barcode);
                 newGoodRef.child("Name").setValue(name);
                 newGoodRef.child("Price").setValue(price);
                 newGoodRef.child("Cost").setValue(cost);
@@ -137,11 +137,10 @@ public class Inventory_step3 extends AppCompatActivity {
                 page.putExtra("barcode", barcode);
                 page.putExtra("Key", key);
                 page.putExtra("Key2", key2);
-                page.putExtra("name",name);
+                page.putExtra("name", name);
                 page.putExtra("Users", users);
                 startActivity(page);
                 finish();
-
 
 
             }

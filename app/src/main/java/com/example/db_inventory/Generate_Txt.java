@@ -1,12 +1,6 @@
 package com.example.db_inventory;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -16,32 +10,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.apache.poi.hssf.model.InternalSheet;
-import org.apache.poi.hssf.record.aggregates.RowRecordsAggregate;
 import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.util.DocumentFormatException;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.Permission;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,8 +38,8 @@ public class Generate_Txt extends AppCompatActivity {
 
     private static final String TAG = "";
     public static File filePath, filePath2;
-    private static String EXCEL_SHEET_NAME = "House List 1";
-    private static String EXCEL_SHEET_NAME2 = "New Good 1";
+    private static final String EXCEL_SHEET_NAME = "House List 1";
+    private static final String EXCEL_SHEET_NAME2 = "New Good 1";
     private static HSSFSheet hssfSheet;
     private static HSSFRow hssfRow;
     private static HSSFCell hssfCell;
@@ -64,10 +51,9 @@ public class Generate_Txt extends AppCompatActivity {
     List<NewGoods> newGoodsList;
     Button btn_excel_export, btn_excel_newGoods;
     String currentDateandTime;
+    String currentDateandTime2;
     private DatabaseReference houseRef, newGoodRef;
     private File housefile;
-
-    String currentDateandTime2;
 
     private static boolean isExternalStorageReadOnly() {
         String externalStorageState = Environment.getExternalStorageState();
@@ -115,7 +101,7 @@ public class Generate_Txt extends AppCompatActivity {
                 Manifest.permission.READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
         btn_excel_export.setOnClickListener(new View.OnClickListener() {
-            FileOutputStream fileOutputStream = null;
+            final FileOutputStream fileOutputStream = null;
 
             @Override
             public void onClick(View view) {
@@ -152,7 +138,7 @@ public class Generate_Txt extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    if(snapshot.exists()){
+                    if (snapshot.exists()) {
                         NewGoods newGoods = new NewGoods();
 
                         newGoods.setName(dataSnapshot.child("Name").getValue().toString());
@@ -168,8 +154,8 @@ public class Generate_Txt extends AppCompatActivity {
                         Log.d("New_Goods", "Price: " + newGoods.getPrice());
 
                         newGoodsList.add(newGoods);
-                    }else{
-                        Toast.makeText(getApplicationContext(),"Something is missing", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Something is missing", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -262,7 +248,7 @@ public class Generate_Txt extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
         currentDateandTime = sdf.format(new Date());
 
-        filePath2 = new File(housefile, "GoodsList_" + currentDateandTime +".xls");
+        filePath2 = new File(housefile, "GoodsList_" + currentDateandTime + ".xls");
         FileOutputStream fileOutputStream = null;
 
         boolean isSuccess;
@@ -339,7 +325,7 @@ public class Generate_Txt extends AppCompatActivity {
         currentDateandTime = sdf.format(new Date());
 
 
-        filePath = new File(housefile, "HouseList_"+ currentDateandTime +".xls");
+        filePath = new File(housefile, "HouseList_" + currentDateandTime + ".xls");
         FileOutputStream fileOutputStream = null;
 
         boolean isSuccess;
@@ -368,8 +354,8 @@ public class Generate_Txt extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
-        String users=getIntent().getStringExtra("Users");
+    public void onBackPressed() {
+        String users = getIntent().getStringExtra("Users");
         super.onBackPressed();
         Intent intent = new Intent(Generate_Txt.this, MainActivity.class);
         intent.putExtra("Users", users);

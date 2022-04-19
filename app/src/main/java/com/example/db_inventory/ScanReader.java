@@ -5,23 +5,24 @@ import android.content.Intent;
 
 public class ScanReader {
 
-    public static final String ACTION_SCAN_RESULT = "com.action.SCAN_RESULT" ;
+    public static final String ACTION_SCAN_RESULT = "com.action.SCAN_RESULT";
 
-    public static final String SCAN_RESULT = "scanContext" ;
-    public static final String ACTION_START_SCAN = "com.action.START_SCAN" ;
-    public static final String ACTION_STOP_SCAN = "com.action.STOP_SCAN" ;
-    public static final String ACTION_INIT = "com.action.INIT_SCAN" ;
-    public static final String ACTION_KILL = "com.action.KILL_SCAN" ;
+    public static final String SCAN_RESULT = "scanContext";
+    public static final String ACTION_START_SCAN = "com.action.START_SCAN";
+    public static final String ACTION_STOP_SCAN = "com.action.STOP_SCAN";
+    public static final String ACTION_INIT = "com.action.INIT_SCAN";
+    public static final String ACTION_KILL = "com.action.KILL_SCAN";
 
-    private Context context ;
-    public ScanReader(Context context){
-        this.context = context ;
+    private final Context context;
+
+    public ScanReader(Context context) {
+        this.context = context;
     }
 
 
     public void init() {
         Intent intent = new Intent();
-        intent.setAction(ACTION_INIT) ;
+        intent.setAction(ACTION_INIT);
 
         context.sendBroadcast(intent);
     }
@@ -29,7 +30,7 @@ public class ScanReader {
 
     public void startScan() {
         Intent intent = new Intent();
-        intent.putExtra("third", true) ;
+        intent.putExtra("third", true);
         intent.setAction(ACTION_START_SCAN);
         context.sendBroadcast(intent);
     }
@@ -43,7 +44,7 @@ public class ScanReader {
     public void closeScan() {
         Intent intent = new Intent();
         intent.setAction(ACTION_KILL);
-        intent.putExtra("third", false) ;
+        intent.putExtra("third", false);
         context.sendBroadcast(intent);
     }
 }

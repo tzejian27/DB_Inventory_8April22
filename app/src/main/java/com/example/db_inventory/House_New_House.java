@@ -1,14 +1,14 @@
 package com.example.db_inventory;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,7 +25,7 @@ public class House_New_House extends AppCompatActivity {
     Button btn_cancel, btn_enter;
     DatabaseReference myRef;
     String TotalQty = "0";
-    String TotalType="0";
+    String TotalType = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +36,11 @@ public class House_New_House extends AppCompatActivity {
         myRef = database.getReference("House").push();
         myRef.keepSynced(true);
 
-        edt_house_name=findViewById(R.id.editText_house_name);
-        btn_cancel=findViewById(R.id.btn_cancel);
-        btn_enter=findViewById(R.id.btn_enter);
+        edt_house_name = findViewById(R.id.editText_house_name);
+        btn_cancel = findViewById(R.id.btn_cancel);
+        btn_enter = findViewById(R.id.btn_enter);
 
-        String users=getIntent().getStringExtra("Users");
+        String users = getIntent().getStringExtra("Users");
 
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +57,7 @@ public class House_New_House extends AppCompatActivity {
                 String name = edt_house_name.getText().toString().trim();
                 if (name.isEmpty()) {
                     Toast.makeText(House_New_House.this, "Please enter Name ", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     add();
                 }
             }
@@ -67,7 +67,7 @@ public class House_New_House extends AppCompatActivity {
 
     private void add() {
         String name = edt_house_name.getText().toString().trim();
-        String users=getIntent().getStringExtra("Users");
+        String users = getIntent().getStringExtra("Users");
         myRef.child("Name").orderByChild("Name").equalTo(name).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -75,17 +75,17 @@ public class House_New_House extends AppCompatActivity {
                 // String name=d,ataSnapshot.child("House_Name").getValue().toString();
 
 
-                final String key =myRef.getKey();
+                final String key = myRef.getKey();
                 String name = edt_house_name.getText().toString().trim();
                 // String house_ref=name + "/";
-                if(dataSnapshot.exists()) {
+                if (dataSnapshot.exists()) {
                     Toast.makeText(House_New_House.this, "Data Exists !", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Map dataMap = new HashMap();
-                    dataMap.put("Name",name);
-                    dataMap.put("TotalQty",TotalQty);
-                    dataMap.put("TotalType",TotalType);
-                    dataMap.put("Key",key);
+                    dataMap.put("Name", name);
+                    dataMap.put("TotalQty", TotalQty);
+                    dataMap.put("TotalType", TotalType);
+                    dataMap.put("Key", key);
 
 
                     // Map dataMap2 = new HashMap();
@@ -98,7 +98,7 @@ public class House_New_House extends AppCompatActivity {
                     //   String name = e1.getText().toString().trim();
                     Intent intent = new Intent(House_New_House.this, House_Menu.class);
                     intent.putExtra("name", name);
-                    intent.putExtra("Key",key);
+                    intent.putExtra("Key", key);
                     intent.putExtra("Users", users);
                     startActivity(intent);
                     finish();

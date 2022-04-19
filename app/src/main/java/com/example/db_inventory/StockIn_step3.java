@@ -1,8 +1,5 @@
 package com.example.db_inventory;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,19 +44,19 @@ public class StockIn_step3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_in_step3);
 
-        t1 = (TextView) findViewById(R.id.textView_Inventory_TotalQty_SI);
-        t2 = (TextView) findViewById(R.id.textView_Inventory_Qty_SI);
-        t3 = (TextView) findViewById(R.id.textView_Inventory_name_SI);
-        t4 = (TextView) findViewById(R.id.textView_Inventory_price_SI);
-        t5 = (TextView) findViewById(R.id.textView_Inventory_cost_SI);
-        tv_qtyIn = (TextView) findViewById(R.id.textView_quantity_in_SI);
+        t1 = findViewById(R.id.textView_Inventory_TotalQty_SI);
+        t2 = findViewById(R.id.textView_Inventory_Qty_SI);
+        t3 = findViewById(R.id.textView_Inventory_name_SI);
+        t4 = findViewById(R.id.textView_Inventory_price_SI);
+        t5 = findViewById(R.id.textView_Inventory_cost_SI);
+        tv_qtyIn = findViewById(R.id.textView_quantity_in_SI);
 
-        e1 = (EditText) findViewById(R.id.editText_Inventory_barcode_SI);
-        e2_quantity_in = (EditText) findViewById(R.id.editText_Inventory_step5_Qty_SI);
+        e1 = findViewById(R.id.editText_Inventory_barcode_SI);
+        e2_quantity_in = findViewById(R.id.editText_Inventory_step5_Qty_SI);
 
-        b1 = (Button) findViewById(R.id.btn_Inventory_esc_SI);
-        b2 = (Button) findViewById(R.id.btn_Inventory_enter_SI);
-        b3 = (Button) findViewById(R.id.btn_back_SI);
+        b1 = findViewById(R.id.btn_Inventory_esc_SI);
+        b2 = findViewById(R.id.btn_Inventory_enter_SI);
+        b3 = findViewById(R.id.btn_back_SI);
 
         Intent intent1 = getIntent();
         barcode = intent1.getStringExtra("barcode");
@@ -67,7 +67,7 @@ public class StockIn_step3 extends AppCompatActivity {
         e1.setText(barcode);
         e1.setEnabled(false);
 
-        stockInRef=FirebaseDatabase.getInstance().getReference("StockIn");
+        stockInRef = FirebaseDatabase.getInstance().getReference("StockIn");
 
         databaseReference2 = FirebaseDatabase.getInstance().getReference("House").child(key).child(key2);
 
@@ -126,7 +126,7 @@ public class StockIn_step3 extends AppCompatActivity {
         });
 
         b1.setOnClickListener(new View.OnClickListener() {
-            String users = getIntent().getStringExtra("Users");
+            final String users = getIntent().getStringExtra("Users");
 
             @Override
             public void onClick(View v) {
@@ -143,7 +143,7 @@ public class StockIn_step3 extends AppCompatActivity {
         });
 
         b3.setOnClickListener(new View.OnClickListener() {
-            String users = getIntent().getStringExtra("Users");
+            final String users = getIntent().getStringExtra("Users");
 
             @Override
             public void onClick(View view) {
@@ -154,7 +154,7 @@ public class StockIn_step3 extends AppCompatActivity {
         });
 
         b2.setOnClickListener(new View.OnClickListener() {
-            String users = getIntent().getStringExtra("Users");
+            final String users = getIntent().getStringExtra("Users");
 
             @Override
             public void onClick(View v) {
@@ -211,15 +211,15 @@ public class StockIn_step3 extends AppCompatActivity {
                             //Create stock in record
                             barcode = intent1.getStringExtra("barcode");
                             name = intent1.getStringExtra("name");
-                            String barcode_ref=barcode + "/";
+                            String barcode_ref = barcode + "/";
                             Map dataMap2 = new HashMap();
-                            dataMap2.put("Barcode",barcode);
-                            dataMap2.put("Name",ItemName);
+                            dataMap2.put("Barcode", barcode);
+                            dataMap2.put("Name", ItemName);
                             dataMap2.put("QtyIn", qty);
                             dataMap2.put("QtyIn_Date", currentDateandTime);
 
-                            Map dataMap3=new HashMap();
-                            dataMap3.put(barcode_ref+"/", dataMap2);
+                            Map dataMap3 = new HashMap();
+                            dataMap3.put(barcode_ref + "/", dataMap2);
 
                             stockInRef.updateChildren(dataMap3);
 

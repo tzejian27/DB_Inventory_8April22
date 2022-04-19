@@ -1,8 +1,5 @@
 package com.example.db_inventory;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -58,118 +58,115 @@ public class Create_User extends AppCompatActivity {
         // Apply the adapter to the spinner
         role.setAdapter(addRole);
 
-        String users=getIntent().getStringExtra("Users");
+        String users = getIntent().getStringExtra("Users");
 
-        btn_create.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String username = et_username.getText().toString().trim();
-                String pass1 = et_pass1.getText().toString().trim();
-                String pass2 = et_pass2.getText().toString().trim();
-                String roleSP = role.getSelectedItem().toString().trim();
+        btn_create.setOnClickListener(view -> {
+            String username = et_username.getText().toString().trim();
+            String pass1 = et_pass1.getText().toString().trim();
+            String pass2 = et_pass2.getText().toString().trim();
+            String roleSP = role.getSelectedItem().toString().trim();
 
-                //Set ref so username will be parent to the data
-                String nameRef = username + "/";
+            //Set ref so username will be parent to the data
+            String nameRef = username + "/";
 
-                if (username.isEmpty()) {
-                    et_username.setError("Username is required");
-                    et_username.requestFocus();
-                    return;
-                }
+            if (username.isEmpty()) {
+                et_username.setError("Username is required");
+                et_username.requestFocus();
+                return;
+            }
 
-                if (pass1.isEmpty()) {
-                    et_pass1.setError("Password is required");
-                    et_pass1.requestFocus();
-                    return;
-                }
+            if (pass1.isEmpty()) {
+                et_pass1.setError("Password is required");
+                et_pass1.requestFocus();
+                return;
+            }
 
-                if (pass2.isEmpty()) {
-                    et_pass2.setError("Confirm Password is required");
-                    et_pass2.requestFocus();
-                    return;
-                }
+            if (pass2.isEmpty()) {
+                et_pass2.setError("Confirm Password is required");
+                et_pass2.requestFocus();
+                return;
+            }
 
-                if (!pass1.equals(pass2)) {
-                    Toast.makeText(getApplicationContext(), "Password not match", Toast.LENGTH_SHORT).show();
-                    et_pass1.setError("Password not match");
-                    et_pass1.requestFocus();
+            if (!pass1.equals(pass2)) {
+                Toast.makeText(getApplicationContext(), "Password not match", Toast.LENGTH_SHORT).show();
+                et_pass1.setError("Password not match");
+                et_pass1.requestFocus();
+            } else {
+                if (roleSP.equals("admin")) {
+                    adminRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (!snapshot.child(username).exists()) {
+                                Map dataMap1 = new HashMap();
+                                dataMap1.put("Username", username);
+                                dataMap1.put("Password", pass1);
+                                dataMap1.put("Role", roleSP);
+
+                                Map dataMap2 = new HashMap();
+                                dataMap2.put(nameRef + "/", dataMap1);
+                                adminRef.updateChildren(dataMap2);
+
+                                //Set text as empty after success
+                                et_username.setText("");
+                                et_pass1.setText("");
+                                et_pass2.setText("");
+
+                                Intent intent2MaintainUser = new Intent(getApplicationContext(), Maintain_User.class);
+                                intent2MaintainUser.putExtra("Users", users);
+                                startActivity(intent2MaintainUser);
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Account already exist", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                } else if (roleSP.equals("user")) {
+                    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (!snapshot.child(username).exists()) {
+                                Map dataMap1 = new HashMap();
+                                dataMap1.put("Username", username);
+                                dataMap1.put("Password", pass1);
+                                dataMap1.put("Role", roleSP);
+
+
+                                /*Map dataMap2 = new HashMap();
+                                dataMap2.put(nameRef , dataMap1);*/
+                                usersRef.child(username).updateChildren(dataMap1);
+
+                                //Set text as empty after success
+                                et_username.setText("");
+                                et_pass1.setText("");
+                                et_pass2.setText("");
+
+                                Intent intent2MaintainUser = new Intent(getApplicationContext(), Maintain_User.class);
+                                intent2MaintainUser.putExtra("Users", users);
+                                startActivity(intent2MaintainUser);
+
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Account already exist", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                 } else {
-                    if (roleSP.equals("admin")) {
-                        adminRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if (!snapshot.child(username).exists()) {
-                                    Map dataMap1 = new HashMap();
-                                    dataMap1.put("Username", username);
-                                    dataMap1.put("Password", pass1);
-                                    dataMap1.put("Role", roleSP);
-
-                                    Map dataMap2 = new HashMap();
-                                    dataMap2.put(nameRef + "/", dataMap1);
-                                    adminRef.updateChildren(dataMap2);
-
-                                    //Set text as empty after success
-                                    et_username.setText("");
-                                    et_pass1.setText("");
-                                    et_pass2.setText("");
-
-                                    Intent intent2MaintainUser = new Intent(getApplicationContext(), Maintain_User.class);
-                                    intent2MaintainUser.putExtra("Users", users);
-                                    startActivity(intent2MaintainUser);
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Account already exist", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-
-                    } else if (roleSP.equals("user")) {
-                        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if (!snapshot.child(username).exists()) {
-                                    Map dataMap1 = new HashMap();
-                                    dataMap1.put("Username", username);
-                                    dataMap1.put("Password", pass1);
-                                    dataMap1.put("Role", roleSP);
-
-
-                                    /*Map dataMap2 = new HashMap();
-                                    dataMap2.put(nameRef , dataMap1);*/
-                                    usersRef.child(username).updateChildren(dataMap1);
-
-                                    //Set text as empty after success
-                                    et_username.setText("");
-                                    et_pass1.setText("");
-                                    et_pass2.setText("");
-
-                                    Intent intent2MaintainUser = new Intent(getApplicationContext(), Maintain_User.class);
-                                    intent2MaintainUser.putExtra("Users", users);
-                                    startActivity(intent2MaintainUser);
-
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Account already exist", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Something wrong with role", Toast.LENGTH_SHORT).show();
-                    }
-
+                    Toast.makeText(getApplicationContext(), "Something wrong with role", Toast.LENGTH_SHORT).show();
                 }
-
 
             }
+
+
         });
 
         btn_cancel.setOnClickListener(new View.OnClickListener() {
@@ -185,7 +182,7 @@ public class Create_User extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        String users=getIntent().getStringExtra("Users");
+        String users = getIntent().getStringExtra("Users");
         super.onBackPressed();
         Intent intent2back = new Intent(getApplicationContext(), Maintain_User.class);
         intent2back.putExtra("Users", users);

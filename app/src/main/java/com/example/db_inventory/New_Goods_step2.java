@@ -1,7 +1,5 @@
 package com.example.db_inventory;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -18,8 +18,8 @@ import java.util.Map;
 
 public class New_Goods_step2 extends AppCompatActivity {
 
-    EditText e1,e2;
-    Button b1,b2;
+    EditText e1, e2;
+    Button b1, b2;
     DatabaseReference databaseReference;
 
     @Override
@@ -27,21 +27,21 @@ public class New_Goods_step2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_goods_step2);
 
-        e1= (EditText)findViewById(R.id.editText_New_Goods_price) ;
-        e2=(EditText) findViewById(R.id.editText_New_Goods_cost);
-        b1=(Button)findViewById(R.id.btn_new_goods_back2);
-        b2=(Button)findViewById(R.id.btn_new_goods_next2);
+        e1 = findViewById(R.id.editText_New_Goods_price);
+        e2 = findViewById(R.id.editText_New_Goods_cost);
+        b1 = findViewById(R.id.btn_new_goods_back2);
+        b2 = findViewById(R.id.btn_new_goods_next2);
 
-        databaseReference= FirebaseDatabase.getInstance().getReference("New_Goods");
+        databaseReference = FirebaseDatabase.getInstance().getReference("New_Goods");
         databaseReference.keepSynced(true);
 
-        String users=getIntent().getStringExtra("Users");
+        String users = getIntent().getStringExtra("Users");
 
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(New_Goods_step2.this,House_New_Goods.class);
+                Intent intent = new Intent(New_Goods_step2.this, House_New_Goods.class);
                 intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
@@ -58,14 +58,14 @@ public class New_Goods_step2 extends AppCompatActivity {
                 String cost = e2.getText().toString().trim();
 
                 String barcode_ref = barcode + "/";
-                final String key =databaseReference.getKey();
+                final String key = databaseReference.getKey();
 
-                if(TextUtils.isEmpty(price)){
+                if (TextUtils.isEmpty(price)) {
                     e1.setError("Required Field...");
                     return;
                 }
 
-                if(TextUtils.isEmpty(cost)){
+                if (TextUtils.isEmpty(cost)) {
                     e2.setError("Required Field...");
                     return;
                 }

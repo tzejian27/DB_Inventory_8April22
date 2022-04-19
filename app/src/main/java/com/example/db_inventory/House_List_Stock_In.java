@@ -1,12 +1,5 @@
 package com.example.db_inventory;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +22,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class House_List_Stock_In extends AppCompatActivity {
@@ -34,27 +31,27 @@ public class House_List_Stock_In extends AppCompatActivity {
     RecyclerView recyclerView;
     //com.example.db_inventory.HouseList_SI_Adapter HouseList_SI_Adapter;
     List<House_list_class> postList;
-    private String post_key="";
+    private final String post_key = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_list_stock_in);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_House_SI);
+        recyclerView = findViewById(R.id.recyclerView_House_SI);
         LinearLayoutManager layoutManagerHouse = new LinearLayoutManager(this);
         layoutManagerHouse.setStackFromEnd(true);
         layoutManagerHouse.setReverseLayout(true);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManagerHouse);
 
-        databaseReference= FirebaseDatabase.getInstance().getReference("House");
+        databaseReference = FirebaseDatabase.getInstance().getReference("House");
         databaseReference.keepSynced(true);
 
-        btn_back=findViewById(R.id.imageView_house_back_SI);
-        btn_search=(ImageView)findViewById(R.id.imageView_house_search_SI);
+        btn_back = findViewById(R.id.imageView_house_back_SI);
+        btn_search = findViewById(R.id.imageView_house_search_SI);
 
-        String users=getIntent().getStringExtra("Users");
+        String users = getIntent().getStringExtra("Users");
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +65,7 @@ public class House_List_Stock_In extends AppCompatActivity {
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent page= new Intent(House_List_Stock_In.this,Search_House.class);
+                Intent page = new Intent(House_List_Stock_In.this, Search_House.class);
                 page.putExtra("Users", users);
                 startActivity(page);
 
@@ -79,14 +76,14 @@ public class House_List_Stock_In extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        String users=getIntent().getStringExtra("Users");
+        String users = getIntent().getStringExtra("Users");
 
         FirebaseRecyclerOptions<House_list_class> houseAdapter = new FirebaseRecyclerOptions.Builder<House_list_class>()
                 .setQuery(databaseReference, House_list_class.class)
                 .setLifecycleOwner(this)
                 .build();
 
-        FirebaseRecyclerAdapter<House_list_class, HouseViewHolder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<House_list_class, HouseViewHolder>(houseAdapter) {
+        FirebaseRecyclerAdapter<House_list_class, HouseViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<House_list_class, HouseViewHolder>(houseAdapter) {
             @Override
             protected void onBindViewHolder(@NonNull HouseViewHolder holder, int position, @NonNull House_list_class model) {
                 holder.Name.setText(model.getName());
@@ -98,16 +95,16 @@ public class House_List_Stock_In extends AppCompatActivity {
                     public void onClick(View v) {
 
                         final String key = model.getKey();
-                        databaseReference= FirebaseDatabase.getInstance().getReference("House").child(key);
+                        databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
                         databaseReference.keepSynced(true);
                         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 final String name = dataSnapshot.child("Name").getValue().toString().trim();
 
-                                Intent intent=new Intent(getApplicationContext(),Stock_In_Scan.class);
-                                intent.putExtra("Key",key);
-                                intent.putExtra("name",name);
+                                Intent intent = new Intent(getApplicationContext(), Stock_In_Scan.class);
+                                intent.putExtra("Key", key);
+                                intent.putExtra("name", name);
                                 intent.putExtra("Users", users);
                                 Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
                                 startActivity(intent);
@@ -125,7 +122,7 @@ public class House_List_Stock_In extends AppCompatActivity {
             @NonNull
             @Override
             public HouseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.house_list_item,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.house_list_item, parent, false);
                 return new HouseViewHolder(view);
             }
         };
@@ -135,6 +132,16 @@ public class House_List_Stock_In extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        String users = getIntent().getStringExtra("Users");
+        super.onBackPressed();
+        Intent intent = new Intent(House_List_Stock_In.this, Home_Page.class);
+        intent.putExtra("Users", users);
+        startActivity(intent);
+        finish();
+
+    }
 
     public class HouseViewHolder extends RecyclerView.ViewHolder {
         View mView;
@@ -147,23 +154,9 @@ public class House_List_Stock_In extends AppCompatActivity {
             super(itemView);
 
             mView = itemView;
-            Name=itemView.findViewById(R.id.textView_Name);
-            TotalQty=itemView.findViewById(R.id.textView_TotalQty);
-            Total_type=itemView.findViewById(R.id.textView_TotalType);
+            Name = itemView.findViewById(R.id.textView_Name);
+            TotalQty = itemView.findViewById(R.id.textView_TotalQty);
+            Total_type = itemView.findViewById(R.id.textView_TotalType);
         }
-    }
-
-
-
-
-    @Override
-    public void onBackPressed(){
-        String users=getIntent().getStringExtra("Users");
-        super.onBackPressed();
-        Intent intent = new Intent(House_List_Stock_In.this, Home_Page.class);
-        intent.putExtra("Users", users);
-        startActivity(intent);
-        finish();
-
     }
 }

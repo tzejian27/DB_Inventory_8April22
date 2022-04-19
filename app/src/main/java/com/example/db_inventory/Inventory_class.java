@@ -1,9 +1,7 @@
 package com.example.db_inventory;
 
-import java.util.List;
-
 public class Inventory_class {
-    private String Barcode,Quantity,ItemName,HouseKey,Price,Cost,Date_and_Time,Key;
+    private String Barcode, Quantity, ItemName, HouseKey, Price, Cost, Date_and_Time, Key;
 
     public Inventory_class() {
     }

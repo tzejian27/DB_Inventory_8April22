@@ -5,7 +5,8 @@ public class User_List_class {
     private String Role;
     private String Password;
 
-    public User_List_class(){}
+    public User_List_class() {
+    }
 
     public User_List_class(String username, String role, String password) {
         Username = username;

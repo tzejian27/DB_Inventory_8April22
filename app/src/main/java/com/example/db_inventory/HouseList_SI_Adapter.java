@@ -1,7 +1,5 @@
 package com.example.db_inventory;
 
-import static android.content.Intent.getIntent;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,13 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,7 +35,7 @@ public class HouseList_SI_Adapter extends RecyclerView.Adapter<HouseList_SI_Adap
     @Override
     public HouseList_SI_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View row = LayoutInflater.from(mContext).inflate(R.layout.house_list_item,parent,false);
+        View row = LayoutInflater.from(mContext).inflate(R.layout.house_list_item, parent, false);
         return new HouseList_SI_Adapter.MyViewHolder(row);
     }
 
@@ -56,27 +51,27 @@ public class HouseList_SI_Adapter extends RecyclerView.Adapter<HouseList_SI_Adap
             public void onClick(View v) {
 
                 final String key = mData.get(position).getKey();
-                databaseReference= FirebaseDatabase.getInstance().getReference("House").child(key);
+                databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
                 databaseReference.keepSynced(true);
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         final String name = dataSnapshot.child("Name").getValue().toString().trim();
 
-                        CharSequence option[]=new CharSequence[]{
+                        CharSequence[] option = new CharSequence[]{
                                 "Stock In"
                         };
 
-                        AlertDialog.Builder builder =new AlertDialog.Builder(mContext);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                         builder.setTitle("Select Option");
                         builder.setItems(option, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
-                                if (position==0){
+                                if (position == 0) {
 
-                                    Intent intent=new Intent(mContext,Stock_In_Scan.class);
-                                    intent.putExtra("Key",key);
-                                    intent.putExtra("name",name);
+                                    Intent intent = new Intent(mContext, Stock_In_Scan.class);
+                                    intent.putExtra("Key", key);
+                                    intent.putExtra("name", name);
                                     mContext.startActivity(intent);
                                 }
                             }
@@ -110,9 +105,9 @@ public class HouseList_SI_Adapter extends RecyclerView.Adapter<HouseList_SI_Adap
             super(itemView);
 
             mView = itemView;
-            Name=itemView.findViewById(R.id.textView_Name);
-            TotalQty=itemView.findViewById(R.id.textView_TotalQty);
-            Total_type=itemView.findViewById(R.id.textView_TotalType);
+            Name = itemView.findViewById(R.id.textView_Name);
+            TotalQty = itemView.findViewById(R.id.textView_TotalQty);
+            Total_type = itemView.findViewById(R.id.textView_TotalType);
         }
     }
 }

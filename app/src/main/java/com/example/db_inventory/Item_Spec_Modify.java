@@ -1,8 +1,5 @@
 package com.example.db_inventory;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,9 +20,9 @@ import com.google.firebase.database.ValueEventListener;
 public class Item_Spec_Modify extends AppCompatActivity {
 
     TextView t1;
-    EditText e1,e2,e3;
-    Button b1,b2;
-    DatabaseReference databaseReference,databaseReference2,databaseReference3;
+    EditText e1, e2, e3;
+    Button b1, b2;
+    DatabaseReference databaseReference, databaseReference2, databaseReference3;
     String barcode;
     String s1;
     String itemName;
@@ -34,14 +34,14 @@ public class Item_Spec_Modify extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_spec_modify);
 
-        t1=(TextView) findViewById(R.id.textView42);
+        t1 = findViewById(R.id.textView42);
 
-        e1=(EditText)findViewById(R.id.editText_ItemSpec_Modify_name);
-        e2=(EditText)findViewById(R.id.editText_ItemSpec_Modify_price);
-        e3=(EditText)findViewById(R.id.editText_ItemSpec_Modify_cost);
+        e1 = findViewById(R.id.editText_ItemSpec_Modify_name);
+        e2 = findViewById(R.id.editText_ItemSpec_Modify_price);
+        e3 = findViewById(R.id.editText_ItemSpec_Modify_cost);
 
-        b1=(Button)findViewById(R.id.btn_Inventory_ItemSpec_Modidy_Esc);
-        b2=(Button)findViewById(R.id.btn_Inventory_ItemSpec_Modify_Enter);
+        b1 = findViewById(R.id.btn_Inventory_ItemSpec_Modidy_Esc);
+        b2 = findViewById(R.id.btn_Inventory_ItemSpec_Modify_Enter);
 
         final Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
@@ -49,7 +49,7 @@ public class Item_Spec_Modify extends AppCompatActivity {
         final String key2 = intent.getStringExtra("Key2");
         //final String barcode1=intent.getStringExtra("Barcode");
 
-        databaseReference= FirebaseDatabase.getInstance().getReference("House").child(key).child(key2);
+        databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key).child(key2);
         databaseReference.keepSynced(true);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -73,9 +73,6 @@ public class Item_Spec_Modify extends AppCompatActivity {
         });
 
 
-
-
-
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +83,7 @@ public class Item_Spec_Modify extends AppCompatActivity {
             }
         });
 
-        String users=getIntent().getStringExtra("Users");
+        String users = getIntent().getStringExtra("Users");
 
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,13 +93,13 @@ public class Item_Spec_Modify extends AppCompatActivity {
                 String cost = e3.getText().toString().trim();
 
                 final Intent intent = getIntent();
-                final String barcode1 =intent.getStringExtra("Barcode1");
+                final String barcode1 = intent.getStringExtra("Barcode1");
 
                 if (name.isEmpty() && price.isEmpty() && cost.isEmpty()) {
                     Toast.makeText(Item_Spec_Modify.this, "Please enter name , price and cost ", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     //Not sure need or not
-                    databaseReference2=FirebaseDatabase.getInstance().getReference("New_Goods").child(barcode);
+                    databaseReference2 = FirebaseDatabase.getInstance().getReference("New_Goods").child(barcode);
                     databaseReference2.keepSynced(true);
                     databaseReference2.child("Name").setValue(name);
                     databaseReference2.child("Price").setValue(price);
@@ -123,9 +120,9 @@ public class Item_Spec_Modify extends AppCompatActivity {
                     databaseReference.child("Cost").setValue(cost);
 
 
-                    Intent page = new Intent(Item_Spec_Modify.this,Item_Spec.class);
-                    page.putExtra("Key",key);
-                    page.putExtra("Key2",key2);
+                    Intent page = new Intent(Item_Spec_Modify.this, Item_Spec.class);
+                    page.putExtra("Key", key);
+                    page.putExtra("Key2", key2);
                     page.putExtra("Users", users);
                     startActivity(page);
                     finish();

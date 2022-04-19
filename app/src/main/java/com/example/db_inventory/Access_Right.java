@@ -1,15 +1,13 @@
 package com.example.db_inventory;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,15 +41,15 @@ public class Access_Right extends AppCompatActivity {
         setContentView(R.layout.activity_access_right);
         setTitle("User Access Right");
 
-        sw_new_house=findViewById(R.id.switch_new_house);
-        sw_edit_spec=findViewById(R.id.switch_edit_spec);
-        sw_data_clear=findViewById(R.id.switch_data_clear);
-        sw_stock_in=findViewById(R.id.switch_stock_in);
-        sw_stock_out=findViewById(R.id.switch_SO);
-        sw_modify_delete=findViewById(R.id.switch_modify_delete);
-        sw_setting=findViewById(R.id.switch_setting);
+        sw_new_house = findViewById(R.id.switch_new_house);
+        sw_edit_spec = findViewById(R.id.switch_edit_spec);
+        sw_data_clear = findViewById(R.id.switch_data_clear);
+        sw_stock_in = findViewById(R.id.switch_stock_in);
+        sw_stock_out = findViewById(R.id.switch_SO);
+        sw_modify_delete = findViewById(R.id.switch_modify_delete);
+        sw_setting = findViewById(R.id.switch_setting);
 
-        arightRef= FirebaseDatabase.getInstance().getReference("Access_Right");
+        arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
         arightRef.keepSynced(true);
 
         //btn_confirm=findViewById(R.id.btn_access_right_confirm);
@@ -59,12 +57,12 @@ public class Access_Right extends AppCompatActivity {
         sw_new_house.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(sw_new_house.isChecked()){
-                    Switch1="On";
+                if (sw_new_house.isChecked()) {
+                    Switch1 = "On";
                     arightRef.child("SW_NewHouse").setValue(Switch1).toString().trim();
 
-                }else{
-                    Switch1="Off";
+                } else {
+                    Switch1 = "Off";
                     arightRef.child("SW_NewHouse").setValue(Switch1).toString().trim();
                 }
             }
@@ -73,11 +71,11 @@ public class Access_Right extends AppCompatActivity {
         sw_edit_spec.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(sw_edit_spec.isChecked()){
-                    Switch2="On";
+                if (sw_edit_spec.isChecked()) {
+                    Switch2 = "On";
                     arightRef.child("SW_EditSpec").setValue(Switch2).toString().trim();
-                }else{
-                    Switch2="Off";
+                } else {
+                    Switch2 = "Off";
                     arightRef.child("SW_EditSpec").setValue(Switch2).toString().trim();
                 }
             }
@@ -86,11 +84,11 @@ public class Access_Right extends AppCompatActivity {
         sw_data_clear.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(sw_data_clear.isChecked()){
-                    Switch3="On";
+                if (sw_data_clear.isChecked()) {
+                    Switch3 = "On";
                     arightRef.child("SW_DataClear").setValue(Switch3).toString().trim();
-                }else{
-                    Switch3="Off";
+                } else {
+                    Switch3 = "Off";
                     arightRef.child("SW_DataClear").setValue(Switch3).toString().trim();
                 }
             }
@@ -99,11 +97,11 @@ public class Access_Right extends AppCompatActivity {
         sw_stock_in.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(sw_stock_in.isChecked()){
-                    Switch4="On";
+                if (sw_stock_in.isChecked()) {
+                    Switch4 = "On";
                     arightRef.child("SW_StockIn").setValue(Switch4).toString().trim();
-                }else{
-                    Switch4="Off";
+                } else {
+                    Switch4 = "Off";
                     arightRef.child("SW_StockIn").setValue(Switch4).toString().trim();
                 }
             }
@@ -112,11 +110,11 @@ public class Access_Right extends AppCompatActivity {
         sw_stock_out.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(sw_stock_out.isChecked()){
-                    Switch5="On";
+                if (sw_stock_out.isChecked()) {
+                    Switch5 = "On";
                     arightRef.child("SW_StockOut").setValue(Switch5).toString().trim();
-                }else{
-                    Switch5="Off";
+                } else {
+                    Switch5 = "Off";
                     arightRef.child("SW_StockOut").setValue(Switch5).toString().trim();
                 }
             }
@@ -125,11 +123,11 @@ public class Access_Right extends AppCompatActivity {
         sw_modify_delete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(sw_modify_delete.isChecked()){
-                    Switch6="On";
+                if (sw_modify_delete.isChecked()) {
+                    Switch6 = "On";
                     arightRef.child("SW_ModifyDelete").setValue(Switch6).toString().trim();
-                }else{
-                    Switch6="Off";
+                } else {
+                    Switch6 = "Off";
                     arightRef.child("SW_ModifyDelete").setValue(Switch6).toString().trim();
                 }
             }
@@ -138,17 +136,17 @@ public class Access_Right extends AppCompatActivity {
         sw_setting.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(sw_setting.isChecked()){
-                    Switch7="On";
+                if (sw_setting.isChecked()) {
+                    Switch7 = "On";
                     arightRef.child("SW_Setting").setValue(Switch7).toString().trim();
-                }else{
-                    Switch7="Off";
+                } else {
+                    Switch7 = "Off";
                     arightRef.child("SW_Setting").setValue(Switch7).toString().trim();
                 }
             }
         });
 
-        String users=getIntent().getStringExtra("Users");
+        String users = getIntent().getStringExtra("Users");
 
         /*btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,7 +164,6 @@ public class Access_Right extends AppCompatActivity {
 
             }
         });*/
-
 
 
     }
@@ -257,7 +254,7 @@ public class Access_Right extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        String users=getIntent().getStringExtra("Users");
+        String users = getIntent().getStringExtra("Users");
         super.onBackPressed();
         Intent intent2back = new Intent(getApplicationContext(), Maintain_User.class);
         intent2back.putExtra("Users", users);

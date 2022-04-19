@@ -1,10 +1,5 @@
 package com.example.db_inventory;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -16,6 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +25,7 @@ public class House_List2 extends AppCompatActivity {
 
     DatabaseReference databaseReference;
     RecyclerView recyclerView;
-    ImageView imageView1,imageView2;
+    ImageView imageView1, imageView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +33,12 @@ public class House_List2 extends AppCompatActivity {
         setContentView(R.layout.activity_house_list2);
         setTitle("House List");
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_Inventory_List);
+        recyclerView = findViewById(R.id.recyclerView_Inventory_List);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        imageView1=(ImageView)findViewById(R.id.imageView_back);
-        imageView2=(ImageView)findViewById(R.id.imageView_search) ;
+        imageView1 = findViewById(R.id.imageView_back);
+        imageView2 = findViewById(R.id.imageView_search);
         imageView2.setVisibility(View.INVISIBLE);
 
         Intent intent = getIntent();
@@ -51,18 +51,18 @@ public class House_List2 extends AppCompatActivity {
             }
         });
 
-        databaseReference= FirebaseDatabase.getInstance().getReference("House");
+        databaseReference = FirebaseDatabase.getInstance().getReference("House");
         databaseReference.keepSynced(true);
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
 
 
         Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
-        String users=getIntent().getStringExtra("Users");
+        String users = getIntent().getStringExtra("Users");
 
         FirebaseRecyclerOptions<House_list_class> houseAdapter = new FirebaseRecyclerOptions.Builder<House_list_class>()
                 .setQuery(databaseReference.orderByChild("Name").equalTo(name), House_list_class.class)
@@ -72,45 +72,45 @@ public class House_List2 extends AppCompatActivity {
         FirebaseRecyclerAdapter<House_list_class, AllUsersViewHolder> firebaseRecyclerAdapter2 = new FirebaseRecyclerAdapter<House_list_class, AllUsersViewHolder>(houseAdapter) {
             @Override
             protected void onBindViewHolder(@NonNull AllUsersViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull House_list_class model) {
-                holder.setName (model.getName());
-                holder.setTotalQty (model.getTotalQty());
-                holder.setTotalType (model.getTotalType());
+                holder.setName(model.getName());
+                holder.setTotalQty(model.getTotalQty());
+                holder.setTotalType(model.getTotalType());
 
                 holder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         final String key = getRef(position).getKey();
-                        CharSequence option[]=new CharSequence[]{
-                                "Enter","Modify","Stock In"
+                        CharSequence[] option = new CharSequence[]{
+                                "Enter", "Modify", "Stock In"
                         };
 
-                        AlertDialog.Builder builder =new AlertDialog.Builder(House_List2.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(House_List2.this);
                         builder.setTitle("Select Option");
                         builder.setItems(option, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
-                                if (position == 0){
+                                if (position == 0) {
 
-                                    Intent intent=new Intent(House_List2.this,House_Menu.class);
-                                    intent.putExtra("Key",key);
-                                    intent.putExtra("name",name);
+                                    Intent intent = new Intent(House_List2.this, House_Menu.class);
+                                    intent.putExtra("Key", key);
+                                    intent.putExtra("name", name);
                                     intent.putExtra("Users", users);
                                     startActivity(intent);
                                     finish();
 
                                 }
-                                if (position == 1){
-                                    Intent intent=new Intent(House_List2.this,House_Modify.class);
-                                    intent.putExtra("Key",key);
-                                    intent.putExtra("name",name);
+                                if (position == 1) {
+                                    Intent intent = new Intent(House_List2.this, House_Modify.class);
+                                    intent.putExtra("Key", key);
+                                    intent.putExtra("name", name);
                                     intent.putExtra("Users", users);
                                     startActivity(intent);
                                     finish();
                                 }
-                                if (position==2){
-                                    Intent intent=new Intent(House_List2.this,Stock_In_Scan.class);
-                                    intent.putExtra("Key",key);
-                                    intent.putExtra("name",name);
+                                if (position == 2) {
+                                    Intent intent = new Intent(House_List2.this, Stock_In_Scan.class);
+                                    intent.putExtra("Key", key);
+                                    intent.putExtra("name", name);
                                     intent.putExtra("Users", users);
                                     startActivity(intent);
                                 }
@@ -146,17 +146,17 @@ public class House_List2 extends AppCompatActivity {
         }
 
         public void setName(String name) {
-            TextView Name = (TextView) mView.findViewById(R.id.textView_Name);
+            TextView Name = mView.findViewById(R.id.textView_Name);
             Name.setText(name);
         }
 
         public void setTotalQty(String totalQty) {
-            TextView TotalQty = (TextView) mView.findViewById(R.id.textView_TotalQty);
+            TextView TotalQty = mView.findViewById(R.id.textView_TotalQty);
             TotalQty.setText(totalQty);
         }
 
         public void setTotalType(String totalType) {
-            TextView TotalType = (TextView) mView.findViewById(R.id.textView_TotalType);
+            TextView TotalType = mView.findViewById(R.id.textView_TotalType);
             TotalType.setText(totalType);
         }
 

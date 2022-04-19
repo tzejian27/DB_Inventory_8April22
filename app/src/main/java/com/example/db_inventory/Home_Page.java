@@ -1,14 +1,14 @@
 package com.example.db_inventory;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,7 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Home_Page extends AppCompatActivity implements View.OnClickListener{
+public class Home_Page extends AppCompatActivity implements View.OnClickListener {
 
     Button btn_home_home, btn_stock_adjustment;
     Button btn_sales_order, btn_maintain_users;
@@ -33,14 +33,14 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        btn_home_home=findViewById(R.id.btn_House_intent);
-        btn_stock_adjustment=findViewById(R.id.btn_stock_adjustment);
-        btn_sales_order=findViewById(R.id.btn_sales_order);
-        btn_maintain_users=findViewById(R.id.btn_maintain_user);
-        cardView=findViewById(R.id.cv_maintain_user);
+        btn_home_home = findViewById(R.id.btn_House_intent);
+        btn_stock_adjustment = findViewById(R.id.btn_stock_adjustment);
+        btn_sales_order = findViewById(R.id.btn_sales_order);
+        btn_maintain_users = findViewById(R.id.btn_maintain_user);
+        cardView = findViewById(R.id.cv_maintain_user);
 
-        btn_stockIn=findViewById(R.id.btn_stock_in);
-        btn_stockOut=findViewById(R.id.btn_stock_out);
+        btn_stockIn = findViewById(R.id.btn_stock_in);
+        btn_stockOut = findViewById(R.id.btn_stock_out);
 
         btn_stockIn.setOnClickListener(this);
         btn_stockOut.setOnClickListener(this);
@@ -49,7 +49,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         btn_stock_adjustment.setOnClickListener(this);
         btn_sales_order.setOnClickListener(this);
 
-        String users=getIntent().getStringExtra("Users");
+        String users = getIntent().getStringExtra("Users");
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
 
 
@@ -60,8 +60,8 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-        String users=getIntent().getStringExtra("Users");
-        switch (view.getId()){
+        String users = getIntent().getStringExtra("Users");
+        switch (view.getId()) {
 
             case R.id.btn_House_intent:
                 Intent intent2house = new Intent(Home_Page.this, MainActivity.class);
@@ -70,20 +70,20 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 break;
             case R.id.btn_stock_adjustment:
                 //stock adjustment help calculate the quantity of stock on hand compare with book quantity
-                Toast.makeText(getApplicationContext(),"Stock adjustment still under construction",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Stock adjustment still under construction", Toast.LENGTH_SHORT).show();
                 //Intent intent2stock_adjust = new Intent(Home_Page.this, Stock_Adjustment_Home.class);
                 //startActivity(intent2stock_adjust);
                 break;
             case R.id.btn_sales_order:
-                Toast.makeText(getApplicationContext(),"Sales Order still under construction",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Sales Order still under construction", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_maintain_user:
                 //maintain user are only access by the admin
-                if(users != null && users.equals("Admin")){
+                if (users != null && users.equals("Admin")) {
                     Intent intent2MaintainUser = new Intent(Home_Page.this, Maintain_User.class);
                     intent2MaintainUser.putExtra("Users", users);
                     startActivity(intent2MaintainUser);
-                }else{
+                } else {
                     //when there is not admin role received then show error message where not allowed user to enter
                     Toast.makeText(Home_Page.this, "You are not authorized to execute, Please Login as admin", Toast.LENGTH_LONG).show();
                 }
@@ -115,7 +115,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
 
                         }
                     });
-                }else{
+                } else {
                     Toast.makeText(Home_Page.this, "Something go wrong, pls sign in again", Toast.LENGTH_LONG).show();
                 }
                 break;
@@ -138,12 +138,13 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                                 Toast.makeText(Home_Page.this, "Permission denied", Toast.LENGTH_LONG).show();
                             }
                         }
+
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
                     });
-                }else{
+                } else {
                     Toast.makeText(Home_Page.this, "Something go wrong, pls sign in again", Toast.LENGTH_LONG).show();
                 }
 

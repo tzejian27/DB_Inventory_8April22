@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +20,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.core.Context;
 
 import java.util.List;
 
-public class HouseList_Adapter extends RecyclerView.Adapter<HouseList_Adapter.MyViewHolder>{
+public class HouseList_Adapter extends RecyclerView.Adapter<HouseList_Adapter.MyViewHolder> {
 
     House_List mContext;
     List<House_list_class> mData;
@@ -43,7 +41,7 @@ public class HouseList_Adapter extends RecyclerView.Adapter<HouseList_Adapter.My
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View row = LayoutInflater.from(mContext).inflate(R.layout.house_list_item,parent,false);
+        View row = LayoutInflater.from(mContext).inflate(R.layout.house_list_item, parent, false);
         return new MyViewHolder(row);
     }
 
@@ -73,47 +71,47 @@ public class HouseList_Adapter extends RecyclerView.Adapter<HouseList_Adapter.My
             public void onClick(View v) {
 
                 final String key = mData.get(position).getKey();
-                databaseReference= FirebaseDatabase.getInstance().getReference("House").child(key);
+                databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
                 databaseReference.keepSynced(true);
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         final String name = dataSnapshot.child("Name").getValue().toString().trim();
 
-                        CharSequence option[]=new CharSequence[]{
-                                "Enter","Modify","Delete"
+                        CharSequence[] option = new CharSequence[]{
+                                "Enter", "Modify", "Delete"
                         };
 
-                        AlertDialog.Builder builder =new AlertDialog.Builder(mContext);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                         builder.setTitle("Select Option");
                         builder.setItems(option, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
-                                if (position == 0){
+                                if (position == 0) {
 
-                                    Intent intent=new Intent(mContext,House_Menu.class);
-                                    intent.putExtra("Key",key);
-                                    intent.putExtra("name",name);
+                                    Intent intent = new Intent(mContext, House_Menu.class);
+                                    intent.putExtra("Key", key);
+                                    intent.putExtra("name", name);
                                     mContext.startActivity(intent);
 
 
                                 }
-                                if (position == 1){
-                                    if(Switch1.equals("On")){
-                                        Intent intent=new Intent(mContext,House_Modify.class);
-                                        intent.putExtra("Key",key);
-                                        intent.putExtra("name",name);
+                                if (position == 1) {
+                                    if (Switch1.equals("On")) {
+                                        Intent intent = new Intent(mContext, House_Modify.class);
+                                        intent.putExtra("Key", key);
+                                        intent.putExtra("name", name);
                                         mContext.startActivity(intent);
 
-                                    }else if(Switch1.equals("Off")){
+                                    } else if (Switch1.equals("Off")) {
                                         Toast.makeText(mContext, "Modify Access Right Off", Toast.LENGTH_LONG).show();
                                     }
 
                                 }
-                                if (position==2){
+                                if (position == 2) {
 
-                                    if(Switch2.equals("On")){
-                                        CharSequence option2[]=new CharSequence[]{
+                                    if (Switch2.equals("On")) {
+                                        CharSequence[] option2 = new CharSequence[]{
                                                 "Delete", "Cancel"
                                         };
                                         AlertDialog.Builder deleteBuilder = new AlertDialog.Builder(mContext);
@@ -121,21 +119,21 @@ public class HouseList_Adapter extends RecyclerView.Adapter<HouseList_Adapter.My
                                         deleteBuilder.setItems(option2, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
-                                                if (i==0){
+                                                if (i == 0) {
                                                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("House");
                                                     reference.child(key).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
-                                                            if (task.isSuccessful()){
+                                                            if (task.isSuccessful()) {
                                                                 Toast.makeText(mContext, "Deleted  successfully", Toast.LENGTH_SHORT).show();
-                                                            }else {
+                                                            } else {
                                                                 Toast.makeText(mContext, task.getException().toString(), Toast.LENGTH_SHORT).show();
                                                             }
                                                         }
                                                     });
                                                 }
 
-                                                if (i==1){
+                                                if (i == 1) {
                                                     dialog.cancel();
                                                 }
 
@@ -144,7 +142,7 @@ public class HouseList_Adapter extends RecyclerView.Adapter<HouseList_Adapter.My
                                         });
                                         deleteBuilder.show();
 
-                                    }else if(Switch2.equals("Off")){
+                                    } else if (Switch2.equals("Off")) {
                                         Toast.makeText(mContext, "Delete House Access Right Off", Toast.LENGTH_LONG).show();
                                     }
 
@@ -180,9 +178,9 @@ public class HouseList_Adapter extends RecyclerView.Adapter<HouseList_Adapter.My
             super(itemView);
 
             mView = itemView;
-            Name=itemView.findViewById(R.id.textView_Name);
-            TotalQty=itemView.findViewById(R.id.textView_TotalQty);
-            Total_type=itemView.findViewById(R.id.textView_TotalType);
+            Name = itemView.findViewById(R.id.textView_Name);
+            TotalQty = itemView.findViewById(R.id.textView_TotalQty);
+            Total_type = itemView.findViewById(R.id.textView_TotalType);
         }
     }
 }

@@ -2,47 +2,44 @@ package com.example.db_inventory;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.content.Context;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.db_inventory.House_list_class;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-public class DeleteHouseAdapter extends RecyclerView.Adapter<DeleteHouseAdapter.ViewHolder>{
+public class DeleteHouseAdapter extends RecyclerView.Adapter<DeleteHouseAdapter.ViewHolder> {
 
-    private Context mContext;
-    private List<House_list_class> myDataList;
-    private String post_key="";
+    private final Context mContext;
+    private final List<House_list_class> myDataList;
+    private String post_key = "";
 
     private String Name = "";
     private String Total_type = "";
-    private String TotalQty="";
+    private String TotalQty = "";
 
-    public DeleteHouseAdapter(Context mContext, List<House_list_class> myDataList){
-        this.mContext=mContext;
-        this.myDataList=myDataList;
+    public DeleteHouseAdapter(Context mContext, List<House_list_class> myDataList) {
+        this.mContext = mContext;
+        this.myDataList = myDataList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(mContext).inflate(R.layout.house_list_item,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.house_list_item, parent, false);
         return new DeleteHouseAdapter.ViewHolder(view);
     }
 
@@ -57,17 +54,17 @@ public class DeleteHouseAdapter extends RecyclerView.Adapter<DeleteHouseAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                post_key=myDataList.get(position).getKey();
+                post_key = myDataList.get(position).getKey();
 
-                Name=data.getName();
-                TotalQty= data.getTotalQty();
-                Total_type=data.getTotalType();
+                Name = data.getName();
+                TotalQty = data.getTotalQty();
+                Total_type = data.getTotalType();
 
-                CharSequence option[]=new CharSequence[]{
-                       "Delete"
+                CharSequence[] option = new CharSequence[]{
+                        "Delete"
                 };
 
-                AlertDialog.Builder builder =new AlertDialog.Builder(mContext);
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setTitle("Select Option");
                 builder.setItems(option, new DialogInterface.OnClickListener() {
                     @Override
@@ -77,9 +74,9 @@ public class DeleteHouseAdapter extends RecyclerView.Adapter<DeleteHouseAdapter.
                         reference.child(post_key).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     Toast.makeText(mContext, "Deleted  successfully", Toast.LENGTH_SHORT).show();
-                                }else {
+                                } else {
                                     Toast.makeText(mContext, task.getException().toString(), Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -87,7 +84,6 @@ public class DeleteHouseAdapter extends RecyclerView.Adapter<DeleteHouseAdapter.
 
                     }
                 });
-
 
 
             }
@@ -100,7 +96,7 @@ public class DeleteHouseAdapter extends RecyclerView.Adapter<DeleteHouseAdapter.
         return myDataList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView Name;
         TextView Total_type;
         TextView TotalQty;
@@ -109,9 +105,9 @@ public class DeleteHouseAdapter extends RecyclerView.Adapter<DeleteHouseAdapter.
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            Name=itemView.findViewById(R.id.textView_Name);
-            TotalQty=itemView.findViewById(R.id.textView_TotalQty);
-            Total_type=itemView.findViewById(R.id.textView_TotalType);
+            Name = itemView.findViewById(R.id.textView_Name);
+            TotalQty = itemView.findViewById(R.id.textView_TotalQty);
+            Total_type = itemView.findViewById(R.id.textView_TotalType);
         }
     }
 }

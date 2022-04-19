@@ -52,7 +52,6 @@
     <string name="inventory_s_cost">Inventory\'s cost</string>
     <string name="enter_to_change_quantity">Enter to change quantity</string>
     <string name="esc">ESC</string>
-    <string name="add">Add</string>
     <string name="change">Change</string>
     <string name="item_spec">Item Spec</string>
     <string name="item_spec_price">Item Spec Price</string>

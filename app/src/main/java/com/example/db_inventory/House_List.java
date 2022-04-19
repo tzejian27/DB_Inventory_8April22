@@ -1,14 +1,14 @@
 package com.example.db_inventory;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,16 +32,16 @@ public class House_List extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_list);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_House);
+        recyclerView = findViewById(R.id.recyclerView_House);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        databaseReference= FirebaseDatabase.getInstance().getReference("House");
+        databaseReference = FirebaseDatabase.getInstance().getReference("House");
         databaseReference.keepSynced(true);
 
-        btn_back=findViewById(R.id.imageView_house_back);
-        btn_search=(ImageView)findViewById(R.id.imageView_house_search);
-        String users=getIntent().getStringExtra("Users");
+        btn_back = findViewById(R.id.imageView_house_back);
+        btn_search = findViewById(R.id.imageView_house_search);
+        String users = getIntent().getStringExtra("Users");
 
 
         btn_back.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +56,7 @@ public class House_List extends AppCompatActivity {
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent page= new Intent(House_List.this,Search_House.class);
+                Intent page = new Intent(House_List.this, Search_House.class);
                 page.putExtra("Users", users);
                 startActivity(page);
 
@@ -75,12 +75,12 @@ public class House_List extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                postList=new ArrayList<>();
-                for (DataSnapshot postsnap:dataSnapshot.getChildren()){
-                    House_list_class list =postsnap.getValue(House_list_class.class);
+                postList = new ArrayList<>();
+                for (DataSnapshot postsnap : dataSnapshot.getChildren()) {
+                    House_list_class list = postsnap.getValue(House_list_class.class);
                     postList.add(list);
                 }
-                HouseList_Adapter= new HouseList_Adapter(House_List.this,postList);
+                HouseList_Adapter = new HouseList_Adapter(House_List.this, postList);
                 recyclerView.setAdapter(HouseList_Adapter);
             }
 
@@ -93,8 +93,8 @@ public class House_List extends AppCompatActivity {
 
 
     @Override
-    public void onBackPressed(){
-        String users=getIntent().getStringExtra("Users");
+    public void onBackPressed() {
+        String users = getIntent().getStringExtra("Users");
         super.onBackPressed();
         Intent intent = new Intent(House_List.this, MainActivity.class);
         intent.putExtra("Users", users);

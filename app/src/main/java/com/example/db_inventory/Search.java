@@ -1,7 +1,5 @@
 package com.example.db_inventory;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,21 +11,21 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Search extends AppCompatActivity {
-    Button b1,b2;
-    EditText e1 ;
+import androidx.appcompat.app.AppCompatActivity;
 
+public class Search extends AppCompatActivity {
     //Barcode
     public static String barcode;
-    private String barcodeStr;
+    Button b1, b2;
+    EditText e1;
     ScanReader scanReader;
-
-    private BroadcastReceiver resultReceiver = new BroadcastReceiver() {
+    private String barcodeStr;
+    private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             byte[] barcode = intent.getByteArrayExtra(ScanReader.SCAN_RESULT);
             Log.e("MainActivity", "barcode = " + new String(barcode));
-            if (barcode!= null){
+            if (barcode != null) {
                 barcodeStr = new String(barcode);
                 e1.setText(barcodeStr);
             }
@@ -39,12 +37,12 @@ public class Search extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        b1=(Button)findViewById(R.id.btn_Search_Cancel);
-        b2=(Button)findViewById(R.id.btn_Search_Enter);
+        b1 = findViewById(R.id.btn_Search_Cancel);
+        b2 = findViewById(R.id.btn_Search_Enter);
 
-        e1=(EditText)findViewById(R.id.editText_Search_barcode);
+        e1 = findViewById(R.id.editText_Search_barcode);
 
-        String users=getIntent().getStringExtra("Users");
+        String users = getIntent().getStringExtra("Users");
 
         //Barcode Scanning
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -61,9 +59,9 @@ public class Search extends AppCompatActivity {
                 Intent intent = getIntent();
                 final String name = intent.getStringExtra("name");
                 final String key = intent.getStringExtra("Key");
-                Intent page = new Intent(Search.this,Inventory_List.class);
-                page.putExtra("name",name);
-                page.putExtra("Key",key);
+                Intent page = new Intent(Search.this, Inventory_List.class);
+                page.putExtra("name", name);
+                page.putExtra("Key", key);
                 page.putExtra("Users", users);
                 startActivity(page);
                 finish();
@@ -78,11 +76,11 @@ public class Search extends AppCompatActivity {
                 final String name = intent.getStringExtra("name");
                 final String key = intent.getStringExtra("Key");
                 final String key2 = intent.getStringExtra("Key2");
-                Intent page = new Intent(Search.this,Inventory_List2.class);
-                page.putExtra("name",name);
-                page.putExtra("Barcode",barcode);
-                page.putExtra("Key",key);
-                page.putExtra("Key2",key2);
+                Intent page = new Intent(Search.this, Inventory_List2.class);
+                page.putExtra("name", name);
+                page.putExtra("Barcode", barcode);
+                page.putExtra("Key", key);
+                page.putExtra("Key2", key2);
                 page.putExtra("Users", users);
                 startActivity(page);
                 finish();

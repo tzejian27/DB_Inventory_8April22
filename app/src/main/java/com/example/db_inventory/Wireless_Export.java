@@ -1,9 +1,5 @@
 package com.example.db_inventory;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,11 +11,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -38,30 +37,37 @@ import java.util.List;
 
 public class Wireless_Export extends AppCompatActivity {
 
-    Button Export;
-    TextView n1,k1;
-    DatabaseReference houseRef;
-
     private static final String TAG = "";
     public static File filePath;
-    private static String EXCEL_SHEET_NAME = "House & Inventory 1";
+    private static final String EXCEL_SHEET_NAME = "House & Inventory 1";
+    private static HSSFSheet hssfSheet;
+    private static HSSFRow hssfRow;
+    private static HSSFCell hssfCell;
+    Button Export;
+    TextView n1, k1;
+    DatabaseReference houseRef;
     List<HouseInventory> houseInventoryList;
+    String currentDateandTime2;
     private File housefile;
 
-    private static HSSFSheet hssfSheet;
-    private static HSSFRow hssfRow ;
-    private static HSSFCell hssfCell;
+    private static boolean isExternalStorageReadOnly() {
+        String externalStorageState = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED_READ_ONLY.equals(externalStorageState);
+    }
 
-    String currentDateandTime2;
+    private static boolean isExternalStorageAvailable() {
+        String externalStorageState = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(externalStorageState);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wireless_export);
 
-        Export=findViewById(R.id.button_export_inventory);
-        n1=findViewById(R.id.name_export2);
-        k1=findViewById(R.id.key1_export2);
+        Export = findViewById(R.id.button_export_inventory);
+        n1 = findViewById(R.id.name_export2);
+        k1 = findViewById(R.id.key1_export2);
 
         Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
@@ -72,7 +78,7 @@ public class Wireless_Export extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
         currentDateandTime2 = sdf.format(new Date());
 
-        housefile = new File("/storage/emulated/0/Report/"+ "DB Inventory"+currentDateandTime2);
+        housefile = new File("/storage/emulated/0/Report/" + "DB Inventory" + currentDateandTime2);
 
         if (!housefile.exists()) {
             housefile.mkdirs();
@@ -80,7 +86,7 @@ public class Wireless_Export extends AppCompatActivity {
 
         fetchHouseInventory();
 
-        houseInventoryList=new ArrayList<>();
+        houseInventoryList = new ArrayList<>();
 
         filePath = new File(housefile, "HouseInventoryList.xls");
 
@@ -97,7 +103,7 @@ public class Wireless_Export extends AppCompatActivity {
                     exportExcel(houseInventoryList);
                     Toast.makeText(Wireless_Export.this, "Generating House and Inventory List", Toast.LENGTH_SHORT).show();
 
-                } catch (DocumentFormatException e){
+                } catch (DocumentFormatException e) {
                     e.printStackTrace();
                     Toast.makeText(Wireless_Export.this, "Failed", Toast.LENGTH_SHORT).show();
                 }
@@ -106,13 +112,13 @@ public class Wireless_Export extends AppCompatActivity {
 
     }
 
-    private void FetchAll(){
+    private void FetchAll() {
 
         DatabaseReference houseRef2 = FirebaseDatabase.getInstance().getReference("House");
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     //creating an object and setting to display
                     HouseInventory houses = new HouseInventory();
                     houses.setBarcode(snapshot.child("Barcode").getValue().toString());
@@ -178,18 +184,18 @@ public class Wireless_Export extends AppCompatActivity {
         });
     }
 
-    public void exportExcel(List<HouseInventory> houseInventoryList){
+    public void exportExcel(List<HouseInventory> houseInventoryList) {
         HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
 
         hssfSheet = hssfWorkbook.createSheet(EXCEL_SHEET_NAME);
-        hssfSheet.setColumnWidth(0,(15*400));
-        hssfSheet.setColumnWidth(1,(15*400));
-        hssfSheet.setColumnWidth(2,(15*400));
-        hssfSheet.setColumnWidth(3,(15*400));
-        hssfSheet.setColumnWidth(4,(15*400));
-        hssfSheet.setColumnWidth(5,(15*400));
-        hssfSheet.setColumnWidth(6,(15*400));
-        hssfSheet.setColumnWidth(7,(15*400));
+        hssfSheet.setColumnWidth(0, (15 * 400));
+        hssfSheet.setColumnWidth(1, (15 * 400));
+        hssfSheet.setColumnWidth(2, (15 * 400));
+        hssfSheet.setColumnWidth(3, (15 * 400));
+        hssfSheet.setColumnWidth(4, (15 * 400));
+        hssfSheet.setColumnWidth(5, (15 * 400));
+        hssfSheet.setColumnWidth(6, (15 * 400));
+        hssfSheet.setColumnWidth(7, (15 * 400));
 
         hssfRow = hssfSheet.createRow(0);
 
@@ -217,7 +223,7 @@ public class Wireless_Export extends AppCompatActivity {
         hssfCell = hssfRow.createCell(7);
         hssfCell.setCellValue("Key");
 
-        for(int i = 0; i< this.houseInventoryList.size(); i++) {
+        for (int i = 0; i < this.houseInventoryList.size(); i++) {
             HouseInventory house = this.houseInventoryList.get(i);
             HSSFRow rowData = hssfSheet.createRow(i + 1);
 
@@ -248,7 +254,7 @@ public class Wireless_Export extends AppCompatActivity {
 
         }
 
-        String users=getIntent().getStringExtra("Users");
+        String users = getIntent().getStringExtra("Users");
 
         Intent intent = getIntent();
         final String nameFile = intent.getStringExtra("name");
@@ -258,35 +264,35 @@ public class Wireless_Export extends AppCompatActivity {
         currentDateandTime2 = sdf.format(new Date());
 
 
-            filePath = new File(housefile, "HouseInventoryList_" +nameFile + "_" + currentDateandTime2 + ".xls");
-            FileOutputStream fileOutputStream = null;
+        filePath = new File(housefile, "HouseInventoryList_" + nameFile + "_" + currentDateandTime2 + ".xls");
+        FileOutputStream fileOutputStream = null;
 
-            boolean isSuccess;
+        boolean isSuccess;
 
+        try {
+            fileOutputStream = new FileOutputStream(filePath);
+            hssfWorkbook.write(fileOutputStream);
+            Log.e(TAG, "Writing file" + filePath);
+            isSuccess = true;
+        } catch (IOException e) {
+            Log.e(TAG, "Error writing Exception: ", e);
+            isSuccess = false;
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to save file due to Exception: ", e);
+            isSuccess = false;
+        } finally {
             try {
-                fileOutputStream = new FileOutputStream(filePath);
-                hssfWorkbook.write(fileOutputStream);
-                Log.e(TAG, "Writing file" + filePath);
-                isSuccess = true;
-            } catch (IOException e) {
-                Log.e(TAG, "Error writing Exception: ", e);
-                isSuccess = false;
-            } catch (Exception e) {
-                Log.e(TAG, "Failed to save file due to Exception: ", e);
-                isSuccess = false;
-            } finally {
-                try {
-                    if (null != fileOutputStream) {
-                        fileOutputStream.close();
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                if (null != fileOutputStream) {
+                    fileOutputStream.close();
                 }
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
+        }
     }
 
-    public void onBackPressed(){
-        String users=getIntent().getStringExtra("Users");
+    public void onBackPressed() {
+        String users = getIntent().getStringExtra("Users");
         Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
@@ -299,15 +305,5 @@ public class Wireless_Export extends AppCompatActivity {
         startActivity(page);
         finish();
 
-    }
-
-    private static boolean isExternalStorageReadOnly() {
-        String externalStorageState = Environment.getExternalStorageState();
-        return Environment.MEDIA_MOUNTED_READ_ONLY.equals(externalStorageState);
-    }
-
-    private static boolean isExternalStorageAvailable() {
-        String externalStorageState = Environment.getExternalStorageState();
-        return Environment.MEDIA_MOUNTED.equals(externalStorageState);
     }
 }

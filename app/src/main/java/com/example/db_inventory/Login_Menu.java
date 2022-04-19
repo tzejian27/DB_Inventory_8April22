@@ -1,15 +1,14 @@
 package com.example.db_inventory;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 public class Login_Menu extends AppCompatActivity {
     Boolean doubleBackToExitPressedOnce = true;
@@ -20,8 +19,8 @@ public class Login_Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_menu);
 
-        btn_admin=findViewById(R.id.btn_admin_login);
-        btn_user=findViewById(R.id.btn_user_login);
+        btn_admin = findViewById(R.id.btn_admin_login);
+        btn_user = findViewById(R.id.btn_user_login);
 
         //intent to the admin login page
         //only admin are allowed to make modify on maintain user
