@@ -1,76 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".House_New_House"
+    android:layout_margin="20dp"
     android:orientation="vertical"
-    android:layout_margin="20dp">
+    tools:context=".House_New_House">
 
     <TextView
-        android:textColor="@color/blue"
         android:id="@+id/txt_new_house"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/new_house"
-        android:textSize="80px"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="18dp"
         android:layout_marginBottom="70dp"
-        android:layout_gravity="center_horizontal"/>
+        android:text="@string/new_house"
+        android:textColor="@color/blue"
+        android:textSize="80px" />
 
     <TextView
-        android:textColor="@color/blue"
         android:id="@+id/txt_input_house"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:text="@string/input_house_name"
-        android:textSize="50px"
-        android:layout_marginBottom="10dp"/>
+        android:textColor="@color/blue"
+        android:textSize="50px" />
 
     <EditText
-        android:background="@drawable/blue_border"
-        android:paddingLeft="20dp"
         android:id="@+id/editText_house_name"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/blue_border"
         android:ems="10"
         android:hint="@string/enter_house_name"
         android:inputType="textPersonName"
-        android:layout_marginBottom="50dp"/>
+        android:paddingLeft="20dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:orientation="horizontal">
 
         <Button
-            android:backgroundTint="@color/blue"
-            android:textColor="@color/white"
             android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:layout_weight="1"
+            android:width="300dp"
+            android:backgroundTint="@color/blue"
             android:text="@string/cancel"
-            android:width="300dp"/>
+            android:textColor="@color/white" />
 
         <Button
-            android:backgroundTint="@color/blue"
-            android:textColor="@color/white"
             android:id="@+id/btn_enter"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:layout_weight="1"
+            android:width="300dp"
+            android:backgroundTint="@color/blue"
             android:text="@string/enter"
-            android:width="300dp"/>
+            android:textColor="@color/white" />
 
     </LinearLayout>
-
 
 
 </LinearLayout>

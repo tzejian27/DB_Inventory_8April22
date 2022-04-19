@@ -7,8 +7,6 @@
     tools:context=".Item_Spec_Modify">
 
     <TextView
-        android:textColor="@color/blue"
-        android:textSize="70px"
         android:id="@+id/textView39"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,12 +16,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Modify Spec"
+        android:textColor="@color/blue"
+        android:textSize="70px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:textColor="@color/blue"
         android:id="@+id/textView40"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,11 +30,11 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="60dp"
         android:text="@string/name"
+        android:textColor="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
     <TextView
-        android:textColor="@color/blue"
         android:id="@+id/textView41"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,11 +42,11 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/price"
+        android:textColor="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_ItemSpec_Modify_name" />
 
     <TextView
-        android:textColor="@color/blue"
         android:id="@+id/textView42"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,12 +54,11 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/cost"
+        android:textColor="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_ItemSpec_Modify_price" />
 
     <EditText
-        android:background="@drawable/blue_border"
-        android:paddingLeft="20dp"
         android:id="@+id/editText_ItemSpec_Modify_name"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -69,15 +67,15 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:background="@drawable/blue_border"
         android:ems="10"
         android:inputType="textPersonName"
+        android:paddingLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView40" />
 
     <EditText
-        android:background="@drawable/blue_border"
-        android:paddingLeft="20dp"
         android:id="@+id/editText_ItemSpec_Modify_price"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -86,15 +84,15 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:background="@drawable/blue_border"
         android:ems="10"
         android:inputType="number"
+        android:paddingLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView41" />
 
     <EditText
-        android:background="@drawable/blue_border"
-        android:paddingLeft="20dp"
         android:id="@+id/editText_ItemSpec_Modify_cost"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -103,35 +101,37 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:background="@drawable/blue_border"
         android:ems="10"
         android:inputType="number"
+        android:paddingLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView42" />
 
     <Button
-        android:background="@color/blue"
-        android:textColor="@color/white"
         android:id="@+id/btn_Inventory_ItemSpec_Modidy_Esc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginBottom="32dp"
+        android:background="@color/blue"
         android:text="@string/esc"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:background="@color/blue"
-        android:textColor="@color/white"
         android:id="@+id/btn_Inventory_ItemSpec_Modify_Enter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="32dp"
+        android:background="@color/blue"
         android:text="@string/enter"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

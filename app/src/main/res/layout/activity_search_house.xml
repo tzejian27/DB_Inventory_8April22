@@ -7,8 +7,6 @@
     tools:context=".Search_House">
 
     <TextView
-        android:textColor="@color/blue"
-        android:textSize="100px"
         android:id="@+id/textView47"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,12 +16,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="@string/search"
+        android:textColor="@color/blue"
+        android:textSize="100px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:textColor="@color/blue"
         android:id="@+id/textView48"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,12 +30,11 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="50dp"
         android:text="@string/house_name1"
+        android:textColor="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView47" />
 
     <EditText
-        android:background="@drawable/blue_border"
-        android:paddingLeft="20dp"
         android:id="@+id/editText_House_Search_name"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -45,35 +43,37 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:background="@drawable/blue_border"
         android:ems="10"
         android:inputType="textPersonName"
+        android:paddingLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView48" />
 
     <Button
-        android:background="@color/blue"
-        android:textColor="@color/white"
         android:id="@+id/btn_house_search_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginBottom="32dp"
+        android:background="@color/blue"
         android:text="@string/cancel"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:background="@color/blue"
-        android:textColor="@color/white"
         android:id="@+id/btn_house_search_enter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="32dp"
+        android:background="@color/blue"
         android:text="@string/enter"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

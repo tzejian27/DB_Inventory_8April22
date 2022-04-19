@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Access_Right"
+    android:layout_margin="20dp"
     android:orientation="vertical"
-    android:layout_margin="20dp">
+    tools:context=".Access_Right">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-         <TextView
-            android:textColor="@color/blue"
+        <TextView
             android:id="@+id/txt_create_nh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="5"
             android:text="Create new house"
-            android:textSize="50px"
-            android:layout_weight="5"/>
+            android:textColor="@color/blue"
+            android:textSize="50px" />
 
         <Switch
 
             android:id="@+id/switch_new_house"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:checked="false" />
 
     </LinearLayout>
 
@@ -36,75 +35,75 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/txt_edit_spec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="5"
             android:text="@string/edit_spec"
-            android:textSize="50px"
-            android:layout_weight="5"/>
+            android:textColor="@color/blue"
+            android:textSize="50px" />
 
         <Switch
 
             android:id="@+id/switch_edit_spec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:checked="false" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/txt_data_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="5"
             android:text="Data Clear"
-            android:textSize="50px"
-            android:layout_weight="5"/>
+            android:textColor="@color/blue"
+            android:textSize="50px" />
 
         <Switch
 
             android:id="@+id/switch_data_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:checked="false" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/txt_stock_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="5"
             android:text="Stock In"
-            android:textSize="50px"
-            android:layout_weight="5"/>
+            android:textColor="@color/blue"
+            android:textSize="50px" />
 
         <Switch
 
             android:id="@+id/switch_stock_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:checked="false" />
 
 
     </LinearLayout>
@@ -112,25 +111,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/txt_SO"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="5"
             android:text="Stock Out"
-            android:textSize="50px"
-            android:layout_weight="5"/>
+            android:textColor="@color/blue"
+            android:textSize="50px" />
 
         <Switch
 
             android:id="@+id/switch_SO"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:checked="false" />
 
 
     </LinearLayout>
@@ -138,25 +137,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/txt_modify_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="5"
             android:text="Modify/Delete"
-            android:textSize="50px"
-            android:layout_weight="5"/>
+            android:textColor="@color/blue"
+            android:textSize="50px" />
 
         <Switch
 
             android:id="@+id/switch_modify_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:checked="false" />
 
 
     </LinearLayout>
@@ -164,25 +163,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/txt_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="5"
             android:text="Setting"
-            android:textSize="50px"
-            android:layout_weight="5"/>
+            android:textColor="@color/blue"
+            android:textSize="50px" />
 
         <Switch
 
             android:id="@+id/switch_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:checked="false" />
 
 
     </LinearLayout>

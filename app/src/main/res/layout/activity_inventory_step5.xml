@@ -1,106 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Inventory_step5"
+    android:layout_margin="10dp"
     android:orientation="vertical"
-    android:layout_margin="10dp">
+    tools:context=".Inventory_step5">
 
     <TextView
-        android:textColor="@color/blue"
         android:id="@+id/txt_modify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Modify Qty"
-        android:textSize="80px"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="18dp"
         android:layout_marginBottom="70dp"
-        android:layout_gravity="center_horizontal"/>
+        android:text="Modify Qty"
+        android:textColor="@color/blue"
+        android:textSize="80px" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/tv_Inventory_TotalQty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Total Quantity"
-            android:layout_weight="1"/>
+            android:textColor="@color/blue" />
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/textView_Inventory_step5_totalQty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="6"
             android:text="@string/total_quantity"
-            android:layout_weight="6"/>
+            android:textColor="@color/blue" />
 
 
     </LinearLayout>
 
     <TextView
-        android:textColor="@color/blue"
         android:id="@+id/txt_step5_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:text="@string/quantity"
-        android:textSize="50px"
-        android:layout_marginBottom="10dp"/>
+        android:textColor="@color/blue"
+        android:textSize="50px" />
 
     <EditText
-        android:background="@drawable/blue_border"
-        android:paddingLeft="20dp"
         android:id="@+id/editText_Inventory_step5_Qty"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/blue_border"
         android:ems="10"
         android:hint="@string/enter_to_change_quantity"
         android:inputType="number"
-        android:layout_marginBottom="30dp"/>
+        android:paddingLeft="20dp" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp">
+        android:layout_marginTop="100dp"
+        android:orientation="horizontal">
 
         <Button
-            android:backgroundTint="@color/blue"
-            android:textColor="@color/white"
             android:id="@+id/btn_Inventory_step5_cancel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="@string/cancel"/>
+            android:backgroundTint="@color/blue"
+            android:text="@string/cancel"
+            android:textColor="@color/white" />
 
-<!--        <Button-->
-<!--            android:backgroundTint="@color/blue"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:id="@+id/btn_Inventory_step5_add"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:text="@string/add"-->
-<!--            android:layout_margin="5dp"-->
-<!--            android:layout_weight="1"/>-->
+        <!--        <Button-->
+        <!--            android:backgroundTint="@color/blue"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:id="@+id/btn_Inventory_step5_add"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:text="@string/add"-->
+        <!--            android:layout_margin="5dp"-->
+        <!--            android:layout_weight="1"/>-->
 
         <Button
-            android:backgroundTint="@color/blue"
-            android:textColor="@color/white"
             android:id="@+id/btn_Inventory_step5_change"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="@string/change"
             android:layout_margin="5dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:backgroundTint="@color/blue"
+            android:text="@string/change"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

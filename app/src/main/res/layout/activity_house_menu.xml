@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".House_Menu"
+    android:background="@drawable/bg"
     android:orientation="vertical"
     android:weightSum="10"
-    android:background="@drawable/bg">
+    tools:context=".House_Menu">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,13 +26,13 @@
     </RelativeLayout>
 
     <TextView
-        android:textColor="@color/white"
-        android:textSize="50px"
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/house_name" />
+        android:text="@string/house_name"
+        android:textColor="@color/white"
+        android:textSize="50px" />
 
 
     <GridLayout
@@ -41,38 +41,38 @@
         android:layout_weight="8"
         android:alignmentMode="alignMargins"
         android:columnCount="2"
-        android:rowCount="3"
         android:columnOrderPreserved="false"
-        android:padding="14dp">
+        android:padding="14dp"
+        android:rowCount="3">
 
         <androidx.cardview.widget.CardView
 
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_columnWeight="1"
             android:layout_rowWeight="1"
-            android:layout_marginBottom="16dp"
+            android:layout_columnWeight="1"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="8dp">
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="8dp"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal|center_vertical">
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/btn_inventory"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
+                    android:backgroundTint="@color/orange"
                     android:text="@string/inventory"
                     android:textSize="13dp"
-                    android:backgroundTint="@color/orange"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
@@ -83,30 +83,30 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_columnWeight="1"
             android:layout_rowWeight="1"
-            android:layout_marginBottom="16dp"
+            android:layout_columnWeight="1"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="8dp">
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="8dp"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal|center_vertical">
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/btn_inventory_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:text="@string/inventory_list"
                     android:backgroundTint="@color/orange"
+                    android:text="@string/inventory_list"
                     android:textSize="13dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
@@ -117,30 +117,30 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_columnWeight="1"
             android:layout_rowWeight="1"
-            android:layout_marginBottom="16dp"
+            android:layout_columnWeight="1"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="8dp">
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="8dp"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal|center_vertical">
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/btn_wireless_export"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
+                    android:backgroundTint="@color/orange"
                     android:text="@string/export_inventory"
                     android:textSize="13dp"
-                    android:backgroundTint="@color/orange"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
@@ -151,30 +151,30 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_columnWeight="1"
             android:layout_rowWeight="1"
-            android:layout_marginBottom="16dp"
+            android:layout_columnWeight="1"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="8dp">
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="8dp"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal|center_vertical">
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/btn_data_clear"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
+                    android:backgroundTint="@color/orange"
                     android:text="@string/data_clear"
                     android:textSize="13dp"
-                    android:backgroundTint="@color/orange"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
@@ -185,30 +185,30 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_columnWeight="1"
             android:layout_rowWeight="1"
-            android:layout_marginBottom="16dp"
+            android:layout_columnWeight="1"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="8dp">
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="8dp"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal|center_vertical">
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/btn_House_Menu_Back"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
+                    android:backgroundTint="@color/orange"
                     android:text="@string/back"
                     android:textSize="13dp"
-                    android:backgroundTint="@color/orange"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
@@ -219,31 +219,31 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_columnWeight="1"
             android:layout_rowWeight="1"
-            android:layout_marginBottom="16dp"
+            android:layout_columnWeight="1"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            app:cardElevation="8dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="invisible"
             app:cardCornerRadius="8dp"
-            android:visibility="invisible">
+            app:cardElevation="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="8dp"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal|center_vertical">
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/btn_export_Inventory"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:text="@string/generate_excel"
                     android:background="@color/blue"
+                    android:text="@string/generate_excel"
                     android:textStyle="bold"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
 
 
             </LinearLayout>
@@ -253,8 +253,6 @@
 
 
     </GridLayout>
-
-
 
 
 </LinearLayout>

@@ -7,9 +7,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_margin="10dp"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,16 +21,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:width="100dp"
-                android:textColor="@color/black"
-                android:text="@string/name"/>
+                android:text="@string/name"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/textView_Name_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/black"
-                android:text="@string/name1" />
+                android:text="@string/name1"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 
@@ -44,16 +44,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:width="100dp"
-                android:textColor="@color/black"
-                android:text="@string/role"/>
+                android:text="@string/role"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/textView_role"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/black"
-                android:text="@string/role1" />
+                android:text="@string/role1"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 

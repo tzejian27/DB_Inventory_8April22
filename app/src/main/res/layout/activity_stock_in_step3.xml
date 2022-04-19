@@ -1,89 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StockIn_step3"
+    android:layout_margin="20dp"
     android:orientation="vertical"
-    android:layout_margin="20dp">
+    tools:context=".StockIn_step3">
 
     <TextView
-        android:textColor="@color/blue"
         android:id="@+id/txt_new_house_SI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stock In"
-        android:textSize="80px"
+        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="30dp"
-        android:layout_gravity="center_horizontal"/>
+        android:text="Stock In"
+        android:textColor="@color/blue"
+        android:textSize="80px" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/tv_Inventory_TotalQty_SI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="House Qty"
-            android:layout_weight="1"/>
+            android:textColor="@color/blue" />
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/textView_Inventory_TotalQty_SI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="6"
             android:text="@string/total_quantity"
-            android:layout_weight="6"/>
+            android:textColor="@color/blue" />
 
 
     </LinearLayout>
 
     <TextView
-        android:textColor="@color/blue"
         android:id="@+id/txt_input_barcode4_SI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:text="@string/input_barcode"
-        android:textSize="50px"
-        android:layout_marginBottom="10dp"/>
+        android:textColor="@color/blue"
+        android:textSize="50px" />
 
     <EditText
-        android:background="@drawable/blue_border"
-        android:paddingLeft="20dp"
         android:id="@+id/editText_Inventory_barcode_SI"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/blue_border"
         android:ems="10"
         android:hint="@string/enter_scan_barcode"
         android:inputType="textPersonName"
-        android:layout_marginBottom="30dp"/>
+        android:paddingLeft="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/tv_inventory_quantity_SI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:width="100dp"
             android:text="Total Qty"
-            android:width="100dp"/>
+            android:textColor="@color/blue" />
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/textView_Inventory_Qty_SI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="6"
             android:text="@string/inventory_s_quantity"
-            android:layout_weight="6"/>
+            android:textColor="@color/blue" />
 
 
     </LinearLayout>
@@ -91,24 +90,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/tv_quantity_in_SI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:width="100dp"
             android:text="Qty in"
-            android:width="100dp"/>
+            android:textColor="@color/blue" />
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/textView_quantity_in_SI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="6"
             android:text="Qty in"
-            android:layout_weight="6"/>
+            android:textColor="@color/blue" />
 
 
     </LinearLayout>
@@ -116,24 +115,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/tv_Inventory_name_SI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:width="100dp"
             android:text="@string/name"
-            android:width="100dp"/>
+            android:textColor="@color/blue" />
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/textView_Inventory_name_SI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="6"
             android:text="@string/inventory_s_name"
-            android:layout_weight="6"/>
+            android:textColor="@color/blue" />
 
 
     </LinearLayout>
@@ -141,24 +140,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/tv_Inventory_price_SI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:width="100dp"
             android:text="@string/price"
-            android:width="100dp"/>
+            android:textColor="@color/blue" />
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/textView_Inventory_price_SI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="6"
             android:text="@string/inventory_s_price"
-            android:layout_weight="6"/>
+            android:textColor="@color/blue" />
 
 
     </LinearLayout>
@@ -166,82 +165,82 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/tv_Inventory_cost_SI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:width="100dp"
             android:text="@string/cost"
-            android:width="100dp"/>
+            android:textColor="@color/blue" />
 
         <TextView
-            android:textColor="@color/blue"
             android:id="@+id/textView_Inventory_cost_SI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="6"
             android:text="@string/inventory_s_cost"
-            android:layout_weight="6"/>
+            android:textColor="@color/blue" />
 
     </LinearLayout>
 
     <TextView
-        android:textColor="@color/blue"
         android:id="@+id/txt_step5_quantity_SI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:text="Qty In"
-        android:textSize="50px"
-        android:layout_marginBottom="10dp"/>
+        android:textColor="@color/blue"
+        android:textSize="50px" />
 
     <EditText
-        android:background="@drawable/blue_border"
-        android:paddingLeft="20dp"
         android:id="@+id/editText_Inventory_step5_Qty_SI"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/blue_border"
         android:ems="10"
         android:hint="Add qty in"
         android:inputType="number"
-        android:layout_marginBottom="30dp"/>
+        android:paddingLeft="20dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:orientation="horizontal">
 
         <Button
-            android:backgroundTint="@color/blue"
-            android:textColor="@color/white"
             android:id="@+id/btn_back_SI"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Back"
             android:layout_marginRight="10dp"
-            android:width="100dp"/>
+            android:layout_weight="1"
+            android:width="100dp"
+            android:backgroundTint="@color/blue"
+            android:text="Back"
+            android:textColor="@color/white" />
 
         <Button
-            android:backgroundTint="@color/blue"
-            android:textColor="@color/white"
             android:id="@+id/btn_Inventory_enter_SI"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:width="100dp"
+            android:backgroundTint="@color/blue"
             android:text="Done"
-            android:width="100dp"/>
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/btn_Inventory_esc_SI"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginLeft="10dp"
+            android:layout_weight="1"
             android:width="100dp"
             android:backgroundTint="@color/blue"
             android:text="@string/next"
