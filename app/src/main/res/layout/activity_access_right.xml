@@ -188,16 +188,14 @@
     </LinearLayout>
 
 
-
-
-    <Button
+    <!--<Button
         android:id="@+id/btn_access_right_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/blue"
         android:text="@string/confirm"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="200dp"/>
+        android:layout_marginTop="200dp"/>-->
 
 
 </LinearLayout>

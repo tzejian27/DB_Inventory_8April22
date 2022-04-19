@@ -30,6 +30,9 @@ public class HouseList_Adapter extends RecyclerView.Adapter<HouseList_Adapter.My
     House_List mContext;
     List<House_list_class> mData;
     DatabaseReference databaseReference;
+    DatabaseReference arightRef;
+    String Switch1;
+    String Switch2;
 
     public HouseList_Adapter(House_List mContext, List<House_list_class> mData) {
         this.mContext = mContext;
@@ -49,6 +52,21 @@ public class HouseList_Adapter extends RecyclerView.Adapter<HouseList_Adapter.My
         holder.Name.setText(mData.get(position).getName());
         holder.TotalQty.setText(mData.get(position).getTotalQty());
         holder.Total_type.setText(mData.get(position).getTotalType());
+
+        arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
+        arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Switch1 = snapshot.child("SW_ModifyDelete").getValue().toString().trim();
+                Switch2 = snapshot.child("SW_DataClear").getValue().toString().trim();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,43 +99,55 @@ public class HouseList_Adapter extends RecyclerView.Adapter<HouseList_Adapter.My
 
                                 }
                                 if (position == 1){
-                                    Intent intent=new Intent(mContext,House_Modify.class);
-                                    intent.putExtra("Key",key);
-                                    intent.putExtra("name",name);
-                                    mContext.startActivity(intent);
+                                    if(Switch1.equals("On")){
+                                        Intent intent=new Intent(mContext,House_Modify.class);
+                                        intent.putExtra("Key",key);
+                                        intent.putExtra("name",name);
+                                        mContext.startActivity(intent);
+
+                                    }else if(Switch1.equals("Off")){
+                                        Toast.makeText(mContext, "Modify Access Right Off", Toast.LENGTH_LONG).show();
+                                    }
 
                                 }
                                 if (position==2){
-                                    CharSequence option2[]=new CharSequence[]{
-                                            "Delete", "Cancel"
-                                    };
-                                    AlertDialog.Builder deleteBuilder = new AlertDialog.Builder(mContext);
-                                    deleteBuilder.setTitle("Are you confirm to delete the house?");
-                                    deleteBuilder.setItems(option2, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            if (i==0){
-                                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("House");
-                                                reference.child(key).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful()){
-                                                            Toast.makeText(mContext, "Deleted  successfully", Toast.LENGTH_SHORT).show();
-                                                        }else {
-                                                            Toast.makeText(mContext, task.getException().toString(), Toast.LENGTH_SHORT).show();
+
+                                    if(Switch2.equals("On")){
+                                        CharSequence option2[]=new CharSequence[]{
+                                                "Delete", "Cancel"
+                                        };
+                                        AlertDialog.Builder deleteBuilder = new AlertDialog.Builder(mContext);
+                                        deleteBuilder.setTitle("Are you confirm to delete the house?");
+                                        deleteBuilder.setItems(option2, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                if (i==0){
+                                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("House");
+                                                    reference.child(key).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()){
+                                                                Toast.makeText(mContext, "Deleted  successfully", Toast.LENGTH_SHORT).show();
+                                                            }else {
+                                                                Toast.makeText(mContext, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                                            }
                                                         }
-                                                    }
-                                                });
+                                                    });
+                                                }
+
+                                                if (i==1){
+                                                    dialog.cancel();
+                                                }
+
+
                                             }
+                                        });
+                                        deleteBuilder.show();
 
-                                            if (i==1){
-                                                dialog.cancel();
-                                            }
+                                    }else if(Switch2.equals("Off")){
+                                        Toast.makeText(mContext, "Delete House Access Right Off", Toast.LENGTH_LONG).show();
+                                    }
 
-
-                                        }
-                                    });
-                                    deleteBuilder.show();
 
                                 }
                             }

@@ -42,6 +42,10 @@ public class Inventory_List extends AppCompatActivity {
     InventoryList_Adapter InventoryList_Adapter;
     List<Inventory_class> postList;
 
+    DatabaseReference arightRef;
+    String Switch1;
+    String Switch2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +62,8 @@ public class Inventory_List extends AppCompatActivity {
         final String name = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
         String users=getIntent().getStringExtra("Users");
+
+        arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
 
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,60 +145,79 @@ public class Inventory_List extends AppCompatActivity {
                 viewHolder.setPrice(model.getPrice());
                 viewHolder.setCost(model.getCost());
 
-                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onClick(View view) {
-                        final String key2 = getRef(position).getKey();
-                        CharSequence option[] = new CharSequence[]{
-                                "Spec", "Delete", "Modify"
-                        };
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Switch1=snapshot.child("SW_EditSpec").getValue().toString().trim();
+                        if(Switch1.equals("On")){
+                            viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    final String key2 = getRef(position).getKey();
+                                    CharSequence option[] = new CharSequence[]{
+                                            "Spec", "Delete", "Modify"
+                                    };
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(Inventory_List.this);
-                        builder.setTitle("Select Option");
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(Inventory_List.this);
+                                    builder.setTitle("Select Option");
 
-                        builder.setItems(option, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int position) {
-                                if (position == 0) {
-                                    if(switch1.equals("Need")){
-                                        Intent intent = new Intent(Inventory_List.this, Item_Spec.class);
-                                        intent.putExtra("Key", key);
-                                        intent.putExtra("Key2", key2);
-                                        intent.putExtra("name", name);
-                                        intent.putExtra("Barcode", model.getBarcode());
-                                        intent.putExtra("Users", users);
-                                        startActivity(intent);
-                                    }else{
-                                        Toast.makeText(getApplicationContext(),"Edit Spec is Not Allowed", Toast.LENGTH_SHORT).show();
-                                    }
+                                    builder.setItems(option, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int position) {
+                                            if (position == 0) {
+                                                if(switch1.equals("Need")){
+                                                    Intent intent = new Intent(Inventory_List.this, Item_Spec.class);
+                                                    intent.putExtra("Key", key);
+                                                    intent.putExtra("Key2", key2);
+                                                    intent.putExtra("name", name);
+                                                    intent.putExtra("Barcode", model.getBarcode());
+                                                    intent.putExtra("Users", users);
+                                                    startActivity(intent);
+                                                }else{
+                                                    Toast.makeText(getApplicationContext(),"Edit Spec is Not Allowed", Toast.LENGTH_SHORT).show();
+                                                }
 
 
+                                            }
+                                            if (position == 1) {
+                                                Intent intent = new Intent(Inventory_List.this, Inventory_Delete_Confirm.class);
+                                                intent.putExtra("Key", key);
+                                                intent.putExtra("Key2", key2);
+                                                intent.putExtra("name", name);
+                                                intent.putExtra("Users", users);
+                                                startActivity(intent);
+                                            }
+                                            if (position == 2) {
+
+                                                //Modify Inventory
+                                                Intent intent = new Intent(Inventory_List.this, Inventory_step5.class);
+                                                intent.putExtra("name", name);
+                                                intent.putExtra("barcode", model.getBarcode());
+                                                intent.putExtra("Key", key);
+                                                intent.putExtra("Key2", key2);
+                                                intent.putExtra("Users", users);
+                                                startActivity(intent);
+                                            }
+
+                                        }
+                                    });
+                                    builder.show();
                                 }
-                                if (position == 1) {
-                                    Intent intent = new Intent(Inventory_List.this, Inventory_Delete_Confirm.class);
-                                    intent.putExtra("Key", key);
-                                    intent.putExtra("Key2", key2);
-                                    intent.putExtra("name", name);
-                                    intent.putExtra("Users", users);
-                                    startActivity(intent);
-                                }
-                                if (position == 2) {
+                            });
 
-                                    //Modify Inventory
-                                    Intent intent = new Intent(Inventory_List.this, Inventory_step5.class);
-                                    intent.putExtra("name", name);
-                                    intent.putExtra("barcode", model.getBarcode());
-                                    intent.putExtra("Key", key);
-                                    intent.putExtra("Key2", key2);
-                                    intent.putExtra("Users", users);
-                                    startActivity(intent);
-                                }
+                        }else if(Switch1.equals("Off")){
+                            Toast.makeText(Inventory_List.this, "Edit Permission denied", Toast.LENGTH_LONG).show();
 
-                            }
-                        });
-                        builder.show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
+
+
             }
 
             @NonNull

@@ -1,11 +1,21 @@
 package com.example.db_inventory;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Access_Right extends AppCompatActivity {
     Switch sw_new_house;
@@ -15,12 +25,23 @@ public class Access_Right extends AppCompatActivity {
     Switch sw_stock_out;
     Switch sw_modify_delete;
     Switch sw_setting;
+    DatabaseReference arightRef;
+
+    String Switch1;
+    String Switch2;
+    String Switch3;
+    String Switch4;
+    String Switch5;
+    String Switch6;
+    String Switch7;
+
+    Button btn_confirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_access_right);
-        setTitle("Access Right");
+        setTitle("User Access Right");
 
         sw_new_house=findViewById(R.id.switch_new_house);
         sw_edit_spec=findViewById(R.id.switch_edit_spec);
@@ -30,8 +51,208 @@ public class Access_Right extends AppCompatActivity {
         sw_modify_delete=findViewById(R.id.switch_modify_delete);
         sw_setting=findViewById(R.id.switch_setting);
 
+        arightRef= FirebaseDatabase.getInstance().getReference("Access_Right");
+        arightRef.keepSynced(true);
+
+        //btn_confirm=findViewById(R.id.btn_access_right_confirm);
+
+        sw_new_house.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(sw_new_house.isChecked()){
+                    Switch1="On";
+                    arightRef.child("SW_NewHouse").setValue(Switch1).toString().trim();
+
+                }else{
+                    Switch1="Off";
+                    arightRef.child("SW_NewHouse").setValue(Switch1).toString().trim();
+                }
+            }
+        });
+
+        sw_edit_spec.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(sw_edit_spec.isChecked()){
+                    Switch2="On";
+                    arightRef.child("SW_EditSpec").setValue(Switch2).toString().trim();
+                }else{
+                    Switch2="Off";
+                    arightRef.child("SW_EditSpec").setValue(Switch2).toString().trim();
+                }
+            }
+        });
+
+        sw_data_clear.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(sw_data_clear.isChecked()){
+                    Switch3="On";
+                    arightRef.child("SW_DataClear").setValue(Switch3).toString().trim();
+                }else{
+                    Switch3="Off";
+                    arightRef.child("SW_DataClear").setValue(Switch3).toString().trim();
+                }
+            }
+        });
+
+        sw_stock_in.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(sw_stock_in.isChecked()){
+                    Switch4="On";
+                    arightRef.child("SW_StockIn").setValue(Switch4).toString().trim();
+                }else{
+                    Switch4="Off";
+                    arightRef.child("SW_StockIn").setValue(Switch4).toString().trim();
+                }
+            }
+        });
+
+        sw_stock_out.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(sw_stock_out.isChecked()){
+                    Switch5="On";
+                    arightRef.child("SW_StockOut").setValue(Switch5).toString().trim();
+                }else{
+                    Switch5="Off";
+                    arightRef.child("SW_StockOut").setValue(Switch5).toString().trim();
+                }
+            }
+        });
+
+        sw_modify_delete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(sw_modify_delete.isChecked()){
+                    Switch6="On";
+                    arightRef.child("SW_ModifyDelete").setValue(Switch6).toString().trim();
+                }else{
+                    Switch6="Off";
+                    arightRef.child("SW_ModifyDelete").setValue(Switch6).toString().trim();
+                }
+            }
+        });
+
+        sw_setting.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(sw_setting.isChecked()){
+                    Switch7="On";
+                    arightRef.child("SW_Setting").setValue(Switch7).toString().trim();
+                }else{
+                    Switch7="Off";
+                    arightRef.child("SW_Setting").setValue(Switch7).toString().trim();
+                }
+            }
+        });
+
+        String users=getIntent().getStringExtra("Users");
+
+        /*btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                arightRef.child("SW_NewHouse").setValue(Switch1).toString().trim();
+                arightRef.child("SW_EditSpec").setValue(Switch2).toString().trim();
+                arightRef.child("SW_DataClear").setValue(Switch3).toString().trim();
+                arightRef.child("SW_StockIn").setValue(Switch4).toString().trim();
+                arightRef.child("SW_StockOut").setValue(Switch5).toString().trim();
+                arightRef.child("SW_ModifyDelete").setValue(Switch6).toString().trim();
+                arightRef.child("SW_Setting").setValue(Switch7).toString().trim();
+                Intent page = new Intent(Access_Right.this, Maintain_User.class);
+                page.putExtra("Users", users);
+                startActivity(page);
+
+            }
+        });*/
 
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String sw_nh = snapshot.child("SW_NewHouse").getValue().toString().trim();
+                    String sw_eSpec = snapshot.child("SW_EditSpec").getValue().toString().trim();
+                    String sw_dc = snapshot.child("SW_DataClear").getValue().toString().trim();
+                    String sw_SI = snapshot.child("SW_StockIn").getValue().toString().trim();
+                    String sw_SO = snapshot.child("SW_StockOut").getValue().toString().trim();
+                    String sw_MD = snapshot.child("SW_ModifyDelete").getValue().toString().trim();
+                    String sw_set = snapshot.child("SW_Setting").getValue().toString().trim();
+
+                    if (sw_nh.equals("Off")) {
+                        sw_new_house.setChecked(false);
+                    } else if (sw_nh.equals("On")) {
+                        sw_new_house.setChecked(true);
+                    }
+
+                    if (sw_eSpec.equals("Off")) {
+                        sw_edit_spec.setChecked(false);
+                    } else if (sw_eSpec.equals("On")) {
+                        sw_edit_spec.setChecked(true);
+                    }
+
+                    if (sw_dc.equals("Off")) {
+                        sw_data_clear.setChecked(false);
+                    } else if (sw_dc.equals("On")) {
+                        sw_data_clear.setChecked(true);
+                    }
+
+                    if (sw_SI.equals("Off")) {
+                        sw_stock_in.setChecked(false);
+                    } else if (sw_SI.equals("On")) {
+                        sw_stock_in.setChecked(true);
+                    }
+
+                    if (sw_SO.equals("Off")) {
+                        sw_stock_out.setChecked(false);
+                    } else if (sw_SO.equals("On")) {
+                        sw_stock_out.setChecked(true);
+                    }
+
+                    if (sw_MD.equals("Off")) {
+                        sw_modify_delete.setChecked(false);
+                    } else if (sw_MD.equals("On")) {
+                        sw_modify_delete.setChecked(true);
+                    }
+
+                    if (sw_set.equals("Off")) {
+                        sw_setting.setChecked(false);
+                    } else if (sw_set.equals("On")) {
+                        sw_setting.setChecked(true);
+                    }
+
+                } else {
+                    arightRef.child("SW_NewHouse").setValue("On");
+                    arightRef.child("SW_EditSpec").setValue("On");
+                    arightRef.child("SW_DataClear").setValue("On");
+                    arightRef.child("SW_StockIn").setValue("On");
+                    arightRef.child("SW_StockOut").setValue("On");
+                    arightRef.child("SW_ModifyDelete").setValue("On");
+                    arightRef.child("SW_Setting").setValue("On");
+
+                    sw_new_house.setChecked(true);
+                    sw_edit_spec.setChecked(true);
+                    sw_data_clear.setChecked(true);
+                    sw_stock_in.setChecked(true);
+                    sw_stock_out.setChecked(true);
+                    sw_modify_delete.setChecked(true);
+                    sw_setting.setChecked(true);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override

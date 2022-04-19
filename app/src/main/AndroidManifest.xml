@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DB_Inventory">
         <activity
+            android:name=".StockOut_step3"
+            android:exported="false" />
+        <activity
+            android:name=".Modify_User"
+            android:exported="false" />
+        <activity
             android:name=".Stock_Out_Scan"
             android:exported="false" />
         <activity

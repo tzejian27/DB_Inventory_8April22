@@ -164,13 +164,13 @@ public class Maintain_User extends AppCompatActivity {
 
                                             Toast.makeText(Maintain_User.this, "Modify "+key  , Toast.LENGTH_SHORT).show();
                                             //Modify user data
-                                            /*Intent intent = new Intent(Maintain_User.this, Modify_User.class);
-                                            intent.putExtra("Name",username);
+                                            Intent intent = new Intent(Maintain_User.this, Modify_User.class);
+                                            intent.putExtra("Name",key);
                                             intent.putExtra("Role",role);
                                             intent.putExtra("Password",password);
                                             intent.putExtra("Users", users);
                                             Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
-                                            startActivity(intent);*/
+                                            startActivity(intent);
 
                                         }
                                     }

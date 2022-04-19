@@ -124,14 +124,14 @@ public class Stock_Out_Scan extends AppCompatActivity {
                 if(barcode.isEmpty()){
                     Toast.makeText(Stock_Out_Scan.this, "Please enter/scan barcode  ", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(Stock_Out_Scan.this, "Still under construction  ", Toast.LENGTH_SHORT).show();
-                    //add();
+                    //Toast.makeText(Stock_Out_Scan.this, "Still under construction  ", Toast.LENGTH_SHORT).show();
+                    add();
                 }
             }
         });
     }
 
-    /*private void add() {
+    private void add() {
         final String barcode = edt_barcode.getText().toString().trim();
         String users=getIntent().getStringExtra("Users");
         // final String barcode1 = e1.getText().toString().trim();
@@ -198,7 +198,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
                                     //   @Override
                                     //     public void onComplete(@NonNull Task<Void> task) {
                                     //     if (task.isSuccessful()){
-                                    Intent page = new Intent(Stock_Out_Scan.this,StockIn_step3.class);
+                                    Intent page = new Intent(Stock_Out_Scan.this,StockOut_step3.class);
                                     page.putExtra("barcode", barcode);
                                     page.putExtra("name", name);
                                     page.putExtra("Key", key);
@@ -217,62 +217,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
                                     //    }
                                     //  });
                                 }else if(!dataSnapshot3.exists()){
-                                    databaseReference2=FirebaseDatabase.getInstance().getReference("Switch");
-                                    databaseReference2.keepSynced(true);
-                                    databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            String s1 = dataSnapshot.child("NoNeed").getValue().toString().trim();
-
-                                            if (s1.equals("Need")){
-                                                String barcode = edt_barcode.getText().toString().trim();
-                                                Intent intent = new Intent(Stock_Out_Scan.this, StockIn_step2.class);
-                                                intent.putExtra("barcode", barcode);
-                                                intent.putExtra("name",name);
-                                                intent.putExtra("Key",key);
-                                                intent.putExtra("Users", users);
-                                                startActivity(intent);
-                                            }else{
-
-                                                databaseReference3=FirebaseDatabase.getInstance().getReference("House").child(key).push();
-                                                databaseReference3.keepSynced(true);
-                                                final String key2 = databaseReference3.getKey();
-
-                                                String barcode = edt_barcode.getText().toString().trim();
-                                                Map dataMap = new HashMap();
-                                                dataMap.put("Key",key2);
-                                                dataMap.put("HouseKey",key);
-                                                dataMap.put("Barcode",barcode);
-                                                dataMap.put("ItemName","Haven't Modify");
-                                                dataMap.put("Price","0");
-                                                dataMap.put("Cost","0");
-                                                dataMap.put("Quantity",Quantity);
-                                                dataMap.put("Date_and_Time",currentDateandTime);
-
-                                                k = maxid -3;
-                                                totaltype =Long.toString(k);
-
-                                                databaseReference3.updateChildren(dataMap);
-                                                databaseReference.child("TotalType").setValue(totaltype);
-
-                                                Intent intent = new Intent(Stock_Out_Scan.this, StockIn_step3.class);
-                                                intent.putExtra("barcode", barcode);
-                                                intent.putExtra("name",name);
-                                                intent.putExtra("Key",key);
-                                                intent.putExtra("Key2",key2);
-                                                intent.putExtra("Users", users);
-                                                startActivity(intent);
-                                            }
-                                            Toast.makeText(Stock_Out_Scan.this, "Data Save", Toast.LENGTH_SHORT).show();
-                                            finish();
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                        }
-                                    });
-
+                                    Toast.makeText(Stock_Out_Scan.this, "Barcode doesn't exist", Toast.LENGTH_SHORT).show();
 
                                 }else if( dataSnapshot3.exists()){
                                     // k = maxid -3;
@@ -285,7 +230,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                                                 inventory_key = childSnapshot.getKey();
-                                                Intent intent = new Intent(Stock_Out_Scan.this,StockIn_step3.class);
+                                                Intent intent = new Intent(Stock_Out_Scan.this,StockOut_step3.class);
                                                 intent.putExtra("barcode", barcode);
                                                 intent.putExtra("name",name);
                                                 intent.putExtra("Key", key);
@@ -327,7 +272,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
             }
         });
 
-    }*/
+    }
 
 
 
