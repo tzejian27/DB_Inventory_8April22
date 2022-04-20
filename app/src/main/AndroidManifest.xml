@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DB_Inventory">
         <activity
+            android:name=".Sales_Order"
+            android:exported="false" />
+        <activity
             android:name=".StockOut_step3"
             android:exported="false" />
         <activity

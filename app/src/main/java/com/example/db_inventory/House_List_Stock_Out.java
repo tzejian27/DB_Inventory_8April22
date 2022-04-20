@@ -105,7 +105,7 @@ public class House_List_Stock_Out extends AppCompatActivity {
                                 intent.putExtra("Key", key);
                                 intent.putExtra("name", name);
                                 intent.putExtra("Users", users);
-                                Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Enter " + name, Toast.LENGTH_SHORT).show();
                                 startActivity(intent);
                             }
 

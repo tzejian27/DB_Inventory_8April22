@@ -49,7 +49,7 @@ public class Login_Menu extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(Login_Menu.this)
                 .setTitle("Exit")
                 .setCancelable(false)
-                .setMessage("Are your sure want to exit?")
+                .setMessage("Are you sure to exit?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

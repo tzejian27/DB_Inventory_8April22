@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="30dp"
-        android:text="Stock In"
+        android:text="@string/stock_in"
         android:textColor="@color/blue"
         android:textSize="80px" />
 
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="House Qty"
+            android:text="@string/house_qty"
             android:textColor="@color/blue" />
 
         <TextView
@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="100dp"
-            android:text="Total Qty"
+            android:text="@string/total_qty"
             android:textColor="@color/blue" />
 
         <TextView
@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="100dp"
-            android:text="Qty in"
+            android:text="@string/qty_in"
             android:textColor="@color/blue" />
 
         <TextView
@@ -202,7 +202,7 @@
         android:layout_marginBottom="30dp"
         android:background="@drawable/blue_border"
         android:ems="10"
-        android:hint="Add qty in"
+        android:hint="@string/add_qty_in"
         android:inputType="number"
         android:paddingLeft="20dp" />
 

@@ -23,6 +23,7 @@ public class Access_Right extends AppCompatActivity {
     Switch sw_stock_out;
     Switch sw_modify_delete;
     Switch sw_setting;
+    Switch sw_house_list;
     DatabaseReference arightRef;
 
     String Switch1;
@@ -32,6 +33,7 @@ public class Access_Right extends AppCompatActivity {
     String Switch5;
     String Switch6;
     String Switch7;
+    String Switch8;
 
     Button btn_confirm;
 
@@ -48,6 +50,7 @@ public class Access_Right extends AppCompatActivity {
         sw_stock_out = findViewById(R.id.switch_SO);
         sw_modify_delete = findViewById(R.id.switch_modify_delete);
         sw_setting = findViewById(R.id.switch_setting);
+        sw_house_list = findViewById(R.id.switch_house_list);
 
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
         arightRef.keepSynced(true);
@@ -146,6 +149,19 @@ public class Access_Right extends AppCompatActivity {
             }
         });
 
+        sw_house_list.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (sw_house_list.isChecked()) {
+                    Switch8 = "On";
+                    arightRef.child("SW_HouseList").setValue(Switch8).toString().trim();
+                } else {
+                    Switch8 = "Off";
+                    arightRef.child("SW_HouseList").setValue(Switch8).toString().trim();
+                }
+            }
+        });
+
         String users = getIntent().getStringExtra("Users");
 
         /*btn_confirm.setOnClickListener(new View.OnClickListener() {
@@ -182,6 +198,7 @@ public class Access_Right extends AppCompatActivity {
                     String sw_SO = snapshot.child("SW_StockOut").getValue().toString().trim();
                     String sw_MD = snapshot.child("SW_ModifyDelete").getValue().toString().trim();
                     String sw_set = snapshot.child("SW_Setting").getValue().toString().trim();
+                    String sw_HL = snapshot.child("SW_HouseList").getValue().toString().trim();
 
                     if (sw_nh.equals("Off")) {
                         sw_new_house.setChecked(false);
@@ -225,6 +242,12 @@ public class Access_Right extends AppCompatActivity {
                         sw_setting.setChecked(true);
                     }
 
+                    if (sw_HL.equals("Off")) {
+                        sw_house_list.setChecked(false);
+                    } else if (sw_HL.equals("On")) {
+                        sw_house_list.setChecked(true);
+                    }
+
                 } else {
                     arightRef.child("SW_NewHouse").setValue("On");
                     arightRef.child("SW_EditSpec").setValue("On");
@@ -233,6 +256,7 @@ public class Access_Right extends AppCompatActivity {
                     arightRef.child("SW_StockOut").setValue("On");
                     arightRef.child("SW_ModifyDelete").setValue("On");
                     arightRef.child("SW_Setting").setValue("On");
+                    arightRef.child("SW_HouseList").setValue("On");
 
                     sw_new_house.setChecked(true);
                     sw_edit_spec.setChecked(true);
@@ -241,6 +265,7 @@ public class Access_Right extends AppCompatActivity {
                     sw_stock_out.setChecked(true);
                     sw_modify_delete.setChecked(true);
                     sw_setting.setChecked(true);
+                    sw_house_list.setChecked(true);
 
                 }
             }

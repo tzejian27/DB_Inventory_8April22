@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:text="Create new house"
+            android:text="@string/create_new_house"
             android:textColor="@color/blue"
             android:textSize="50px" />
 
@@ -27,7 +27,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checked="false" />
+            android:checked="false"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txt_houselist_nh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="@string/house_list"
+            android:textColor="@color/blue"
+            android:textSize="50px" />
+
+        <Switch
+
+            android:id="@+id/switch_house_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     </LinearLayout>
 
@@ -53,7 +80,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checked="false" />
+            android:checked="false"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     </LinearLayout>
 
@@ -68,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:text="Data Clear"
+            android:text="@string/data_clear"
             android:textColor="@color/blue"
             android:textSize="50px" />
 
@@ -78,7 +106,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checked="false" />
+            android:checked="false"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     </LinearLayout>
 
@@ -93,7 +122,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:text="Stock In"
+            android:text="@string/stock_in"
             android:textColor="@color/blue"
             android:textSize="50px" />
 
@@ -103,7 +132,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checked="false" />
+            android:checked="false"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 
     </LinearLayout>
@@ -119,7 +149,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:text="Stock Out"
+            android:text="@string/stock_out"
             android:textColor="@color/blue"
             android:textSize="50px" />
 
@@ -129,7 +159,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checked="false" />
+            android:checked="false"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 
     </LinearLayout>
@@ -145,7 +176,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:text="Modify/Delete"
+            android:text="@string/modify_delete"
             android:textColor="@color/blue"
             android:textSize="50px" />
 
@@ -155,7 +186,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checked="false" />
+            android:checked="false"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 
     </LinearLayout>
@@ -164,19 +196,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:ignore="UseSwitchCompatOrMaterialXml">
 
         <TextView
             android:id="@+id/txt_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:text="Setting"
+            android:text="@string/setting"
             android:textColor="@color/blue"
             android:textSize="50px" />
 
         <Switch
-
             android:id="@+id/switch_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

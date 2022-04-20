@@ -15,7 +15,8 @@
             android:id="@+id/imageView_house_back_SI"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_action_back" />
+            android:src="@drawable/ic_action_back"
+            android:contentDescription="TODO" />
 
         <TextView
 
@@ -24,7 +25,7 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/house_list"
+            android:text="@string/house_list_stock_in"
             android:textSize="50px" />
 
         <ImageView

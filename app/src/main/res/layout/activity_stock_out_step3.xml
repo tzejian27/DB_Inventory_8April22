@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="30dp"
-        android:text="Stock Out"
+        android:text="@string/stock_out"
         android:textColor="@color/blue"
         android:textSize="80px" />
 
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="House Qty"
+            android:text="@string/house_qty"
             android:textColor="@color/blue" />
 
         <TextView

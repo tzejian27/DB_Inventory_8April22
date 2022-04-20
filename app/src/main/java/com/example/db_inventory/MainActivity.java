@@ -95,9 +95,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.btn_house_list:
-                Intent intent2house_list = new Intent(MainActivity.this, House_List.class);
-                intent2house_list.putExtra("Users", users);
-                startActivity(intent2house_list);
+                if (users != null && users.equals("Admin")) {
+                    Intent intent2house_list = new Intent(MainActivity.this, House_List.class);
+                    intent2house_list.putExtra("Users", users);
+                    startActivity(intent2house_list);
+                } else if (users.equals("User")) {
+                    arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            Switch3 = snapshot.child("SW_HouseList").getValue().toString().trim();
+                            if (Switch3.equals("On")) {
+                                Intent intent2house_list = new Intent(MainActivity.this, House_List.class);
+                                intent2house_list.putExtra("Users", users);
+                                startActivity(intent2house_list);
+                            } else if (Switch3.equals("Off")) {
+                                Toast.makeText(MainActivity.this, "Permission denied", Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                } else {
+                    Toast.makeText(MainActivity.this, "Something go wrong, pls sign in again", Toast.LENGTH_LONG).show();
+                }
+
                 break;
             case R.id.btn_house_delete:
                 Toast.makeText(this, "New Function will be Update in the future", Toast.LENGTH_LONG).show();

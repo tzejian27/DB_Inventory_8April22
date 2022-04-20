@@ -91,4 +91,16 @@
     <string name="role1">Role</string>
     <string name="cost1">Cost</string>
     <string name="disable_edit_spec">Disable Edit Spec:</string>
+    <string name="create_new_house">Create new house</string>
+    <string name="modify_delete">Modify/Delete</string>
+    <string name="create_new_user">Create New User</string>
+    <string name="role_user_or_admin">Role (User or Admin)</string>
+    <string name="house_list_stock_in">House List (Stock In)</string>
+    <string name="house_list_stock_out">House List (Stock Out)</string>
+    <string name="item_cost">Item Cost :</string>
+    <string name="qty_in">Qty in</string>
+    <string name="add_qty_in">Add qty in</string>
+    <string name="house_qty">House Qty</string>
+    <string name="stock_out">Stock Out</string>
+    <string name="stock_in">Stock In</string>
 </resources>

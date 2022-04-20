@@ -1,5 +1,6 @@
 package com.example.db_inventory;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -156,8 +158,26 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent2login = new Intent(Home_Page.this, Login_Menu.class);
-        startActivity(intent2login);
+        String users = getIntent().getStringExtra("Users");
+        AlertDialog.Builder builder = new AlertDialog.Builder(Home_Page.this)
+                .setTitle("Logout")
+                .setCancelable(false)
+                .setMessage("Are you sure to logout?")
+                .setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent2login = new Intent(Home_Page.this, Login_Menu.class);
+                        startActivity(intent2login);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+        builder.show();
+
+
     }
 }

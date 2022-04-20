@@ -23,7 +23,7 @@
                 android:width="150dp"
                 android:text="@string/name"
                 android:textColor="@color/black"
-                android:textSize="25dp" />
+                android:textSize="23dp" />
 
             <TextView
                 android:id="@+id/textView_Name"
@@ -32,7 +32,7 @@
                 android:layout_weight="1"
                 android:text="@string/name1"
                 android:textColor="@color/black"
-                android:textSize="25dp" />
+                android:textSize="23dp" />
 
         </LinearLayout>
 
@@ -48,7 +48,7 @@
                 android:width="150dp"
                 android:text="@string/total_type"
                 android:textColor="@color/black"
-                android:textSize="25dp" />
+                android:textSize="23dp" />
 
             <TextView
                 android:id="@+id/textView_TotalType"
@@ -57,7 +57,7 @@
                 android:layout_weight="1"
                 android:text="@string/total_type1"
                 android:textColor="@color/black"
-                android:textSize="25dp" />
+                android:textSize="23dp" />
 
         </LinearLayout>
 
@@ -73,7 +73,7 @@
                 android:width="150dp"
                 android:text="@string/total_qty"
                 android:textColor="@color/black"
-                android:textSize="25dp" />
+                android:textSize="23dp" />
 
             <TextView
                 android:id="@+id/textView_TotalQty"
@@ -82,7 +82,7 @@
                 android:layout_weight="1"
                 android:text="@string/total_qty1"
                 android:textColor="@color/black"
-                android:textSize="25dp" />
+                android:textSize="23dp" />
 
         </LinearLayout>
 
