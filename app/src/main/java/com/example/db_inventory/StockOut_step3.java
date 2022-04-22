@@ -37,6 +37,9 @@ public class StockOut_step3 extends AppCompatActivity {
     String totalQty;
     String currentDateandTime;
 
+    DatabaseReference allowNRef;
+    String Switch1;
+
     DatabaseReference databaseReference, databaseReference2, stockOutRef;
 
     @Override
@@ -156,83 +159,180 @@ public class StockOut_step3 extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             final String users = getIntent().getStringExtra("Users");
 
+
             @Override
             public void onClick(View v) {
                 final String qty = e2_quantity_out.getText().toString().trim();
 
+                allowNRef = FirebaseDatabase.getInstance().getReference("Switch");
+                allowNRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Switch1 = snapshot.child("Allow_Negative").getValue().toString().trim();
+                        if (Switch1.equals("On")) {
+                            if (qty.isEmpty()) {
+                                Toast.makeText(StockOut_step3.this, "Please enter Qty out", Toast.LENGTH_SHORT).show();
+                            } else {
+                                final int total = Integer.parseInt(qty);
+                                final int qty1 = Integer.parseInt(Quantity);
+                                int sum = qty1 - total;
+                                String sum2 = String.valueOf(sum);
+                                databaseReference.child(key2).child("Quantity").setValue(sum2);//.addOnCompleteListener(new OnCompleteListener<Void>() {
+                                //   @Override
+                                //    public void onComplete(@NonNull Task<Void> task) {
+                                //       if (task.isSuccessful()){
+                                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        totalQty = dataSnapshot.child("TotalQty").getValue().toString().trim();
 
-                if (qty.isEmpty()) {
-                    Toast.makeText(StockOut_step3.this, "Please enter Qty out", Toast.LENGTH_SHORT).show();
-                } else {
-                    final int total = Integer.parseInt(qty);
-                    final int qty1 = Integer.parseInt(Quantity);
-                    int sum = qty1 - total;
-                    String sum2 = String.valueOf(sum);
-                    databaseReference.child(key2).child("Quantity").setValue(sum2);//.addOnCompleteListener(new OnCompleteListener<Void>() {
-                    //   @Override
-                    //    public void onComplete(@NonNull Task<Void> task) {
-                    //       if (task.isSuccessful()){
-                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            totalQty = dataSnapshot.child("TotalQty").getValue().toString().trim();
+                                        int sum = 0;
+                                        int totalQty1 = Integer.parseInt(totalQty);
+                                        sum = totalQty1 - total;
+                                        String sum2 = String.valueOf(sum);
 
-                            int sum = 0;
-                            int totalQty1 = Integer.parseInt(totalQty);
-                            sum = totalQty1 - total;
-                            String sum2 = String.valueOf(sum);
+                                        databaseReference.child("TotalQty").setValue(sum2).toString().trim();
 
-                            databaseReference.child("TotalQty").setValue(sum2).toString().trim();
+                                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
+                                        currentDateandTime = sdf.format(new Date());
 
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
-                            currentDateandTime = sdf.format(new Date());
+                                        Map dataMap = new HashMap();
+                                        dataMap.put("QtyOut", qty);
+                                        dataMap.put("QtyOut_Date", currentDateandTime);
 
-                            Map dataMap = new HashMap();
-                            dataMap.put("QtyOut", qty);
-                            dataMap.put("QtyOut_Date", currentDateandTime);
+                                        databaseReference2.updateChildren(dataMap);
 
-                            databaseReference2.updateChildren(dataMap);
-
-                            tv_qtyOut.setText(qty);
-                            e2_quantity_out.setEnabled(false);
-                            b2.setClickable(false);
-
-
-                            String Quantity = dataSnapshot.child(key2).child("Quantity").getValue().toString().trim();
-                            t1.setText(sum2);
-                            t2.setText(Quantity);
-
-                            String ItemName = dataSnapshot.child(key2).child("ItemName").getValue().toString().trim();
+                                        tv_qtyOut.setText(qty);
+                                        e2_quantity_out.setEnabled(false);
+                                        b2.setClickable(false);
 
 
-                            //Create stock in record
-                            barcode = intent1.getStringExtra("barcode");
-                            name = intent1.getStringExtra("name");
-                            String barcode_ref = barcode + "/";
-                            Map dataMap2 = new HashMap();
-                            dataMap2.put("Barcode", barcode);
-                            dataMap2.put("Name", ItemName);
-                            dataMap2.put("QtyOut", qty);
-                            dataMap2.put("QtyOut_Date", currentDateandTime);
+                                        String Quantity = dataSnapshot.child(key2).child("Quantity").getValue().toString().trim();
+                                        t1.setText(sum2);
+                                        t2.setText(Quantity);
 
-                            Map dataMap3 = new HashMap();
-                            dataMap3.put(barcode_ref + "/", dataMap2);
+                                        String ItemName = dataSnapshot.child(key2).child("ItemName").getValue().toString().trim();
 
-                            stockOutRef.updateChildren(dataMap3);
 
+                                        //Create stock in record
+                                        barcode = intent1.getStringExtra("barcode");
+                                        name = intent1.getStringExtra("name");
+                                        String barcode_ref = barcode + "/";
+                                        Map dataMap2 = new HashMap();
+                                        dataMap2.put("Barcode", barcode);
+                                        dataMap2.put("Name", ItemName);
+                                        dataMap2.put("QtyOut", qty);
+                                        dataMap2.put("QtyOut_Date", currentDateandTime);
+
+                                        Map dataMap3 = new HashMap();
+                                        dataMap3.put(barcode_ref + "/", dataMap2);
+
+                                        stockOutRef.updateChildren(dataMap3);
+
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                                //   }
+                                //     }
+                                //    });
+                                Toast.makeText(StockOut_step3.this, "Add Successfully !!!", Toast.LENGTH_SHORT).show();
+                            }
+                        }else {
+
+                            final int total1 = Integer.parseInt(qty);
+                            final int qty11 = Integer.parseInt(Quantity);
+                            if (qty.isEmpty()) {
+                                Toast.makeText(StockOut_step3.this, "Please enter Qty out", Toast.LENGTH_SHORT).show();
+                            }else if(total1<=qty11){
+                                final int total = Integer.parseInt(qty);
+                                final int qty1 = Integer.parseInt(Quantity);
+                                int sum = qty1 - total;
+                                String sum2 = String.valueOf(sum);
+                                databaseReference.child(key2).child("Quantity").setValue(sum2);//.addOnCompleteListener(new OnCompleteListener<Void>() {
+                                //   @Override
+                                //    public void onComplete(@NonNull Task<Void> task) {
+                                //       if (task.isSuccessful()){
+                                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        totalQty = dataSnapshot.child("TotalQty").getValue().toString().trim();
+
+                                        int sum = 0;
+                                        int totalQty1 = Integer.parseInt(totalQty);
+                                        sum = totalQty1 - total;
+                                        String sum2 = String.valueOf(sum);
+
+                                        databaseReference.child("TotalQty").setValue(sum2).toString().trim();
+
+                                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
+                                        currentDateandTime = sdf.format(new Date());
+
+                                        Map dataMap = new HashMap();
+                                        dataMap.put("QtyOut", qty);
+                                        dataMap.put("QtyOut_Date", currentDateandTime);
+
+                                        databaseReference2.updateChildren(dataMap);
+
+                                        tv_qtyOut.setText(qty);
+                                        e2_quantity_out.setEnabled(false);
+                                        b2.setClickable(false);
+
+
+                                        String Quantity = dataSnapshot.child(key2).child("Quantity").getValue().toString().trim();
+                                        t1.setText(sum2);
+                                        t2.setText(Quantity);
+
+                                        String ItemName = dataSnapshot.child(key2).child("ItemName").getValue().toString().trim();
+
+
+                                        //Create stock in record
+                                        barcode = intent1.getStringExtra("barcode");
+                                        name = intent1.getStringExtra("name");
+                                        String barcode_ref = barcode + "/";
+                                        Map dataMap2 = new HashMap();
+                                        dataMap2.put("Barcode", barcode);
+                                        dataMap2.put("Name", ItemName);
+                                        dataMap2.put("QtyOut", qty);
+                                        dataMap2.put("QtyOut_Date", currentDateandTime);
+
+                                        Map dataMap3 = new HashMap();
+                                        dataMap3.put(barcode_ref + "/", dataMap2);
+
+                                        stockOutRef.updateChildren(dataMap3);
+
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                                //   }
+                                //     }
+                                //    });
+                                Toast.makeText(StockOut_step3.this, "Add Successfully !!!", Toast.LENGTH_SHORT).show();
+
+                            }else{
+                                Toast.makeText(StockOut_step3.this, "Execute actual Quantity "+ total1 + " < " + qty11, Toast.LENGTH_SHORT).show();
+                            }
 
                         }
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
-                    });
-                    //   }
-                    //     }
-                    //    });
-                    Toast.makeText(StockOut_step3.this, "Add Successfully !!!", Toast.LENGTH_SHORT).show();
-                }
+                    }
+                });
+
+
+
             }
         });
 

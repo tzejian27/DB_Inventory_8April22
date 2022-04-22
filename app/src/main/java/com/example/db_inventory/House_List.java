@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,11 +27,16 @@ public class House_List extends AppCompatActivity {
     RecyclerView recyclerView;
     HouseList_Adapter HouseList_Adapter;
     List<House_list_class> postList;
+    TextView t1;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_list);
+
+        t1 = findViewById(R.id.record_HL);
 
         recyclerView = findViewById(R.id.recyclerView_House);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -82,6 +88,7 @@ public class House_List extends AppCompatActivity {
                 }
                 HouseList_Adapter = new HouseList_Adapter(House_List.this, postList);
                 recyclerView.setAdapter(HouseList_Adapter);
+                t1.setText(String.valueOf(HouseList_Adapter.getItemCount()));
             }
 
             @Override

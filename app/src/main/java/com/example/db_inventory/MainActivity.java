@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btn_new_house, btn_house_list, btn_house_delete, btn_generate_txt, btn_setting, btn_new_goods;
+    Button btn_new_house, btn_house_list, btn_house_delete, btn_generate_txt, btn_new_goods;
     DatabaseReference databaseReference, databaseReference2;
     String s1;
 
@@ -46,14 +46,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_house_list = findViewById(R.id.btn_house_list);
         btn_house_delete = findViewById(R.id.btn_house_delete);
         btn_generate_txt = findViewById(R.id.btn_gen_txt);
-        btn_setting = findViewById(R.id.btn_house_setting);
         btn_new_goods = findViewById(R.id.btn_new_goods);
 
         btn_new_house.setOnClickListener(this);
         btn_house_list.setOnClickListener(this);
         btn_house_delete.setOnClickListener(this);
         btn_generate_txt.setOnClickListener(this);
-        btn_setting.setOnClickListener(this);
         btn_new_goods.setOnClickListener(this);
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
 
@@ -135,36 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent2house_generate);
                 //Toast.makeText(this, "Coming Soon!!!", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.btn_house_setting:
 
-                if (users != null && users.equals("Admin")) {
-                    Intent intent2house_setting = new Intent(MainActivity.this, House_Setting.class);
-                    intent2house_setting.putExtra("Users", users);
-                    startActivity(intent2house_setting);
-                } else if (users.equals("User")) {
-                    arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Switch2 = snapshot.child("SW_Setting").getValue().toString().trim();
-                            if (Switch2.equals("On")) {
-                                Intent intent2house_setting = new Intent(MainActivity.this, House_Setting.class);
-                                intent2house_setting.putExtra("Users", users);
-                                startActivity(intent2house_setting);
-                            } else if (Switch2.equals("Off")) {
-                                Toast.makeText(MainActivity.this, "Permission denied", Toast.LENGTH_LONG).show();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                } else {
-                    Toast.makeText(MainActivity.this, "Something go wrong, pls sign in again", Toast.LENGTH_LONG).show();
-                }
-
-                break;
             case R.id.btn_new_goods:
 
                 databaseReference2 = FirebaseDatabase.getInstance().getReference("Switch");

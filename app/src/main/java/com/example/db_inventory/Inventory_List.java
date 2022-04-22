@@ -39,6 +39,7 @@ public class Inventory_List extends AppCompatActivity {
     String sum2, switch1;
     InventoryList_Adapter InventoryList_Adapter;
     List<Inventory_class> postList;
+    TextView totalrecord;
 
     DatabaseReference arightRef;
     String Switch1;
@@ -55,6 +56,7 @@ public class Inventory_List extends AppCompatActivity {
 
         iv_back = findViewById(R.id.imageView_IL_back);
         iv_search = findViewById(R.id.imageView_IL_search);
+        totalrecord = findViewById(R.id.record_IL);
 
         Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
@@ -142,6 +144,13 @@ public class Inventory_List extends AppCompatActivity {
                 viewHolder.setDate_and_Time(model.getDate_and_Time());
                 viewHolder.setPrice(model.getPrice());
                 viewHolder.setCost(model.getCost());
+                viewHolder.setItemCode(model.getItemCode());
+                //totalrecord.setText(model.getBarcode().length());
+                    totalrecord.setText(String.valueOf(getItemCount()));
+
+                /*for(int i=0;i<model.getBarcode().length(); i++){
+                    totalrecord.setText(String.valueOf(i-1));
+                }*/
 
                 arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -228,6 +237,7 @@ public class Inventory_List extends AppCompatActivity {
         };
         recyclerView.setAdapter(firebaseRecyclerAdapter2);
         firebaseRecyclerAdapter2.startListening();
+        //totalrecord.setText(String.valueOf(recyclerView.getAdapter().getItemCount()));
     }
 
     public void onBackPressed() {
@@ -259,6 +269,7 @@ public class Inventory_List extends AppCompatActivity {
         public void setBarcode(String barcode) {
             TextView Barcode = mView.findViewById(R.id.textView_InventoryList_Barcode);
             Barcode.setText(barcode);
+
         }
 
         public void setQuanlity(String quanlity) {
@@ -284,6 +295,11 @@ public class Inventory_List extends AppCompatActivity {
         public void setCost(String cost) {
             TextView Cost = mView.findViewById(R.id.textView_InventoryList_Cost);
             Cost.setText(cost);
+        }
+
+        public void setItemCode(String itemCode){
+            TextView ItemCode = mView.findViewById(R.id.textView_InventoryList_itemCode);
+            ItemCode.setText(itemCode);
         }
 
 

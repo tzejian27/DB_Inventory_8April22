@@ -47,6 +47,10 @@ public class Stock_Out_Scan extends AppCompatActivity {
     long k;
     String inventory_key;
     ScanReader scanReader;
+
+    DatabaseReference allowNRef;
+    String Switch1;
+
     private String barcodeStr;
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
@@ -132,17 +136,11 @@ public class Stock_Out_Scan extends AppCompatActivity {
     private void add() {
         final String barcode = edt_barcode.getText().toString().trim();
         String users = getIntent().getStringExtra("Users");
-        // final String barcode1 = e1.getText().toString().trim();
-        //final String barcode_ref = barcode1 + "/";
-
-        //databaseReference3=FirebaseDatabase.getInstance().getReference("House").child(key).push();
-        //final String key2 = databaseReference3.getKey();
 
         if (TextUtils.isEmpty(barcode)) {
             edt_barcode.setError("Required Field...");
             return;
         }
-
 
         databaseReference2 = FirebaseDatabase.getInstance().getReference("New_Goods");
         databaseReference2.keepSynced(true);
@@ -155,77 +153,66 @@ public class Stock_Out_Scan extends AppCompatActivity {
                         databaseReference.orderByChild("Barcode").equalTo(barcode).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot3) {
+
                                 if (dataSnapshot2.exists() && !dataSnapshot3.exists()) {
-                                    Name = dataSnapshot.child("Name").getValue().toString().trim();
-                                    Price = dataSnapshot.child("Price").getValue().toString().trim();
-                                    Cost = dataSnapshot.child("Cost").getValue().toString().trim();
+                                    Toast.makeText(Stock_Out_Scan.this, "Barcode doesn't exist in House", Toast.LENGTH_SHORT).show();
+                                                /*Name = dataSnapshot.child("Name").getValue().toString().trim();
+                                                Price = dataSnapshot.child("Price").getValue().toString().trim();
+                                                Cost = dataSnapshot.child("Cost").getValue().toString().trim();
+                                                Quantity = dataSnapshot3.child("Quantity").getValue().toString().trim();
+                                                int qty = Integer.parseInt(Quantity);
+                                                if(0>=qty){
+                                                    Toast.makeText(Stock_Out_Scan.this, "Execute actual Qty" + qty, Toast.LENGTH_SHORT).show();
+                                                }
 
 
-                                    Intent intent = getIntent();
-                                    String name = intent.getStringExtra("name");
-                                    k = maxid - 3;
-                                    totaltype = Long.toString(k);
-                                    // final String key2 =Long.toString(k);
+                                                Intent intent = getIntent();
+                                                String name = intent.getStringExtra("name");
+                                                k = maxid - 3;
+                                                totaltype = Long.toString(k);
 
-                                    databaseReference3 = FirebaseDatabase.getInstance().getReference("House").child(key).push();
-                                    databaseReference3.keepSynced(true);
-                                    final String key2 = databaseReference3.getKey();
+                                                databaseReference3 = FirebaseDatabase.getInstance().getReference("House").child(key).push();
+                                                databaseReference3.keepSynced(true);
+                                                final String key2 = databaseReference3.getKey();
 
-                                    Map dataMap = new HashMap();
-                                    dataMap.put("Key", key2);
-                                    dataMap.put("HouseKey", key);
-                                    dataMap.put("Barcode", barcode);
-                                    dataMap.put("ItemName", Name);
-                                    dataMap.put("Price", Price);
-                                    dataMap.put("Cost", Cost);
-                                    dataMap.put("Quantity", Quantity);
-                                    dataMap.put("Date_and_Time", currentDateandTime);
-
-
-                                    //   Map dataMap2 = new HashMap();
-                                    //   dataMap2.put(maxid-3 + "/" ,dataMap);
+                                                Map dataMap = new HashMap();
+                                                dataMap.put("Key", key2);
+                                                dataMap.put("HouseKey", key);
+                                                dataMap.put("Barcode", barcode);
+                                                dataMap.put("ItemName", Name);
+                                                dataMap.put("Price", Price);
+                                                dataMap.put("Cost", Cost);
+                                                dataMap.put("Quantity", Quantity);
+                                                dataMap.put("Date_and_Time", currentDateandTime);
 
 
-                                    databaseReference3.updateChildren(dataMap);//.addOnCompleteListener(new OnCompleteListener() {
-                                    //   @Override
-                                    //       public void onComplete(@NonNull Task task) {
-                                    //       if (task.isSuccessful()){
-                                    databaseReference.child("TotalType").setValue(totaltype);//.addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    //   @Override
-                                    //     public void onComplete(@NonNull Task<Void> task) {
-                                    //     if (task.isSuccessful()){
-                                    Intent page = new Intent(Stock_Out_Scan.this, StockOut_step3.class);
-                                    page.putExtra("barcode", barcode);
-                                    page.putExtra("name", name);
-                                    page.putExtra("Key", key);
-                                    page.putExtra("Key2", key2);
-                                    page.putExtra("Users", users);
-                                    startActivity(page);
-                                    finish();
-                                    //     }else{
-                                    //       Toast.makeText(Inventory.this, "Error", Toast.LENGTH_SHORT).show();
-                                    //     }
+                                                databaseReference3.updateChildren(dataMap);
 
-                                    //    }
-                                    //  });
-                                    //     }
+                                                databaseReference.child("TotalType").setValue(totaltype);
 
-                                    //    }
-                                    //  });
+                                                Intent page = new Intent(Stock_Out_Scan.this, StockOut_step3.class);
+                                                page.putExtra("barcode", barcode);
+                                                page.putExtra("name", name);
+                                                page.putExtra("Key", key);
+                                                page.putExtra("Key2", key2);
+                                                page.putExtra("Users", users);
+                                                startActivity(page);
+                                                finish();*/
                                 } else if (!dataSnapshot3.exists()) {
-                                    Toast.makeText(Stock_Out_Scan.this, "Barcode doesn't exist", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Stock_Out_Scan.this, "Barcode doesn't exist in House", Toast.LENGTH_SHORT).show();
 
                                 } else if (dataSnapshot3.exists()) {
-                                    // k = maxid -3;
-                                    // key2 =Long.toString(k);
-                                    // databaseReference3=FirebaseDatabase.getInstance().getReference("House").child(key).push();
-                                    //  key2 = databaseReference3.getKey();
+
                                     final String barcode = edt_barcode.getText().toString().trim();
                                     databaseReference.orderByChild("Barcode").equalTo(barcode).addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
                                             for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+
                                                 inventory_key = childSnapshot.getKey();
+
                                                 Intent intent = new Intent(Stock_Out_Scan.this, StockOut_step3.class);
                                                 intent.putExtra("barcode", barcode);
                                                 intent.putExtra("name", name);
@@ -242,9 +229,6 @@ public class Stock_Out_Scan extends AppCompatActivity {
 
                                         }
                                     });
-
-
-                                    // Toast.makeText(Inventory.this, "Data Already Exists", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
@@ -267,6 +251,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
 
             }
         });
+
 
     }
 

@@ -1,12 +1,12 @@
 package com.example.db_inventory;
 
 public class Inventory_class {
-    private String Barcode, Quantity, ItemName, HouseKey, Price, Cost, Date_and_Time, Key;
+    private String Barcode, Quantity, ItemName, HouseKey, Price, Cost, Date_and_Time, Key, ItemCode;
 
     public Inventory_class() {
     }
 
-    public Inventory_class(String barcode, String quantity, String itemName, String houseKey, String price, String cost, String date_and_Time, String key) {
+    public Inventory_class(String barcode, String quantity, String itemName, String houseKey, String price, String cost, String date_and_Time, String key, String itemCode) {
         Barcode = barcode;
         Quantity = quantity;
         ItemName = itemName;
@@ -15,6 +15,7 @@ public class Inventory_class {
         Cost = cost;
         Date_and_Time = date_and_Time;
         Key = key;
+        ItemCode = itemCode;
     }
 
     public String getBarcode() {
@@ -79,5 +80,13 @@ public class Inventory_class {
 
     public void setKey(String key) {
         Key = key;
+    }
+
+    public String getItemCode() {
+        return ItemCode;
+    }
+
+    public void setItemCode(String itemCode) {
+        ItemCode = itemCode;
     }
 }

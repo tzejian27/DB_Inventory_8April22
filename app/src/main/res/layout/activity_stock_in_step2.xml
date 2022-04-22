@@ -8,10 +8,30 @@
     tools:context=".StockIn_step2">
 
     <TextView
+        android:id="@+id/txt_input_inventory_itemcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Item code"
+        android:textColor="@color/blue"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/editText_Inventory_itemcode_SI"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/blue_border"
+        android:ems="10"
+        android:hint="Scan/Enter Item Code(Optional)"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp" />
+
+
+    <TextView
         android:id="@+id/txt_input_inventory_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:layout_marginBottom="10dp"
         android:text="@string/input_name"
         android:textColor="@color/blue"
@@ -21,7 +41,7 @@
         android:id="@+id/editText_Inventory_name_SI"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/blue_border"
         android:ems="10"
         android:hint="@string/enter_name"
@@ -33,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="@string/input_price"
+        android:text="@string/input_price_rm"
         android:textColor="@color/blue"
         android:textSize="50px" />
 
@@ -41,7 +61,7 @@
         android:id="@+id/editText_Inventory_price_SI"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/blue_border"
         android:ems="10"
         android:hint="@string/enter_price"
@@ -62,7 +82,7 @@
         android:id="@+id/editText_Inventory_cost_SI"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/blue_border"
         android:ems="10"
         android:hint="@string/enter_cost"

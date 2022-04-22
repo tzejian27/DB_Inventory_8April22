@@ -54,6 +54,7 @@ public class New_Goods_step2 extends AppCompatActivity {
                 Intent intent = getIntent();
                 String barcode = intent.getStringExtra("barcode");
                 String name = intent.getStringExtra("name");
+                String itemcode = intent.getStringExtra("ItemCode");
                 String price = e1.getText().toString().trim();
                 String cost = e2.getText().toString().trim();
 
@@ -76,6 +77,7 @@ public class New_Goods_step2 extends AppCompatActivity {
                 Map dataMap = new HashMap();
                 dataMap.put("Barcode", barcode);
                 dataMap.put("Name", name);
+                dataMap.put("ItemCode", itemcode);
                 dataMap.put("Price", price);
                 dataMap.put("Cost", cost);
 

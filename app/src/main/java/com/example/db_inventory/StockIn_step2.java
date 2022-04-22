@@ -1,9 +1,14 @@
 package com.example.db_inventory;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -24,7 +29,7 @@ import java.util.Map;
 public class StockIn_step2 extends AppCompatActivity {
 
     Button b1, b2;
-    EditText e1, e2, e3;
+    EditText e1, e2, e3, e4;
     DatabaseReference databaseReference, databaseReference2, newGoodRef;
     int TotalQty = 0;
     String Quantity = "0";
@@ -33,6 +38,24 @@ public class StockIn_step2 extends AppCompatActivity {
     String currentDateandTime;
     String key2;
     String totaltype;
+
+    ScanReader scanReader;
+    private String itemCodeStr;
+    public static String itemcode;
+
+    private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            byte[] itemcode = intent.getByteArrayExtra(ScanReader.SCAN_RESULT);
+            Log.e("MainActivity", "itemcode = " + new String(itemcode));
+            if (itemcode != null) {
+                String itemCodeScan = e4.getText().toString().trim();
+                itemCodeStr = new String(itemcode);
+                e4.setText(itemCodeStr);
+
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +68,19 @@ public class StockIn_step2 extends AppCompatActivity {
         e1 = findViewById(R.id.editText_Inventory_name_SI);
         e2 = findViewById(R.id.editText_Inventory_price_SI);
         e3 = findViewById(R.id.editText_Inventory_cost_SI);
+        e4 = findViewById(R.id.editText_Inventory_itemcode_SI);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
         currentDateandTime = sdf.format(new Date());
+
+        //Barcode Scanning
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ScanReader.ACTION_SCAN_RESULT);
+        registerReceiver(resultReceiver, filter);
+
+        scanReader = new ScanReader(this);
+        scanReader.init();
 
         Intent intent = getIntent();
         final String key = intent.getStringExtra("Key");
@@ -90,6 +123,7 @@ public class StockIn_step2 extends AppCompatActivity {
                 String itemName = e1.getText().toString().trim();
                 String price = e2.getText().toString().trim();
                 String cost = e3.getText().toString().trim();
+                String itemcode = e4.getText().toString().trim();
                 databaseReference2 = FirebaseDatabase.getInstance().getReference("House").child(key).push();
                 databaseReference2.keepSynced(true);
                 key2 = databaseReference2.getKey();
@@ -97,13 +131,23 @@ public class StockIn_step2 extends AppCompatActivity {
 
                 totaltype = Long.toString(k);
 
-                if (TextUtils.isEmpty(price)) {
+                if (TextUtils.isEmpty(itemName)) {
                     e1.setError("Required Field...");
                     return;
                 }
 
-                if (TextUtils.isEmpty(cost)) {
+                if (TextUtils.isEmpty(price)) {
                     e2.setError("Required Field...");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(cost)) {
+                    e3.setError("Required Field...");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(itemcode)) {
+                    e4.setText("");
                     return;
                 }
 
@@ -114,16 +158,19 @@ public class StockIn_step2 extends AppCompatActivity {
                 dataMap.put("ItemName", itemName);
                 dataMap.put("Price", price);
                 dataMap.put("Cost", cost);
+                dataMap.put("ItemCode", itemcode);
                 dataMap.put("Quantity", Quantity);
                 dataMap.put("Key", key2);
+                dataMap.put("ItemCode", itemcode);
                 dataMap.put("Date_and_Time", currentDateandTime);
 
                 //Store Data to "New_Goods" at the same time
                 newGoodRef = FirebaseDatabase.getInstance().getReference("New_Goods").child(barcode);
-                newGoodRef.child("Name").setValue(name);
+                newGoodRef.child("Name").setValue(itemName);
                 newGoodRef.child("Price").setValue(price);
                 newGoodRef.child("Cost").setValue(cost);
                 newGoodRef.child("Barcode").setValue(barcode);
+                newGoodRef.child("ItemCode").setValue(itemcode);
 
 
                 databaseReference2.updateChildren(dataMap);
@@ -138,6 +185,7 @@ public class StockIn_step2 extends AppCompatActivity {
                 page.putExtra("Key2", key2);
                 page.putExtra("name", name);
                 page.putExtra("Users", users);
+                page.putExtra("ItemCode", itemcode);
                 startActivity(page);
                 finish();
 

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,9 @@ public class Inventory_List2 extends AppCompatActivity {
     int t_type;
     int sum;
     String sum2;
+    TextView totalrecord;
+    DatabaseReference arightRef;
+    String Switch1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,8 @@ public class Inventory_List2 extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
+        totalrecord = findViewById(R.id.record_IL2);
+
         imageView1 = findViewById(R.id.imageView_back);
         imageView2 = findViewById(R.id.imageView_search);
         imageView2.setVisibility(View.INVISIBLE);
@@ -50,6 +56,8 @@ public class Inventory_List2 extends AppCompatActivity {
         final String name = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
         String users = getIntent().getStringExtra("Users");
+
+        arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
 
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,10 +98,9 @@ public class Inventory_List2 extends AppCompatActivity {
         final String key = intent.getStringExtra("Key");
 
         FirebaseRecyclerOptions<Inventory_class> inventoryAdapter = new FirebaseRecyclerOptions.Builder<Inventory_class>()
-                .setQuery(databaseReference.orderByChild("Barcode").equalTo(barcode), Inventory_class.class)
+                .setQuery(databaseReference.orderByChild("Barcode").startAt(barcode).endAt(barcode+"~"), Inventory_class.class)
                 .setLifecycleOwner(this)
                 .build();
-
         FirebaseRecyclerAdapter<Inventory_class, AllUsersViewHolder> firebaseRecyclerAdapter2 = new FirebaseRecyclerAdapter<Inventory_class, AllUsersViewHolder>(inventoryAdapter) {
             @Override
             protected void onBindViewHolder(@NonNull AllUsersViewHolder viewHolder, @SuppressLint("RecyclerView") int position, @NonNull Inventory_class model) {
@@ -102,55 +109,76 @@ public class Inventory_List2 extends AppCompatActivity {
                 viewHolder.setItemName(model.getItemName());
                 viewHolder.setDate_and_Time(model.getDate_and_Time());
                 viewHolder.setPrice(model.getPrice());
+                viewHolder.setItemCode(model.getItemCode());
+                totalrecord.setText(String.valueOf(getItemCount()));
 
-                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onClick(View v) {
-                        final String key2 = getRef(position).getKey();
-                        CharSequence[] option = new CharSequence[]{
-                                "Spec", "Delete", "Modify"
-                        };
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Switch1 = snapshot.child("SW_EditSpec").getValue().toString().trim();
+                        if(Switch1.equals("On")){
+                            viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    final String key2 = getRef(position).getKey();
+                                    CharSequence[] option = new CharSequence[]{
+                                            "Spec", "Delete", "Modify"
+                                    };
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(Inventory_List2.this);
-                        builder.setTitle("Select Option");
-                        builder.setItems(option, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int position) {
-                                if (position == 0) {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(Inventory_List2.this);
+                                    builder.setTitle("Select Option");
+                                    builder.setItems(option, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int position) {
+                                            if (position == 0) {
 
-                                    Intent intent = new Intent(Inventory_List2.this, Item_Spec.class);
-                                    intent.putExtra("Key", key);
-                                    intent.putExtra("Key2", key2);
-                                    intent.putExtra("name", name);
-                                    intent.putExtra("Barcode", model.getBarcode());
-                                    intent.putExtra("Users", users);
-                                    startActivity(intent);
-                                    finish();
+                                                Intent intent = new Intent(Inventory_List2.this, Item_Spec.class);
+                                                intent.putExtra("Key", key);
+                                                intent.putExtra("Key2", key2);
+                                                intent.putExtra("name", model.getItemName());
+                                                intent.putExtra("Barcode", model.getBarcode());
+                                                intent.putExtra("Users", users);
+                                                startActivity(intent);
+                                                finish();
 
+                                            }
+                                            if (position == 1) {
+                                                Intent intent = new Intent(Inventory_List2.this, Inventory_Delete_Confirm.class);
+                                                intent.putExtra("Key", key);
+                                                intent.putExtra("Key2", key2);
+                                                intent.putExtra("name", model.getItemName());
+                                                intent.putExtra("Users", users);
+                                                startActivity(intent);
+                                            }
+                                            if (position == 2) {
+                                                Intent intent = new Intent(Inventory_List2.this, Inventory_step5.class);
+                                                intent.putExtra("name", model.getItemName());
+                                                intent.putExtra("barcode", model.getBarcode());
+                                                intent.putExtra("Key2", key2);
+                                                intent.putExtra("Key", key);
+                                                intent.putExtra("Users", users);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }
+                                    });
+                                    builder.show();
                                 }
-                                if (position == 1) {
-                                    Intent intent = new Intent(Inventory_List2.this, Inventory_Delete_Confirm.class);
-                                    intent.putExtra("Key", key);
-                                    intent.putExtra("Key2", key2);
-                                    intent.putExtra("name", name);
-                                    intent.putExtra("Users", users);
-                                    startActivity(intent);
-                                }
-                                if (position == 2) {
-                                    Intent intent = new Intent(Inventory_List2.this, Inventory_step5.class);
-                                    intent.putExtra("name", name);
-                                    intent.putExtra("barcode", barcode);
-                                    intent.putExtra("Key2", key2);
-                                    intent.putExtra("Key", key);
-                                    intent.putExtra("Users", users);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            }
-                        });
-                        builder.show();
+                            });
+
+                        } else if (Switch1.equals("Off")) {
+                            Toast.makeText(Inventory_List2.this, "Edit Permission denied", Toast.LENGTH_LONG).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
+
+
             }
 
             @NonNull
@@ -200,6 +228,11 @@ public class Inventory_List2 extends AppCompatActivity {
         public void setPrice(String price) {
             TextView Price = mView.findViewById(R.id.textView_InventoryList_Price);
             Price.setText(price);
+        }
+
+        public void setItemCode(String itemCode){
+            TextView ItemCode = mView.findViewById(R.id.textView_InventoryList_itemCode);
+            ItemCode.setText(itemCode);
         }
 
 

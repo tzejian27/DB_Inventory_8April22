@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="18dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/new_goods"
         android:textColor="@color/blue"
         android:textSize="100px" />
@@ -39,6 +39,26 @@
         android:paddingLeft="20dp" />
 
     <TextView
+        android:id="@+id/txt_new_good_itemcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Item code"
+        android:textColor="@color/blue"
+        android:textSize="50px" />
+
+    <EditText
+        android:id="@+id/editText_new_goods_itemcode"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/blue_border"
+        android:ems="10"
+        android:hint="Scan/Enter Item Code(Optional)"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp" />
+
+    <TextView
         android:id="@+id/txt_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,7 +74,7 @@
         android:layout_marginBottom="50dp"
         android:background="@drawable/blue_border"
         android:ems="10"
-        android:hint="@string/enter_name"
+        android:hint="@string/enter_description"
         android:inputType="textPersonName"
         android:paddingLeft="20dp" />
 

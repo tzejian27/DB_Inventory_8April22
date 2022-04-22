@@ -20,7 +20,7 @@ public class House_New_Goods extends AppCompatActivity {
     //Barcode
     public static String barcode;
     Button b1, b2;
-    EditText e1, e2;
+    EditText e1, e2, e3;
     ScanReader scanReader;
     private String barcodeStr;
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
@@ -29,8 +29,17 @@ public class House_New_Goods extends AppCompatActivity {
             byte[] barcode = intent.getByteArrayExtra(ScanReader.SCAN_RESULT);
             Log.e("MainActivity", "barcode = " + new String(barcode));
             if (barcode != null) {
+                String barcodeScan = e1.getText().toString().trim();
+                String itemCodeScan = e3.getText().toString().trim();
                 barcodeStr = new String(barcode);
-                e1.setText(barcodeStr);
+                if(TextUtils.isEmpty(barcodeScan) && TextUtils.isEmpty(itemCodeScan)){
+                    e1.setText(barcodeStr);
+                }else if(TextUtils.isEmpty(barcodeScan)){
+                    e1.setText(barcodeStr);
+                }else{
+                    e3.setText(barcodeStr);
+                }
+
             }
         }
     };
@@ -44,6 +53,7 @@ public class House_New_Goods extends AppCompatActivity {
 
         e1 = findViewById(R.id.editText_new_goods_barcode);
         e2 = findViewById(R.id.editText_new_goods_name);
+        e3 = findViewById(R.id.editText_new_goods_itemcode);
 
         b1 = findViewById(R.id.btn_new_goods_back);
         b2 = findViewById(R.id.btn_new_goods_next);
@@ -75,6 +85,7 @@ public class House_New_Goods extends AppCompatActivity {
             public void onClick(View v) {
                 String barcode = e1.getText().toString().trim();
                 String name = e2.getText().toString().trim();
+                String itemcode = e3.getText().toString().trim();
 
                 if (TextUtils.isEmpty(barcode)) {
                     e1.setError("Please enter barcode");
@@ -86,6 +97,11 @@ public class House_New_Goods extends AppCompatActivity {
                     return;
                 }
 
+                if (TextUtils.isEmpty(itemcode)) {
+                    e3.setText("");
+                    return;
+                }
+
 
                 if (barcode.isEmpty()) {
                     Toast.makeText(House_New_Goods.this, "Please enter barcode and Good Name", Toast.LENGTH_SHORT).show();
@@ -94,6 +110,7 @@ public class House_New_Goods extends AppCompatActivity {
                     intent.putExtra("barcode", barcode);
                     intent.putExtra("name", name);
                     intent.putExtra("Users", users);
+                    intent.putExtra("ItemCode", itemcode);
                     startActivity(intent);
                     finish();
                 }

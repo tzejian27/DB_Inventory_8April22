@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="@string/input_price"
+        android:text="@string/input_price_rm"
         android:textColor="@color/blue"
         android:textSize="50px" />
 

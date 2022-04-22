@@ -31,6 +31,7 @@ public class House_List_Stock_Out extends AppCompatActivity {
     RecyclerView recyclerView;
     List<House_list_class> postList;
     private final String post_key = "";
+    TextView totalrecord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,8 @@ public class House_List_Stock_Out extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("House");
         databaseReference.keepSynced(true);
+
+        totalrecord = findViewById(R.id.record_SO);
 
         btn_back = findViewById(R.id.imageView_house_back_SO);
         btn_search = findViewById(R.id.imageView_house_search_SO);
@@ -88,6 +91,7 @@ public class House_List_Stock_Out extends AppCompatActivity {
                 holder.Name.setText(model.getName());
                 holder.TotalQty.setText(model.getTotalQty());
                 holder.Total_type.setText(model.getTotalType());
+                totalrecord.setText(String.valueOf(getItemCount()));
 
                 holder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override

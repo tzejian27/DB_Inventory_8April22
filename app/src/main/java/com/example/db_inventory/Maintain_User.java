@@ -223,7 +223,7 @@ public class Maintain_User extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         String users = getIntent().getStringExtra("Users");
-        Intent intent2homepage = new Intent(getApplicationContext(), Home_Page.class);
+        Intent intent2homepage = new Intent(getApplicationContext(), Maintain.class);
         intent2homepage.putExtra("Users", users);
         startActivity(intent2homepage);
     }

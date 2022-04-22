@@ -154,12 +154,12 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/btn_house_setting"
+                    android:id="@+id/btn_new_goods"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:backgroundTint="@color/blue"
-                    android:text="@string/setting"
+                    android:text="@string/new_goods"
                     android:textStyle="bold" />
 
 
@@ -177,7 +177,8 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            android:visibility="invisible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -187,7 +188,6 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/btn_new_goods"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"

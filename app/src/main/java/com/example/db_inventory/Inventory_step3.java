@@ -52,6 +52,7 @@ public class Inventory_step3 extends AppCompatActivity {
         final String key = intent.getStringExtra("Key");
         final String name = intent.getStringExtra("name");
         final String barcode = intent.getStringExtra("barcode");
+        final String itemCode = intent.getStringExtra("ItemCode");
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
 
@@ -80,6 +81,7 @@ public class Inventory_step3 extends AppCompatActivity {
                 intent.putExtra("name", name);
                 intent.putExtra("barcode", barcode);
                 intent.putExtra("Users", users);
+                intent.putExtra("ItemCode", itemCode);
                 startActivity(intent);
                 finish();
             }
@@ -119,14 +121,16 @@ public class Inventory_step3 extends AppCompatActivity {
                 dataMap.put("Cost", cost);
                 dataMap.put("Quantity", Quantity);
                 dataMap.put("Key", key2);
+                dataMap.put("ItemCode", itemCode);
                 dataMap.put("Date_and_Time", currentDateandTime);
 
                 //Store Data to "New_Goods" at the same time
                 newGoodRef = FirebaseDatabase.getInstance().getReference("New_Goods").child(barcode);
-                newGoodRef.child("Name").setValue(name);
+                newGoodRef.child("Name").setValue(itemName);
                 newGoodRef.child("Price").setValue(price);
                 newGoodRef.child("Cost").setValue(cost);
                 newGoodRef.child("Barcode").setValue(barcode);
+                newGoodRef.child("ItemCode").setValue(itemCode);
 
 
                 databaseReference2.updateChildren(dataMap);
@@ -137,7 +141,7 @@ public class Inventory_step3 extends AppCompatActivity {
                 page.putExtra("barcode", barcode);
                 page.putExtra("Key", key);
                 page.putExtra("Key2", key2);
-                page.putExtra("name", name);
+                page.putExtra("name", itemName);
                 page.putExtra("Users", users);
                 startActivity(page);
                 finish();

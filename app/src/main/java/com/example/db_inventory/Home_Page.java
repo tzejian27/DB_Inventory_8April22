@@ -82,9 +82,9 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
             case R.id.btn_maintain_user:
                 //maintain user are only access by the admin
                 if (users != null && users.equals("Admin")) {
-                    Intent intent2MaintainUser = new Intent(Home_Page.this, Maintain_User.class);
-                    intent2MaintainUser.putExtra("Users", users);
-                    startActivity(intent2MaintainUser);
+                    Intent intent2Maintain = new Intent(Home_Page.this, Maintain.class);
+                    intent2Maintain.putExtra("Users", users);
+                    startActivity(intent2Maintain);
                 } else {
                     //when there is not admin role received then show error message where not allowed user to enter
                     Toast.makeText(Home_Page.this, "You are not authorized to execute, Please Login as admin", Toast.LENGTH_LONG).show();

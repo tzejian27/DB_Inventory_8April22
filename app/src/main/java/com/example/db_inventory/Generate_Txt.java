@@ -81,7 +81,7 @@ public class Generate_Txt extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
         currentDateandTime = sdf.format(new Date());
 
-        housefile = new File("/storage/emulated/0/Report/" + "DB Inventory" + currentDateandTime);
+        housefile = new File("/storage/emulated/0/Report/" + "eStock" + currentDateandTime);
 
         if (!housefile.exists()) {
             housefile.mkdirs();

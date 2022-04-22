@@ -261,7 +261,7 @@ public class Inventory extends AppCompatActivity {
                                                 intent.putExtra("Users", users);
                                                 startActivity(intent);
                                             }
-                                            Toast.makeText(Inventory.this, "Data Save", Toast.LENGTH_SHORT).show();
+                                            //Toast.makeText(Inventory.this, "Data Save", Toast.LENGTH_SHORT).show();
                                             finish();
                                         }
 

@@ -49,6 +49,7 @@ public class InventoryList_Adapter extends RecyclerView.Adapter<InventoryList_Ad
         viewHolder.setItemName(model.getItemName());
         viewHolder.setDate_and_Time(model.getDate_and_Time());
         viewHolder.setPrice(model.getPrice());
+        viewHolder.setItemCode(model.getItemCode());
 
         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
 
@@ -147,6 +148,12 @@ public class InventoryList_Adapter extends RecyclerView.Adapter<InventoryList_Ad
             TextView Price = mView.findViewById(R.id.textView_InventoryList_Price);
             Price.setText(price);
         }
+
+        public void setItemCode(String itemCode){
+            TextView ItemCode = mView.findViewById(R.id.textView_InventoryList_itemCode);
+            ItemCode.setText(itemCode);
+        }
+
 
 
     }

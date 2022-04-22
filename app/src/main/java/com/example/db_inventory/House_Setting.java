@@ -18,9 +18,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class House_Setting extends AppCompatActivity {
 
-    android.widget.Switch s1, s2;
+    android.widget.Switch s1, s2, s3;
     String Switch;
     String Switch2;
+    String Switch3;
     Button b1;
     DatabaseReference databaseReference;
 
@@ -31,6 +32,7 @@ public class House_Setting extends AppCompatActivity {
 
         s1 = findViewById(R.id.switch_disable);
         s2 = findViewById(R.id.switch_edit_spec);
+        s3 = findViewById(R.id.switch_allow_negative_qty);
 
         b1 = findViewById(R.id.btn_setting_confirm);
 
@@ -68,6 +70,20 @@ public class House_Setting extends AppCompatActivity {
             }
         });
 
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String Allow_Negative = snapshot.child("Allow_Negative").getValue().toString().trim();
+                    Switch3 = Allow_Negative;
+                    s3.setChecked(!Allow_Negative.equals("Off"));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         s1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -98,6 +114,17 @@ public class House_Setting extends AppCompatActivity {
             }
         });
 
+        s3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(s3.isChecked()){
+                    Switch3="On";
+                }else{
+                    Switch3="Off";
+                }
+            }
+        });
+
         String users = getIntent().getStringExtra("Users");
 
         b1.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +132,8 @@ public class House_Setting extends AppCompatActivity {
             public void onClick(View v) {
                 databaseReference.child("Disable").setValue(Switch).toString().trim();
                 databaseReference.child("NoNeed").setValue(Switch2).toString().trim();
-                Intent page = new Intent(House_Setting.this, MainActivity.class);
+                databaseReference.child("Allow_Negative").setValue(Switch3).toString().trim();
+                Intent page = new Intent(House_Setting.this, Maintain.class);
                 page.putExtra("Users", users);
                 page.putExtra("Switch", Switch);
                 startActivity(page);
@@ -117,7 +145,7 @@ public class House_Setting extends AppCompatActivity {
     public void onBackPressed() {
         String users = getIntent().getStringExtra("Users");
         super.onBackPressed();
-        Intent intent = new Intent(House_Setting.this, MainActivity.class);
+        Intent intent = new Intent(House_Setting.this, Maintain.class);
         intent.putExtra("Users", users);
         startActivity(intent);
         finish();

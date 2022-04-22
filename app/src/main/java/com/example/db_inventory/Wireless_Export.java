@@ -78,7 +78,7 @@ public class Wireless_Export extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
         currentDateandTime2 = sdf.format(new Date());
 
-        housefile = new File("/storage/emulated/0/Report/" + "DB Inventory" + currentDateandTime2);
+        housefile = new File("/storage/emulated/0/Report/" + "eStock" + currentDateandTime2);
 
         if (!housefile.exists()) {
             housefile.mkdirs();

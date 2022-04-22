@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:width="150dp"
-                android:text="@string/name"
+                android:text="House Name"
                 android:textColor="@color/black"
                 android:textSize="23dp" />
 
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:width="150dp"
-                android:text="@string/total_qty"
+                android:text="House Qty"
                 android:textColor="@color/black"
                 android:textSize="23dp" />
 
@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/total_qty1"
+                android:text="@string/house_qty"
                 android:textColor="@color/black"
                 android:textSize="23dp" />
 

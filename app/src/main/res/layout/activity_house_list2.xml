@@ -60,4 +60,24 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/recordlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total record :"/>
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/record_HL2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""/>
+
+    </LinearLayout>
+
 </RelativeLayout>

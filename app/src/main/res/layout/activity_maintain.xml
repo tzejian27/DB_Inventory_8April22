@@ -7,7 +7,7 @@
     android:background="@drawable/bg"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".Home_Page">
+    tools:context=".Maintain">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/menu"
+            android:text="Maintain"
             android:textColor="@color/white"
             android:textSize="40dp" />
     </RelativeLayout>
@@ -53,12 +53,12 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/btn_stock_in"
+                    android:id="@+id/btn_new_house_M"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:background="@color/blue"
-                    android:text="Stock In"
+                    android:text="New House"
                     android:textStyle="bold" />
 
 
@@ -86,12 +86,12 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/btn_stock_out"
+                    android:id="@+id/btn_user_M"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:background="@color/blue"
-                    android:text="Stock out"
+                    android:text="User"
                     android:textStyle="bold" />
 
 
@@ -120,12 +120,12 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/btn_House_intent"
+                    android:id="@+id/btn_setting_M"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:background="@color/blue"
-                    android:text="Stock Take"
+                    android:text="Setting"
                     android:textStyle="bold" />
 
 
@@ -143,7 +143,8 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            android:visibility="invisible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -153,7 +154,6 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/btn_stock_adjustment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
@@ -177,7 +177,8 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            android:visibility="invisible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -187,7 +188,6 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/btn_sales_order"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
@@ -211,7 +211,8 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            android:visibility="invisible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -221,12 +222,11 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/btn_maintain_user"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:background="@color/blue"
-                    android:text="Maintain"
+                    android:text="@string/maintain_user"
                     android:textStyle="bold" />
 
 

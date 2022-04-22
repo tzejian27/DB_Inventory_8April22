@@ -30,6 +30,7 @@ public class StockIn_step3 extends AppCompatActivity {
     String key;
     String key2;
     String barcode;
+    String itemcode;
     String TotalQty;
     String name;
     int sum;
@@ -63,6 +64,7 @@ public class StockIn_step3 extends AppCompatActivity {
         name = intent1.getStringExtra("name");
         key = intent1.getStringExtra("Key");
         key2 = intent1.getStringExtra("Key2");
+        itemcode = intent1.getStringExtra("ItemCode");
 
         e1.setText(barcode);
         e1.setEnabled(false);
@@ -137,6 +139,7 @@ public class StockIn_step3 extends AppCompatActivity {
                 intent.putExtra("Key2", key2);
                 intent.putExtra("name", name);
                 intent.putExtra("Users", users);
+                intent.putExtra("ItemCode", itemcode);
                 startActivity(intent);
                 finish();
             }
@@ -214,8 +217,9 @@ public class StockIn_step3 extends AppCompatActivity {
                             String barcode_ref = barcode + "/";
                             Map dataMap2 = new HashMap();
                             dataMap2.put("Barcode", barcode);
-                            dataMap2.put("Name", ItemName);
+                            dataMap2.put("Name", name);
                             dataMap2.put("QtyIn", qty);
+                            dataMap2.put("ItemCode", itemcode);
                             dataMap2.put("QtyIn_Date", currentDateandTime);
 
                             Map dataMap3 = new HashMap();

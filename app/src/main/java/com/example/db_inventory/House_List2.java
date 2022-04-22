@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,20 +19,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.List;
 
 public class House_List2 extends AppCompatActivity {
 
     DatabaseReference databaseReference;
     RecyclerView recyclerView;
     ImageView imageView1, imageView2;
+    TextView totalrecord;
+
+    DatabaseReference arightRef;
+    String Switch1;
+    String Switch2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_list2);
         setTitle("House List");
+
+        totalrecord = findViewById(R.id.record_HL2);
 
         recyclerView = findViewById(R.id.recyclerView_Inventory_List);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -60,12 +73,13 @@ public class House_List2 extends AppCompatActivity {
         super.onStart();
 
 
+
         Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
         String users = getIntent().getStringExtra("Users");
 
         FirebaseRecyclerOptions<House_list_class> houseAdapter = new FirebaseRecyclerOptions.Builder<House_list_class>()
-                .setQuery(databaseReference.orderByChild("Name").equalTo(name), House_list_class.class)
+                .setQuery(databaseReference.orderByChild("Name").startAt(name).endAt(name+"~"), House_list_class.class)
                 .setLifecycleOwner(this)
                 .build();
 
@@ -75,13 +89,31 @@ public class House_List2 extends AppCompatActivity {
                 holder.setName(model.getName());
                 holder.setTotalQty(model.getTotalQty());
                 holder.setTotalType(model.getTotalType());
+                String houseName=String.valueOf(model.getName());
+                totalrecord.setText(String.valueOf(getItemCount()));
+
+                arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
+                arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Switch1 = snapshot.child("SW_ModifyDelete").getValue().toString().trim();
+                        Switch2 = snapshot.child("SW_DataClear").getValue().toString().trim();
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
 
                 holder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         final String key = getRef(position).getKey();
                         CharSequence[] option = new CharSequence[]{
-                                "Enter", "Modify", "Stock In"
+                                "Enter", "Modify", "Stock In", "Stock Out"
                         };
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(House_List2.this);
@@ -93,25 +125,40 @@ public class House_List2 extends AppCompatActivity {
 
                                     Intent intent = new Intent(House_List2.this, House_Menu.class);
                                     intent.putExtra("Key", key);
-                                    intent.putExtra("name", name);
+                                    intent.putExtra("name", houseName);
                                     intent.putExtra("Users", users);
                                     startActivity(intent);
                                     finish();
 
                                 }
                                 if (position == 1) {
-                                    Intent intent = new Intent(House_List2.this, House_Modify.class);
-                                    intent.putExtra("Key", key);
-                                    intent.putExtra("name", name);
-                                    intent.putExtra("Users", users);
-                                    startActivity(intent);
-                                    finish();
+                                    if(Switch1.equals("On")){
+                                        Intent intent = new Intent(House_List2.this, House_Modify.class);
+                                        intent.putExtra("Key", key);
+                                        intent.putExtra("name", houseName);
+                                        intent.putExtra("Users", users);
+                                        startActivity(intent);
+                                        finish();
+                                    }else if(Switch1.equals("Off")){
+                                        Toast.makeText(getApplicationContext(), "Modify Access Right Off", Toast.LENGTH_LONG).show();
+                                    }
+
                                 }
                                 if (position == 2) {
                                     Intent intent = new Intent(House_List2.this, Stock_In_Scan.class);
                                     intent.putExtra("Key", key);
-                                    intent.putExtra("name", name);
+                                    intent.putExtra("name", houseName);
                                     intent.putExtra("Users", users);
+                                    Toast.makeText(getApplicationContext(), "Enter " + houseName, Toast.LENGTH_SHORT).show();
+                                    startActivity(intent);
+                                }
+
+                                if (position == 3) {
+                                    Intent intent = new Intent(House_List2.this, Stock_Out_Scan.class);
+                                    intent.putExtra("Key", key);
+                                    intent.putExtra("name", houseName);
+                                    intent.putExtra("Users", users);
+                                    Toast.makeText(getApplicationContext(), "Enter " + houseName, Toast.LENGTH_SHORT).show();
                                     startActivity(intent);
                                 }
 
@@ -132,6 +179,9 @@ public class House_List2 extends AppCompatActivity {
 
         recyclerView.setAdapter(firebaseRecyclerAdapter2);
         firebaseRecyclerAdapter2.startListening();
+
+        //totalrecord.setText(String.valueOf(firebaseRecyclerAdapter2.getItemCount()));
+        //totalrecord.setText(String.valueOf(recyclerView.getAdapter().getItemCount()));
     }
 
 
@@ -142,6 +192,7 @@ public class House_List2 extends AppCompatActivity {
             super(itemView);
 
             mView = itemView;
+
 
         }
 
