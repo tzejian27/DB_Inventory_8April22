@@ -19,6 +19,8 @@ public class Delete_House extends AppCompatActivity {
     DatabaseReference databaseReference;
     String key;
 
+    //House deletion
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,8 @@ public class Delete_House extends AppCompatActivity {
 
         String users = getIntent().getStringExtra("Users");
 
+
+        //cancel confirmation of delete action
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +53,7 @@ public class Delete_House extends AppCompatActivity {
             }
         });
 
+        //delete button
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,5 +70,15 @@ public class Delete_House extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        String users = getIntent().getStringExtra("Users");
+        super.onBackPressed();
+        Intent intent = new Intent(Delete_House.this, House_List.class);
+        intent.putExtra("Users", users);
+        startActivity(intent);
+        finish();
     }
 }

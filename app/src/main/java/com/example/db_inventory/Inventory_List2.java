@@ -38,6 +38,7 @@ public class Inventory_List2 extends AppCompatActivity {
     DatabaseReference arightRef;
     String Switch1;
 
+    //Inventory List when search
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

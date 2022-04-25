@@ -27,6 +27,7 @@ public class House_New_House extends AppCompatActivity {
     String TotalQty = "0";
     String TotalType = "0";
 
+    //Adding new house
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

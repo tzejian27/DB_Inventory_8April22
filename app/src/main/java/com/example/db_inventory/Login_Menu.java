@@ -14,6 +14,7 @@ public class Login_Menu extends AppCompatActivity {
     Boolean doubleBackToExitPressedOnce = true;
     Button btn_admin, btn_user;
 
+    //select type of user to login
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

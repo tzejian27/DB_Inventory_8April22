@@ -30,6 +30,7 @@ public class Inventory_step4 extends AppCompatActivity {
 
     DatabaseReference databaseReference;
 
+    //show item detail
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -37,7 +37,7 @@
     <string name="enter_scan_barcode">Enter/Scan Barcode</string>
     <string name="next">Next</string>
     <string name="delete_this_house">Delete this house ?</string>
-    <string name="input_name">Input Name :</string>
+    <string name="input_name">Input Name(Description) :</string>
     <string name="enter_price">Enter price (RM)</string>
     <string name="totalqty">TotalQty :</string>
     <string name="total_quantity">Total qty</string>

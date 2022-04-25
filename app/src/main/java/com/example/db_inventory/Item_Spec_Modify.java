@@ -29,6 +29,7 @@ public class Item_Spec_Modify extends AppCompatActivity {
     String price;
     String cost;
 
+    //Modify item spec
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

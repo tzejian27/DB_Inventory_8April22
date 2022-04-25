@@ -31,7 +31,7 @@ public class Login_user extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_user);
 
-        //This is login for user
+        //This is login page for user
         setTitle("LoginPage (User)");
         txtName = findViewById(R.id.name_login_user);
         txtPw = findViewById(R.id.pass_login_user);

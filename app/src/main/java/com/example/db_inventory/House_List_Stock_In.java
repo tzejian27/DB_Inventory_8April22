@@ -34,6 +34,7 @@ public class House_List_Stock_In extends AppCompatActivity {
     private final String post_key = "";
     TextView totalrecord;
 
+    //Stock in House list
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

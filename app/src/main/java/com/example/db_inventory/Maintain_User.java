@@ -34,7 +34,10 @@ public class Maintain_User extends AppCompatActivity {
     RecyclerView recyclerView_user, recyclerView_admin;
     FirebaseRecyclerAdapter UserAdapter, AdminAdapter;
 
-
+    //Show admin and user list
+    //modify or delete user account
+    //create user account
+    //Modify access right
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

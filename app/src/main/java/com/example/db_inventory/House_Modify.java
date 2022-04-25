@@ -19,6 +19,7 @@ public class House_Modify extends AppCompatActivity {
     DatabaseReference databaseReference;
     String key, name;
 
+    //Modify house name
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -5,6 +5,7 @@ import android.content.Intent;
 
 public class ScanReader {
 
+    //communicate with scan setting
     public static final String ACTION_SCAN_RESULT = "com.action.SCAN_RESULT";
 
     public static final String SCAN_RESULT = "scanContext";

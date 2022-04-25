@@ -33,6 +33,7 @@ public class House_List_Stock_Out extends AppCompatActivity {
     private final String post_key = "";
     TextView totalrecord;
 
+    //Stock Out House list
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

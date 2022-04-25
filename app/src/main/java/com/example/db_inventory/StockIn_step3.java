@@ -40,6 +40,7 @@ public class StockIn_step3 extends AppCompatActivity {
 
     DatabaseReference databaseReference, databaseReference2, stockInRef;
 
+    //Stock in qty in and get the detail display
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

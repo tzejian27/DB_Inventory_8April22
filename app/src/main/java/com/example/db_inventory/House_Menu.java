@@ -74,10 +74,10 @@ public class House_Menu extends AppCompatActivity {
             }
         });
 
+        //Generate Inventory excel
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(House_Menu.this, "Coming Soon!!!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(House_Menu.this, Wireless_Export.class);
                 intent.putExtra("name", t1.getText());
                 intent.putExtra("Key", key);

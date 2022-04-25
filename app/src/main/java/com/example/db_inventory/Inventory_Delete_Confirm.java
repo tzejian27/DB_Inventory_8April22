@@ -32,6 +32,7 @@ public class Inventory_Delete_Confirm extends AppCompatActivity {
     int sum3;
     String sum4;
 
+    //communicate with Inventory_Data_Clear for making data clear confrimation
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

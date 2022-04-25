@@ -22,6 +22,7 @@ public class New_Goods_step2 extends AppCompatActivity {
     Button b1, b2;
     DatabaseReference databaseReference;
 
+    //cost and price for new good
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

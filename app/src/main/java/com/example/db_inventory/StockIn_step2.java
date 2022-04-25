@@ -57,6 +57,7 @@ public class StockIn_step2 extends AppCompatActivity {
         }
     };
 
+    //Stock in item detail
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

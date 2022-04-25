@@ -42,6 +42,7 @@ public class StockOut_step3 extends AppCompatActivity {
 
     DatabaseReference databaseReference, databaseReference2, stockOutRef;
 
+    //Stock out qty out and get the detail display
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

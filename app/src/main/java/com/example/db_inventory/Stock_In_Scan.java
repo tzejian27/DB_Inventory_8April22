@@ -60,6 +60,8 @@ public class Stock_In_Scan extends AppCompatActivity {
         }
     };
 
+    //Scan barcode for stock in
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

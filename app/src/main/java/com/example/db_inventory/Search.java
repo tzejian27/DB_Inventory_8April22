@@ -20,6 +20,8 @@ public class Search extends AppCompatActivity {
     EditText e1;
     ScanReader scanReader;
     private String barcodeStr;
+
+    //setting scanned item to edit text box
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -31,6 +33,7 @@ public class Search extends AppCompatActivity {
             }
         }
     };
+    //searching barcode
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

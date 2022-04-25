@@ -20,6 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
+//old house delete recycle view adapter
+//but "Not more used"
 public class DeleteHouseAdapter extends RecyclerView.Adapter<DeleteHouseAdapter.ViewHolder> {
 
     private final Context mContext;

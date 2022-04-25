@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+//Export data to excel table
 public class Generate_Txt extends AppCompatActivity {
 
     private static final String TAG = "";
@@ -133,6 +134,7 @@ public class Generate_Txt extends AppCompatActivity {
 
     }
 
+    //get new good list data
     private void fetchNewGoods() {
         newGoodRef.orderByChild("Barcode").addValueEventListener(new ValueEventListener() {
             @Override
@@ -168,6 +170,7 @@ public class Generate_Txt extends AppCompatActivity {
         });
     }
 
+    //get house list data
     private void fetchHouse() {
         houseRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -203,6 +206,7 @@ public class Generate_Txt extends AppCompatActivity {
         });
     }
 
+    //creating sheet, column, row of excel
     public void exportNewGoods(List<NewGoods> newGoodsList) {
         HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
 

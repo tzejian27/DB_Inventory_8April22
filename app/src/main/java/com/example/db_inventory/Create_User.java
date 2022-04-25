@@ -60,6 +60,7 @@ public class Create_User extends AppCompatActivity {
 
         String users = getIntent().getStringExtra("Users");
 
+        //create user
         btn_create.setOnClickListener(view -> {
             String username = et_username.getText().toString().trim();
             String pass1 = et_pass1.getText().toString().trim();
@@ -69,6 +70,7 @@ public class Create_User extends AppCompatActivity {
             //Set ref so username will be parent to the data
             String nameRef = username + "/";
 
+            //check data existing when button clicked
             if (username.isEmpty()) {
                 et_username.setError("Username is required");
                 et_username.requestFocus();
@@ -93,6 +95,7 @@ public class Create_User extends AppCompatActivity {
                 et_pass1.requestFocus();
             } else {
                 if (roleSP.equals("admin")) {
+                    //separate the data stored (Admin/User)
                     adminRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {

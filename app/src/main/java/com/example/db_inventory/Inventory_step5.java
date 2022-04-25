@@ -30,6 +30,7 @@ public class Inventory_step5 extends AppCompatActivity {
     String totalQty;
     String name;
 
+    //Modify Inventory qty
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

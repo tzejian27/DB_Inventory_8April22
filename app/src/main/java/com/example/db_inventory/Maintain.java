@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+//maintain page
+//maintain user, setting, add new house
 public class Maintain extends AppCompatActivity implements View.OnClickListener{
 
     Button b1, b2, b3;

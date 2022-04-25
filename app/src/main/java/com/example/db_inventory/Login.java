@@ -31,7 +31,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //This is login for admin
+        //This is login page for admin
         setTitle("LoginPage (Admin)");
         txtName = findViewById(R.id.name_login);
         txtPw = findViewById(R.id.pass_login);

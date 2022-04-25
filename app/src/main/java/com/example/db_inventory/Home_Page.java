@@ -30,6 +30,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
     String Switch2;
     String Switch3;
 
+    //Home page
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -22,6 +22,7 @@ public class Item_Spec extends AppCompatActivity {
     String s1;
     DatabaseReference databaseReference, databaseReference2;
 
+    //Show item spec
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

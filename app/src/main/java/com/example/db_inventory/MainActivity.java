@@ -30,12 +30,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String Switch6;
     String Switch7;
 
+    //Stoke take menu
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //Front page for DB Inventory
 
         //Get root data from firebase as reference
         databaseReference = FirebaseDatabase.getInstance().getReference("House");

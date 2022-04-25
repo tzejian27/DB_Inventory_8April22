@@ -35,6 +35,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
+//Export Inventory list of a house
 public class Wireless_Export extends AppCompatActivity {
 
     private static final String TAG = "";

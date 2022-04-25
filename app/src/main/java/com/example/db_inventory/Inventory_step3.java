@@ -34,6 +34,7 @@ public class Inventory_step3 extends AppCompatActivity {
     String key2;
     String totaltype;
 
+    //Item cost and price for new good added when adding inventory
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

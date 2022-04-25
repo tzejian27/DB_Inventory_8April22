@@ -38,6 +38,8 @@ public class House_List2 extends AppCompatActivity {
     String Switch1;
     String Switch2;
 
+    //HouseList when making search
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

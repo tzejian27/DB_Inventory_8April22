@@ -18,6 +18,8 @@ public class Search_House extends AppCompatActivity {
     String name;
     DatabaseReference databaseReference;
 
+    //text box for search house
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

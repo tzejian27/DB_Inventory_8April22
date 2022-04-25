@@ -8,6 +8,7 @@ public class HouseInventory {
     private String Key;
     private String Barcode, Quantity, ItemName, HouseKey, Price, Cost, Date_and_Time, Key2;
 
+    //doesn't be used
     public HouseInventory() {
     }
 

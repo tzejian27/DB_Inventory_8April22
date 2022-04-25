@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
 
+//No more used
 public class InventoryList_Adapter extends RecyclerView.Adapter<InventoryList_Adapter.MyViewHolder> {
 
     Inventory_List mContext;

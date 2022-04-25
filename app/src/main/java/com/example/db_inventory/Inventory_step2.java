@@ -41,6 +41,7 @@ public class Inventory_step2 extends AppCompatActivity {
         }
     };
 
+    //Define item code and item description to new inventory
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

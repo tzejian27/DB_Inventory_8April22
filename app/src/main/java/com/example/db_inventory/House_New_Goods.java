@@ -23,6 +23,9 @@ public class House_New_Goods extends AppCompatActivity {
     EditText e1, e2, e3;
     ScanReader scanReader;
     private String barcodeStr;
+
+    //give priority the barcode scan to the barcode column
+    //then if the barcode already exist, the scanned data will be given to the item code column
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -44,7 +47,7 @@ public class House_New_Goods extends AppCompatActivity {
         }
     };
 
-
+    //Adding new good
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

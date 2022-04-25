@@ -18,6 +18,7 @@ public class Inventory_Data_Clear extends AppCompatActivity {
     String totaltype;
     int t_type;
 
+    //house clear pages
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

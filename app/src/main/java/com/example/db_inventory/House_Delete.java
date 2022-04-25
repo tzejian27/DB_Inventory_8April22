@@ -31,6 +31,8 @@ public class House_Delete extends AppCompatActivity {
     private List<House_list_class> myDataList;
     private FirebaseAuth mAuth;
 
+    //Not more used
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
