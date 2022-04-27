@@ -60,7 +60,6 @@ public class New_Goods_step2 extends AppCompatActivity {
                 String cost = e2.getText().toString().trim();
 
                 String barcode_ref = barcode + "/";
-                final String key = databaseReference.getKey();
 
                 if (TextUtils.isEmpty(price)) {
                     e1.setError("Required Field...");

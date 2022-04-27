@@ -22,15 +22,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.List;
-
 public class House_List_Stock_Out extends AppCompatActivity {
 
     ImageView btn_back, btn_search;
     DatabaseReference databaseReference;
     RecyclerView recyclerView;
-    List<House_list_class> postList;
-    private final String post_key = "";
     TextView totalrecord;
 
     //Stock Out House list
@@ -56,23 +52,17 @@ public class House_List_Stock_Out extends AppCompatActivity {
 
         String users = getIntent().getStringExtra("Users");
 
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent2home = new Intent(House_List_Stock_Out.this, Home_Page.class);
-                intent2home.putExtra("Users", users);
-                startActivity(intent2home);
-            }
+        btn_back.setOnClickListener(view -> {
+            Intent intent2home = new Intent(House_List_Stock_Out.this, Home_Page.class);
+            intent2home.putExtra("Users", users);
+            startActivity(intent2home);
         });
 
-        btn_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent page = new Intent(House_List_Stock_Out.this, Search_House.class);
-                page.putExtra("Users", users);
-                startActivity(page);
+        btn_search.setOnClickListener(v -> {
+            Intent page = new Intent(House_List_Stock_Out.this, Search_House.class);
+            page.putExtra("Users", users);
+            startActivity(page);
 
-            }
         });
     }
 
@@ -94,32 +84,29 @@ public class House_List_Stock_Out extends AppCompatActivity {
                 holder.Total_type.setText(model.getTotalType());
                 totalrecord.setText(String.valueOf(getItemCount()));
 
-                holder.mView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                holder.mView.setOnClickListener(v -> {
 
-                        final String key = model.getKey();
-                        databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
-                        databaseReference.keepSynced(true);
-                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                final String name = dataSnapshot.child("Name").getValue().toString().trim();
+                    final String key = model.getKey();
+                    databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
+                    databaseReference.keepSynced(true);
+                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            final String name = dataSnapshot.child("Name").getValue().toString().trim();
 
-                                Intent intent = new Intent(getApplicationContext(), Stock_Out_Scan.class);
-                                intent.putExtra("Key", key);
-                                intent.putExtra("name", name);
-                                intent.putExtra("Users", users);
-                                Toast.makeText(getApplicationContext(), "Enter " + name, Toast.LENGTH_SHORT).show();
-                                startActivity(intent);
-                            }
+                            Intent intent = new Intent(getApplicationContext(), Stock_Out_Scan.class);
+                            intent.putExtra("Key", key);
+                            intent.putExtra("name", name);
+                            intent.putExtra("Users", users);
+                            Toast.makeText(getApplicationContext(), "Enter " + name, Toast.LENGTH_SHORT).show();
+                            startActivity(intent);
+                        }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            }
-                        });
-                    }
+                        }
+                    });
                 });
             }
 
@@ -127,7 +114,7 @@ public class House_List_Stock_Out extends AppCompatActivity {
             @Override
             public House_List_Stock_Out.HouseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.house_list_item, parent, false);
-                return new House_List_Stock_Out.HouseViewHolder(view);
+                return new HouseViewHolder(view);
             }
         };
 
@@ -147,7 +134,7 @@ public class House_List_Stock_Out extends AppCompatActivity {
 
     }
 
-    public class HouseViewHolder extends RecyclerView.ViewHolder {
+    public static class HouseViewHolder extends RecyclerView.ViewHolder {
         View mView;
         TextView Name;
         TextView Total_type;

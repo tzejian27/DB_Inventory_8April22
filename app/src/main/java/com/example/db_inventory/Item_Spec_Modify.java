@@ -22,9 +22,8 @@ public class Item_Spec_Modify extends AppCompatActivity {
     TextView t1;
     EditText e1, e2, e3;
     Button b1, b2;
-    DatabaseReference databaseReference, databaseReference2, databaseReference3;
+    DatabaseReference databaseReference, databaseReference2;
     String barcode;
-    String s1;
     String itemName;
     String price;
     String cost;

@@ -2,6 +2,7 @@ package com.example.db_inventory;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,14 +10,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DatabaseReference;
-
 public class Search_House extends AppCompatActivity {
 
     EditText e1;
     Button b1, b2;
     String name;
-    DatabaseReference databaseReference;
 
     //text box for search house
 
@@ -46,14 +44,19 @@ public class Search_House extends AppCompatActivity {
             public void onClick(View v) {
                 name = e1.getText().toString().trim();
 
-                if (name == null) {
-                    Toast.makeText(Search_House.this, "Error ....", Toast.LENGTH_SHORT).show();
-                } else {
+                if (TextUtils.isEmpty(name)){
+                    e1.setError("Empty Filled");
+                    return;
+                }
+
+                if (name != null) {
                     Intent page = new Intent(Search_House.this, House_List2.class);
                     page.putExtra("name", name);
                     page.putExtra("Users", users);
                     startActivity(page);
                     finish();
+                } else {
+                    Toast.makeText(Search_House.this, "Error ....", Toast.LENGTH_SHORT).show();
                 }
             }
         });

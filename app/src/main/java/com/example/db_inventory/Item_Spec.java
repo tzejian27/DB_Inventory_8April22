@@ -19,8 +19,7 @@ public class Item_Spec extends AppCompatActivity {
 
     TextView t1, t2;
     Button b1, b2;
-    String s1;
-    DatabaseReference databaseReference, databaseReference2;
+    DatabaseReference databaseReference;
 
     //Show item spec
     @Override

@@ -42,7 +42,6 @@ public class Stock_In_Scan extends AppCompatActivity {
     String Cost;
     String name;
     String key;
-    String key2;
     String totaltype;
     long k;
     String inventory_key;

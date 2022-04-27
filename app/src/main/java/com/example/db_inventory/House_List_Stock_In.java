@@ -22,17 +22,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.List;
+import java.util.Objects;
 
 public class House_List_Stock_In extends AppCompatActivity {
 
     ImageView btn_back, btn_search;
     DatabaseReference databaseReference;
     RecyclerView recyclerView;
-    //com.example.db_inventory.HouseList_SI_Adapter HouseList_SI_Adapter;
-    List<House_list_class> postList;
-    private final String post_key = "";
-    TextView totalrecord;
+    TextView totalRecord;
 
     //Stock in House list
     @Override
@@ -50,30 +47,24 @@ public class House_List_Stock_In extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("House");
         databaseReference.keepSynced(true);
 
-        totalrecord = findViewById(R.id.record_SI);
+        totalRecord = findViewById(R.id.record_SI);
 
         btn_back = findViewById(R.id.imageView_house_back_SI);
         btn_search = findViewById(R.id.imageView_house_search_SI);
 
         String users = getIntent().getStringExtra("Users");
 
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent2home = new Intent(House_List_Stock_In.this, Home_Page.class);
-                intent2home.putExtra("Users", users);
-                startActivity(intent2home);
-            }
+        btn_back.setOnClickListener(view -> {
+            Intent intent2home = new Intent(House_List_Stock_In.this, Home_Page.class);
+            intent2home.putExtra("Users", users);
+            startActivity(intent2home);
         });
 
-        btn_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent page = new Intent(House_List_Stock_In.this, Search_House.class);
-                page.putExtra("Users", users);
-                startActivity(page);
+        btn_search.setOnClickListener(v -> {
+            Intent page = new Intent(House_List_Stock_In.this, Search_House.class);
+            page.putExtra("Users", users);
+            startActivity(page);
 
-            }
         });
     }
 
@@ -93,35 +84,32 @@ public class House_List_Stock_In extends AppCompatActivity {
                 holder.Name.setText(model.getName());
                 holder.TotalQty.setText(model.getTotalQty());
                 holder.Total_type.setText(model.getTotalType());
-                totalrecord.setText(String.valueOf(getItemCount()));
+                totalRecord.setText(String.valueOf(getItemCount()));
 
 
-                holder.mView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                holder.mView.setOnClickListener(v -> {
 
-                        final String key = model.getKey();
-                        databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
-                        databaseReference.keepSynced(true);
-                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                final String name = dataSnapshot.child("Name").getValue().toString().trim();
+                    final String key = model.getKey();
+                    databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
+                    databaseReference.keepSynced(true);
+                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            final String name = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString().trim();
 
-                                Intent intent = new Intent(getApplicationContext(), Stock_In_Scan.class);
-                                intent.putExtra("Key", key);
-                                intent.putExtra("name", name);
-                                intent.putExtra("Users", users);
-                                Toast.makeText(getApplicationContext(), "Enter " + name, Toast.LENGTH_SHORT).show();
-                                startActivity(intent);
-                            }
+                            Intent intent = new Intent(getApplicationContext(), Stock_In_Scan.class);
+                            intent.putExtra("Key", key);
+                            intent.putExtra("name", name);
+                            intent.putExtra("Users", users);
+                            Toast.makeText(getApplicationContext(), "Enter " + name, Toast.LENGTH_SHORT).show();
+                            startActivity(intent);
+                        }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            }
-                        });
-                    }
+                        }
+                    });
                 });
             }
 
@@ -149,7 +137,7 @@ public class House_List_Stock_In extends AppCompatActivity {
 
     }
 
-    public class HouseViewHolder extends RecyclerView.ViewHolder {
+    public static class HouseViewHolder extends RecyclerView.ViewHolder {
         View mView;
         TextView Name;
         TextView Total_type;

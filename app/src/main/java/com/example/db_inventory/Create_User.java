@@ -96,6 +96,7 @@ public class Create_User extends AppCompatActivity {
             } else {
                 if (roleSP.equals("admin")) {
                     //separate the data stored (Admin/User)
+                    //Admin account
                     adminRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -129,6 +130,7 @@ public class Create_User extends AppCompatActivity {
                     });
 
                 } else if (roleSP.equals("user")) {
+                    //User account
                     usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {

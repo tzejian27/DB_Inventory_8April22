@@ -3,6 +3,7 @@ package com.example.db_inventory;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -15,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +36,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 //Export Inventory list of a house
@@ -47,10 +52,15 @@ public class Wireless_Export extends AppCompatActivity {
     private static HSSFCell hssfCell;
     Button Export;
     TextView n1, k1;
+    TextView stockTake_no;
     DatabaseReference houseRef;
+    DatabaseReference stockTakeRef;
     List<HouseInventory> houseInventoryList;
     String currentDateandTime2;
     private File housefile;
+    FirebaseUser user;
+    DatabaseReference userRef;
+
 
     private static boolean isExternalStorageReadOnly() {
         String externalStorageState = Environment.getExternalStorageState();
@@ -70,17 +80,33 @@ public class Wireless_Export extends AppCompatActivity {
         Export = findViewById(R.id.button_export_inventory);
         n1 = findViewById(R.id.name_export2);
         k1 = findViewById(R.id.key1_export2);
+        stockTake_no = findViewById(R.id.stock_take_num);
 
         Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
+
         houseRef = FirebaseDatabase.getInstance().getReference("House").child(key);
+        stockTakeRef = FirebaseDatabase.getInstance().getReference("StockTakeRecord");
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        final DBHandler dbHandler = new DBHandler(this);
+        Cursor cursor = dbHandler.fetch();
+        cursor.moveToLast();
+        final TextView userName = findViewById(R.id.stock_take_username);
+        userName.setText(cursor.getString(1));
+
+
         houseRef.keepSynced(true);
 
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
         currentDateandTime2 = sdf.format(new Date());
 
+        stockTake_no.setText("StockTake_" + name + "_" + currentDateandTime2);
+
         housefile = new File("/storage/emulated/0/Report/" + "eStock" + currentDateandTime2);
+
 
         if (!housefile.exists()) {
             housefile.mkdirs();
@@ -95,14 +121,15 @@ public class Wireless_Export extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
-        n1.setText("House Name: " + name);
-        k1.setText("House Key: " + key);
+        n1.setText(name);
+        k1.setText(key);
 
         Export.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
                     exportExcel(houseInventoryList);
+                    ExportStockTake();
                     Toast.makeText(Wireless_Export.this, "Generating House and Inventory List", Toast.LENGTH_SHORT).show();
 
                 } catch (DocumentFormatException e) {
@@ -114,39 +141,67 @@ public class Wireless_Export extends AppCompatActivity {
 
     }
 
-    private void FetchAll() {
+    //export Stock take to firebase
+    private void ExportStockTake(){
+        Intent intent = getIntent();
+        final String nameFile = intent.getStringExtra("name");
+        final String key = intent.getStringExtra("Key");
 
-        DatabaseReference houseRef2 = FirebaseDatabase.getInstance().getReference("House");
-        ValueEventListener eventListener = new ValueEventListener() {
+        final DBHandler dbHandler = new DBHandler(this);
+        Cursor cursor = dbHandler.fetch();
+        cursor.moveToLast();
+        final TextView userName = findViewById(R.id.stock_take_username);
+        userName.setText(cursor.getString(1));
+
+        String username1 = userName.getText().toString().trim();
+
+        //Save stock take record
+        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+        currentDateandTime2 = sdf.format(new Date());
+        //set default status
+        String status = "Pending";
+
+        houseRef.orderByChild("HouseKey").equalTo(key).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    //creating an object and setting to display
-                    HouseInventory houses = new HouseInventory();
-                    houses.setBarcode(snapshot.child("Barcode").getValue().toString());
-                    houses.setQuantity(snapshot.child("Quantity").getValue().toString());
-                    houses.setItemName(snapshot.child("ItemName").getValue().toString());
-                    houses.setHouseKey(snapshot.child("HouseKey").getValue().toString());
-                    houses.setPrice(snapshot.child("Price").getValue().toString());
-                    houses.setCost(snapshot.child("Cost").getValue().toString());
-                    houses.setDate_and_Time(snapshot.child("Date_and_Time").getValue().toString());
-                    houses.setKey2(snapshot.child("Key").getValue().toString());
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                    Log.d("House", "HouseKey: " + houses.getHouseKey());
+                    String ST_Barcode = snapshot.child("Barcode").getValue().toString();
+                    String ST_Qty= snapshot.child("Quantity").getValue().toString();
+                    String ST_ItemName = snapshot.child("ItemName").getValue().toString();
+                    String ST_Price= snapshot.child("Price").getValue().toString();
+                    String ST_Cost = snapshot.child("Cost").getValue().toString();
+                    String ST_HouseKey= snapshot.child("HouseKey").getValue().toString();
+                    String ST_Date_and_Time = snapshot.child("Date_and_Time").getValue().toString();
 
-                    /* The error before was cause by giving incorrect data type
-                    You were adding an object of type House yet the arraylist expects obejct of type DisabledUsers
-                     */
-                    houseInventoryList.add(houses);
+                    stockTake_no.setText("StockTake_" + nameFile + "_" + currentDateandTime2);
+                    String recordName = stockTake_no.getText().toString().trim();
+                    Map dataMap = new HashMap();
+                    dataMap.put("Barcode", ST_Barcode);
+                    dataMap.put("Qty", ST_Qty);
+                    dataMap.put("ItemName", ST_ItemName);
+                    dataMap.put("Price", ST_Price);
+                    dataMap.put("Cost", ST_Cost);
+                    dataMap.put("HouseKey", ST_HouseKey);
+                    dataMap.put("DateAndTime", ST_Date_and_Time);
+                    dataMap.put("Status", status);
+                    dataMap.put("StorageLocation", nameFile);
+                    dataMap.put("Username", username1);
+
+                    stockTakeRef.child(recordName).child(snapshot.child("Barcode").getValue().toString()).updateChildren(dataMap);
+
                 }
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        };
-        houseRef2.addListenerForSingleValueEvent(eventListener);
+        });
+
+
+
     }
 
     private void fetchHouseInventory() {
@@ -167,6 +222,37 @@ public class Wireless_Export extends AppCompatActivity {
                     houses.setCost(snapshot.child("Cost").getValue().toString());
                     houses.setDate_and_Time(snapshot.child("Date_and_Time").getValue().toString());
                     houses.setKey2(snapshot.child("Key").getValue().toString());
+
+                    //Save stock take record
+                    SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+                    currentDateandTime2 = sdf.format(new Date());
+
+                    Intent intent = getIntent();
+                    final String name = intent.getStringExtra("name");
+                    String status = "Pending";
+
+                    /*String ST_Barcode = snapshot.child("Barcode").getValue().toString();
+                    String ST_Qty= snapshot.child("Quantity").getValue().toString();
+                    String ST_ItemName = snapshot.child("ItemName").getValue().toString();
+                    String ST_Price= snapshot.child("Price").getValue().toString();
+                    String ST_Cost = snapshot.child("Cost").getValue().toString();
+                    String ST_HouseKey= snapshot.child("HouseKey").getValue().toString();
+                    String ST_Date_and_Time = snapshot.child("Date_and_Time").getValue().toString();*/
+
+                    /*stockTake_no.setText("StockTake_" + name + "_" + currentDateandTime2);
+                    String recordName = stockTake_no.getText().toString().trim();
+                    Map dataMap = new HashMap();
+                    dataMap.put("Barcode", snapshot.child("Barcode").getValue().toString());
+                    dataMap.put("Qty", snapshot.child("Quantity").getValue().toString());
+                    dataMap.put("ItemName", snapshot.child("ItemName").getValue().toString());
+                    dataMap.put("Price", snapshot.child("Price").getValue().toString());
+                    dataMap.put("Cost", snapshot.child("Cost").getValue().toString());
+                    dataMap.put("HouseKey", snapshot.child("HouseKey").getValue().toString());
+                    dataMap.put("DateAndTime", snapshot.child("Date_and_Time").getValue().toString());
+                    dataMap.put("Status", status);
+                    dataMap.put("StorageLocation", name);
+
+                    stockTakeRef.child(recordName).child(snapshot.child("Barcode").getValue().toString()).updateChildren(dataMap);*/
 
                     Log.d("House", "HouseKey: " + houses.getHouseKey());
 
@@ -253,8 +339,8 @@ public class Wireless_Export extends AppCompatActivity {
             hssfCell = rowData.createCell(7);
             hssfCell.setCellValue(this.houseInventoryList.get(i).getKey2());
 
-
         }
+
 
         String users = getIntent().getStringExtra("Users");
 
@@ -266,7 +352,7 @@ public class Wireless_Export extends AppCompatActivity {
         currentDateandTime2 = sdf.format(new Date());
 
 
-        filePath = new File(housefile, "HouseInventoryList_" + nameFile + "_" + currentDateandTime2 + ".xls");
+        filePath = new File(housefile, "StockTake" + nameFile + "_" + currentDateandTime2 + ".xls");
         FileOutputStream fileOutputStream = null;
 
         boolean isSuccess;

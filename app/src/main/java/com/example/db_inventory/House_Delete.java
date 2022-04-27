@@ -23,14 +23,14 @@ import java.util.List;
 public class House_Delete extends AppCompatActivity {
 
     ImageView btn_back, btn_search;
-    DatabaseReference databaseReference;
 
     private RecyclerView recyclerView_delete;
     private DatabaseReference mHouseDatabase;
     private DeleteHouseAdapter deleteHouseAdapter;
     private List<House_list_class> myDataList;
-    private FirebaseAuth mAuth;
 
+    //Not more used
+    //Not more used
     //Not more used
 
 
@@ -39,7 +39,7 @@ public class House_Delete extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_delete);
 
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mHouseDatabase = FirebaseDatabase.getInstance().getReference("House");
         mHouseDatabase.keepSynced(true);
 

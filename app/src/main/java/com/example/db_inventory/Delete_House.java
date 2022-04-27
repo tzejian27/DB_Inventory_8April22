@@ -53,7 +53,7 @@ public class Delete_House extends AppCompatActivity {
             }
         });
 
-        //delete button
+        //delete button enter
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

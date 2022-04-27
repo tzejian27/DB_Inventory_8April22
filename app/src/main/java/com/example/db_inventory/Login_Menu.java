@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 public class Login_Menu extends AppCompatActivity {
-    Boolean doubleBackToExitPressedOnce = true;
     Button btn_admin, btn_user;
 
     //select type of user to login
@@ -65,17 +64,5 @@ public class Login_Menu extends AppCompatActivity {
                 });
 
         builder.show();
-
-        /*Intent intent=new Intent(Login_Menu.this, Login_Menu.class);
-        startActivity(intent);
-        finish();*/
-
-        /*if(doubleBackToExitPressedOnce){
-            // Do what ever you want
-            doubleBackToExitPressedOnce = false;
-        } else{
-            // Do exit app or back press here
-            super.onBackPressed();
-        }*/
     }
 }

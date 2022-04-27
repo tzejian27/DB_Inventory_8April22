@@ -8,21 +8,106 @@
     android:orientation="vertical"
     tools:context=".Wireless_Export">
 
-    <TextView
-        android:id="@+id/name_export2"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="@string/name" />
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
 
-    <TextView
-        android:id="@+id/key1_export2"
-        android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="House Name:"
+            android:layout_weight="1"
+            android:textColor="@color/black"/>
+
+
+        <TextView
+            android:id="@+id/name_export2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="House Name"
+            android:layout_weight="2"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="House Key:"
+            android:layout_weight="1"
+            android:textColor="@color/black"/>
+
+
+        <TextView
+            android:id="@+id/key1_export2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="House Key"
+            android:layout_weight="2"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Stock Take Number:"
+            android:layout_weight="1"
+            android:textColor="@color/black"/>
+
+
+        <TextView
+            android:id="@+id/stock_take_num"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Stock Take Number"
+            android:layout_weight="2"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginTop="20dp"
-        android:text="@string/key1" />
+        android:layout_marginBottom="40dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Username:"
+            android:layout_weight="1"
+            android:textColor="@color/black"/>
+
+
+        <TextView
+            android:id="@+id/stock_take_username"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Username"
+            android:layout_weight="2"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_export_inventory"
@@ -33,7 +118,7 @@
         android:layout_margin="8dp"
         android:backgroundTint="@color/blue"
         android:padding="8dp"
-        android:text="@string/generate_inventory_excel"
+        android:text="Export Stock Take"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="14sp" />

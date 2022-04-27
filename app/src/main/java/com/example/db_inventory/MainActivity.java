@@ -23,12 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     DatabaseReference arightRef;
     String Switch1;
-    String Switch2;
     String Switch3;
-    String Switch4;
-    String Switch5;
-    String Switch6;
-    String Switch7;
 
     //Stoke take menu
     @Override

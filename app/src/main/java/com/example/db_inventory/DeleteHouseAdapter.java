@@ -48,7 +48,7 @@ public class DeleteHouseAdapter extends RecyclerView.Adapter<DeleteHouseAdapter.
     @Override
     public void onBindViewHolder(@NonNull DeleteHouseAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final House_list_class data = myDataList.get(position);
-
+        //Show data
         holder.Name.setText(myDataList.get(position).getName());
         holder.TotalQty.setText(myDataList.get(position).getTotalQty());
         holder.Total_type.setText(myDataList.get(position).getTotalType());

@@ -26,6 +26,7 @@ public class House_New_Goods extends AppCompatActivity {
 
     //give priority the barcode scan to the barcode column
     //then if the barcode already exist, the scanned data will be given to the item code column
+
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -73,6 +74,7 @@ public class House_New_Goods extends AppCompatActivity {
         String users = getIntent().getStringExtra("Users");
 
 
+        //back button
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +85,7 @@ public class House_New_Goods extends AppCompatActivity {
             }
         });
 
+        //Intent to add new goods step 2
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +110,7 @@ public class House_New_Goods extends AppCompatActivity {
 
 
                 if (barcode.isEmpty()) {
-                    Toast.makeText(House_New_Goods.this, "Please enter barcode and Good Name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(House_New_Goods.this, "Please enter barcode", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(House_New_Goods.this, New_Goods_step2.class);
                     intent.putExtra("barcode", barcode);

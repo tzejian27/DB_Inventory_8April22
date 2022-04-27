@@ -22,9 +22,7 @@ public class House_Menu extends AppCompatActivity {
     TextView t1;
 
     DatabaseReference arightRef;
-    String Switch1;
     String Switch2;
-    String Switch3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +38,7 @@ public class House_Menu extends AppCompatActivity {
 
         b1 = findViewById(R.id.btn_inventory);
         b2 = findViewById(R.id.btn_inventory_list);
-        b3 = findViewById(R.id.btn_wireless_export);
+        b3 = findViewById(R.id.btn_export_inventory_HM);
         b4 = findViewById(R.id.btn_data_clear);
         b5 = findViewById(R.id.btn_House_Menu_Back);
         b6 = findViewById(R.id.btn_export_Inventory);
@@ -49,7 +47,7 @@ public class House_Menu extends AppCompatActivity {
         String users = getIntent().getStringExtra("Users");
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
 
-
+        //add inventory
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +60,7 @@ public class House_Menu extends AppCompatActivity {
             }
         });
 
+        //inventory list
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +86,7 @@ public class House_Menu extends AppCompatActivity {
             }
         });
 
+        //Data Clear
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,6 +115,7 @@ public class House_Menu extends AppCompatActivity {
             }
         });
 
+        //back button
         b5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,16 +124,11 @@ public class House_Menu extends AppCompatActivity {
             }
         });
 
+        //no been used
         b6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(House_Menu.this, "View At Inventory List!!!", Toast.LENGTH_SHORT).show();
-
-                /*Intent intent = new Intent(House_Menu.this,Generate_Inventory.class);
-                intent.putExtra("name", t1.getText());
-                intent.putExtra("Key",key);
-                startActivity(intent);
-                finish();*/
             }
         });
     }

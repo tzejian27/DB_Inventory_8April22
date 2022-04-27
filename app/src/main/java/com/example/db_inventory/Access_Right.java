@@ -59,7 +59,7 @@ public class Access_Right extends AppCompatActivity {
 
         //btn_confirm=findViewById(R.id.btn_access_right_confirm);
 
-        //setting the new add switch status to database
+        //set the new add switch status to database
         sw_new_house.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

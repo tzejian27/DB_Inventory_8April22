@@ -2,7 +2,6 @@ package com.example.db_inventory;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,8 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.List;
 
 public class House_List2 extends AppCompatActivity {
 
@@ -56,15 +53,7 @@ public class House_List2 extends AppCompatActivity {
         imageView2 = findViewById(R.id.imageView_search);
         imageView2.setVisibility(View.INVISIBLE);
 
-        Intent intent = getIntent();
-        final String name = intent.getStringExtra("name");
-
-        imageView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        imageView1.setOnClickListener(v -> finish());
 
         databaseReference = FirebaseDatabase.getInstance().getReference("House");
         databaseReference.keepSynced(true);
@@ -80,6 +69,7 @@ public class House_List2 extends AppCompatActivity {
         final String name = intent.getStringExtra("name");
         String users = getIntent().getStringExtra("Users");
 
+        //Search for house name start with "Name"
         FirebaseRecyclerOptions<House_list_class> houseAdapter = new FirebaseRecyclerOptions.Builder<House_list_class>()
                 .setQuery(databaseReference.orderByChild("Name").startAt(name).endAt(name+"~"), House_list_class.class)
                 .setLifecycleOwner(this)
@@ -110,64 +100,60 @@ public class House_List2 extends AppCompatActivity {
                 });
 
 
-                holder.mView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        final String key = getRef(position).getKey();
-                        CharSequence[] option = new CharSequence[]{
-                                "Enter", "Modify", "Stock In", "Stock Out"
-                        };
+                holder.mView.setOnClickListener(v -> {
+                    final String key = getRef(position).getKey();
+                    CharSequence[] option = new CharSequence[]{
+                            "Enter", "Modify", "Stock In", "Stock Out"
+                    };
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(House_List2.this);
-                        builder.setTitle("Select Option");
-                        builder.setItems(option, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int position) {
-                                if (position == 0) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(House_List2.this);
+                    builder.setTitle("Select Option");
+                    builder.setItems(option, (dialog, position1) -> {
+                        //Enter house
+                        if (position1 == 0) {
+                            Intent intent1 = new Intent(House_List2.this, House_Menu.class);
+                            intent1.putExtra("Key", key);
+                            intent1.putExtra("name", houseName);
+                            intent1.putExtra("Users", users);
+                            startActivity(intent1);
+                            finish();
 
-                                    Intent intent = new Intent(House_List2.this, House_Menu.class);
-                                    intent.putExtra("Key", key);
-                                    intent.putExtra("name", houseName);
-                                    intent.putExtra("Users", users);
-                                    startActivity(intent);
-                                    finish();
-
-                                }
-                                if (position == 1) {
-                                    if(Switch1.equals("On")){
-                                        Intent intent = new Intent(House_List2.this, House_Modify.class);
-                                        intent.putExtra("Key", key);
-                                        intent.putExtra("name", houseName);
-                                        intent.putExtra("Users", users);
-                                        startActivity(intent);
-                                        finish();
-                                    }else if(Switch1.equals("Off")){
-                                        Toast.makeText(getApplicationContext(), "Modify Access Right Off", Toast.LENGTH_LONG).show();
-                                    }
-
-                                }
-                                if (position == 2) {
-                                    Intent intent = new Intent(House_List2.this, Stock_In_Scan.class);
-                                    intent.putExtra("Key", key);
-                                    intent.putExtra("name", houseName);
-                                    intent.putExtra("Users", users);
-                                    Toast.makeText(getApplicationContext(), "Enter " + houseName, Toast.LENGTH_SHORT).show();
-                                    startActivity(intent);
-                                }
-
-                                if (position == 3) {
-                                    Intent intent = new Intent(House_List2.this, Stock_Out_Scan.class);
-                                    intent.putExtra("Key", key);
-                                    intent.putExtra("name", houseName);
-                                    intent.putExtra("Users", users);
-                                    Toast.makeText(getApplicationContext(), "Enter " + houseName, Toast.LENGTH_SHORT).show();
-                                    startActivity(intent);
-                                }
-
+                        }
+                        //Enter Modify House Name
+                        if (position1 == 1) {
+                            if(Switch1.equals("On")){
+                                Intent intent1 = new Intent(House_List2.this, House_Modify.class);
+                                intent1.putExtra("Key", key);
+                                intent1.putExtra("name", houseName);
+                                intent1.putExtra("Users", users);
+                                startActivity(intent1);
+                                finish();
+                            }else if(Switch1.equals("Off")){
+                                Toast.makeText(getApplicationContext(), "Modify Access Right Off", Toast.LENGTH_LONG).show();
                             }
-                        });
-                        builder.show();
-                    }
+
+                        }
+                        //Enter Stock In
+                        if (position1 == 2) {
+                            Intent intent1 = new Intent(House_List2.this, Stock_In_Scan.class);
+                            intent1.putExtra("Key", key);
+                            intent1.putExtra("name", houseName);
+                            intent1.putExtra("Users", users);
+                            Toast.makeText(getApplicationContext(), "Enter " + houseName, Toast.LENGTH_SHORT).show();
+                            startActivity(intent1);
+                        }
+                        //Enter Stock Out
+                        if (position1 == 3) {
+                            Intent intent1 = new Intent(House_List2.this, Stock_Out_Scan.class);
+                            intent1.putExtra("Key", key);
+                            intent1.putExtra("name", houseName);
+                            intent1.putExtra("Users", users);
+                            Toast.makeText(getApplicationContext(), "Enter " + houseName, Toast.LENGTH_SHORT).show();
+                            startActivity(intent1);
+                        }
+
+                    });
+                    builder.show();
                 });
             }
 
@@ -181,9 +167,6 @@ public class House_List2 extends AppCompatActivity {
 
         recyclerView.setAdapter(firebaseRecyclerAdapter2);
         firebaseRecyclerAdapter2.startListening();
-
-        //totalrecord.setText(String.valueOf(firebaseRecyclerAdapter2.getItemCount()));
-        //totalrecord.setText(String.valueOf(recyclerView.getAdapter().getItemCount()));
     }
 
 
@@ -194,8 +177,6 @@ public class House_List2 extends AppCompatActivity {
             super(itemView);
 
             mView = itemView;
-
-
         }
 
         public void setName(String name) {

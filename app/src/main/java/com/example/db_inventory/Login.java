@@ -25,6 +25,7 @@ public class Login extends AppCompatActivity {
     EditText txtName, txtPw;
     DatabaseReference LoginRef;
     private ProgressBar progressbar_main;
+    private DBHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,10 @@ public class Login extends AppCompatActivity {
         btnLogin = findViewById(R.id.btn_login);
 
         progressbar_main = findViewById(R.id.progressbar_main);
+
+        // creating a new dbhandler class
+        // and passing our context to it.
+        dbHandler = new DBHandler(getApplicationContext());
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +98,14 @@ public class Login extends AppCompatActivity {
                         intent.putExtra(Username, username);
                         intent.putExtra("Users", users);
                         intent.putExtra("Role", "admin");
+
+                        //Save user info to db
+                        String userName = txtName.getText().toString();
+                        String userRole = users;
+                        dbHandler.addUserInfo(userName, userRole);
+
+
+
                         startActivity(intent);
                         finish();
                         txtName.setText("");

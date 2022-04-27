@@ -12,8 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.DatabaseReference;
-
 import java.util.List;
 
 //No more used
@@ -21,7 +19,6 @@ public class InventoryList_Adapter extends RecyclerView.Adapter<InventoryList_Ad
 
     Inventory_List mContext;
     List<Inventory_class> mData;
-    DatabaseReference databaseReference;
 
 
     public InventoryList_Adapter(Inventory_List mContext, List<Inventory_class> mData) {

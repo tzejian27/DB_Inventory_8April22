@@ -31,7 +31,6 @@ public class StockIn_step2 extends AppCompatActivity {
     Button b1, b2;
     EditText e1, e2, e3, e4;
     DatabaseReference databaseReference, databaseReference2, newGoodRef;
-    int TotalQty = 0;
     String Quantity = "0";
     long maxid = 0;
     long k;
@@ -43,6 +42,7 @@ public class StockIn_step2 extends AppCompatActivity {
     private String itemCodeStr;
     public static String itemcode;
 
+    //set scan input to edit text
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

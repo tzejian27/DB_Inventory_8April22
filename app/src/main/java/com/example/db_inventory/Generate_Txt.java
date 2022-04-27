@@ -52,10 +52,10 @@ public class Generate_Txt extends AppCompatActivity {
     List<NewGoods> newGoodsList;
     Button btn_excel_export, btn_excel_newGoods;
     String currentDateandTime;
-    String currentDateandTime2;
     private DatabaseReference houseRef, newGoodRef;
     private File housefile;
 
+    //request permission
     private static boolean isExternalStorageReadOnly() {
         String externalStorageState = Environment.getExternalStorageState();
         return Environment.MEDIA_MOUNTED_READ_ONLY.equals(externalStorageState);
@@ -101,6 +101,7 @@ public class Generate_Txt extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
+        //Export House List Excel
         btn_excel_export.setOnClickListener(new View.OnClickListener() {
             final FileOutputStream fileOutputStream = null;
 
@@ -118,6 +119,7 @@ public class Generate_Txt extends AppCompatActivity {
             }
         });
 
+        //Export Good List Excel
         btn_excel_newGoods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

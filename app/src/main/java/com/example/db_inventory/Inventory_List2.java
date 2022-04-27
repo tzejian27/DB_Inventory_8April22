@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class Inventory_List2 extends AppCompatActivity {
 
     DatabaseReference databaseReference;
@@ -77,7 +79,7 @@ public class Inventory_List2 extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                totaltype = dataSnapshot.child("TotalType").getValue().toString().trim();
+                totaltype = Objects.requireNonNull(dataSnapshot.child("TotalType").getValue()).toString().trim();
             }
 
             @Override
@@ -115,6 +117,7 @@ public class Inventory_List2 extends AppCompatActivity {
 
                 arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
+                    //checking the switch
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Switch1 = snapshot.child("SW_EditSpec").getValue().toString().trim();
                         if(Switch1.equals("On")){

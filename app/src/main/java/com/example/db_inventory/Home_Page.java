@@ -2,6 +2,7 @@ package com.example.db_inventory;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Home_Page extends AppCompatActivity implements View.OnClickListener {
 
-    Button btn_home_home, btn_stock_adjustment;
+    Button btn_stock_take, btn_stock_adjustment;
     Button btn_sales_order, btn_maintain_users;
     Button btn_stockIn, btn_stockOut;
     CardView cardView;
@@ -36,7 +37,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        btn_home_home = findViewById(R.id.btn_House_intent);
+        btn_stock_take = findViewById(R.id.btn_stock_take);
         btn_stock_adjustment = findViewById(R.id.btn_stock_adjustment);
         btn_sales_order = findViewById(R.id.btn_sales_order);
         btn_maintain_users = findViewById(R.id.btn_maintain_user);
@@ -48,7 +49,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         btn_stockIn.setOnClickListener(this);
         btn_stockOut.setOnClickListener(this);
 
-        btn_home_home.setOnClickListener(this);
+        btn_stock_take.setOnClickListener(this);
         btn_stock_adjustment.setOnClickListener(this);
         btn_sales_order.setOnClickListener(this);
 
@@ -64,22 +65,35 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View view) {
         String users = getIntent().getStringExtra("Users");
+
+        final DBHandler dbHandler = new DBHandler(this);
+        Cursor cursor = dbHandler.fetch();
+        cursor.moveToLast();
+        String role = cursor.getString(2);
+
         switch (view.getId()) {
 
-            case R.id.btn_House_intent:
+            //Intent to Stock Take
+            case R.id.btn_stock_take:
                 Intent intent2house = new Intent(Home_Page.this, MainActivity.class);
                 intent2house.putExtra("Users", users);
                 startActivity(intent2house);
                 break;
+            //Intent to stock adjustment
             case R.id.btn_stock_adjustment:
                 //stock adjustment help calculate the quantity of stock on hand compare with book quantity
                 Toast.makeText(getApplicationContext(), "Stock adjustment still under construction", Toast.LENGTH_SHORT).show();
                 //Intent intent2stock_adjust = new Intent(Home_Page.this, Stock_Adjustment_Home.class);
                 //startActivity(intent2stock_adjust);
                 break;
+            //Intent to Sale Order List
             case R.id.btn_sales_order:
-                Toast.makeText(getApplicationContext(), "Sales Order still under construction", Toast.LENGTH_SHORT).show();
+                Intent intent2salesorder = new Intent(Home_Page.this, Sales_Order.class);
+                intent2salesorder.putExtra("Users", users);
+                startActivity(intent2salesorder);
+                //Toast.makeText(getApplicationContext(), "Sales Order still under construction", Toast.LENGTH_SHORT).show();
                 break;
+            //Intent to Maintain User (only allow admin to use it)
             case R.id.btn_maintain_user:
                 //maintain user are only access by the admin
                 if (users != null && users.equals("Admin")) {
@@ -91,6 +105,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                     Toast.makeText(Home_Page.this, "You are not authorized to execute, Please Login as admin", Toast.LENGTH_LONG).show();
                 }
                 break;
+            //Intent to Stock in (Check access right for user, admin no need)
             case R.id.btn_stock_in:
                 //allowed business to aware their storage
                 //it record the quantity of stock coming in
@@ -122,7 +137,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                     Toast.makeText(Home_Page.this, "Something go wrong, pls sign in again", Toast.LENGTH_LONG).show();
                 }
                 break;
-
+            //Intent to Stock Out (Check access right for user, admin no need)
             case R.id.btn_stock_out:
                 if (users != null && users.equals("Admin")) {
                     Intent intent2HouseList2 = new Intent(Home_Page.this, House_List_Stock_Out.class);
@@ -159,6 +174,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onBackPressed() {
+        //Logout confirmation
         String users = getIntent().getStringExtra("Users");
         AlertDialog.Builder builder = new AlertDialog.Builder(Home_Page.this)
                 .setTitle("Logout")

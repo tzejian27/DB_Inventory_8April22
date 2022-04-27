@@ -87,6 +87,7 @@ public class House_List extends AppCompatActivity {
                 }
                 HouseList_Adapter = new HouseList_Adapter(House_List.this, postList);
                 recyclerView.setAdapter(HouseList_Adapter);
+                //Get total number of record
                 t1.setText(String.valueOf(HouseList_Adapter.getItemCount()));
             }
 

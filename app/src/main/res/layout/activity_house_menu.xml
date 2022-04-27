@@ -133,7 +133,7 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/btn_wireless_export"
+                    android:id="@+id/btn_export_inventory_HM"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"

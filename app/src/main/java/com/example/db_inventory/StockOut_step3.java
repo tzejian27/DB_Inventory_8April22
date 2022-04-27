@@ -320,7 +320,7 @@ public class StockOut_step3 extends AppCompatActivity {
                                 Toast.makeText(StockOut_step3.this, "Add Successfully !!!", Toast.LENGTH_SHORT).show();
 
                             }else{
-                                Toast.makeText(StockOut_step3.this, "Execute actual Quantity "+ total1 + " < " + qty11, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(StockOut_step3.this, "Execute actual Quantity \n"+ total1 + " < " + qty11, Toast.LENGTH_SHORT).show();
                             }
 
                         }

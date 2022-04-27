@@ -32,7 +32,6 @@ public class Maintain_User extends AppCompatActivity {
     Button btn_create, btn_access;
     DatabaseReference userRef, adminRef;
     RecyclerView recyclerView_user, recyclerView_admin;
-    FirebaseRecyclerAdapter UserAdapter, AdminAdapter;
 
     //Show admin and user list
     //modify or delete user account
@@ -139,14 +138,11 @@ public class Maintain_User extends AppCompatActivity {
                                                 public void onClick(DialogInterface dialogInterface, int i) {
                                                     if (i == 0) {
                                                         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child("User");
-                                                        reference.child(key).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                if (task.isSuccessful()) {
-                                                                    Toast.makeText(Maintain_User.this, "Delete successfully", Toast.LENGTH_SHORT).show();
-                                                                } else {
-                                                                    Toast.makeText(Maintain_User.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
-                                                                }
+                                                        reference.child(key).removeValue().addOnCompleteListener(task -> {
+                                                            if (task.isSuccessful()) {
+                                                                Toast.makeText(Maintain_User.this, "Delete successfully", Toast.LENGTH_SHORT).show();
+                                                            } else {
+                                                                Toast.makeText(Maintain_User.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                                                             }
                                                         });
                                                     }

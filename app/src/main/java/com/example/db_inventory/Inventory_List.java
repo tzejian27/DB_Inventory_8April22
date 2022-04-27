@@ -139,7 +139,7 @@ public class Inventory_List extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull AllUsersViewHolder viewHolder, @SuppressLint("RecyclerView") int position, @NonNull Inventory_class model) {
                 viewHolder.setBarcode(model.getBarcode());
-                viewHolder.setQuanlity(model.getQuantity());
+                viewHolder.setQuantity(model.getQuantity());
                 viewHolder.setItemName(model.getItemName());
                 viewHolder.setDate_and_Time(model.getDate_and_Time());
                 viewHolder.setPrice(model.getPrice());
@@ -272,9 +272,9 @@ public class Inventory_List extends AppCompatActivity {
 
         }
 
-        public void setQuanlity(String quanlity) {
+        public void setQuantity(String quantity) {
             TextView Qty = mView.findViewById(R.id.textView_InventoryList_Qty);
-            Qty.setText(quanlity);
+            Qty.setText(quantity);
         }
 
         public void setItemName(String itemName) {

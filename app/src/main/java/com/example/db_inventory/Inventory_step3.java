@@ -26,7 +26,6 @@ public class Inventory_step3 extends AppCompatActivity {
     Button b1, b2;
     EditText e1, e2;
     DatabaseReference databaseReference, databaseReference2, newGoodRef;
-    int TotalQty = 0;
     String Quantity = "0";
     long maxid = 0;
     long k;
@@ -125,13 +124,26 @@ public class Inventory_step3 extends AppCompatActivity {
                 dataMap.put("ItemCode", itemCode);
                 dataMap.put("Date_and_Time", currentDateandTime);
 
-                //Store Data to "New_Goods" at the same time
                 newGoodRef = FirebaseDatabase.getInstance().getReference("New_Goods").child(barcode);
-                newGoodRef.child("Name").setValue(itemName);
-                newGoodRef.child("Price").setValue(price);
-                newGoodRef.child("Cost").setValue(cost);
-                newGoodRef.child("Barcode").setValue(barcode);
-                newGoodRef.child("ItemCode").setValue(itemCode);
+                newGoodRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(!snapshot.exists()){
+                            //Store Data to "New_Goods" at the same time
+                            newGoodRef = FirebaseDatabase.getInstance().getReference("New_Goods").child(barcode);
+                            newGoodRef.child("Name").setValue(itemName);
+                            newGoodRef.child("Price").setValue(price);
+                            newGoodRef.child("Cost").setValue(cost);
+                            newGoodRef.child("Barcode").setValue(barcode);
+                            newGoodRef.child("ItemCode").setValue(itemCode);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
 
                 databaseReference2.updateChildren(dataMap);
@@ -142,7 +154,7 @@ public class Inventory_step3 extends AppCompatActivity {
                 page.putExtra("barcode", barcode);
                 page.putExtra("Key", key);
                 page.putExtra("Key2", key2);
-                page.putExtra("name", itemName);
+                page.putExtra("name", name);
                 page.putExtra("Users", users);
                 startActivity(page);
                 finish();

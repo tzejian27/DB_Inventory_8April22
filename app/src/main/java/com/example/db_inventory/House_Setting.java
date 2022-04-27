@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -132,6 +132,13 @@ public class House_Setting extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                StringBuilder result = new StringBuilder();
+                result.append("Setting:");
+                result.append("\nDisable New Goods: " + Switch);
+                result.append("\nDisable Edit Spec: " + Switch2);
+                result.append("\nAllow Negative Qty: " + Switch3);
+
+                Toast.makeText(getApplicationContext(), result.toString(),Toast.LENGTH_LONG).show();
                 databaseReference.child("Disable").setValue(Switch).toString().trim();
                 databaseReference.child("NoNeed").setValue(Switch2).toString().trim();
                 databaseReference.child("Allow_Negative").setValue(Switch3).toString().trim();

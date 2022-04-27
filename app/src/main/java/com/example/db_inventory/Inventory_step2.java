@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -91,7 +90,7 @@ public class Inventory_step2 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent1 = getIntent();
                 String barcode = intent1.getStringExtra("barcode");
-                // String name = intent1.getStringExtra("name");
+                String name = intent1.getStringExtra("name");
                 final String itemName = e1.getText().toString().trim();
                 final String itemCode = e2.getText().toString().trim();
                 String barcode_ref = barcode + "/";

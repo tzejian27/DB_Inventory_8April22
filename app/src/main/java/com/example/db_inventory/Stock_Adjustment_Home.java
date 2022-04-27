@@ -12,11 +12,9 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 
 import java.io.File;
@@ -29,14 +27,9 @@ import java.util.List;
 
 public class Stock_Adjustment_Home extends AppCompatActivity {
     public static final String TAG = "ExcelUtil";
-    private static final String EXCEL_SHEET_NAME = "House & Inventory 1";
     private static final int REQUEST_CODE_DOC = 1234;
-    private static final int REQUEST_CHOOSER = 1234;
-    private static HSSFCell hssfCell;
     private static HSSFSheet hssfSheet;
     private static HSSFWorkbook hssfWorkbook;
-    private static CellStyle headerCellStyle;
-    private static HSSFRow hssfRow;
     private static List<Inventory_class> importedExcelData;
     Button btn_import;
 

@@ -120,7 +120,7 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/btn_House_intent"
+                    android:id="@+id/btn_stock_take"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"

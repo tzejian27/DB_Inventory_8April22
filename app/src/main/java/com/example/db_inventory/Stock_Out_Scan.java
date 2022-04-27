@@ -24,8 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Stock_Out_Scan extends AppCompatActivity {
 
@@ -33,7 +31,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
     public static String barcode;
     EditText edt_barcode;
     Button btn_back, btn_next;
-    DatabaseReference databaseReference, databaseReference2, databaseReference3;
+    DatabaseReference databaseReference, databaseReference2;
     long maxid = 0;
     String Quantity = "0";
     String currentDateandTime;
