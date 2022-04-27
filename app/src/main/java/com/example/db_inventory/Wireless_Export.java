@@ -174,6 +174,7 @@ public class Wireless_Export extends AppCompatActivity {
                     String ST_HouseKey= snapshot.child("HouseKey").getValue().toString();
                     String ST_Date_and_Time = snapshot.child("Date_and_Time").getValue().toString();
 
+                    //save stock take record
                     stockTake_no.setText("StockTake_" + houseName + "_" + currentDateandTime2);
                     String recordName = stockTake_no.getText().toString().trim();
                     Map dataMap = new HashMap();
