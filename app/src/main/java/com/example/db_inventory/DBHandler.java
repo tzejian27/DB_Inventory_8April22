@@ -79,30 +79,6 @@ public class DBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    /*//read data
-    public ArrayList<UserInfoModal> readUserInfo(){
-        // on below line we are creating a
-        // database for reading our database.
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        // on below line we are creating a cursor with query to read data from database.
-        Cursor cursorUserInfo = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY "+ ID_COL + " DESC LIMIT 1", null);
-
-        // on below line we are creating a new array list.
-        ArrayList<UserInfoModal> userInfoModalArrayList = new ArrayList<>();
-
-        //moving cursor to first position
-        if(cursorUserInfo.moveToFirst()){
-            do{
-                userInfoModalArrayList.add(new UserInfoModal(cursorUserInfo.getString(1),
-                        cursorUserInfo.getString(2)));
-            } while (cursorUserInfo.moveToNext());
-        }
-
-        cursorUserInfo.close();
-        return userInfoModalArrayList;
-    }*/
-
     public Cursor fetch() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, new String[]{ID_COL, Username_COL, Role_COL}, null, null, null, null, null);
