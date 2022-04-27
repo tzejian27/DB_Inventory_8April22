@@ -144,7 +144,7 @@ public class Wireless_Export extends AppCompatActivity {
     //export Stock take to firebase
     private void ExportStockTake(){
         Intent intent = getIntent();
-        final String nameFile = intent.getStringExtra("name");
+        final String houseName = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
 
         final DBHandler dbHandler = new DBHandler(this);
@@ -174,7 +174,7 @@ public class Wireless_Export extends AppCompatActivity {
                     String ST_HouseKey= snapshot.child("HouseKey").getValue().toString();
                     String ST_Date_and_Time = snapshot.child("Date_and_Time").getValue().toString();
 
-                    stockTake_no.setText("StockTake_" + nameFile + "_" + currentDateandTime2);
+                    stockTake_no.setText("StockTake_" + houseName + "_" + currentDateandTime2);
                     String recordName = stockTake_no.getText().toString().trim();
                     Map dataMap = new HashMap();
                     dataMap.put("Barcode", ST_Barcode);
@@ -185,7 +185,7 @@ public class Wireless_Export extends AppCompatActivity {
                     dataMap.put("HouseKey", ST_HouseKey);
                     dataMap.put("DateAndTime", ST_Date_and_Time);
                     dataMap.put("Status", status);
-                    dataMap.put("StorageLocation", nameFile);
+                    dataMap.put("StorageLocation", houseName);
                     dataMap.put("Username", username1);
 
                     stockTakeRef.child(recordName).child(snapshot.child("Barcode").getValue().toString()).updateChildren(dataMap);
@@ -345,14 +345,14 @@ public class Wireless_Export extends AppCompatActivity {
         String users = getIntent().getStringExtra("Users");
 
         Intent intent = getIntent();
-        final String nameFile = intent.getStringExtra("name");
+        final String houseName = intent.getStringExtra("name");
         intent.putExtra("Users", users);
 
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
         currentDateandTime2 = sdf.format(new Date());
 
 
-        filePath = new File(housefile, "StockTake" + nameFile + "_" + currentDateandTime2 + ".xls");
+        filePath = new File(housefile, "StockTake_" + houseName + "_" + currentDateandTime2 + ".xls");
         FileOutputStream fileOutputStream = null;
 
         boolean isSuccess;

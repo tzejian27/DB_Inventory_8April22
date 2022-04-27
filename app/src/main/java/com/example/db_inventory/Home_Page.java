@@ -96,7 +96,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
             //Intent to Maintain User (only allow admin to use it)
             case R.id.btn_maintain_user:
                 //maintain user are only access by the admin
-                if (users != null && users.equals("Admin")) {
+                if (role != null && role.equals("Admin")) {
                     Intent intent2Maintain = new Intent(Home_Page.this, Maintain.class);
                     intent2Maintain.putExtra("Users", users);
                     startActivity(intent2Maintain);

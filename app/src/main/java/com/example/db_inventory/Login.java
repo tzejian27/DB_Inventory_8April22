@@ -105,7 +105,6 @@ public class Login extends AppCompatActivity {
                         dbHandler.addUserInfo(userName, userRole);
 
 
-
                         startActivity(intent);
                         finish();
                         txtName.setText("");
