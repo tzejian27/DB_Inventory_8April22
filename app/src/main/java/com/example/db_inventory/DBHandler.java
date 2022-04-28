@@ -79,6 +79,7 @@ public class DBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //code to get single value of login user (username/role)
     public Cursor fetch() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, new String[]{ID_COL, Username_COL, Role_COL}, null, null, null, null, null);

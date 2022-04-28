@@ -48,16 +48,14 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
 
         btn_stockIn.setOnClickListener(this);
         btn_stockOut.setOnClickListener(this);
-
         btn_stock_take.setOnClickListener(this);
         btn_stock_adjustment.setOnClickListener(this);
         btn_sales_order.setOnClickListener(this);
+        btn_maintain_users.setOnClickListener(this);
 
         String users = getIntent().getStringExtra("Users");
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
 
-
-        btn_maintain_users.setOnClickListener(this);
 
 
     }
