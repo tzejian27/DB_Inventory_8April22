@@ -55,6 +55,7 @@ public class Wireless_Export extends AppCompatActivity {
     TextView stockTake_no;
     DatabaseReference houseRef;
     DatabaseReference stockTakeRef;
+    DatabaseReference stockTakeNoRef;
     List<HouseInventory> houseInventoryList;
     String currentDateandTime2;
     private File housefile;
@@ -87,7 +88,8 @@ public class Wireless_Export extends AppCompatActivity {
         final String key = intent.getStringExtra("Key");
 
         houseRef = FirebaseDatabase.getInstance().getReference("House").child(key);
-        stockTakeRef = FirebaseDatabase.getInstance().getReference("StockTakeRecord");
+        stockTakeRef = FirebaseDatabase.getInstance().getReference("InventoryStockTakeNo");
+        stockTakeNoRef = FirebaseDatabase.getInstance().getReference("StockTakeNo");
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -159,25 +161,32 @@ public class Wireless_Export extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
         currentDateandTime2 = sdf.format(new Date());
         //set default status
-        String status = "Pending";
+        String status = "pending";
 
         houseRef.orderByChild("HouseKey").equalTo(key).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
+                    Map dataMap = new HashMap();
                     String ST_Barcode = snapshot.child("Barcode").getValue().toString();
-                    String ST_Qty= snapshot.child("Quantity").getValue().toString();
+                    String ST_Qty = snapshot.child("Quantity").getValue().toString();
                     String ST_ItemName = snapshot.child("ItemName").getValue().toString();
-                    String ST_Price= snapshot.child("Price").getValue().toString();
+                    String ST_Price = snapshot.child("Price").getValue().toString();
                     String ST_Cost = snapshot.child("Cost").getValue().toString();
-                    String ST_HouseKey= snapshot.child("HouseKey").getValue().toString();
+                    String ST_HouseKey = snapshot.child("HouseKey").getValue().toString();
                     String ST_Date_and_Time = snapshot.child("Date_and_Time").getValue().toString();
+
+                    if (snapshot.child("ItemCode").exists()) {
+                        String ST_ItemCode = snapshot.child("ItemCode").getValue().toString();
+                        dataMap.put("ItemCode", ST_ItemCode);
+                    } else {
+                        String ST_ItemCode = "-";
+                        dataMap.put("ItemCode", ST_ItemCode);
+                    }
 
                     //save stock take record
                     stockTake_no.setText("StockTake_" + houseName + "_" + currentDateandTime2);
                     String recordName = stockTake_no.getText().toString().trim();
-                    Map dataMap = new HashMap();
                     dataMap.put("Barcode", ST_Barcode);
                     dataMap.put("Qty", ST_Qty);
                     dataMap.put("ItemName", ST_ItemName);
@@ -189,9 +198,19 @@ public class Wireless_Export extends AppCompatActivity {
                     dataMap.put("StorageLocation", houseName);
                     dataMap.put("Username", username1);
 
+
                     stockTakeRef.child(recordName).child(snapshot.child("Barcode").getValue().toString()).updateChildren(dataMap);
 
                 }
+                //record a pending status in "InventoryStockTakeNo"
+                stockTake_no.setText("StockTake_" + houseName + "_" + currentDateandTime2);
+                String recordName = stockTake_no.getText().toString().trim();
+                Map statusMap = new HashMap();
+                statusMap.put("status", status);
+                statusMap.put("stocktakeno", recordName);
+                statusMap.put("storagelocation", houseName);
+                stockTakeNoRef.child(recordName).updateChildren(statusMap);
+
 
             }
 
@@ -223,6 +242,12 @@ public class Wireless_Export extends AppCompatActivity {
                     houses.setCost(snapshot.child("Cost").getValue().toString());
                     houses.setDate_and_Time(snapshot.child("Date_and_Time").getValue().toString());
                     houses.setKey2(snapshot.child("Key").getValue().toString());
+
+                    if (snapshot.child("ItemCode").exists()) {
+                        houses.setItemCode(snapshot.child("ItemCode").getValue().toString());
+                    } else {
+                        houses.setItemCode("-");
+                    }
 
                     //Save stock take record
                     SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
@@ -285,6 +310,7 @@ public class Wireless_Export extends AppCompatActivity {
         hssfSheet.setColumnWidth(5, (15 * 400));
         hssfSheet.setColumnWidth(6, (15 * 400));
         hssfSheet.setColumnWidth(7, (15 * 400));
+        hssfSheet.setColumnWidth(8, (15 * 400));
 
         hssfRow = hssfSheet.createRow(0);
 
@@ -311,6 +337,9 @@ public class Wireless_Export extends AppCompatActivity {
 
         hssfCell = hssfRow.createCell(7);
         hssfCell.setCellValue("Key");
+
+        hssfCell = hssfRow.createCell(8);
+        hssfCell.setCellValue("ItemCode");
 
         for (int i = 0; i < this.houseInventoryList.size(); i++) {
             HouseInventory house = this.houseInventoryList.get(i);
@@ -339,6 +368,9 @@ public class Wireless_Export extends AppCompatActivity {
 
             hssfCell = rowData.createCell(7);
             hssfCell.setCellValue(this.houseInventoryList.get(i).getKey2());
+
+            hssfCell = rowData.createCell(8);
+            hssfCell.setCellValue(this.houseInventoryList.get(i).getItemCode());
 
         }
 

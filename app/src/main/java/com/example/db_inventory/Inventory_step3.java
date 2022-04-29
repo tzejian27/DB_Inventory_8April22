@@ -112,11 +112,12 @@ public class Inventory_step3 extends AppCompatActivity {
                     return;
                 }
 
-
+                //SAVE TO HOUSE
                 Map dataMap = new HashMap();
                 dataMap.put("HouseKey", key);
                 dataMap.put("Barcode", barcode);
                 dataMap.put("ItemName", itemName);
+                dataMap.put("ItemCode", itemCode);
                 dataMap.put("Price", price);
                 dataMap.put("Cost", cost);
                 dataMap.put("Quantity", Quantity);
@@ -156,6 +157,7 @@ public class Inventory_step3 extends AppCompatActivity {
                 page.putExtra("Key2", key2);
                 page.putExtra("name", name);
                 page.putExtra("Users", users);
+                page.putExtra("ItemCode", itemCode);
                 startActivity(page);
                 finish();
 

@@ -152,7 +152,7 @@ public class StockIn_step2 extends AppCompatActivity {
                     return;
                 }
 
-
+                //SAVE TO HOUSE
                 Map dataMap = new HashMap();
                 dataMap.put("HouseKey", key);
                 dataMap.put("Barcode", barcode);

@@ -26,7 +26,7 @@ public class StockIn_step3 extends AppCompatActivity {
 
     TextView t1, t2, t3, t4, t5, tv_qtyIn;
     EditText e1, e2_quantity_in;
-    Button b1, b2, b3;
+    Button btn_esc, btn_enter, btn_back;
     String key;
     String key2;
     String barcode;
@@ -56,9 +56,9 @@ public class StockIn_step3 extends AppCompatActivity {
         e1 = findViewById(R.id.editText_Inventory_barcode_SI);
         e2_quantity_in = findViewById(R.id.editText_Inventory_step5_Qty_SI);
 
-        b1 = findViewById(R.id.btn_Inventory_esc_SI);
-        b2 = findViewById(R.id.btn_Inventory_enter_SI);
-        b3 = findViewById(R.id.btn_back_SI);
+        btn_esc = findViewById(R.id.btn_Inventory_esc_SI);
+        btn_enter = findViewById(R.id.btn_Inventory_enter_SI);
+        btn_back = findViewById(R.id.btn_back_SI);
 
         Intent intent1 = getIntent();
         barcode = intent1.getStringExtra("barcode");
@@ -128,7 +128,7 @@ public class StockIn_step3 extends AppCompatActivity {
             }
         });
 
-        b1.setOnClickListener(new View.OnClickListener() {
+        btn_esc.setOnClickListener(new View.OnClickListener() {
             final String users = getIntent().getStringExtra("Users");
 
             @Override
@@ -146,7 +146,7 @@ public class StockIn_step3 extends AppCompatActivity {
             }
         });
 
-        b3.setOnClickListener(new View.OnClickListener() {
+        btn_back.setOnClickListener(new View.OnClickListener() {
             final String users = getIntent().getStringExtra("Users");
 
             @Override
@@ -157,7 +157,7 @@ public class StockIn_step3 extends AppCompatActivity {
             }
         });
 
-        b2.setOnClickListener(new View.OnClickListener() {
+        btn_enter.setOnClickListener(new View.OnClickListener() {
             final String users = getIntent().getStringExtra("Users");
 
             @Override
@@ -204,7 +204,7 @@ public class StockIn_step3 extends AppCompatActivity {
 
                             tv_qtyIn.setText(qty);
                             e2_quantity_in.setEnabled(false);
-                            b2.setClickable(false);
+                            btn_enter.setClickable(false);
 
                             TotalQty = dataSnapshot.child("TotalQty").getValue().toString().trim();
 

@@ -24,6 +24,7 @@ public class Inventory_step4 extends AppCompatActivity {
     String key;
     String key2;
     String barcode;
+    String ItemCode;
     String TotalQty;
     String name;
     int sum;
@@ -52,6 +53,7 @@ public class Inventory_step4 extends AppCompatActivity {
         name = intent1.getStringExtra("name");
         key = intent1.getStringExtra("Key");
         key2 = intent1.getStringExtra("Key2");
+        ItemCode = intent1.getStringExtra("ItemCode");
 
         e1.setText(barcode);
         e1.setEnabled(false);
@@ -66,6 +68,11 @@ public class Inventory_step4 extends AppCompatActivity {
                     String Name = dataSnapshot.child("ItemName").getValue().toString().trim();
                     String Price = dataSnapshot.child("Price").getValue().toString().trim();
                     String Cost = dataSnapshot.child("Cost").getValue().toString().trim();
+                    if (dataSnapshot.child("ItemCode").exists()) {
+                        String ItemCode = dataSnapshot.child("ItemCode").getValue().toString().trim();
+                    } else {
+                        String ItemCode = "-";
+                    }
 
                     // t1.setText(TotalQty);
                     t2.setText(Quantity);

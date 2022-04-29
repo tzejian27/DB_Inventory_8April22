@@ -43,6 +43,7 @@ public class Stock_In_Scan extends AppCompatActivity {
     String name;
     String key;
     String totaltype;
+    String ItemCode;
     long k;
     String inventory_key;
     ScanReader scanReader;
@@ -143,7 +144,6 @@ public class Stock_In_Scan extends AppCompatActivity {
             return;
         }
 
-
         databaseReference2 = FirebaseDatabase.getInstance().getReference("New_Goods");
         databaseReference2.keepSynced(true);
         databaseReference2.child(barcode).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -160,6 +160,11 @@ public class Stock_In_Scan extends AppCompatActivity {
                                     Price = dataSnapshot.child("Price").getValue().toString().trim();
                                     Cost = dataSnapshot.child("Cost").getValue().toString().trim();
 
+                                    if (dataSnapshot.child("ItemCode").exists()) {
+                                        ItemCode = dataSnapshot.child("ItemCode").getValue().toString().trim();
+                                    } else {
+                                        ItemCode = "-";
+                                    }
 
                                     Intent intent = getIntent();
                                     String name = intent.getStringExtra("name");
@@ -176,6 +181,7 @@ public class Stock_In_Scan extends AppCompatActivity {
                                     dataMap.put("HouseKey", key);
                                     dataMap.put("Barcode", barcode);
                                     dataMap.put("ItemName", Name);
+                                    dataMap.put("ItemCode", ItemCode);
                                     dataMap.put("Price", Price);
                                     dataMap.put("Cost", Cost);
                                     dataMap.put("Quantity", Quantity);
@@ -239,6 +245,7 @@ public class Stock_In_Scan extends AppCompatActivity {
                                                 dataMap.put("Key", key2);
                                                 dataMap.put("HouseKey", key);
                                                 dataMap.put("Barcode", barcode);
+                                                dataMap.put("ItemCode", ItemCode);
                                                 dataMap.put("ItemName", "Haven't Modify");
                                                 dataMap.put("Price", "0");
                                                 dataMap.put("Cost", "0");

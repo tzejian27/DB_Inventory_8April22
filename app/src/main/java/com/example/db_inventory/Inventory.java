@@ -43,6 +43,7 @@ public class Inventory extends AppCompatActivity {
     String Cost;
     String name;
     String key;
+    String ItemCode;
     String key2;
     String totaltype;
     long k;
@@ -162,6 +163,11 @@ public class Inventory extends AppCompatActivity {
                                     Price = dataSnapshot.child("Price").getValue().toString().trim();
                                     Cost = dataSnapshot.child("Cost").getValue().toString().trim();
 
+                                    if (dataSnapshot.child("ItemCode").exists()) {
+                                        ItemCode = dataSnapshot.child("ItemCode").getValue().toString().trim();
+                                    } else {
+                                        ItemCode = "-";
+                                    }
 
                                     Intent intent = getIntent();
                                     String name = intent.getStringExtra("name");
@@ -177,6 +183,7 @@ public class Inventory extends AppCompatActivity {
                                     dataMap.put("Key", key2);
                                     dataMap.put("HouseKey", key);
                                     dataMap.put("Barcode", barcode);
+                                    dataMap.put("ItemCode", ItemCode);
                                     dataMap.put("ItemName", Name);
                                     dataMap.put("Price", Price);
                                     dataMap.put("Cost", Cost);
@@ -237,10 +244,13 @@ public class Inventory extends AppCompatActivity {
                                                 final String key2 = databaseReference3.getKey();
 
                                                 String barcode = edt_barcode.getText().toString().trim();
+
+                                                //STORE TO HOUSE WHEN BARCODE IS EXIST IN NEW GOODS
                                                 Map dataMap = new HashMap();
                                                 dataMap.put("Key", key2);
                                                 dataMap.put("HouseKey", key);
                                                 dataMap.put("Barcode", barcode);
+                                                dataMap.put("ItemCode", ItemCode);
                                                 dataMap.put("ItemName", "Haven't Modify");
                                                 dataMap.put("Price", "0");
                                                 dataMap.put("Cost", "0");

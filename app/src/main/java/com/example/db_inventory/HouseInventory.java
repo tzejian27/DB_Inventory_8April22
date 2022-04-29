@@ -7,12 +7,13 @@ public class HouseInventory {
     private String TotalType;
     private String Key;
     private String Barcode, Quantity, ItemName, HouseKey, Price, Cost, Date_and_Time, Key2;
+    private String ItemCode;
 
     //doesn't be used
     public HouseInventory() {
     }
 
-    public HouseInventory(String name, String totalQty, String totalType, String key, String barcode, String quantity, String itemName, String houseKey, String price, String cost, String date_and_Time, String key2) {
+    public HouseInventory(String name, String totalQty, String totalType, String key, String barcode, String quantity, String itemName, String houseKey, String price, String cost, String date_and_Time, String key2, String itemCode) {
         Name = name;
         TotalQty = totalQty;
         TotalType = totalType;
@@ -25,6 +26,7 @@ public class HouseInventory {
         Cost = cost;
         Date_and_Time = date_and_Time;
         Key2 = key2;
+        ItemCode = itemCode;
     }
 
     public String getName() {
@@ -121,5 +123,13 @@ public class HouseInventory {
 
     public void setKey2(String key2) {
         Key2 = key2;
+    }
+
+    public String getItemCode() {
+        return ItemCode;
+    }
+
+    public void setItemCode(String itemCode) {
+        ItemCode = itemCode;
     }
 }

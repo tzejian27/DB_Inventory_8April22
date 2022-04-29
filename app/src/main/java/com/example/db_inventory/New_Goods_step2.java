@@ -19,7 +19,7 @@ import java.util.Map;
 public class New_Goods_step2 extends AppCompatActivity {
 
     EditText e1, e2;
-    Button b1, b2;
+    Button button_next, button_cancel;
     DatabaseReference databaseReference;
 
     //cost and price for new good
@@ -30,8 +30,8 @@ public class New_Goods_step2 extends AppCompatActivity {
 
         e1 = findViewById(R.id.editText_New_Goods_price);
         e2 = findViewById(R.id.editText_New_Goods_cost);
-        b1 = findViewById(R.id.btn_new_goods_back2);
-        b2 = findViewById(R.id.btn_new_goods_next2);
+        button_cancel = findViewById(R.id.btn_new_goods_back2);
+        button_next = findViewById(R.id.btn_new_goods_next2);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("New_Goods");
         databaseReference.keepSynced(true);
@@ -39,7 +39,7 @@ public class New_Goods_step2 extends AppCompatActivity {
         String users = getIntent().getStringExtra("Users");
 
 
-        b1.setOnClickListener(new View.OnClickListener() {
+        button_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(New_Goods_step2.this, House_New_Goods.class);
@@ -49,7 +49,7 @@ public class New_Goods_step2 extends AppCompatActivity {
             }
         });
 
-        b2.setOnClickListener(new View.OnClickListener() {
+        button_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = getIntent();
