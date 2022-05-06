@@ -1,6 +1,7 @@
 package com.example.db_inventory;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -112,6 +113,12 @@ public class Inventory_step3 extends AppCompatActivity {
                     return;
                 }
 
+                //RECORD PERSON INSERT
+                final DBHandler dbHandler = new DBHandler(getApplicationContext());
+                Cursor cursor = dbHandler.fetch();
+                cursor.moveToLast();
+                String username1 = cursor.getString(1);
+
                 //SAVE TO HOUSE
                 Map dataMap = new HashMap();
                 dataMap.put("HouseKey", key);
@@ -124,6 +131,7 @@ public class Inventory_step3 extends AppCompatActivity {
                 dataMap.put("Key", key2);
                 dataMap.put("ItemCode", itemCode);
                 dataMap.put("Date_and_Time", currentDateandTime);
+                dataMap.put("User", username1);
 
                 newGoodRef = FirebaseDatabase.getInstance().getReference("New_Goods").child(barcode);
                 newGoodRef.addListenerForSingleValueEvent(new ValueEventListener() {

@@ -1,6 +1,7 @@
 package com.example.db_inventory;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -90,6 +91,7 @@ public class Login extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     String pwd = snapshot.child("Password").getValue().toString();
+
 
                     if (Password.equals(pwd)) {
                         username = Username;

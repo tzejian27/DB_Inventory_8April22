@@ -177,6 +177,7 @@ public class Inventory_List extends AppCompatActivity {
                                                     intent.putExtra("Key", key);
                                                     intent.putExtra("Key2", key2);
                                                     intent.putExtra("name", name);
+                                                    intent.putExtra("ItemName", model.getItemName());
                                                     intent.putExtra("Barcode", model.getBarcode());
                                                     intent.putExtra("Users", users);
                                                     startActivity(intent);
@@ -191,6 +192,7 @@ public class Inventory_List extends AppCompatActivity {
                                                 intent.putExtra("Key", key);
                                                 intent.putExtra("Key2", key2);
                                                 intent.putExtra("name", name);
+                                                intent.putExtra("ItemName", model.getItemName());
                                                 intent.putExtra("Users", users);
                                                 startActivity(intent);
                                             }
@@ -202,6 +204,7 @@ public class Inventory_List extends AppCompatActivity {
                                                 intent.putExtra("barcode", model.getBarcode());
                                                 intent.putExtra("Key", key);
                                                 intent.putExtra("Key2", key2);
+                                                intent.putExtra("ItemName", model.getItemName());
                                                 intent.putExtra("Users", users);
                                                 startActivity(intent);
                                             }

@@ -184,6 +184,14 @@ public class Wireless_Export extends AppCompatActivity {
                         dataMap.put("ItemCode", ST_ItemCode);
                     }
 
+                    if (snapshot.child("User").exists()) {
+                        String ST_User = snapshot.child("User").getValue().toString();
+                        dataMap.put("Username", ST_User);
+                    } else {
+                        String ST_User = "-";
+                        dataMap.put("Username", ST_User);
+                    }
+
                     //save stock take record
                     stockTake_no.setText("StockTake_" + houseName + "_" + currentDateandTime2);
                     String recordName = stockTake_no.getText().toString().trim();
@@ -196,7 +204,6 @@ public class Wireless_Export extends AppCompatActivity {
                     dataMap.put("DateAndTime", ST_Date_and_Time);
                     dataMap.put("Status", status);
                     dataMap.put("StorageLocation", houseName);
-                    dataMap.put("Username", username1);
 
 
                     stockTakeRef.child(recordName).child(snapshot.child("Barcode").getValue().toString()).updateChildren(dataMap);
@@ -209,6 +216,7 @@ public class Wireless_Export extends AppCompatActivity {
                 statusMap.put("status", status);
                 statusMap.put("stocktakeno", recordName);
                 statusMap.put("storagelocation", houseName);
+                statusMap.put("date", currentDateandTime2);
                 stockTakeNoRef.child(recordName).updateChildren(statusMap);
 
 
@@ -248,6 +256,13 @@ public class Wireless_Export extends AppCompatActivity {
                     } else {
                         houses.setItemCode("-");
                     }
+
+                    if (snapshot.child("User").exists()) {
+                        houses.setUser(snapshot.child("User").getValue().toString());
+                    } else {
+                        houses.setUser("-");
+                    }
+
 
                     //Save stock take record
                     SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
@@ -311,6 +326,7 @@ public class Wireless_Export extends AppCompatActivity {
         hssfSheet.setColumnWidth(6, (15 * 400));
         hssfSheet.setColumnWidth(7, (15 * 400));
         hssfSheet.setColumnWidth(8, (15 * 400));
+        hssfSheet.setColumnWidth(9, (15 * 400));
 
         hssfRow = hssfSheet.createRow(0);
 
@@ -340,6 +356,9 @@ public class Wireless_Export extends AppCompatActivity {
 
         hssfCell = hssfRow.createCell(8);
         hssfCell.setCellValue("ItemCode");
+
+        hssfCell = hssfRow.createCell(9);
+        hssfCell.setCellValue("User");
 
         for (int i = 0; i < this.houseInventoryList.size(); i++) {
             HouseInventory house = this.houseInventoryList.get(i);
@@ -371,6 +390,9 @@ public class Wireless_Export extends AppCompatActivity {
 
             hssfCell = rowData.createCell(8);
             hssfCell.setCellValue(this.houseInventoryList.get(i).getItemCode());
+
+            hssfCell = rowData.createCell(9);
+            hssfCell.setCellValue(this.houseInventoryList.get(i).getUser());
 
         }
 

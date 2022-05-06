@@ -1,6 +1,7 @@
 package com.example.db_inventory;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -114,10 +115,17 @@ public class Item_Spec_Modify extends AppCompatActivity {
                     //      public void onComplete(@NonNull Task<Void> task) {
                     //          if (task.isSuccessful()){
 
+                    //RECORD PERSON INSERT
+                    final DBHandler dbHandler = new DBHandler(getApplicationContext());
+                    Cursor cursor = dbHandler.fetch();
+                    cursor.moveToLast();
+                    String username1 = cursor.getString(1);
+
                     //Update the spec price also when it was modify
                     databaseReference.child("ItemName").setValue(name);
                     databaseReference.child("Price").setValue(price);
                     databaseReference.child("Cost").setValue(cost);
+                    databaseReference.child("User").setValue(username1);
 
 
                     Intent page = new Intent(Item_Spec_Modify.this, Item_Spec.class);

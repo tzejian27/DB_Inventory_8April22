@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -179,6 +180,13 @@ public class Inventory extends AppCompatActivity {
                                     databaseReference3.keepSynced(true);
                                     final String key2 = databaseReference3.getKey();
 
+                                    //RECORD PERSON INSERT
+                                    final DBHandler dbHandler = new DBHandler(getApplicationContext());
+                                    Cursor cursor = dbHandler.fetch();
+                                    cursor.moveToLast();
+                                    String username1 = cursor.getString(1);
+
+
                                     Map dataMap = new HashMap();
                                     dataMap.put("Key", key2);
                                     dataMap.put("HouseKey", key);
@@ -189,6 +197,7 @@ public class Inventory extends AppCompatActivity {
                                     dataMap.put("Cost", Cost);
                                     dataMap.put("Quantity", Quantity);
                                     dataMap.put("Date_and_Time", currentDateandTime);
+                                    dataMap.put("User", username1);
 
 
                                     //   Map dataMap2 = new HashMap();
@@ -245,6 +254,12 @@ public class Inventory extends AppCompatActivity {
 
                                                 String barcode = edt_barcode.getText().toString().trim();
 
+                                                //RECORD PERSON INSERT
+                                                final DBHandler dbHandler = new DBHandler(getApplicationContext());
+                                                Cursor cursor = dbHandler.fetch();
+                                                cursor.moveToLast();
+                                                String username1 = cursor.getString(1);
+
                                                 //STORE TO HOUSE WHEN BARCODE IS EXIST IN NEW GOODS
                                                 Map dataMap = new HashMap();
                                                 dataMap.put("Key", key2);
@@ -256,6 +271,7 @@ public class Inventory extends AppCompatActivity {
                                                 dataMap.put("Cost", "0");
                                                 dataMap.put("Quantity", Quantity);
                                                 dataMap.put("Date_and_Time", currentDateandTime);
+                                                dataMap.put("User", username1);
 
                                                 k = maxid - 3;
                                                 totaltype = Long.toString(k);

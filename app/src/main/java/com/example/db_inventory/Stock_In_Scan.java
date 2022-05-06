@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -240,6 +241,12 @@ public class Stock_In_Scan extends AppCompatActivity {
                                                 databaseReference3.keepSynced(true);
                                                 final String key2 = databaseReference3.getKey();
 
+                                                //RECORD PERSON INSERT
+                                                /*final DBHandler dbHandler = new DBHandler(getApplicationContext());
+                                                Cursor cursor = dbHandler.fetch();
+                                                cursor.moveToLast();
+                                                String username1 = cursor.getString(1);*/
+
                                                 String barcode = edt_barcode.getText().toString().trim();
                                                 Map dataMap = new HashMap();
                                                 dataMap.put("Key", key2);
@@ -251,6 +258,7 @@ public class Stock_In_Scan extends AppCompatActivity {
                                                 dataMap.put("Cost", "0");
                                                 dataMap.put("Quantity", Quantity);
                                                 dataMap.put("Date_and_Time", currentDateandTime);
+                                                /*dataMap.put("User", username1);*/
 
                                                 k = maxid - 3;
                                                 totaltype = Long.toString(k);
@@ -265,8 +273,9 @@ public class Stock_In_Scan extends AppCompatActivity {
                                                 intent.putExtra("Key2", key2);
                                                 intent.putExtra("Users", users);
                                                 startActivity(intent);
+                                                Toast.makeText(Stock_In_Scan.this, "Data Save", Toast.LENGTH_SHORT).show();
                                             }
-                                            Toast.makeText(Stock_In_Scan.this, "Data Save", Toast.LENGTH_SHORT).show();
+
                                             finish();
                                         }
 

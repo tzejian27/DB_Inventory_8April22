@@ -1,6 +1,7 @@
 package com.example.db_inventory;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,9 +37,10 @@ public class StockIn_step3 extends AppCompatActivity {
     int sum;
     String Quantity;
     String totalQty;
-    String currentDateandTime;
+    String currentDateandTime, currentDateandTime2;
 
-    DatabaseReference databaseReference, databaseReference2, stockInRef;
+    DatabaseReference databaseReference, databaseReference2;
+    DatabaseReference stockInOutRef;
 
     //Stock in qty in and get the detail display
     @Override
@@ -69,8 +71,6 @@ public class StockIn_step3 extends AppCompatActivity {
 
         e1.setText(barcode);
         e1.setEnabled(false);
-
-        stockInRef = FirebaseDatabase.getInstance().getReference("StockIn");
 
         databaseReference2 = FirebaseDatabase.getInstance().getReference("House").child(key).child(key2);
 
@@ -172,7 +172,16 @@ public class StockIn_step3 extends AppCompatActivity {
                     final int qty1 = Integer.parseInt(Quantity);
                     int sum = qty1 + total;
                     String sum2 = String.valueOf(sum);
-                    databaseReference.child(key2).child("Quantity").setValue(sum2);//.addOnCompleteListener(new OnCompleteListener<Void>() {
+                    databaseReference.child(key2).child("Quantity").setValue(sum2);
+
+                    //RECORD PERSON INSERT
+                    final DBHandler dbHandler = new DBHandler(getApplicationContext());
+                    Cursor cursor = dbHandler.fetch();
+                    cursor.moveToLast();
+                    String username1 = cursor.getString(1);
+
+                    databaseReference.child(key2).child("User").setValue(username1);
+                    //.addOnCompleteListener(new OnCompleteListener<Void>() {
                     //   @Override
                     //    public void onComplete(@NonNull Task<Void> task) {
                     //       if (task.isSuccessful()){
@@ -211,22 +220,41 @@ public class StockIn_step3 extends AppCompatActivity {
 
                             String ItemName = dataSnapshot.child(key2).child("ItemName").getValue().toString().trim();
 
+                            //record stock in and out record;
+                            stockInOutRef = FirebaseDatabase.getInstance().getReference("StockMovement");
 
-                            //Create stock in record
-                            barcode = intent1.getStringExtra("barcode");
-                            name = intent1.getStringExtra("name");
-                            String barcode_ref = barcode + "/";
-                            Map dataMap2 = new HashMap();
-                            dataMap2.put("Barcode", barcode);
-                            dataMap2.put("Name", name);
-                            dataMap2.put("QtyIn", qty);
-                            dataMap2.put("ItemCode", itemcode);
-                            dataMap2.put("QtyIn_Date", currentDateandTime);
+                            SimpleDateFormat sdf2 = new SimpleDateFormat("dd_MM_yyyy_HH:mm:ss");
+                            currentDateandTime2 = sdf2.format(new Date());
+                            String parentname = barcode + "_" + currentDateandTime2;
 
-                            Map dataMap3 = new HashMap();
-                            dataMap3.put(barcode_ref + "/", dataMap2);
+                            Map dataMap4 = new HashMap();
+                            dataMap4.put("Barcode", barcode);
+                            dataMap4.put("Name", ItemName);
+                            dataMap4.put("QtyIn", qty);
+                            dataMap4.put("QtyOut", 0);
+                            dataMap4.put("QtyInOut_Date", currentDateandTime);
+                            //QUANTITY BEFORE STOCK IN
+                            dataMap4.put("Qty", qty1);
+                            //QUANTITY AFTER STOCK IN
+                            dataMap4.put("TotalQty", Quantity);
+                            dataMap4.put("HouseName", name);
+                            stockInOutRef.child(name).child(parentname).updateChildren(dataMap4);
 
-                            stockInRef.updateChildren(dataMap3);
+                            stockInOutRef.child(name).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if (!snapshot.child("housename").exists()) {
+                                        Map map = new HashMap();
+                                        map.put("housename", name);
+                                        stockInOutRef.child(name).updateChildren(map);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
 
 
                         }

@@ -1,6 +1,7 @@
 package com.example.db_inventory;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Inventory_step5 extends AppCompatActivity {
 
     Button b1, b2, b3;
@@ -29,6 +35,9 @@ public class Inventory_step5 extends AppCompatActivity {
     DatabaseReference databaseReference, databaseReference2;
     String totalQty;
     String name;
+    DatabaseReference stockInOutRef;
+    String currentDateandTime, currentDateandTime2;
+    String itemName;
 
     //Modify Inventory qty
     @Override
@@ -41,6 +50,7 @@ public class Inventory_step5 extends AppCompatActivity {
         key = intent1.getStringExtra("Key");
         key2 = intent1.getStringExtra("Key2");
         name = intent1.getStringExtra("name");
+        itemName = intent1.getStringExtra("ItemName");
 
 
         t1 = findViewById(R.id.textView_Inventory_step5_totalQty);
@@ -145,14 +155,66 @@ public class Inventory_step5 extends AppCompatActivity {
 
                     final int total = Integer.parseInt(qty);
                     final int qty1 = Integer.parseInt(Quantity);
-                    databaseReference.child(key2).child("Quantity").setValue(qty);//.addOnCompleteListener(new OnCompleteListener<Void>() {
-                    //   @Override
-                    //   public void onComplete(@NonNull Task<Void> task) {
-                    //    if (task.isSuccessful()){
+                    final int stockadjust = total - qty1;
+                    databaseReference.child(key2).child("Quantity").setValue(qty);
+
+                    //RECORD PERSON INSERT
+                    final DBHandler dbHandler = new DBHandler(getApplicationContext());
+                    Cursor cursor = dbHandler.fetch();
+                    cursor.moveToLast();
+                    String username1 = cursor.getString(1);
+
+                    databaseReference.child(key2).child("User").setValue(username1);
+
+                    //save stock adjustment to stock in and out
+                    //date for data store
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
+                    currentDateandTime = sdf.format(new Date());
+
+                    //date for parent name
+                    SimpleDateFormat sdf2 = new SimpleDateFormat("dd_MM_yyyy_HH:mm:ss");
+                    currentDateandTime2 = sdf2.format(new Date());
+
+                    String parentname = barcode + "_" + currentDateandTime2;
+
+                    stockInOutRef = FirebaseDatabase.getInstance().getReference("StockMovement");
+
+
+                    Map dataMap4 = new HashMap();
+                    dataMap4.put("Barcode", barcode);
+                    dataMap4.put("Name", itemName);
+                    dataMap4.put("QtyOut", 0);
+                    dataMap4.put("QtyIn", 0);
+                    dataMap4.put("StockAdj", stockadjust);
+                    dataMap4.put("QtyInOut_Date", currentDateandTime);
+                    //QUANTITY BEFORE STOCK TAKE
+                    dataMap4.put("Qty", Quantity);
+                    //QUANTITY AFTER STOCK TAKE
+                    dataMap4.put("TotalQty", qty);
+                    dataMap4.put("HouseName", name);
+                    stockInOutRef.child(name).child(parentname).updateChildren(dataMap4);
+
+                    stockInOutRef.child(name).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (!snapshot.child("housename").exists()) {
+                                Map map = new HashMap();
+                                map.put("housename", name);
+                                stockInOutRef.child(name).updateChildren(map);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             totalQty = dataSnapshot.child("TotalQty").getValue().toString().trim();
+
 
                             int totalQty1 = Integer.parseInt(totalQty);
 

@@ -28,6 +28,7 @@ public class Inventory_step4 extends AppCompatActivity {
     String TotalQty;
     String name;
     int sum;
+    String ItemName;
 
     DatabaseReference databaseReference;
 
@@ -65,7 +66,7 @@ public class Inventory_step4 extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot != null) {
                     String Quantity = dataSnapshot.child("Quantity").getValue().toString().trim();
-                    String Name = dataSnapshot.child("ItemName").getValue().toString().trim();
+                    ItemName = dataSnapshot.child("ItemName").getValue().toString().trim();
                     String Price = dataSnapshot.child("Price").getValue().toString().trim();
                     String Cost = dataSnapshot.child("Cost").getValue().toString().trim();
                     if (dataSnapshot.child("ItemCode").exists()) {
@@ -76,7 +77,7 @@ public class Inventory_step4 extends AppCompatActivity {
 
                     // t1.setText(TotalQty);
                     t2.setText(Quantity);
-                    t3.setText(Name);
+                    t3.setText(ItemName);
                     t4.setText(Price);
                     t5.setText(Cost);
                 }
@@ -120,6 +121,7 @@ public class Inventory_step4 extends AppCompatActivity {
         });
 
         b2.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Inventory_step4.this, Inventory_step5.class);
@@ -127,6 +129,7 @@ public class Inventory_step4 extends AppCompatActivity {
                 intent.putExtra("Key", key);
                 intent.putExtra("Key2", key2);
                 intent.putExtra("name", name);
+                intent.putExtra("ItemName", ItemName);
                 intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();

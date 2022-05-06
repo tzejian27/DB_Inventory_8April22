@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -152,6 +153,12 @@ public class StockIn_step2 extends AppCompatActivity {
                     return;
                 }
 
+                //RECORD PERSON INSERT
+                final DBHandler dbHandler = new DBHandler(getApplicationContext());
+                Cursor cursor = dbHandler.fetch();
+                cursor.moveToLast();
+                String username1 = cursor.getString(1);
+
                 //SAVE TO HOUSE
                 Map dataMap = new HashMap();
                 dataMap.put("HouseKey", key);
@@ -164,6 +171,7 @@ public class StockIn_step2 extends AppCompatActivity {
                 dataMap.put("Key", key2);
                 dataMap.put("ItemCode", itemcode);
                 dataMap.put("Date_and_Time", currentDateandTime);
+                dataMap.put("User", username1);
 
                 //Store Data to "New_Goods" at the same time
                 newGoodRef = FirebaseDatabase.getInstance().getReference("New_Goods").child(barcode);

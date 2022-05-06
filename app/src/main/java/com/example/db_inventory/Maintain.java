@@ -33,7 +33,6 @@ public class Maintain extends AppCompatActivity implements View.OnClickListener{
         b1 = findViewById(R.id.btn_new_house_M);
         b2 = findViewById(R.id.btn_user_M);
         b3 = findViewById(R.id.btn_setting_M);
-
         b1.setOnClickListener(this);
         b2.setOnClickListener(this);
         b3.setOnClickListener(this);
