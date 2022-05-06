@@ -33,6 +33,8 @@ public class House_Menu extends AppCompatActivity {
         String name = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
 
+        setTitle("eStock_House Menu_" + name);
+
         t1 = findViewById(R.id.name);
         t1.setText(name);
 

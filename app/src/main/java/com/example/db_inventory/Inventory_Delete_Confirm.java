@@ -49,6 +49,8 @@ public class Inventory_Delete_Confirm extends AppCompatActivity {
         final String key = intent.getStringExtra("Key");
         final String key2 = intent.getStringExtra("Key2");
 
+        setTitle("eStock_Delete_" + name);
+
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
 

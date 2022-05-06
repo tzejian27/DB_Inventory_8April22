@@ -26,6 +26,7 @@ public class Sales_Order extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_order);
+        setTitle("eStock_Sales Order List");
 
         recyclerView = findViewById(R.id.recyclerView_SaleOrderList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -34,6 +34,7 @@ public class Item_Spec_Modify extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_spec_modify);
+        setTitle("eStock_Inventory_Modify Spec");
 
         t1 = findViewById(R.id.textView42);
 

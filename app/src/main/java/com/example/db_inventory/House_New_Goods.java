@@ -62,6 +62,8 @@ public class House_New_Goods extends AppCompatActivity {
         b1 = findViewById(R.id.btn_new_goods_back);
         b2 = findViewById(R.id.btn_new_goods_next);
 
+        setTitle("eStock_Add New Good");
+
         //Barcode Scanning
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         IntentFilter filter = new IntentFilter();

@@ -60,6 +60,8 @@ public class Inventory_List2 extends AppCompatActivity {
         final String key = intent.getStringExtra("Key");
         String users = getIntent().getStringExtra("Users");
 
+        setTitle("eStock_Inventory List_" + name);
+
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
 
         imageView1.setOnClickListener(new View.OnClickListener() {

@@ -30,6 +30,7 @@ public class House_Setting extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_setting);
+        setTitle("eStock_Setting");
 
         s1 = findViewById(R.id.switch_disable);
         s2 = findViewById(R.id.switch_edit_spec);

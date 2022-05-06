@@ -46,6 +46,8 @@ public class Modify_User extends AppCompatActivity {
         final String password = intent.getStringExtra("Password");
         String users = getIntent().getStringExtra("Users");
 
+        setTitle("eStock_Modify User-" + name);
+
         et_username.setText(name);
         et_c_password.setText(password);
         et_username.setEnabled(false);

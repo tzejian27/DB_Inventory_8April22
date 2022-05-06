@@ -36,6 +36,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+        setTitle("eStock_Home Page");
 
         btn_stock_take = findViewById(R.id.btn_stock_take);
         btn_stock_adjustment = findViewById(R.id.btn_stock_adjustment);

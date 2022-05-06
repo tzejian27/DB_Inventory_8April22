@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("eStock_Stock Take Menu");
 
         //Get root data from firebase as reference
         databaseReference = FirebaseDatabase.getInstance().getReference("House");

@@ -68,6 +68,8 @@ public class Inventory_step2 extends AppCompatActivity {
         String users = getIntent().getStringExtra("Users");
         String itemCode = intent.getStringExtra("ItemCode");
 
+        setTitle("eStock_Inventory_" + name + "_Step2");
+
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
 
         b1.setOnClickListener(new View.OnClickListener() {

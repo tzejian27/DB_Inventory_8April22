@@ -57,6 +57,8 @@ public class Inventory_step3 extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
 
+        setTitle("eStock_Inventory_" + name + "_Step3");
+
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

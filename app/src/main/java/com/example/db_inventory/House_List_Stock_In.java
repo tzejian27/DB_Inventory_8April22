@@ -36,6 +36,7 @@ public class House_List_Stock_In extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_list_stock_in);
+        setTitle("eStock_House List_Stock In");
 
         recyclerView = findViewById(R.id.recyclerView_House_SI);
         LinearLayoutManager layoutManagerHouse = new LinearLayoutManager(this);

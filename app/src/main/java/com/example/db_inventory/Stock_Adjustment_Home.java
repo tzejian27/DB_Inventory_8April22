@@ -97,6 +97,8 @@ public class Stock_Adjustment_Home extends AppCompatActivity {
 
         btn_import = findViewById(R.id.import_Excel);
 
+        setTitle("eStock_Stock Adjustment");
+
         btn_import.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

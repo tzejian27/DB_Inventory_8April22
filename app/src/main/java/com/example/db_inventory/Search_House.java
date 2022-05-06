@@ -28,6 +28,8 @@ public class Search_House extends AppCompatActivity {
         b1 = findViewById(R.id.btn_house_search_cancel);
         b2 = findViewById(R.id.btn_house_search_enter);
 
+        setTitle("eStock_Search House");
+
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override

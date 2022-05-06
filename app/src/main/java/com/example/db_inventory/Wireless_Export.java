@@ -83,6 +83,8 @@ public class Wireless_Export extends AppCompatActivity {
         k1 = findViewById(R.id.key1_export2);
         stockTake_no = findViewById(R.id.stock_take_num);
 
+        setTitle("eStock_Export Stoke Take");
+
         Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");

@@ -33,6 +33,8 @@ public class Inventory_Data_Clear extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("House");
         databaseReference.keepSynced(true);
 
+        setTitle("eStock_Data Clear_" + name);
+
         String users = getIntent().getStringExtra("Users");
 
 

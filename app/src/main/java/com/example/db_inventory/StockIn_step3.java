@@ -69,6 +69,8 @@ public class StockIn_step3 extends AppCompatActivity {
         key2 = intent1.getStringExtra("Key2");
         itemcode = intent1.getStringExtra("ItemCode");
 
+        setTitle("eStock_Stock In_" + barcode);
+
         e1.setText(barcode);
         e1.setEnabled(false);
 

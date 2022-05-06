@@ -52,6 +52,8 @@ public class Inventory_step5 extends AppCompatActivity {
         name = intent1.getStringExtra("name");
         itemName = intent1.getStringExtra("ItemName");
 
+        setTitle("eStock_Inventory Modify_" + itemName);
+
 
         t1 = findViewById(R.id.textView_Inventory_step5_totalQty);
 

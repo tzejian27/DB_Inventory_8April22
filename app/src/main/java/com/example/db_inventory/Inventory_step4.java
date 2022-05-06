@@ -56,6 +56,8 @@ public class Inventory_step4 extends AppCompatActivity {
         key2 = intent1.getStringExtra("Key2");
         ItemCode = intent1.getStringExtra("ItemCode");
 
+        setTitle("eStock_Inventory_Step4");
+
         e1.setText(barcode);
         e1.setEnabled(false);
 

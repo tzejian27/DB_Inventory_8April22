@@ -31,6 +31,7 @@ public class House_Modify extends AppCompatActivity {
         Intent intent1 = getIntent();
         key = intent1.getStringExtra("Key");
         name = intent1.getStringExtra("name");
+        setTitle("eStock_House Modify_" + name);
         e1 = findViewById(R.id.editText_House_Modify_Name);
         e1.setText(name);
 

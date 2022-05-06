@@ -26,6 +26,7 @@ public class Item_Spec extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_spec);
+        setTitle("eStock_Inventory_Item Spec");
 
         t1 = findViewById(R.id.textView_Item_Spec_price);
         t2 = findViewById(R.id.textView_Item_Spec_cost);

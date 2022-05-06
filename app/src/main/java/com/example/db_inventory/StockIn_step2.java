@@ -72,6 +72,8 @@ public class StockIn_step2 extends AppCompatActivity {
         e3 = findViewById(R.id.editText_Inventory_cost_SI);
         e4 = findViewById(R.id.editText_Inventory_itemcode_SI);
 
+        setTitle("eStock_Stock In ");
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
         currentDateandTime = sdf.format(new Date());
 

@@ -48,6 +48,8 @@ public class House_List extends AppCompatActivity {
         btn_search = findViewById(R.id.imageView_house_search);
         String users = getIntent().getStringExtra("Users");
 
+        setTitle("House List");
+
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override

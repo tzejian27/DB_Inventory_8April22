@@ -44,6 +44,7 @@ public class Maintain_User extends AppCompatActivity {
 
         btn_create = findViewById(R.id.btn_create_user);
         btn_access = findViewById(R.id.btn_access_right);
+        setTitle("eStock_Maintain User");
 
         //Connecting recycle view with data by using adapter
         recyclerView_user = findViewById(R.id.recycleView_User);

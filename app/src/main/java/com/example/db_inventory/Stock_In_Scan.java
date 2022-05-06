@@ -79,6 +79,8 @@ public class Stock_In_Scan extends AppCompatActivity {
         name = intent.getStringExtra("name");
         key = intent.getStringExtra("Key");
 
+        setTitle("eStock_Stock In Scan");
+
         //Barcode Scanning
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         IntentFilter filter = new IntentFilter();

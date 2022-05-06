@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DB_Inventory">
         <activity
+            android:name=".StockMovement"
+            android:exported="false" />
+        <activity
             android:name=".Maintain"
             android:exported="false" />
         <activity

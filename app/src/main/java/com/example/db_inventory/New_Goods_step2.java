@@ -27,6 +27,7 @@ public class New_Goods_step2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_goods_step2);
+        setTitle("eStock_Add New Goods");
 
         e1 = findViewById(R.id.editText_New_Goods_price);
         e2 = findViewById(R.id.editText_New_Goods_cost);

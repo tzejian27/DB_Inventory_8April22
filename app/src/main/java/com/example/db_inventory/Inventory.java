@@ -68,6 +68,7 @@ public class Inventory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
+        setTitle("eStock_Inventory");
 
         edt_barcode = findViewById(R.id.editText_barcode);
         btn_back = findViewById(R.id.btn_inventory_back);

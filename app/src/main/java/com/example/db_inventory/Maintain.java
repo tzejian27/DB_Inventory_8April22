@@ -29,6 +29,7 @@ public class Maintain extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintain);
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
+        setTitle("eStock_Maintain");
 
         b1 = findViewById(R.id.btn_new_house_M);
         b2 = findViewById(R.id.btn_user_M);
