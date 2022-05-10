@@ -134,4 +134,13 @@ public class House_Menu extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        String users = getIntent().getStringExtra("Users");
+        super.onBackPressed();
+        Intent intent = new Intent(House_Menu.this, House_List.class);
+        intent.putExtra("Users", users);
+        startActivity(intent);
+    }
 }

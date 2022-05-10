@@ -227,14 +227,20 @@ public class StockIn_step3 extends AppCompatActivity {
 
                             SimpleDateFormat sdf2 = new SimpleDateFormat("dd_MM_yyyy_HH:mm:ss");
                             currentDateandTime2 = sdf2.format(new Date());
+
+                            SimpleDateFormat sdf3 = new SimpleDateFormat("yyyyMMddHHmmss");
+                            String currentDateandTime3 = sdf3.format(new Date());
+
                             String parentname = barcode + "_" + currentDateandTime2;
 
                             Map dataMap4 = new HashMap();
+                            dataMap4.put("ParentName", parentname);
                             dataMap4.put("Barcode", barcode);
                             dataMap4.put("Name", ItemName);
                             dataMap4.put("QtyIn", qty);
                             dataMap4.put("QtyOut", 0);
                             dataMap4.put("QtyInOut_Date", currentDateandTime);
+                            dataMap4.put("QtyInOut_Date2", currentDateandTime3);
                             //QUANTITY BEFORE STOCK IN
                             dataMap4.put("Qty", qty1);
                             //QUANTITY AFTER STOCK IN

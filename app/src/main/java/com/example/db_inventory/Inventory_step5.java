@@ -177,18 +177,24 @@ public class Inventory_step5 extends AppCompatActivity {
                     SimpleDateFormat sdf2 = new SimpleDateFormat("dd_MM_yyyy_HH:mm:ss");
                     currentDateandTime2 = sdf2.format(new Date());
 
+
+                    SimpleDateFormat sdf3 = new SimpleDateFormat("yyyyMMddHHmmss");
+                    String currentDateandTime3 = sdf3.format(new Date());
+
                     String parentname = barcode + "_" + currentDateandTime2;
 
                     stockInOutRef = FirebaseDatabase.getInstance().getReference("StockMovement");
 
 
                     Map dataMap4 = new HashMap();
+                    dataMap4.put("ParentName", parentname);
                     dataMap4.put("Barcode", barcode);
                     dataMap4.put("Name", itemName);
                     dataMap4.put("QtyOut", 0);
                     dataMap4.put("QtyIn", 0);
                     dataMap4.put("StockAdj", stockadjust);
                     dataMap4.put("QtyInOut_Date", currentDateandTime);
+                    dataMap4.put("QtyInOut_Date2", currentDateandTime3);
                     //QUANTITY BEFORE STOCK TAKE
                     dataMap4.put("Qty", Quantity);
                     //QUANTITY AFTER STOCK TAKE
