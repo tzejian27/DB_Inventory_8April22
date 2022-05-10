@@ -262,6 +262,7 @@ public class Stock_In_Scan extends AppCompatActivity {
                                                 dataMap.put("Date_and_Time", currentDateandTime);
                                                 /*dataMap.put("User", username1);*/
 
+                                                //calculate total type
                                                 k = maxid - 3;
                                                 totaltype = Long.toString(k);
 
