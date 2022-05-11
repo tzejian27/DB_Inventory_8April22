@@ -40,7 +40,7 @@ public class StockIn_step3 extends AppCompatActivity {
     String currentDateandTime, currentDateandTime2;
 
     DatabaseReference databaseReference, databaseReference2;
-    DatabaseReference stockInOutRef;
+    DatabaseReference stockMovRef;
 
     //Stock in qty in and get the detail display
     @Override
@@ -223,7 +223,7 @@ public class StockIn_step3 extends AppCompatActivity {
                             String ItemName = dataSnapshot.child(key2).child("ItemName").getValue().toString().trim();
 
                             //record stock in and out record;
-                            stockInOutRef = FirebaseDatabase.getInstance().getReference("StockMovement");
+                            stockMovRef = FirebaseDatabase.getInstance().getReference("StockMovement");
 
                             SimpleDateFormat sdf2 = new SimpleDateFormat("dd_MM_yyyy_HH:mm:ss");
                             currentDateandTime2 = sdf2.format(new Date());
@@ -233,6 +233,7 @@ public class StockIn_step3 extends AppCompatActivity {
 
                             String parentname = barcode + "_" + currentDateandTime2;
 
+                            //Insert stock movement
                             Map dataMap4 = new HashMap();
                             dataMap4.put("ParentName", parentname);
                             dataMap4.put("Barcode", barcode);
@@ -246,15 +247,15 @@ public class StockIn_step3 extends AppCompatActivity {
                             //QUANTITY AFTER STOCK IN
                             dataMap4.put("TotalQty", Quantity);
                             dataMap4.put("HouseName", name);
-                            stockInOutRef.child(name).child(parentname).updateChildren(dataMap4);
+                            stockMovRef.child(name).child(parentname).updateChildren(dataMap4);
 
-                            stockInOutRef.child(name).addListenerForSingleValueEvent(new ValueEventListener() {
+                            stockMovRef.child(name).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     if (!snapshot.child("housename").exists()) {
                                         Map map = new HashMap();
                                         map.put("housename", name);
-                                        stockInOutRef.child(name).updateChildren(map);
+                                        stockMovRef.child(name).updateChildren(map);
                                     }
                                 }
 

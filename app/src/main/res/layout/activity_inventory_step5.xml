@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Total Qty"
+            android:text="S/T Qty"
             android:textColor="@color/blue" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="6"
-            android:text="@string/total_quantity"
+            android:text="S/T Quantity"
             android:textColor="@color/blue" />
 
 
