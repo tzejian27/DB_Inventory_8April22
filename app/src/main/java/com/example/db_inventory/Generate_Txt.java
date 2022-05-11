@@ -79,7 +79,7 @@ public class Generate_Txt extends AppCompatActivity {
 
         newGoodRef = FirebaseDatabase.getInstance().getReference().child("New_Goods");
 
-        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         currentDateandTime = sdf.format(new Date());
 
         housefile = new File("/storage/emulated/0/Report/" + "eStock" + currentDateandTime);
@@ -251,7 +251,7 @@ public class Generate_Txt extends AppCompatActivity {
 
         }
 
-        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         currentDateandTime = sdf.format(new Date());
 
         filePath2 = new File(housefile, "GoodsList_" + currentDateandTime + ".xls");
@@ -327,7 +327,7 @@ public class Generate_Txt extends AppCompatActivity {
 
         }
 
-        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         currentDateandTime = sdf.format(new Date());
 
 

@@ -104,7 +104,7 @@ public class Wireless_Export extends AppCompatActivity {
 
         houseRef.keepSynced(true);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         currentDateandTime2 = sdf.format(new Date());
 
         stockTake_no.setText("StockTake_" + name + "_" + currentDateandTime2);
@@ -160,7 +160,7 @@ public class Wireless_Export extends AppCompatActivity {
         String username1 = userName.getText().toString().trim();
 
         //Save stock take record
-        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         currentDateandTime2 = sdf.format(new Date());
         //set default status
         String status = "pending";
@@ -211,6 +211,7 @@ public class Wireless_Export extends AppCompatActivity {
                     stockTakeRef.child(recordName).child(snapshot.child("Barcode").getValue().toString()).updateChildren(dataMap);
 
                 }
+
                 //record a pending status in "InventoryStockTakeNo"
                 stockTake_no.setText("StockTake_" + houseName + "_" + currentDateandTime2);
                 String recordName = stockTake_no.getText().toString().trim();
@@ -267,7 +268,7 @@ public class Wireless_Export extends AppCompatActivity {
 
 
                     //Save stock take record
-                    SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
                     currentDateandTime2 = sdf.format(new Date());
 
                     Intent intent = getIntent();
@@ -405,7 +406,7 @@ public class Wireless_Export extends AppCompatActivity {
         final String houseName = intent.getStringExtra("name");
         intent.putExtra("Users", users);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         currentDateandTime2 = sdf.format(new Date());
 
 
