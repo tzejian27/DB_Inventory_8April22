@@ -223,7 +223,6 @@ public class Inventory_step5 extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             totalQty = dataSnapshot.child("TotalQty").getValue().toString().trim();
 
-
                             int totalQty1 = Integer.parseInt(totalQty);
 
                             long sum = 0;
