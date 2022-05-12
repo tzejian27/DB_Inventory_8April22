@@ -16,6 +16,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -32,7 +33,7 @@ public class Inventory_step5 extends AppCompatActivity {
     String barcode;
     String Quantity;
     String key2;
-    DatabaseReference databaseReference, databaseReference2;
+    DatabaseReference databaseReference, StockTakeRef;
     String totalQty;
     String name;
     DatabaseReference stockInOutRef;
@@ -62,6 +63,9 @@ public class Inventory_step5 extends AppCompatActivity {
         b1 = findViewById(R.id.btn_Inventory_step5_cancel);
         //b2=(Button)findViewById(R.id.btn_Inventory_step5_add);
         b3 = findViewById(R.id.btn_Inventory_step5_change);
+
+        //Initial stoke take table
+        StockTakeRef = FirebaseDatabase.getInstance().getReference().child("InventoryStockTakeNo");
 
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
@@ -217,6 +221,27 @@ public class Inventory_step5 extends AppCompatActivity {
 
                         }
                     });
+
+                    Query ST2 = StockTakeRef.orderByChild("StorageLocation").equalTo(name);
+
+                    //Update the latest quantity of barcode to all new or old record
+                    ST2.orderByChild("Barcode").equalTo(barcode).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                Map mapIST = new HashMap();
+                                mapIST.put("BookQty", qty);
+                                //StockTakeRef.orderByChild("StorageLocation").equalTo(name).orderByChild("Barcode").equalTo(barcode).snapshot
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
 
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
