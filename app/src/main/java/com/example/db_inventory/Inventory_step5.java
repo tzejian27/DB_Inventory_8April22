@@ -222,27 +222,6 @@ public class Inventory_step5 extends AppCompatActivity {
                         }
                     });
 
-                    Query ST2 = StockTakeRef.orderByChild("StorageLocation").equalTo(name);
-
-                    //Update the latest quantity of barcode to all new or old record
-                    ST2.orderByChild("Barcode").equalTo(barcode).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                Map mapIST = new HashMap();
-                                mapIST.put("BookQty", qty);
-                                //StockTakeRef.orderByChild("StorageLocation").equalTo(name).orderByChild("Barcode").equalTo(barcode).snapshot
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-
-
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
