@@ -1,6 +1,7 @@
 package com.example.db_inventory;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -55,21 +56,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        String users = getIntent().getStringExtra("Users");
+        final DBHandler dbHandler = new DBHandler(this);
+        Cursor cursor = dbHandler.fetch();
+        cursor.moveToLast();
+        String role = cursor.getString(2);
+
         switch (view.getId()) {
             case R.id.btn_new_house:
-                if (users != null && users.equals("Admin")) {
+                if (role != null && role.equals("Admin")) {
                     Intent intent2new_house = new Intent(MainActivity.this, House_New_House.class);
-                    intent2new_house.putExtra("Users", users);
+                    intent2new_house.putExtra("Users", role);
                     startActivity(intent2new_house);
-                } else if (users.equals("User")) {
+                } else if (role.equals("User")) {
                     arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Switch1 = snapshot.child("SW_NewHouse").getValue().toString().trim();
                             if (Switch1.equals("On")) {
                                 Intent intent2new_house = new Intent(MainActivity.this, House_New_House.class);
-                                intent2new_house.putExtra("Users", users);
+                                intent2new_house.putExtra("Users", role);
                                 startActivity(intent2new_house);
                             } else if (Switch1.equals("Off")) {
                                 Toast.makeText(MainActivity.this, "Permission denied", Toast.LENGTH_LONG).show();
@@ -88,18 +93,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.btn_house_list:
-                if (users != null && users.equals("Admin")) {
+                if (role != null && role.equals("Admin")) {
                     Intent intent2house_list = new Intent(MainActivity.this, House_List.class);
-                    intent2house_list.putExtra("Users", users);
+                    intent2house_list.putExtra("Users", role);
                     startActivity(intent2house_list);
-                } else if (users.equals("User")) {
+                } else if (role.equals("User")) {
                     arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Switch3 = snapshot.child("SW_HouseList").getValue().toString().trim();
                             if (Switch3.equals("On")) {
                                 Intent intent2house_list = new Intent(MainActivity.this, House_List.class);
-                                intent2house_list.putExtra("Users", users);
+                                intent2house_list.putExtra("Users", role);
                                 startActivity(intent2house_list);
                             } else if (Switch3.equals("Off")) {
                                 Toast.makeText(MainActivity.this, "Permission denied", Toast.LENGTH_LONG).show();
@@ -124,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_gen_txt:
 
                 Intent intent2house_generate = new Intent(MainActivity.this, Generate_Txt.class);
-                intent2house_generate.putExtra("Users", users);
+                intent2house_generate.putExtra("Users", role);
                 startActivity(intent2house_generate);
                 //Toast.makeText(this, "Coming Soon!!!", Toast.LENGTH_SHORT).show();
                 break;
@@ -142,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(MainActivity.this, "New Good is Disable", Toast.LENGTH_SHORT).show();
                         } else if (s1.equals("Enable")) {
                             Intent intent2new_goods = new Intent(MainActivity.this, House_New_Goods.class);
-                            intent2new_goods.putExtra("Users", users);
+                            intent2new_goods.putExtra("Users", role);
                             startActivity(intent2new_goods);
                         }
                     }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -42,21 +43,25 @@ public class Maintain extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        String users = getIntent().getStringExtra("Users");
+        final DBHandler dbHandler = new DBHandler(this);
+        Cursor cursor = dbHandler.fetch();
+        cursor.moveToLast();
+        String role = cursor.getString(2);
+
         switch (view.getId()) {
             case R.id.btn_new_house_M:
-                if (users != null && users.equals("Admin")) {
+                if (role != null && role.equals("Admin")) {
                     Intent intent2new_house = new Intent(Maintain.this, House_New_House.class);
-                    intent2new_house.putExtra("Users", users);
+                    intent2new_house.putExtra("Users", role);
                     startActivity(intent2new_house);
-                } else if (users.equals("User")) {
+                } else if (role.equals("User")) {
                     arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Switch1 = snapshot.child("SW_NewHouse").getValue().toString().trim();
                             if (Switch1.equals("On")) {
                                 Intent intent2new_house = new Intent(Maintain.this, House_New_House.class);
-                                intent2new_house.putExtra("Users", users);
+                                intent2new_house.putExtra("Users", role);
                                 startActivity(intent2new_house);
                             } else if (Switch1.equals("Off")) {
                                 Toast.makeText(Maintain.this, "Permission denied", Toast.LENGTH_LONG).show();
@@ -77,9 +82,9 @@ public class Maintain extends AppCompatActivity implements View.OnClickListener{
 
             case R.id.btn_user_M:
                 //maintain user are only access by the admin
-                if (users != null && users.equals("Admin")) {
+                if (role != null && role.equals("Admin")) {
                     Intent intent2MaintainUser = new Intent(Maintain.this, Maintain_User.class);
-                    intent2MaintainUser.putExtra("Users", users);
+                    intent2MaintainUser.putExtra("Users", role);
                     startActivity(intent2MaintainUser);
                 } else {
                     //when there is not admin role received then show error message where not allowed user to enter
@@ -89,18 +94,18 @@ public class Maintain extends AppCompatActivity implements View.OnClickListener{
 
             case R.id.btn_setting_M:
 
-                if (users != null && users.equals("Admin")) {
+                if (role != null && role.equals("Admin")) {
                     Intent intent2house_setting = new Intent(Maintain.this, House_Setting.class);
-                    intent2house_setting.putExtra("Users", users);
+                    intent2house_setting.putExtra("Users", role);
                     startActivity(intent2house_setting);
-                } else if (users.equals("User")) {
+                } else if (role.equals("User")) {
                     arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Switch2 = snapshot.child("SW_Setting").getValue().toString().trim();
                             if (Switch2.equals("On")) {
                                 Intent intent2house_setting = new Intent(Maintain.this, House_Setting.class);
-                                intent2house_setting.putExtra("Users", users);
+                                intent2house_setting.putExtra("Users", role);
                                 startActivity(intent2house_setting);
                             } else if (Switch2.equals("Off")) {
                                 Toast.makeText(Maintain.this, "Permission denied", Toast.LENGTH_LONG).show();

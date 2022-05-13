@@ -79,7 +79,7 @@ public class HouseList_Adapter extends RecyclerView.Adapter<HouseList_Adapter.My
                         final String name = dataSnapshot.child("Name").getValue().toString().trim();
 
                         CharSequence[] option = new CharSequence[]{
-                                "Enter", "Modify", "Delete", "StockMovement"
+                                "Enter", "Modify", "Delete"
                         };
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
@@ -148,13 +148,13 @@ public class HouseList_Adapter extends RecyclerView.Adapter<HouseList_Adapter.My
 
 
                                 }
-                                if (position == 3) {
+                                /*if (position == 3) {
                                     Intent intent = new Intent(mContext, StockMovement.class);
                                     intent.putExtra("Key", key);
                                     intent.putExtra("name", name);
                                     mContext.startActivity(intent);
 
-                                }
+                                }*/
 
                             }
                         });

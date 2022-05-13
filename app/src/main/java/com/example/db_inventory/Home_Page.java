@@ -54,7 +54,6 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         btn_sales_order.setOnClickListener(this);
         btn_maintain_users.setOnClickListener(this);
 
-        String users = getIntent().getStringExtra("Users");
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
 
 
@@ -63,8 +62,6 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-        String users = getIntent().getStringExtra("Users");
-
         final DBHandler dbHandler = new DBHandler(this);
         Cursor cursor = dbHandler.fetch();
         cursor.moveToLast();
@@ -75,7 +72,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
             //Intent to Stock Take
             case R.id.btn_stock_take:
                 Intent intent2house = new Intent(Home_Page.this, MainActivity.class);
-                intent2house.putExtra("Users", users);
+                intent2house.putExtra("Users", role);
                 startActivity(intent2house);
                 break;
             //Intent to stock adjustment
@@ -88,7 +85,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
             //Intent to Sale Order List
             case R.id.btn_sales_order:
                 Intent intent2salesorder = new Intent(Home_Page.this, Sales_Order.class);
-                intent2salesorder.putExtra("Users", users);
+                intent2salesorder.putExtra("Users", role);
                 startActivity(intent2salesorder);
                 //Toast.makeText(getApplicationContext(), "Sales Order still under construction", Toast.LENGTH_SHORT).show();
                 break;
@@ -97,7 +94,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 //maintain user are only access by the admin
                 if (role != null && role.equals("Admin")) {
                     Intent intent2Maintain = new Intent(Home_Page.this, Maintain.class);
-                    intent2Maintain.putExtra("Users", users);
+                    intent2Maintain.putExtra("Users", role);
                     startActivity(intent2Maintain);
                 } else {
                     //when there is not admin role received then show error message where not allowed user to enter
@@ -109,18 +106,18 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 //allowed business to aware their storage
                 //it record the quantity of stock coming in
 
-                if (users != null && users.equals("Admin")) {
+                if (role != null && role.equals("Admin")) {
                     Intent intent2HouseList = new Intent(Home_Page.this, House_List_Stock_In.class);
-                    intent2HouseList.putExtra("Users", users);
+                    intent2HouseList.putExtra("Users", role);
                     startActivity(intent2HouseList);
-                } else if (users.equals("User")) {
+                } else if (role.equals("User")) {
                     arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Switch2 = snapshot.child("SW_StockIn").getValue().toString().trim();
                             if (Switch2.equals("On")) {
                                 Intent intent2HouseList = new Intent(Home_Page.this, House_List_Stock_In.class);
-                                intent2HouseList.putExtra("Users", users);
+                                intent2HouseList.putExtra("Users", role);
                                 startActivity(intent2HouseList);
                             } else if (Switch2.equals("Off")) {
                                 Toast.makeText(Home_Page.this, "Permission denied", Toast.LENGTH_LONG).show();
@@ -138,18 +135,18 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 break;
             //Intent to Stock Out (Check access right for user, admin no need)
             case R.id.btn_stock_out:
-                if (users != null && users.equals("Admin")) {
+                if (role != null && role.equals("Admin")) {
                     Intent intent2HouseList2 = new Intent(Home_Page.this, House_List_Stock_Out.class);
-                    intent2HouseList2.putExtra("Users", users);
+                    intent2HouseList2.putExtra("Users", role);
                     startActivity(intent2HouseList2);
-                } else if (users.equals("User")) {
+                } else if (role.equals("User")) {
                     arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Switch1 = snapshot.child("SW_StockOut").getValue().toString().trim();
                             if (Switch1.equals("On")) {
                                 Intent intent2HouseList2 = new Intent(Home_Page.this, House_List_Stock_Out.class);
-                                intent2HouseList2.putExtra("Users", users);
+                                intent2HouseList2.putExtra("Users", role);
                                 startActivity(intent2HouseList2);
                             } else if (Switch1.equals("Off")) {
                                 Toast.makeText(Home_Page.this, "Permission denied", Toast.LENGTH_LONG).show();
@@ -174,7 +171,6 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onBackPressed() {
         //Logout confirmation
-        String users = getIntent().getStringExtra("Users");
         AlertDialog.Builder builder = new AlertDialog.Builder(Home_Page.this)
                 .setTitle("Logout")
                 .setCancelable(false)
