@@ -87,7 +87,6 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 Intent intent2salesorder = new Intent(Home_Page.this, Sales_Order.class);
                 intent2salesorder.putExtra("Users", role);
                 startActivity(intent2salesorder);
-                //Toast.makeText(getApplicationContext(), "Sales Order still under construction", Toast.LENGTH_SHORT).show();
                 break;
             //Intent to Maintain User (only allow admin to use it)
             case R.id.btn_maintain_user:
