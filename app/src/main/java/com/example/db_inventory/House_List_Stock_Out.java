@@ -38,8 +38,6 @@ public class House_List_Stock_Out extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView_House_SO);
         LinearLayoutManager layoutManagerHouse = new LinearLayoutManager(this);
-        //layoutManagerHouse.setStackFromEnd(true);
-        //layoutManagerHouse.setReverseLayout(true);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManagerHouse);
 
