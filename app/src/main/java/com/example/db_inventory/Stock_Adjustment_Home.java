@@ -6,10 +6,22 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -26,110 +38,82 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Stock_Adjustment_Home extends AppCompatActivity {
-    public static final String TAG = "ExcelUtil";
-    private static final int REQUEST_CODE_DOC = 1234;
-    private static HSSFSheet hssfSheet;
-    private static HSSFWorkbook hssfWorkbook;
-    private static List<Inventory_class> importedExcelData;
-    Button btn_import;
 
-    public static List<Inventory_class> readFromExcelWorkbook(Context context, String fileName) {
-        return retrieveExcelFromStorage(context, fileName);
-    }
-
-    private static List<Inventory_class> retrieveExcelFromStorage(Context context, String fileName) {
-        importedExcelData = new ArrayList<>();
-
-        File file = new File(context.getExternalFilesDir(null), fileName);
-        FileInputStream fileInputStream = null;
-
-        try {
-            fileInputStream = new FileInputStream(file);
-            Log.e(TAG, "Reading from Excel" + file);
-
-            hssfWorkbook = new HSSFWorkbook(fileInputStream);
-
-            hssfSheet = hssfWorkbook.getSheetAt(0);
-
-            for (Row row : hssfSheet) {
-                int index = 0;
-                List<String> rowDataList = new ArrayList<>();
-                List<Inventory_class> inventoryClassList = new ArrayList<>();
-
-                if (row.getRowNum() > 0) {
-                    Iterator<Cell> hssfCellIterator = row.cellIterator();
-
-                    while (hssfCellIterator.hasNext()) {
-                        HSSFCell hssfCell = (HSSFCell) hssfCellIterator.next();
-
-                        rowDataList.add(index, hssfCell.getStringCellValue());
-                        index++;
-                    }
-
-                    for (int i = 1; i < rowDataList.size(); i++) {
-                        inventoryClassList.add(new Inventory_class());
-                    }
-                    importedExcelData.add(new Inventory_class());
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return importedExcelData;
-    }
-
-    private static boolean isExternalStorageReadOnly() {
-        String externalStorageState = Environment.getExternalStorageState();
-        return Environment.MEDIA_MOUNTED_READ_ONLY.equals(externalStorageState);
-    }
-
-    private static boolean isExternalStorageAvailable() {
-        String externalStorageState = Environment.getExternalStorageState();
-        return Environment.MEDIA_MOUNTED.equals(externalStorageState);
-    }
+    DatabaseReference SA_Ref;
+    RecyclerView recyclerView;
+    String total;
+    TextView totalrecord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_adjustment_home);
 
-        btn_import = findViewById(R.id.import_Excel);
+        //declare recycle view
+        recyclerView = findViewById(R.id.recyclerView_SA);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
 
-        setTitle("eStock_Stock Adjustment");
+        //declare total SA record
+        totalrecord = findViewById(R.id.record_SA);
 
-        btn_import.setOnClickListener(new View.OnClickListener() {
+        setTitle("eStock_Stock Adjust List");
+
+        //declare the sa reference
+        SA_Ref = FirebaseDatabase.getInstance().getReference("StockAdjustmentNo");
+        SA_Ref.keepSynced(true);
+    }
+
+    public void onStart() {
+        super.onStart();
+
+        FirebaseRecyclerOptions<SA_class> SA_Adapter = new FirebaseRecyclerOptions.Builder<SA_class>()
+                .setQuery(SA_Ref.orderByChild("SAHouse"), SA_class.class)
+                .setLifecycleOwner(this)
+                .build();
+
+        FirebaseRecyclerAdapter<SA_class, SAViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<SA_class, SAViewHolder>(SA_Adapter) {
             @Override
-            public void onClick(View view) {
+            protected void onBindViewHolder(@NonNull SAViewHolder holder, int position, @NonNull SA_class model) {
+                holder.setSAHouse(model.getSAHouse());
+                totalrecord.setText(String.valueOf(getItemCount()));
 
-                String[] mimeTypes =
-                        {"application/vnd.ms-excel"};
-
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    intent.setType(mimeTypes.length == 1 ? mimeTypes[0] : "*/*");
-                    if (mimeTypes.length > 0) {
-                        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+                holder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext(), Stock_Adjustment_List.class);
+                        intent.putExtra("SAName", model.getSAHouse());
+                        Toast.makeText(Stock_Adjustment_Home.this, "Entering " + model.getSAHouse(), Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
                     }
-                } else {
-                    String mimeTypesStr = "";
-                    for (String mimeType : mimeTypes) {
-                        mimeTypesStr += mimeType + "|";
-                    }
-                    intent.setType(mimeTypesStr.substring(0, mimeTypesStr.length() - 1));
-                }
-                startActivityForResult(Intent.createChooser(intent, "ChooseFile"), REQUEST_CODE_DOC);
-
-                //File file = Environment.getExternalStorageDirectory();
-                //File gpxfile = new File(file, FilenameFilter);
-                //Intent intent = new Intent(Intent.ACTION_VIEW);
-                //intent.setDataAndType(Uri.fromFile(file),"");
-                //startActivity(intent);
+                });
             }
-        });
+
+            @NonNull
+            @Override
+            public SAViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sa_recycle, parent, false);
+                return new SAViewHolder(view);
+            }
+        };
+
+        recyclerView.setAdapter(firebaseRecyclerAdapter);
+        firebaseRecyclerAdapter.startListening();
+    }
+
+    public static class SAViewHolder extends RecyclerView.ViewHolder {
+        View mView;
+
+        public SAViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            mView = itemView;
+        }
+
+        public void setSAHouse(String SAHouse) {
+            TextView saHouse = mView.findViewById(R.id.textView_SA);
+            saHouse.setText(SAHouse);
+        }
     }
 
 

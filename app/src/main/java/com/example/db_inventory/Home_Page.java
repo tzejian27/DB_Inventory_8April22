@@ -57,7 +57,6 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
 
 
-
     }
 
     @Override
@@ -75,19 +74,22 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 intent2house.putExtra("Users", role);
                 startActivity(intent2house);
                 break;
+
             //Intent to stock adjustment
             case R.id.btn_stock_adjustment:
                 //stock adjustment help calculate the quantity of stock on hand compare with book quantity
-                Toast.makeText(getApplicationContext(), "Stock adjustment still under construction", Toast.LENGTH_SHORT).show();
-                //Intent intent2stock_adjust = new Intent(Home_Page.this, Stock_Adjustment_Home.class);
-                //startActivity(intent2stock_adjust);
+                //Toast.makeText(getApplicationContext(), "Stock adjustment still under construction", Toast.LENGTH_SHORT).show();
+                Intent intent2stock_adjust = new Intent(getApplicationContext(), Stock_Adjustment_Home.class);
+                startActivity(intent2stock_adjust);
                 break;
+
             //Intent to Sale Order List
             case R.id.btn_sales_order:
                 Intent intent2salesorder = new Intent(Home_Page.this, Sales_Order.class);
                 intent2salesorder.putExtra("Users", role);
                 startActivity(intent2salesorder);
                 break;
+
             //Intent to Maintain User (only allow admin to use it)
             case R.id.btn_maintain_user:
                 //maintain user are only access by the admin
@@ -100,6 +102,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                     Toast.makeText(Home_Page.this, "You are not authorized to execute, Please Login as admin", Toast.LENGTH_LONG).show();
                 }
                 break;
+
             //Intent to Stock in (Check access right for user, admin no need)
             case R.id.btn_stock_in:
                 //allowed business to aware their storage
@@ -132,6 +135,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                     Toast.makeText(Home_Page.this, "Something go wrong, pls sign in again", Toast.LENGTH_LONG).show();
                 }
                 break;
+
             //Intent to Stock Out (Check access right for user, admin no need)
             case R.id.btn_stock_out:
                 if (role != null && role.equals("Admin")) {

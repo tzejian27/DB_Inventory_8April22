@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DB_Inventory">
         <activity
+            android:name=".Stock_Adjustment_List"
+            android:exported="false" />
+        <activity
+            android:name=".Stock_Adjustment_Home"
+            android:exported="false" />
+        <activity
             android:name=".StockMovement"
             android:exported="false" />
         <activity
