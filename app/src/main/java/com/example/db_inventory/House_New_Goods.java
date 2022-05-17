@@ -92,7 +92,7 @@ public class House_New_Goods extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String barcode = e1.getText().toString().trim();
-                String name = e2.getText().toString().trim();
+                String name = e2.getText().toString().trim().replace("/", "|");
                 String itemcode = e3.getText().toString().trim();
 
                 if (TextUtils.isEmpty(barcode)) {

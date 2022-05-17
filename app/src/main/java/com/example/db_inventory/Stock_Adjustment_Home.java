@@ -116,5 +116,14 @@ public class Stock_Adjustment_Home extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), Home_Page.class);
+        startActivity(intent);
+        finish();
+
+    }
+
 
 }

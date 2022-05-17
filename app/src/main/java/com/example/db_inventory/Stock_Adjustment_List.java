@@ -120,4 +120,13 @@ public class Stock_Adjustment_List extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), Stock_Adjustment_Home.class);
+        startActivity(intent);
+        finish();
+
+    }
 }

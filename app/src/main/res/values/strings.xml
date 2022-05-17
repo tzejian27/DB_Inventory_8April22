@@ -7,7 +7,7 @@
     <string name="inventory_list">Inventory List</string>
     <string name="stock_adjustment">Stock Adjustment</string>
     <string name="export_inventory">Export Inventory</string>
-    <string name="data_clear">Data Clear</string>
+    <string name="data_clear">Data Clear/Delete House</string>
     <string name="back">Back</string>
     <string name="new_house">New House</string>
     <string name="house_delete">House Delete</string>
