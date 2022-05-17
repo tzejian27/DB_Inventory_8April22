@@ -68,7 +68,7 @@ public class House_New_House extends AppCompatActivity {
     }
 
     private void add() {
-        String name = edt_house_name.getText().toString().trim();
+        String name = edt_house_name.getText().toString().trim().replace("/","|");
         String users = getIntent().getStringExtra("Users");
         myRef.child("Name").orderByChild("Name").equalTo(name).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -78,7 +78,7 @@ public class House_New_House extends AppCompatActivity {
 
 
                 final String key = myRef.getKey();
-                String name = edt_house_name.getText().toString().trim();
+                String name = edt_house_name.getText().toString().trim().replace("/","|");
                 // String house_ref=name + "/";
                 if (dataSnapshot.exists()) {
                     Toast.makeText(House_New_House.this, "Data Exists !", Toast.LENGTH_SHORT).show();
