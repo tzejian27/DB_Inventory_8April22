@@ -32,7 +32,7 @@ public class Inventory_step2 extends AppCompatActivity {
             byte[] itemcode = intent.getByteArrayExtra(ScanReader.SCAN_RESULT);
             Log.e("MainActivity", "itemcode = " + new String(itemcode));
             if (itemcode != null) {
-                String itemCodeScan = e2.getText().toString().trim();
+                String itemCodeScan = e2.getText().toString().trim().replace("/", "|");
                 itemCodeStr = new String(itemcode);
                 e2.setText(itemCodeStr);
 
@@ -93,8 +93,8 @@ public class Inventory_step2 extends AppCompatActivity {
                 Intent intent1 = getIntent();
                 String barcode = intent1.getStringExtra("barcode");
                 String name = intent1.getStringExtra("name");
-                final String itemName = e1.getText().toString().trim();
-                final String itemCode = e2.getText().toString().trim();
+                final String itemName = e1.getText().toString().trim().replace("/", "|");
+                final String itemCode = e2.getText().toString().trim().replace("/", "|");
                 String barcode_ref = barcode + "/";
 
                 if (itemName.isEmpty()) {

@@ -123,7 +123,7 @@ public class Stock_In_Scan extends AppCompatActivity {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String barcode = edt_barcode.getText().toString().trim();
+                String barcode = edt_barcode.getText().toString().trim().replace("/", "|");
                 if (barcode.isEmpty()) {
                     Toast.makeText(Stock_In_Scan.this, "Please enter/scan barcode  ", Toast.LENGTH_SHORT).show();
                 } else {
@@ -134,7 +134,7 @@ public class Stock_In_Scan extends AppCompatActivity {
     }
 
     private void add() {
-        final String barcode = edt_barcode.getText().toString().trim();
+        final String barcode = edt_barcode.getText().toString().trim().replace("/", "|");
         String users = getIntent().getStringExtra("Users");
         // final String barcode1 = e1.getText().toString().trim();
         //final String barcode_ref = barcode1 + "/";
@@ -230,7 +230,7 @@ public class Stock_In_Scan extends AppCompatActivity {
                                             String s1 = dataSnapshot.child("NoNeed").getValue().toString().trim();
 
                                             if (s1.equals("Need")) {
-                                                String barcode = edt_barcode.getText().toString().trim();
+                                                String barcode = edt_barcode.getText().toString().trim().replace("/", "|");
                                                 Intent intent = new Intent(Stock_In_Scan.this, StockIn_step2.class);
                                                 intent.putExtra("barcode", barcode);
                                                 intent.putExtra("name", name);
@@ -249,7 +249,7 @@ public class Stock_In_Scan extends AppCompatActivity {
                                                 cursor.moveToLast();
                                                 String username1 = cursor.getString(1);*/
 
-                                                String barcode = edt_barcode.getText().toString().trim();
+                                                String barcode = edt_barcode.getText().toString().trim().replace("/", "|");
                                                 Map dataMap = new HashMap();
                                                 dataMap.put("Key", key2);
                                                 dataMap.put("HouseKey", key);
@@ -294,7 +294,7 @@ public class Stock_In_Scan extends AppCompatActivity {
                                     // key2 =Long.toString(k);
                                     // databaseReference3=FirebaseDatabase.getInstance().getReference("House").child(key).push();
                                     //  key2 = databaseReference3.getKey();
-                                    final String barcode = edt_barcode.getText().toString().trim();
+                                    final String barcode = edt_barcode.getText().toString().trim().replace("/", "|");
                                     databaseReference.orderByChild("Barcode").equalTo(barcode).addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

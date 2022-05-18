@@ -166,7 +166,7 @@ public class StockOut_step3 extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                final String qty = e2_quantity_out.getText().toString().trim();
+                final String qty = e2_quantity_out.getText().toString().trim().replace("/", "|");
 
                 allowNRef = FirebaseDatabase.getInstance().getReference("Switch");
                 allowNRef.addListenerForSingleValueEvent(new ValueEventListener() {

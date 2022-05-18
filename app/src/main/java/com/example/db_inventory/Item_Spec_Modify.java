@@ -90,7 +90,7 @@ public class Item_Spec_Modify extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = e1.getText().toString().trim();
+                String name = e1.getText().toString().trim().replace("/", "|");
                 String price = e2.getText().toString().trim();
                 String cost = e3.getText().toString().trim();
 

@@ -123,7 +123,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String barcode = edt_barcode.getText().toString().trim();
+                String barcode = edt_barcode.getText().toString().trim().replace("/", "|");
                 if (barcode.isEmpty()) {
                     Toast.makeText(Stock_Out_Scan.this, "Please enter/scan barcode  ", Toast.LENGTH_SHORT).show();
                 } else {
@@ -135,7 +135,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
     }
 
     private void add() {
-        final String barcode = edt_barcode.getText().toString().trim();
+        final String barcode = edt_barcode.getText().toString().trim().replace("/", "|");
         String users = getIntent().getStringExtra("Users");
 
         if (TextUtils.isEmpty(barcode)) {
@@ -204,7 +204,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
 
                                 } else if (dataSnapshot3.exists()) {
 
-                                    final String barcode = edt_barcode.getText().toString().trim();
+                                    final String barcode = edt_barcode.getText().toString().trim().replace("/", "|");
                                     databaseReference.orderByChild("Barcode").equalTo(barcode).addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -74,7 +74,7 @@ public class Search extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                barcode = e1.getText().toString().trim();
+                barcode = e1.getText().toString().trim().replace("/", "|");
                 Intent intent = getIntent();
                 final String name = intent.getStringExtra("name");
                 final String key = intent.getStringExtra("Key");

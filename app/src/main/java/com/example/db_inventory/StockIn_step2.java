@@ -50,7 +50,7 @@ public class StockIn_step2 extends AppCompatActivity {
             byte[] itemcode = intent.getByteArrayExtra(ScanReader.SCAN_RESULT);
             Log.e("MainActivity", "itemcode = " + new String(itemcode));
             if (itemcode != null) {
-                String itemCodeScan = e4.getText().toString().trim();
+                String itemCodeScan = e4.getText().toString().trim().replace("/", "|");
                 itemCodeStr = new String(itemcode);
                 e4.setText(itemCodeStr);
 
@@ -124,10 +124,10 @@ public class StockIn_step2 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = getIntent();
                 String barcode = intent.getStringExtra("barcode");
-                String itemName = e1.getText().toString().trim();
+                String itemName = e1.getText().toString().trim().replace("/", "|");
                 String price = e2.getText().toString().trim();
                 String cost = e3.getText().toString().trim();
-                String itemcode = e4.getText().toString().trim();
+                String itemcode = e4.getText().toString().trim().replace("/", "|");
                 databaseReference2 = FirebaseDatabase.getInstance().getReference("House").child(key).push();
                 databaseReference2.keepSynced(true);
                 key2 = databaseReference2.getKey();

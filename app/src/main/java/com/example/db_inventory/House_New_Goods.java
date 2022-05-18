@@ -33,14 +33,14 @@ public class House_New_Goods extends AppCompatActivity {
             byte[] barcode = intent.getByteArrayExtra(ScanReader.SCAN_RESULT);
             Log.e("MainActivity", "barcode = " + new String(barcode));
             if (barcode != null) {
-                String barcodeScan = e1.getText().toString().trim();
-                String itemCodeScan = e3.getText().toString().trim();
+                String barcodeScan = e1.getText().toString().trim().replace("/", "|");
+                String itemCodeScan = e3.getText().toString().trim().replace("/", "|");
                 barcodeStr = new String(barcode);
-                if(TextUtils.isEmpty(barcodeScan) && TextUtils.isEmpty(itemCodeScan)){
+                if (TextUtils.isEmpty(barcodeScan) && TextUtils.isEmpty(itemCodeScan)) {
                     e1.setText(barcodeStr);
-                }else if(TextUtils.isEmpty(barcodeScan)){
+                } else if (TextUtils.isEmpty(barcodeScan)) {
                     e1.setText(barcodeStr);
-                }else{
+                } else {
                     e3.setText(barcodeStr);
                 }
 
@@ -91,9 +91,9 @@ public class House_New_Goods extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String barcode = e1.getText().toString().trim();
+                String barcode = e1.getText().toString().trim().replace("/", "|");
                 String name = e2.getText().toString().trim().replace("/", "|");
-                String itemcode = e3.getText().toString().trim();
+                String itemcode = e3.getText().toString().trim().replace("/", "|");
 
                 if (TextUtils.isEmpty(barcode)) {
                     e1.setError("Please enter barcode");

@@ -44,7 +44,7 @@ public class Search_House extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name = e1.getText().toString().trim();
+                name = e1.getText().toString().trim().replace("/", "|");
 
                 if (TextUtils.isEmpty(name)){
                     e1.setError("Empty Filled");

@@ -164,7 +164,7 @@ public class StockIn_step3 extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                final String qty = e2_quantity_in.getText().toString().trim();
+                final String qty = e2_quantity_in.getText().toString().trim().replace("/", "|");
 
 
                 if (qty.isEmpty()) {

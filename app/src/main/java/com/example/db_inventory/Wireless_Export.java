@@ -157,7 +157,7 @@ public class Wireless_Export extends AppCompatActivity {
         final TextView userName = findViewById(R.id.stock_take_username);
         userName.setText(cursor.getString(1));
 
-        String username1 = userName.getText().toString().trim();
+        String username1 = userName.getText().toString().trim().replace("/", "|");
 
         //Save stock take record
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");

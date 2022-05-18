@@ -53,7 +53,7 @@ public class House_Modify extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String editName = e1.getText().toString().trim();
+                String editName = e1.getText().toString().trim().replace("/", "|");
                 databaseReference.child("Name").setValue(editName);//.addOnCompleteListener(new OnCompleteListener<Void>() {
                 //   @Override
                 //  public void onComplete(@NonNull Task<Void> task) {

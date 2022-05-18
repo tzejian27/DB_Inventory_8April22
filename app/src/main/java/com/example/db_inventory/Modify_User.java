@@ -55,7 +55,7 @@ public class Modify_User extends AppCompatActivity {
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = et_username.getText().toString().trim();
+                String username = et_username.getText().toString().trim().replace("/", "|");
                 String current_password = et_c_password.getText().toString().trim();
                 String pass1 = et_pass1.getText().toString().trim();
                 String pass2 = et_pass2.getText().toString().trim();

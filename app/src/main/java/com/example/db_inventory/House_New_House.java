@@ -56,7 +56,7 @@ public class House_New_House extends AppCompatActivity {
         btn_enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = edt_house_name.getText().toString().trim();
+                String name = edt_house_name.getText().toString().trim().replace("/", "|");
                 if (name.isEmpty()) {
                     Toast.makeText(House_New_House.this, "Please enter Name ", Toast.LENGTH_SHORT).show();
                 } else {
