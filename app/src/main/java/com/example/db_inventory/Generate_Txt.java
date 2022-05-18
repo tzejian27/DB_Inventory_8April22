@@ -3,6 +3,7 @@ package com.example.db_inventory;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -145,17 +146,25 @@ public class Generate_Txt extends AppCompatActivity {
                     if (snapshot.exists()) {
                         NewGoods newGoods = new NewGoods();
 
-                        newGoods.setName(dataSnapshot.child("Name").getValue().toString());
-                        //If fatal exception at here, that mean some good miss their barcode (Firebase)
-                        newGoods.setBarcode(dataSnapshot.child("Barcode").getValue().toString());
-                        newGoods.setCost(dataSnapshot.child("Cost").getValue().toString());
-                        newGoods.setPrice(dataSnapshot.child("Price").getValue().toString());
+                        if(dataSnapshot.child("Name").exists()){
+                            newGoods.setName(dataSnapshot.child("Name").getValue().toString());
+                            //If fatal exception at here, that mean some good miss their barcode (Firebase)
+                            newGoods.setBarcode(dataSnapshot.child("Barcode").getValue().toString());
+                            newGoods.setCost(dataSnapshot.child("Cost").getValue().toString());
+                            newGoods.setPrice(dataSnapshot.child("Price").getValue().toString());
 
 
-                        Log.d("New_Goods", "Name: " + newGoods.getName());
-                        Log.d("New_Goods", "Barcode: " + newGoods.getBarcode());
-                        Log.d("New_Goods", "Cost: " + newGoods.getCost());
-                        Log.d("New_Goods", "Price: " + newGoods.getPrice());
+                            Log.d("New_Goods", "Name: " + newGoods.getName());
+                            Log.d("New_Goods", "Barcode: " + newGoods.getBarcode());
+                            Log.d("New_Goods", "Cost: " + newGoods.getCost());
+                            Log.d("New_Goods", "Price: " + newGoods.getPrice());
+                        }else{
+                            Toast.makeText(Generate_Txt.this, "Something wrong with new good data", Toast.LENGTH_SHORT).show();
+                            btn_excel_newGoods.setClickable(false);
+                            btn_excel_newGoods.setBackgroundColor(Color.parseColor("#DCDCDC"));
+                        }
+
+
 
                         newGoodsList.add(newGoods);
                     } else {

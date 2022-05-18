@@ -16,9 +16,37 @@
         android:text="Sales Order List"
         android:textSize="50px" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_SaleOrderList"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_SaleOrderList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total record :"/>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/record_SO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>

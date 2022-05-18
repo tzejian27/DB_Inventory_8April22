@@ -21,6 +21,7 @@ public class Sales_Order extends AppCompatActivity {
 
     DatabaseReference saleOrderRef;
     RecyclerView recyclerView;
+    TextView totalrecord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,8 @@ public class Sales_Order extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         saleOrderRef = FirebaseDatabase.getInstance().getReference("SalesOrderImport").child("Stock");
+
+        totalrecord = findViewById(R.id.record_SO);
 
     }
 
@@ -53,6 +56,7 @@ public class Sales_Order extends AppCompatActivity {
                 holder.setQuantity(model.getQuantity());
                 holder.setCost(model.getCost());
                 holder.setPrice(model.getPrice());
+                totalrecord.setText(String.valueOf(getItemCount()));
             }
 
             @NonNull
