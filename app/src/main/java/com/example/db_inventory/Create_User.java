@@ -62,7 +62,7 @@ public class Create_User extends AppCompatActivity {
 
         //create user
         btn_create.setOnClickListener(view -> {
-            //use replace to avoid using of "/" symbol
+            //replace "/" by symbol "|"
             String username = et_username.getText().toString().trim().replace("/", "|");
             String pass1 = et_pass1.getText().toString().trim();
             String pass2 = et_pass2.getText().toString().trim();
