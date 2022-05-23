@@ -31,7 +31,7 @@ public class House_List_Stock_In extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView totalRecord;
 
-    //Stock in House list
+    //STOCK IN'S HOUSE LIST
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +42,7 @@ public class House_List_Stock_In extends AppCompatActivity {
         LinearLayoutManager layoutManagerHouse = new LinearLayoutManager(this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManagerHouse);
-
+        //LINK TO FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference("House");
         databaseReference.keepSynced(true);
 
@@ -53,12 +53,14 @@ public class House_List_Stock_In extends AppCompatActivity {
 
         String users = getIntent().getStringExtra("Users");
 
+        //EXIT BUTTON
         btn_back.setOnClickListener(view -> {
             Intent intent2home = new Intent(House_List_Stock_In.this, Home_Page.class);
             intent2home.putExtra("Users", users);
             startActivity(intent2home);
         });
 
+        //SEARCH BUTTON
         btn_search.setOnClickListener(v -> {
             Intent page = new Intent(House_List_Stock_In.this, Search_House.class);
             page.putExtra("Users", users);
@@ -96,6 +98,7 @@ public class House_List_Stock_In extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             final String name = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString().trim();
 
+                            //ENTER STOCK IN OF SELECTED HOUSE
                             Intent intent = new Intent(getApplicationContext(), Stock_In_Scan.class);
                             intent.putExtra("Key", key);
                             intent.putExtra("name", name);
@@ -136,6 +139,7 @@ public class House_List_Stock_In extends AppCompatActivity {
 
     }
 
+    //VIEW HOLDER
     public static class HouseViewHolder extends RecyclerView.ViewHolder {
         View mView;
         TextView Name;

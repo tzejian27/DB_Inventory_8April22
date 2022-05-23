@@ -49,7 +49,7 @@ public class House_Menu extends AppCompatActivity {
         String users = getIntent().getStringExtra("Users");
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
 
-        //add inventory
+        //ADD INVENTORY
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +62,7 @@ public class House_Menu extends AppCompatActivity {
             }
         });
 
-        //inventory list
+        //INVENTORY LIST
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +75,7 @@ public class House_Menu extends AppCompatActivity {
             }
         });
 
-        //Generate Inventory excel
+        //GENERATE INVENTORY EXCEL
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +88,7 @@ public class House_Menu extends AppCompatActivity {
             }
         });
 
-        //Data Clear
+        //DATA CLEAR
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +117,7 @@ public class House_Menu extends AppCompatActivity {
             }
         });
 
-        //back button
+        //BACK BUTTON
         b5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +126,7 @@ public class House_Menu extends AppCompatActivity {
             }
         });
 
-        //no been used
+        //NO BEEN USED
         b6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

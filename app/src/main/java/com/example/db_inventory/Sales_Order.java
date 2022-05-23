@@ -29,10 +29,12 @@ public class Sales_Order extends AppCompatActivity {
         setContentView(R.layout.activity_sales_order);
         setTitle("eStock_Sales Order List");
 
+        //DECLARE AND LINK THE RECYCLE LIST
         recyclerView = findViewById(R.id.recyclerView_SaleOrderList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
+        //LINKED WITH SALE ORDER LIST IN FIREBASE
         saleOrderRef = FirebaseDatabase.getInstance().getReference("SalesOrderImport").child("Stock");
 
         totalrecord = findViewById(R.id.record_SO);
@@ -70,6 +72,7 @@ public class Sales_Order extends AppCompatActivity {
         firebaseRecyclerAdapter.startListening();
     }
 
+    //VIEW HOLDER
     public static class SaleOrderViewHolder extends RecyclerView.ViewHolder{
         View mView;
 

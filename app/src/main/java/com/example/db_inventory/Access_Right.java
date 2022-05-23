@@ -37,7 +37,7 @@ public class Access_Right extends AppCompatActivity {
 
     Button btn_confirm;
 
-    //User access right for eStock
+    //USER ACCESS RIGHT FOR ESTOCK
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +57,8 @@ public class Access_Right extends AppCompatActivity {
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
         arightRef.keepSynced(true);
 
-        //btn_confirm=findViewById(R.id.btn_access_right_confirm);
 
-        //set the new add switch status to database
+        //SET THE NEW ADD SWITCH STATUS TO DATABASE
         sw_new_house.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -193,11 +192,11 @@ public class Access_Right extends AppCompatActivity {
         arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //checking existing of switch table in firebase
-                //if not exist it will auto add the table to the firebase
+                //CHECKING EXISTING OF SWITCH TABLE IN FIREBASE
+                //IF NOT EXIST IT WILL AUTO ADD THE TABLE TO THE FIREBASE
                 if (snapshot.exists()) {
-                    //Get the switch data in the database
-                    //then show the switch status by checked or unchecked
+                    //GET THE SWITCH DATA IN THE DATABASE
+                    //THEN SHOW THE SWITCH STATUS BY CHECKED OR UNCHECKED
                     String sw_nh = snapshot.child("SW_NewHouse").getValue().toString().trim();
                     String sw_eSpec = snapshot.child("SW_EditSpec").getValue().toString().trim();
                     String sw_dc = snapshot.child("SW_DataClear").getValue().toString().trim();

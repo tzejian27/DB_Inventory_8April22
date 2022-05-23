@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//Export data to excel table
+//EXPORT DATA TO EXCEL TABLE
 public class Generate_Txt extends AppCompatActivity {
 
     private static final String TAG = "";
@@ -48,7 +48,7 @@ public class Generate_Txt extends AppCompatActivity {
     private static HSSFSheet hssfSheet2;
     private static HSSFRow hssfRow2;
     private static HSSFCell hssfCell2;
-    //creating a list of objects house
+    //CREATING A LIST OF OBJECTS HOUSE
     List<House_list_class> houseListClassList;
     List<NewGoods> newGoodsList;
     Button btn_excel_export, btn_excel_newGoods;
@@ -56,7 +56,7 @@ public class Generate_Txt extends AppCompatActivity {
     private DatabaseReference houseRef, newGoodRef;
     private File housefile;
 
-    //request permission
+    //REQUEST PERMISSION
     private static boolean isExternalStorageReadOnly() {
         String externalStorageState = Environment.getExternalStorageState();
         return Environment.MEDIA_MOUNTED_READ_ONLY.equals(externalStorageState);
@@ -120,7 +120,7 @@ public class Generate_Txt extends AppCompatActivity {
             }
         });
 
-        //Export Good List Excel
+        //EXPORT GOOD LIST EXCEL
         btn_excel_newGoods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,7 +137,7 @@ public class Generate_Txt extends AppCompatActivity {
 
     }
 
-    //get new good list data
+    //GET NEW GOOD LIST DATA
     private void fetchNewGoods() {
         newGoodRef.orderByChild("Barcode").addValueEventListener(new ValueEventListener() {
             @Override
@@ -148,7 +148,7 @@ public class Generate_Txt extends AppCompatActivity {
 
                         if(dataSnapshot.child("Name").exists()){
                             newGoods.setName(dataSnapshot.child("Name").getValue().toString());
-                            //If fatal exception at here, that mean some good miss their barcode (Firebase)
+                            //IF FATAL EXCEPTION AT HERE, THAT MEAN SOME GOOD MISS THEIR BARCODE (FIREBASE)
                             newGoods.setBarcode(dataSnapshot.child("Barcode").getValue().toString());
                             newGoods.setCost(dataSnapshot.child("Cost").getValue().toString());
                             newGoods.setPrice(dataSnapshot.child("Price").getValue().toString());
@@ -181,13 +181,13 @@ public class Generate_Txt extends AppCompatActivity {
         });
     }
 
-    //get house list data
+    //GET HOUSE LIST DATA
     private void fetchHouse() {
         houseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    //creating an object and setting to display
+                    //CREATING AN OBJECT AND SETTING TO DISPLAY
                     House_list_class houses = new House_list_class();
 
                     houses.setKey(snapshot.child("Key").getValue().toString());
@@ -195,14 +195,14 @@ public class Generate_Txt extends AppCompatActivity {
                     houses.setTotalQty(snapshot.child("TotalQty").getValue().toString());
                     houses.setTotalType(snapshot.child("TotalType").getValue().toString());
 
-                    //this just log details fetched from db(you can use Timber for logging
+                    //THIS JUST LOG DETAILS FETCHED FROM DB(YOU CAN USE TIMBER FOR LOGGING
                     Log.d("House", "Key: " + houses.getKey());
                     Log.d("House", "Name: " + houses.getName());
                     Log.d("House", "TotalQty: " + houses.getTotalQty());
                     Log.d("House", "TotalType: " + houses.getTotalType());
 
-                    /* The error before was cause by giving incorrect data type
-                    You were adding an object of type House yet the arraylist expects obejct of type DisabledUsers
+                    /* the error before was cause by giving incorrect data type
+                    you were adding an object of type house yet the arraylist expects object of type disabled users
                      */
                     houseListClassList.add(houses);
 
@@ -217,11 +217,11 @@ public class Generate_Txt extends AppCompatActivity {
         });
     }
 
-    //creating sheet, column, row of excel
+    //CREATING SHEET, COLUMN, ROW OF EXCEL
     public void exportNewGoods(List<NewGoods> newGoodsList) {
         HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
 
-        //Create House Excel sheet
+        //CREATE HOUSE EXCEL SHEET
         hssfSheet2 = hssfWorkbook.createSheet(EXCEL_SHEET_NAME2);
         hssfSheet2.setColumnWidth(0, (15 * 400));
         hssfSheet2.setColumnWidth(1, (15 * 400));
@@ -296,7 +296,7 @@ public class Generate_Txt extends AppCompatActivity {
     public void exportExcel(List<House_list_class> houseListClassList) {
         HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
 
-        //Create House Excel sheet
+        //CREATE HOUSE EXCEL SHEET
         hssfSheet = hssfWorkbook.createSheet(EXCEL_SHEET_NAME);
         hssfSheet.setColumnWidth(0, (15 * 400));
         hssfSheet.setColumnWidth(1, (15 * 400));
@@ -305,6 +305,7 @@ public class Generate_Txt extends AppCompatActivity {
 
         hssfRow = hssfSheet.createRow(0);
 
+        //SET FIRST CELL NAME
         hssfCell = hssfRow.createCell(0);
         hssfCell.setCellValue("Key");
 

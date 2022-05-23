@@ -49,23 +49,25 @@ public class Stock_Adjustment_Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_adjustment_home);
 
-        //declare recycle view
+        //DECLARE RECYCLE VIEW
         recyclerView = findViewById(R.id.recyclerView_SA);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        //declare total SA record
+        //DECLARE TOTAL SA RECORD
         totalrecord = findViewById(R.id.record_SA);
 
         setTitle("eStock_Stock Adjust List");
 
-        //declare the sa reference
+        //DECLARE THE SA REFERENCE
         SA_Ref = FirebaseDatabase.getInstance().getReference("StockAdjustmentNo");
         SA_Ref.keepSynced(true);
     }
 
     public void onStart() {
         super.onStart();
+
+        //GET AND SHOW THE STOCK ADJUSTMENT MADE IN SIDE SERVER
 
         FirebaseRecyclerOptions<SA_class> SA_Adapter = new FirebaseRecyclerOptions.Builder<SA_class>()
                 .setQuery(SA_Ref.orderByChild("SAHouse"), SA_class.class)
@@ -82,6 +84,7 @@ public class Stock_Adjustment_Home extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(getApplicationContext(), Stock_Adjustment_List.class);
+                        //PASSING THE PARENT NAME (STOCK ADJUSTMENT ID)
                         intent.putExtra("SAName", model.getSAHouse());
                         Toast.makeText(Stock_Adjustment_Home.this, "Entering " + model.getSAHouse(), Toast.LENGTH_SHORT).show();
                         startActivity(intent);
@@ -92,6 +95,7 @@ public class Stock_Adjustment_Home extends AppCompatActivity {
             @NonNull
             @Override
             public SAViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                //LINKING THE RECYCLE LAYOUT
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sa_recycle, parent, false);
                 return new SAViewHolder(view);
             }
@@ -101,6 +105,7 @@ public class Stock_Adjustment_Home extends AppCompatActivity {
         firebaseRecyclerAdapter.startListening();
     }
 
+    //VIEW HOLDER
     public static class SAViewHolder extends RecyclerView.ViewHolder {
         View mView;
 

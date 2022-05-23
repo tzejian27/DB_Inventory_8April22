@@ -30,6 +30,7 @@ public class Modify_User extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_user);
 
+        //LINK AND CONNECT
         et_username = findViewById(R.id.username_modify_user);
         et_c_password = findViewById(R.id.current_pass);
         et_pass1 = findViewById(R.id.pass_modify_user);
@@ -38,9 +39,11 @@ public class Modify_User extends AppCompatActivity {
         btn_confirm = findViewById(R.id.btn_confirm_mu);
         btn_cancel = findViewById(R.id.btn_cancel_mu);
 
+        //CONNECT TO USER FIREBASE
         usersRef = FirebaseDatabase.getInstance().getReference("Users").child("User");
         usersRef.keepSynced(true);
 
+        //GET DATA INTENT FROM MAINTAIN USER
         Intent intent = getIntent();
         final String name = intent.getStringExtra("Name");
         final String password = intent.getStringExtra("Password");

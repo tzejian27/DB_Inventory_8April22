@@ -33,7 +33,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //This is login page for admin
+        //THIS IS LOGIN PAGE FOR ADMIN
         setTitle("LoginPage (Admin)");
         txtName = findViewById(R.id.name_login);
         txtPw = findViewById(R.id.pass_login);
@@ -42,8 +42,8 @@ public class Login extends AppCompatActivity {
 
         progressbar_main = findViewById(R.id.progressbar_main);
 
-        // creating a new dbhandler class
-        // and passing our context to it.
+        // CREATING A NEW DBHANDLER CLASS
+        // AND PASSING OUR CONTEXT TO IT.
         dbHandler = new DBHandler(getApplicationContext());
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +54,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        //if already register, no need to login every time
+        //IF ALREADY REGISTER, NO NEED TO LOGIN EVERY TIME
         FirebaseAuth mAuth;
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
@@ -68,7 +68,7 @@ public class Login extends AppCompatActivity {
         String Username = txtName.getText().toString().trim();
         String Password = txtPw.getText().toString().trim();
 
-        //verify the login input provided
+        //VERIFY THE LOGIN INPUT PROVIDED
         if (Username.isEmpty()) {
             txtName.setError("Username is empty");
             txtName.requestFocus();
@@ -81,8 +81,8 @@ public class Login extends AppCompatActivity {
             return;
         }
 
-        //show the progress when button is clicked
-        //where users can view their login progress
+        //SHOW THE PROGRESS WHEN BUTTON IS CLICKED
+        //WHERE USERS CAN VIEW THEIR LOGIN PROGRESS
         progressbar_main.setVisibility(View.VISIBLE);
 
         LoginRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Admin");
@@ -97,27 +97,39 @@ public class Login extends AppCompatActivity {
                         username = Username;
                         String users = "Admin";
                         Intent intent = new Intent(Login.this, Home_Page.class);
+
+                        //INTENT USER'S ROLE AND NAME TO ANOTHER PAGE
                         intent.putExtra(Username, username);
                         intent.putExtra("Users", users);
                         intent.putExtra("Role", "admin");
 
-                        //Save user info to db
                         String userName = txtName.getText().toString();
                         String userRole = users;
+
+                        //SAVE USER INFO TO DB
+                        //WILL BE USED TO CHECK USER ACCESS RIGHT
                         dbHandler.addUserInfo(userName, userRole);
 
 
                         startActivity(intent);
                         finish();
+                        //EMPTY TEXT BOX WHEN LOGIN IS SUCCESS
                         txtName.setText("");
                         txtPw.setText("");
+
+                        //CLOSE LOGIN PROGRESS BAR
+                        //GIVING "LOGIN SUCCESSFULLY" FEEDBACK WHEN PASSWORD IS MATCH
                         progressbar_main.setVisibility(View.INVISIBLE);
+
                         Toast.makeText(getApplicationContext(), "Login Successfully", Toast.LENGTH_SHORT).show();
                     } else {
+
+                        //GIVING "Password incorrect ..." FEEDBACK WHEN PASSWORD IS NOT MATCH
                         Toast.makeText(Login.this, "Password incorrect ...", Toast.LENGTH_SHORT).show();
                         progressbar_main.setVisibility(View.INVISIBLE);
                     }
                 } else {
+                    //GIVING "Username incorrect ..." FEEDBACK WHEN USERNAME DOESN'T EXIST
                     Toast.makeText(Login.this, "Username incorrect ...", Toast.LENGTH_SHORT).show();
                     progressbar_main.setVisibility(View.INVISIBLE);
                 }

@@ -29,7 +29,7 @@ public class House_List extends AppCompatActivity {
     List<House_list_class> postList;
     TextView t1;
 
-    //HouseList to enter stock take and inventory menu
+    //HOUSELIST TO ENTER STOCK TAKE AND INVENTORY MENU
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +37,12 @@ public class House_List extends AppCompatActivity {
 
         t1 = findViewById(R.id.record_HL);
 
+        //DECLARE AND LINK
         recyclerView = findViewById(R.id.recyclerView_House);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
+        //LINK FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference("House");
         databaseReference.keepSynced(true);
 
@@ -51,6 +53,7 @@ public class House_List extends AppCompatActivity {
         setTitle("House List");
 
 
+        //EXIT HOUSE LIST BUTTON
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +63,7 @@ public class House_List extends AppCompatActivity {
             }
         });
 
+        //SEARCH HOUSE
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,12 +80,13 @@ public class House_List extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        //Get List  Posts from the database
+        //GET LIST  POSTS FROM THE DATABASE
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                //LINK TO ADAPTER "HouseList_Adapter"
                 postList = new ArrayList<>();
                 for (DataSnapshot postsnap : dataSnapshot.getChildren()) {
                     House_list_class list = postsnap.getValue(House_list_class.class);
@@ -89,7 +94,7 @@ public class House_List extends AppCompatActivity {
                 }
                 HouseList_Adapter = new HouseList_Adapter(House_List.this, postList);
                 recyclerView.setAdapter(HouseList_Adapter);
-                //Get total number of record
+                //GET TOTAL NUMBER OF RECORD
                 t1.setText(String.valueOf(HouseList_Adapter.getItemCount()));
             }
 

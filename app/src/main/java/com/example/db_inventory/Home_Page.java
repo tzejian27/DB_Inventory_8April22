@@ -38,6 +38,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_home_page);
         setTitle("eStock_Home Page");
 
+        //DECLARE AND LINK THE VARIABLE
         btn_stock_take = findViewById(R.id.btn_stock_take);
         btn_stock_adjustment = findViewById(R.id.btn_stock_adjustment);
         btn_sales_order = findViewById(R.id.btn_sales_order);
@@ -54,6 +55,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         btn_sales_order.setOnClickListener(this);
         btn_maintain_users.setOnClickListener(this);
 
+        //LINKING TO ACCESS RIGHT FIREBASE PARENT
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
 
 
@@ -61,6 +63,8 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
+
+        //GET USER ROLE
         final DBHandler dbHandler = new DBHandler(this);
         Cursor cursor = dbHandler.fetch();
         cursor.moveToLast();
@@ -68,46 +72,49 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
 
         switch (view.getId()) {
 
-            //Intent to Stock Take
+            //INTENT TO STOCK TAKE PAGE
             case R.id.btn_stock_take:
                 Intent intent2house = new Intent(Home_Page.this, MainActivity.class);
                 intent2house.putExtra("Users", role);
                 startActivity(intent2house);
                 break;
 
-            //Intent to stock adjustment
+            //INTENT TO STOCK ADJUSTMENT PAGE
+            //STOCK ADJUSTMENT HELP CALCULATE THE QUANTITY OF STOCK ON HAND COMPARE WITH BOOK QUANTITY
+            //THE DATA AND CALCULATION WILL BE DONE IN SIDE SERVER
             case R.id.btn_stock_adjustment:
-                //stock adjustment help calculate the quantity of stock on hand compare with book quantity
-                //Toast.makeText(getApplicationContext(), "Stock adjustment still under construction", Toast.LENGTH_SHORT).show();
                 Intent intent2stock_adjust = new Intent(getApplicationContext(), Stock_Adjustment_Home.class);
                 startActivity(intent2stock_adjust);
                 break;
 
             //Intent to Sale Order List
+            //THE SALE ORDER DATA CAN BE IMPORT BY EXCEL FILE AT SIDE SERVER
             case R.id.btn_sales_order:
                 Intent intent2salesorder = new Intent(Home_Page.this, Sales_Order.class);
                 intent2salesorder.putExtra("Users", role);
                 startActivity(intent2salesorder);
                 break;
 
-            //Intent to Maintain User (only allow admin to use it)
+            //INTENT TO MAINTAIN USER (ONLY ALLOW ADMIN TO USE IT)
             case R.id.btn_maintain_user:
-                //maintain user are only access by the admin
+                //MAINTAIN ARE ONLY ACCESS BY THE ADMIN
                 if (role != null && role.equals("Admin")) {
                     Intent intent2Maintain = new Intent(Home_Page.this, Maintain.class);
                     intent2Maintain.putExtra("Users", role);
                     startActivity(intent2Maintain);
                 } else {
-                    //when there is not admin role received then show error message where not allowed user to enter
+                    //WHEN THERE IS NOT ADMIN ROLE RECEIVED THEN SHOW ERROR MESSAGE WHERE NOT ALLOWED USER TO ENTER
                     Toast.makeText(Home_Page.this, "You are not authorized to execute, Please Login as admin", Toast.LENGTH_LONG).show();
                 }
                 break;
 
-            //Intent to Stock in (Check access right for user, admin no need)
+            //INTENT TO STOCK IN (CHECK ACCESS RIGHT FOR USER, ADMIN NO NEED)
             case R.id.btn_stock_in:
-                //allowed business to aware their storage
-                //it record the quantity of stock coming in
-
+                //ALLOWED BUSINESS TO AWARE THEIR STORAGE
+                //IT RECORD THE QUANTITY OF STOCK COMING IN
+                //ADMIN ARE ALWAYS ALLOWED TO MAKE THE STOCK IN
+                //WHEN LOGIN USER'S ROLE ARE USER
+                //IT CHECK THE ACCESS RIGHT FOR USER TO ENTER STOCK IN
                 if (role != null && role.equals("Admin")) {
                     Intent intent2HouseList = new Intent(Home_Page.this, House_List_Stock_In.class);
                     intent2HouseList.putExtra("Users", role);
@@ -138,6 +145,11 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
 
             //Intent to Stock Out (Check access right for user, admin no need)
             case R.id.btn_stock_out:
+                //ALLOWED BUSINESS TO AWARE THEIR STORAGE
+                //IT RECORD THE QUANTITY OF STOCK GOING OUT
+                //ADMIN ARE ALWAYS ALLOWED TO MAKE THE STOCK OUT
+                //WHEN LOGIN USER'S ROLE ARE USER
+                //IT CHECK THE ACCESS RIGHT FOR USER TO ENTER STOCK IN
                 if (role != null && role.equals("Admin")) {
                     Intent intent2HouseList2 = new Intent(Home_Page.this, House_List_Stock_Out.class);
                     intent2HouseList2.putExtra("Users", role);
@@ -165,15 +177,14 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                     Toast.makeText(Home_Page.this, "Something go wrong, pls sign in again", Toast.LENGTH_LONG).show();
                 }
 
-                //record the quantity of stock going out
-                //Toast.makeText(getApplicationContext(),"Stock Out still under construction",Toast.LENGTH_SHORT).show();
+                //RECORD THE QUANTITY OF STOCK GOING OUT
                 break;
         }
     }
 
     @Override
     public void onBackPressed() {
-        //Logout confirmation
+        //LOGOUT CONFIRMATION
         AlertDialog.Builder builder = new AlertDialog.Builder(Home_Page.this)
                 .setTitle("Logout")
                 .setCancelable(false)

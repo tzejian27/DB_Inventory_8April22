@@ -32,7 +32,7 @@ public class Login_user extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_user);
 
-        //This is login page for user
+        //THIS IS LOGIN PAGE FOR USER
         setTitle("LoginPage (User)");
         txtName = findViewById(R.id.name_login_user);
         txtPw = findViewById(R.id.pass_login_user);
@@ -41,8 +41,8 @@ public class Login_user extends AppCompatActivity {
 
         progressbar_main = findViewById(R.id.progressbar_main_user);
 
-        // creating a new dbhandler class
-        // and passing our context to it.
+        // CREATING A NEW DBHANDLER CLASS
+        // AND PASSING OUR CONTEXT TO IT.
         dbHandler = new DBHandler(getApplicationContext());
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +58,7 @@ public class Login_user extends AppCompatActivity {
         String Username = txtName.getText().toString().trim();
         String Password = txtPw.getText().toString().trim();
 
-        //verify the login input provided
+        //VERIFY THE LOGIN INPUT PROVIDED
         if (Username.isEmpty()) {
             txtName.setError("Username is empty");
             txtName.requestFocus();
@@ -71,47 +71,54 @@ public class Login_user extends AppCompatActivity {
             return;
         }
 
-        //show the progress when button is clicked
-        //where users can view their login progress
+        //SHOW THE PROGRESS WHEN BUTTON IS CLICKED
+        //WHERE USERS CAN VIEW THEIR LOGIN PROGRESS
         progressbar_main.setVisibility(View.VISIBLE);
 
         LoginRef = FirebaseDatabase.getInstance().getReference().child("Users").child("User");
 
-        //match the username and get the password for the current username
+        //MATCH THE USERNAME AND GET THE PASSWORD FOR THE CURRENT USERNAME
         LoginRef.child(Username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //check isn't the username exist
+                //CHECK ISN'T THE USERNAME EXIST
                 if (snapshot.exists()) {
                     String pwd = snapshot.child("Password").getValue().toString();
 
-                    //matching the password
+                    //MATCHING THE PASSWORD
                     if (Password.equals(pwd)) {
                         username = Username;
                         String users = "User";
-                        //passing needed data to the home page
-                        //role will be used by application to check whether user are allowed with the function
+                        //PASSING NEEDED DATA TO THE HOME PAGE
+                        //ROLE WILL BE USED BY APPLICATION TO CHECK WHETHER USER ARE ALLOWED WITH THE FUNCTION
                         Intent intent = new Intent(getApplicationContext(), Home_Page.class);
                         intent.putExtra(Username, username);
                         intent.putExtra("Users", users);
                         intent.putExtra("Role", "user");
 
-                        //Save user info to db
+                        //SAVE USER INFO TO DB
                         String userName = txtName.getText().toString();
                         String userRole = users;
                         dbHandler.addUserInfo(userName, userRole);
 
                         startActivity(intent);
                         finish();
+
+                        //EMPTY TEXT BOX WHEN LOGIN IS SUCCESS
                         txtName.setText("");
                         txtPw.setText("");
+
+                        //CLOSE LOGIN PROGRESS BAR
+                        //GIVING "LOGIN SUCCESSFULLY" FEEDBACK WHEN PASSWORD IS MATCH
                         progressbar_main.setVisibility(View.INVISIBLE);
                         Toast.makeText(getApplicationContext(), "Login Successfully", Toast.LENGTH_SHORT).show();
                     } else {
+                        //GIVING "Password incorrect ..." FEEDBACK WHEN PASSWORD IS NOT MATCH
                         Toast.makeText(getApplicationContext(), "Password incorrect ...", Toast.LENGTH_SHORT).show();
                         progressbar_main.setVisibility(View.INVISIBLE);
                     }
                 } else {
+                    //GIVING "Username incorrect ..." FEEDBACK WHEN USERNAME DOESN'T EXIST
                     Toast.makeText(getApplicationContext(), "Username incorrect ...", Toast.LENGTH_SHORT).show();
                     progressbar_main.setVisibility(View.INVISIBLE);
                 }

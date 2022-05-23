@@ -35,7 +35,7 @@ public class House_List2 extends AppCompatActivity {
     String Switch1;
     String Switch2;
 
-    //HouseList when making search
+    //HOUSELIST WHEN MAKING ***SEARCH***
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,11 @@ public class House_List2 extends AppCompatActivity {
         final String name = intent.getStringExtra("name");
         String users = getIntent().getStringExtra("Users");
 
-        //Search for house name start with "Name"
+        //SEARCH FOR HOUSE NAME START WITH "NAME"
+        //WE ARE USING START AT AND END AT TO MAKE SURE SEARCH METHOD
+        //CAN SEARCH ONLY BY FIRST CHARACTER
+
+        /*BUT STILL CANNOT DETECT BOTH UPPER AND LOWER CASE, SO WHEN SEARCH VARIABLE ARE RETURN RESULT FROM SAME UPPER/LOWER CASE*/
         FirebaseRecyclerOptions<House_list_class> houseAdapter = new FirebaseRecyclerOptions.Builder<House_list_class>()
                 .setQuery(databaseReference.orderByChild("Name").startAt(name).endAt(name+"~"), House_list_class.class)
                 .setLifecycleOwner(this)
@@ -109,7 +113,7 @@ public class House_List2 extends AppCompatActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(House_List2.this);
                     builder.setTitle("Select Option");
                     builder.setItems(option, (dialog, position1) -> {
-                        //Enter house
+                        //ENTER HOUSE
                         if (position1 == 0) {
                             Intent intent1 = new Intent(House_List2.this, House_Menu.class);
                             intent1.putExtra("Key", key);
@@ -119,7 +123,7 @@ public class House_List2 extends AppCompatActivity {
                             finish();
 
                         }
-                        //Enter Modify House Name
+                        //ENTER MODIFY HOUSE NAME
                         if (position1 == 1) {
                             if(Switch1.equals("On")){
                                 Intent intent1 = new Intent(House_List2.this, House_Modify.class);
@@ -133,7 +137,7 @@ public class House_List2 extends AppCompatActivity {
                             }
 
                         }
-                        //Enter Stock In
+                        //ENTER STOCK IN
                         if (position1 == 2) {
                             Intent intent1 = new Intent(House_List2.this, Stock_In_Scan.class);
                             intent1.putExtra("Key", key);
@@ -142,7 +146,7 @@ public class House_List2 extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Enter " + houseName, Toast.LENGTH_SHORT).show();
                             startActivity(intent1);
                         }
-                        //Enter Stock Out
+                        //ENTER STOCK OUT
                         if (position1 == 3) {
                             Intent intent1 = new Intent(House_List2.this, Stock_Out_Scan.class);
                             intent1.putExtra("Key", key);

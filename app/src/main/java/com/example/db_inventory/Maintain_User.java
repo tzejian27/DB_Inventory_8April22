@@ -33,10 +33,10 @@ public class Maintain_User extends AppCompatActivity {
     DatabaseReference userRef, adminRef;
     RecyclerView recyclerView_user, recyclerView_admin;
 
-    //Show admin and user list
-    //modify or delete user account
-    //create user account
-    //Modify access right
+    //SHOW ADMIN AND USER LIST
+    //MODIFY OR DELETE USER ACCOUNT
+    //CREATE USER ACCOUNT
+    //MODIFY ACCESS RIGHT
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +47,7 @@ public class Maintain_User extends AppCompatActivity {
         setTitle("eStock_Maintain User");
 
         //Connecting recycle view with data by using adapter
+        //USER'S RECYCLE VIEW DATA
         recyclerView_user = findViewById(R.id.recycleView_User);
         LinearLayoutManager layoutManagerUser = new LinearLayoutManager(this);
         layoutManagerUser.setStackFromEnd(true);
@@ -54,6 +55,7 @@ public class Maintain_User extends AppCompatActivity {
         recyclerView_user.setHasFixedSize(true);
         recyclerView_user.setLayoutManager(layoutManagerUser);
 
+        //ADMIN'S RECYCLE VIEW DATA
         recyclerView_admin = findViewById(R.id.recycleView_Admin);
         LinearLayoutManager layoutManagerAdmin = new LinearLayoutManager(this);
         layoutManagerAdmin.setStackFromEnd(true);
@@ -61,13 +63,16 @@ public class Maintain_User extends AppCompatActivity {
         recyclerView_admin.setHasFixedSize(true);
         recyclerView_admin.setLayoutManager(layoutManagerAdmin);
 
+        //CONNECT TO USER FIREBASE
         userRef = FirebaseDatabase.getInstance().getReference("Users").child("User");
         userRef.keepSynced(true);
+        //CONNECT TO ADMIN FIREBASE
         adminRef = FirebaseDatabase.getInstance().getReference("Users").child("Admin");
         adminRef.keepSynced(true);
 
         String users = getIntent().getStringExtra("Users");
 
+        //INTENT TO CREATE NEW USER
         btn_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,6 +83,7 @@ public class Maintain_User extends AppCompatActivity {
             }
         });
 
+        //INTENT TO USER ACCESS RIGHT
         btn_access.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,6 +129,7 @@ public class Maintain_User extends AppCompatActivity {
                                         "Delete", "Modify"
                                 };
 
+                                //DIALOG ASKING FOR DELETE CONFIRMATION
                                 AlertDialog.Builder builder = new AlertDialog.Builder(Maintain_User.this);
                                 builder.setTitle("Select Option");
                                 builder.setItems(option1, new DialogInterface.OnClickListener() {
@@ -155,6 +162,7 @@ public class Maintain_User extends AppCompatActivity {
                                             deleteBuilder.show();
                                         }
 
+                                        //INTENT TO USER DATA MODIFY
                                         if (position == 1) {
 
                                             Toast.makeText(Maintain_User.this, "Modify " + key, Toast.LENGTH_SHORT).show();

@@ -51,27 +51,27 @@ public class Create_User extends AppCompatActivity {
 
         String[] roles = {"user", "admin"};
 
-        // Creating an Array Adapter to populate the spinner with the data in the string resources
+        // CREATING AN ARRAY ADAPTER TO POPULATE THE SPINNER WITH THE DATA IN THE STRING RESOURCES
         ArrayAdapter<String> addRole = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, roles);
-        // Specify the layout to use when the list of choices appears
+        // SPECIFY THE LAYOUT TO USE WHEN THE LIST OF CHOICES APPEARS
         addRole.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
+        // APPLY THE ADAPTER TO THE SPINNER
         role.setAdapter(addRole);
 
         String users = getIntent().getStringExtra("Users");
 
-        //create user
+        //CREATE USER
         btn_create.setOnClickListener(view -> {
-            //replace "/" by symbol "|"
+            //REPLACE "/" BY SYMBOL "|"
             String username = et_username.getText().toString().trim().replace("/", "|");
             String pass1 = et_pass1.getText().toString().trim();
             String pass2 = et_pass2.getText().toString().trim();
             String roleSP = role.getSelectedItem().toString().trim();
 
-            //Set ref so username will be parent to the data
+            //SET REF SO USERNAME WILL BE PARENT TO THE DATA
             String nameRef = username + "/";
 
-            //check data existing when button clicked
+            //CHECK DATA EXISTING WHEN BUTTON CLICKED
             if (username.isEmpty()) {
                 et_username.setError("Username is required");
                 et_username.requestFocus();
@@ -96,8 +96,8 @@ public class Create_User extends AppCompatActivity {
                 et_pass1.requestFocus();
             } else {
                 if (roleSP.equals("admin")) {
-                    //separate the data stored (Admin/User)
-                    //Admin account
+                    //SEPARATE THE DATA STORED (ADMIN/USER)
+                    //ADMIN ACCOUNT
                     adminRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -111,7 +111,7 @@ public class Create_User extends AppCompatActivity {
                                 dataMap2.put(nameRef + "/", dataMap1);
                                 adminRef.updateChildren(dataMap2);
 
-                                //Set text as empty after success
+                                //SET TEXT AS EMPTY AFTER SUCCESS
                                 et_username.setText("");
                                 et_pass1.setText("");
                                 et_pass2.setText("");
@@ -131,7 +131,7 @@ public class Create_User extends AppCompatActivity {
                     });
 
                 } else if (roleSP.equals("user")) {
-                    //User account
+                    //USER ACCOUNT
                     usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -146,7 +146,7 @@ public class Create_User extends AppCompatActivity {
                                 dataMap2.put(nameRef , dataMap1);*/
                                 usersRef.child(username).updateChildren(dataMap1);
 
-                                //Set text as empty after success
+                                //SET TEXT AS EMPTY AFTER SUCCESS
                                 et_username.setText("");
                                 et_pass1.setText("");
                                 et_pass2.setText("");

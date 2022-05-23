@@ -40,7 +40,7 @@ public class House_Setting extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Switch");
         databaseReference.keepSynced(true);
-        //show data by switch
+        //SHOW DATA BY SWITCH
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

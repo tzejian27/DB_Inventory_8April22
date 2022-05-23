@@ -13,7 +13,7 @@ import androidx.core.app.ActivityCompat;
 public class Login_Menu extends AppCompatActivity {
     Button btn_admin, btn_user;
 
-    //select type of user to login
+    //SELECT TYPE OF USER TO LOGIN
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +22,8 @@ public class Login_Menu extends AppCompatActivity {
         btn_admin = findViewById(R.id.btn_admin_login);
         btn_user = findViewById(R.id.btn_user_login);
 
-        //intent to the admin login page
-        //only admin are allowed to make modify on maintain user
+        //INTENT TO THE ADMIN LOGIN PAGE
+        //ONLY ADMIN ARE ALLOWED TO MAKE MODIFY ON MAINTAIN USER
         btn_admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,7 +32,7 @@ public class Login_Menu extends AppCompatActivity {
             }
         });
 
-        //intent to the user login page
+        //INTENT TO THE USER LOGIN PAGE
         btn_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,6 +45,7 @@ public class Login_Menu extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
+        //DIALOG ASKING FOR EXIT WHEN USER PRESS ON BACK
 
         AlertDialog.Builder builder = new AlertDialog.Builder(Login_Menu.this)
                 .setTitle("Exit")

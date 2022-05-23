@@ -44,6 +44,7 @@ public class House_New_House extends AppCompatActivity {
 
         String users = getIntent().getStringExtra("Users");
 
+        //CANCEL/EXIT "ADD NEW HOUSE"
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +54,7 @@ public class House_New_House extends AppCompatActivity {
             }
         });
 
+        //ADD NEW HOUSE
         btn_enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,13 +75,10 @@ public class House_New_House extends AppCompatActivity {
         myRef.child("Name").orderByChild("Name").equalTo(name).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // for (DataSnapshot data : dataSnapshot.getChildren()) {
-                // String name=d,ataSnapshot.child("House_Name").getValue().toString();
-
-
                 final String key = myRef.getKey();
                 String name = edt_house_name.getText().toString().trim().replace("/","|");
-                // String house_ref=name + "/";
+
+                //CHECK IS HOUSE ALREADY EXIST
                 if (dataSnapshot.exists()) {
                     Toast.makeText(House_New_House.this, "Data Exists !", Toast.LENGTH_SHORT).show();
                 } else {
@@ -89,24 +88,14 @@ public class House_New_House extends AppCompatActivity {
                     dataMap.put("TotalType", TotalType);
                     dataMap.put("Key", key);
 
-
-                    // Map dataMap2 = new HashMap();
-                    //dataMap2.put(house_ref + "/" ,dataMap);
-
-                    myRef.updateChildren(dataMap);//.addOnCompleteListener(new OnCompleteListener() {
-                    //  @Override
-                    //   public void onComplete(@NonNull Task task) {
-                    //      if(task.isSuccessful()){
-                    //   String name = e1.getText().toString().trim();
+                    //ADDING THE NEW HOUSE WHEN HOUSE NOT EXISTED
+                    myRef.updateChildren(dataMap);
                     Intent intent = new Intent(House_New_House.this, House_Menu.class);
                     intent.putExtra("name", name);
                     intent.putExtra("Key", key);
                     intent.putExtra("Users", users);
                     startActivity(intent);
                     finish();
-                    //         }
-                    //     }
-                    //   });
                 }
             }
 

@@ -16,8 +16,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-//maintain page
-//maintain user, setting, add new house
+//MAINTAIN PAGE
+//MAINTAIN USER, SETTING, ADD NEW HOUSE
 public class Maintain extends AppCompatActivity implements View.OnClickListener{
 
     Button b1, b2, b3;
@@ -32,6 +32,7 @@ public class Maintain extends AppCompatActivity implements View.OnClickListener{
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
         setTitle("eStock_Maintain");
 
+        //DECLARE AND LINKING THE BUTTON
         b1 = findViewById(R.id.btn_new_house_M);
         b2 = findViewById(R.id.btn_user_M);
         b3 = findViewById(R.id.btn_setting_M);
@@ -43,12 +44,15 @@ public class Maintain extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
+        //GET THE USER ROLE
         final DBHandler dbHandler = new DBHandler(this);
         Cursor cursor = dbHandler.fetch();
         cursor.moveToLast();
         String role = cursor.getString(2);
 
         switch (view.getId()) {
+            //ADMIN ALWAYS ALLOWED TO ENTER
+            //CHECKING ADD NEW HOUSE'S ACCESS RIGHT
             case R.id.btn_new_house_M:
                 if (role != null && role.equals("Admin")) {
                     Intent intent2new_house = new Intent(Maintain.this, House_New_House.class);
@@ -81,19 +85,19 @@ public class Maintain extends AppCompatActivity implements View.OnClickListener{
                 break;
 
             case R.id.btn_user_M:
-                //maintain user are only access by the admin
+                //MAINTAIN USER ARE ONLY ACCESS BY THE ADMIN
                 if (role != null && role.equals("Admin")) {
                     Intent intent2MaintainUser = new Intent(Maintain.this, Maintain_User.class);
                     intent2MaintainUser.putExtra("Users", role);
                     startActivity(intent2MaintainUser);
                 } else {
-                    //when there is not admin role received then show error message where not allowed user to enter
+                    //WHEN THERE IS NOT ADMIN ROLE RECEIVED THEN SHOW ERROR MESSAGE WHERE NOT ALLOWED USER TO ENTER
                     Toast.makeText(Maintain.this, "You are not authorized to execute, Please Login as admin", Toast.LENGTH_LONG).show();
                 }
                 break;
 
             case R.id.btn_setting_M:
-
+                //ENTER SETTING PAGE
                 if (role != null && role.equals("Admin")) {
                     Intent intent2house_setting = new Intent(Maintain.this, House_Setting.class);
                     intent2house_setting.putExtra("Users", role);

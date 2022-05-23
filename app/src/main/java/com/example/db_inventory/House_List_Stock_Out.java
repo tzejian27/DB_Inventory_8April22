@@ -29,7 +29,7 @@ public class House_List_Stock_Out extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView totalrecord;
 
-    //Stock Out House list
+    //STOCK OUT HOUSE LIST
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +41,7 @@ public class House_List_Stock_Out extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManagerHouse);
 
+        //LINK TO FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference("House");
         databaseReference.keepSynced(true);
 
@@ -51,12 +52,14 @@ public class House_List_Stock_Out extends AppCompatActivity {
 
         String users = getIntent().getStringExtra("Users");
 
+        //EXIT BUTTON
         btn_back.setOnClickListener(view -> {
             Intent intent2home = new Intent(House_List_Stock_Out.this, Home_Page.class);
             intent2home.putExtra("Users", users);
             startActivity(intent2home);
         });
 
+        //SEARCH BUTTON
         btn_search.setOnClickListener(v -> {
             Intent page = new Intent(House_List_Stock_Out.this, Search_House.class);
             page.putExtra("Users", users);
@@ -93,6 +96,7 @@ public class House_List_Stock_Out extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             final String name = dataSnapshot.child("Name").getValue().toString().trim();
 
+                            //ENTER STOCK OUT OF SELECTED HOUSE
                             Intent intent = new Intent(getApplicationContext(), Stock_Out_Scan.class);
                             intent.putExtra("Key", key);
                             intent.putExtra("name", name);
