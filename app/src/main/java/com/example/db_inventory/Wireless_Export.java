@@ -145,13 +145,14 @@ public class Wireless_Export extends AppCompatActivity {
 
     }
 
-    //export Stock take to firebase
+    //EXPORT STOCK TAKE TO FIREBASE
     private void ExportStockTake(){
         Intent intent = getIntent();
         final String houseName = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
 
         final DBHandler dbHandler = new DBHandler(this);
+        //GET USERNAME
         Cursor cursor = dbHandler.fetch();
         cursor.moveToLast();
         final TextView userName = findViewById(R.id.stock_take_username);
@@ -159,10 +160,10 @@ public class Wireless_Export extends AppCompatActivity {
 
         String username1 = userName.getText().toString().trim().replace("/", "|");
 
-        //Save stock take record
+        //SAVE STOCK TAKE RECORD
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         currentDateandTime2 = sdf.format(new Date());
-        //set default status
+        //SET DEFAULT STATUS
         String status = "pending";
 
         houseRef.orderByChild("HouseKey").equalTo(key).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -194,7 +195,7 @@ public class Wireless_Export extends AppCompatActivity {
                         dataMap.put("Username", ST_User);
                     }
 
-                    //save stock take record
+                    //SAVE STOCK TAKE RECORD
                     stockTake_no.setText("StockTake_" + houseName + "_" + currentDateandTime2);
                     String recordName = stockTake_no.getText().toString().trim();
                     dataMap.put("Barcode", ST_Barcode);
@@ -212,7 +213,7 @@ public class Wireless_Export extends AppCompatActivity {
 
                 }
 
-                //record a pending status in "InventoryStockTakeNo"
+                //RECORD A PENDING STATUS IN "INVENTORYSTOCKTAKENO"
                 stockTake_no.setText("StockTake_" + houseName + "_" + currentDateandTime2);
                 String recordName = stockTake_no.getText().toString().trim();
                 Map statusMap = new HashMap();
@@ -243,7 +244,7 @@ public class Wireless_Export extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    //creating an object and setting to display
+                    //CREATING AN OBJECT AND SETTING TO DISPLAY
                     HouseInventory houses = new HouseInventory();
                     houses.setBarcode(snapshot.child("Barcode").getValue().toString());
                     houses.setQuantity(snapshot.child("Quantity").getValue().toString());
@@ -267,37 +268,13 @@ public class Wireless_Export extends AppCompatActivity {
                     }
 
 
-                    //Save stock take record
+                    //SAVE STOCK TAKE RECORD
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
                     currentDateandTime2 = sdf.format(new Date());
 
                     Intent intent = getIntent();
                     final String name = intent.getStringExtra("name");
                     String status = "Pending";
-
-                    /*String ST_Barcode = snapshot.child("Barcode").getValue().toString();
-                    String ST_Qty= snapshot.child("Quantity").getValue().toString();
-                    String ST_ItemName = snapshot.child("ItemName").getValue().toString();
-                    String ST_Price= snapshot.child("Price").getValue().toString();
-                    String ST_Cost = snapshot.child("Cost").getValue().toString();
-                    String ST_HouseKey= snapshot.child("HouseKey").getValue().toString();
-                    String ST_Date_and_Time = snapshot.child("Date_and_Time").getValue().toString();*/
-
-                    /*stockTake_no.setText("StockTake_" + name + "_" + currentDateandTime2);
-                    String recordName = stockTake_no.getText().toString().trim();
-                    Map dataMap = new HashMap();
-                    dataMap.put("Barcode", snapshot.child("Barcode").getValue().toString());
-                    dataMap.put("Qty", snapshot.child("Quantity").getValue().toString());
-                    dataMap.put("ItemName", snapshot.child("ItemName").getValue().toString());
-                    dataMap.put("Price", snapshot.child("Price").getValue().toString());
-                    dataMap.put("Cost", snapshot.child("Cost").getValue().toString());
-                    dataMap.put("HouseKey", snapshot.child("HouseKey").getValue().toString());
-                    dataMap.put("DateAndTime", snapshot.child("Date_and_Time").getValue().toString());
-                    dataMap.put("Status", status);
-                    dataMap.put("StorageLocation", name);
-
-                    stockTakeRef.child(recordName).child(snapshot.child("Barcode").getValue().toString()).updateChildren(dataMap);*/
-
                     Log.d("House", "HouseKey: " + houses.getHouseKey());
 
                     /* The error before was cause by giving incorrect data type

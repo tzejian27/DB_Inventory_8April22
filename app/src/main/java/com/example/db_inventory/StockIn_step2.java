@@ -43,7 +43,7 @@ public class StockIn_step2 extends AppCompatActivity {
     private String itemCodeStr;
     public static String itemcode;
 
-    //set scan input to edit text
+    //SET SCAN INPUT TO EDIT TEXT
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -58,7 +58,7 @@ public class StockIn_step2 extends AppCompatActivity {
         }
     };
 
-    //Stock in item detail
+    //STOCK IN ITEM DETAIL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +77,7 @@ public class StockIn_step2 extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
         currentDateandTime = sdf.format(new Date());
 
-        //Barcode Scanning
+        //BARCODE SCANNING
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         IntentFilter filter = new IntentFilter();
         filter.addAction(ScanReader.ACTION_SCAN_RESULT);
@@ -108,6 +108,7 @@ public class StockIn_step2 extends AppCompatActivity {
 
         String users = getIntent().getStringExtra("Users");
 
+        //BACK BUTTON
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,6 +120,7 @@ public class StockIn_step2 extends AppCompatActivity {
         });
 
 
+        //NEXT BUTTON
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
