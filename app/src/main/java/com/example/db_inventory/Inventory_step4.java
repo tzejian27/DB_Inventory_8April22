@@ -32,7 +32,7 @@ public class Inventory_step4 extends AppCompatActivity {
 
     DatabaseReference databaseReference;
 
-    //show item detail
+    //SHOW ITEM DETAIL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +107,7 @@ public class Inventory_step4 extends AppCompatActivity {
 
         String users = getIntent().getStringExtra("Users");
 
-
+        //EXIT BUTTON
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,6 +122,7 @@ public class Inventory_step4 extends AppCompatActivity {
             }
         });
 
+        //ENTER STOKE TAKE
         b2.setOnClickListener(new View.OnClickListener() {
 
             @Override

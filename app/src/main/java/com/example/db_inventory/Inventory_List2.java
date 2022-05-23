@@ -40,7 +40,7 @@ public class Inventory_List2 extends AppCompatActivity {
     DatabaseReference arightRef;
     String Switch1;
 
-    //Inventory List when search
+    //INVENTORY LIST WHEN SEARCH
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +101,10 @@ public class Inventory_List2 extends AppCompatActivity {
         final String barcode = intent.getStringExtra("Barcode");
         final String name = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
+
+        //SEARCH FOR ITEM START WITH "NAME"
+        //WE ARE USING START AT AND END AT TO MAKE SURE SEARCH METHOD
+        //CAN SEARCH ONLY BY FIRST CHARACTER
 
         FirebaseRecyclerOptions<Inventory_class> inventoryAdapter = new FirebaseRecyclerOptions.Builder<Inventory_class>()
                 .setQuery(databaseReference.orderByChild("Barcode").startAt(barcode).endAt(barcode+"~"), Inventory_class.class)

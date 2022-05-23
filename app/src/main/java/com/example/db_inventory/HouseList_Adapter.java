@@ -87,15 +87,15 @@ public class HouseList_Adapter extends RecyclerView.Adapter<HouseList_Adapter.My
                         builder.setItems(option, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
+                                //ENTER HOUSE STOKE TAKE
                                 if (position == 0) {
-
                                     Intent intent = new Intent(mContext, House_Menu.class);
                                     intent.putExtra("Key", key);
                                     intent.putExtra("name", name);
                                     mContext.startActivity(intent);
-
-
                                 }
+                                //ENTER HOUSE NAME MODIFY
+                                //CHECK USER ACCESS RIGHT FOR HOUSE NAME MODIFY
                                 if (position == 1) {
                                     if (Switch1.equals("On")) {
                                         Intent intent = new Intent(mContext, House_Modify.class);
@@ -108,6 +108,7 @@ public class HouseList_Adapter extends RecyclerView.Adapter<HouseList_Adapter.My
                                     }
 
                                 }
+                                //DELETE CONFIRMATION
                                 if (position == 2) {
 
                                     if (Switch2.equals("On")) {

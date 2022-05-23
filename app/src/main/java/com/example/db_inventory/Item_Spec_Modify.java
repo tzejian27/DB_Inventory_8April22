@@ -29,7 +29,7 @@ public class Item_Spec_Modify extends AppCompatActivity {
     String price;
     String cost;
 
-    //Modify item spec
+    //MODIFY ITEM SPEC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,14 +45,18 @@ public class Item_Spec_Modify extends AppCompatActivity {
         b1 = findViewById(R.id.btn_Inventory_ItemSpec_Modidy_Esc);
         b2 = findViewById(R.id.btn_Inventory_ItemSpec_Modify_Enter);
 
+        //GET INTENT DATA
         final Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
         final String key2 = intent.getStringExtra("Key2");
         //final String barcode1=intent.getStringExtra("Barcode");
 
+        //LINK FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key).child(key2);
         databaseReference.keepSynced(true);
+
+
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -74,19 +78,17 @@ public class Item_Spec_Modify extends AppCompatActivity {
             }
         });
 
-
+        //EXIT BUTTON
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //  Intent page = new Intent(Item_Spec_Modify.this,Item_Spec.class);
-                //page.putExtra("Key",key);
-                // startActivity(page);
                 finish();
             }
         });
 
         String users = getIntent().getStringExtra("Users");
 
+        //MODIFY CONFIRMATION
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,19 +112,14 @@ public class Item_Spec_Modify extends AppCompatActivity {
                     databaseReference.child("ItemName").setValue(name);
                     databaseReference.child("Price").setValue(price);
                     databaseReference.child("Cost").setValue(cost);
-                    //databaseReference.child("Barcode").setValue(barcode1);
-                    // .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    //  @Override
-                    //      public void onComplete(@NonNull Task<Void> task) {
-                    //          if (task.isSuccessful()){
 
-                    //RECORD PERSON INSERT
+                    //GET LOGIN PERSON AS RECORD PERSON
                     final DBHandler dbHandler = new DBHandler(getApplicationContext());
                     Cursor cursor = dbHandler.fetch();
                     cursor.moveToLast();
                     String username1 = cursor.getString(1);
 
-                    //Update the spec price also when it was modify
+                    //UPDATE THE SPEC PRICE ALSO WHEN IT WAS MODIFY
                     databaseReference.child("ItemName").setValue(name);
                     databaseReference.child("Price").setValue(price);
                     databaseReference.child("Cost").setValue(cost);
@@ -136,11 +133,6 @@ public class Item_Spec_Modify extends AppCompatActivity {
                     startActivity(page);
                     finish();
                     Toast.makeText(Item_Spec_Modify.this, "Modify Successfully !", Toast.LENGTH_SHORT).show();
-                    //        }else{
-                    //             Toast.makeText(Item_Spec_Modify.this, "Error ......", Toast.LENGTH_SHORT).show();
-                    //        }
-                    //      }
-                    //    });
 
                 }
 

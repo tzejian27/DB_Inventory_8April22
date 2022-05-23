@@ -19,7 +19,7 @@ public class House_Modify extends AppCompatActivity {
     DatabaseReference databaseReference;
     String key, name;
 
-    //Modify house name
+    //MODIFY HOUSE NAME
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +35,7 @@ public class House_Modify extends AppCompatActivity {
         e1 = findViewById(R.id.editText_House_Modify_Name);
         e1.setText(name);
 
+        //LINKING TO FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
 
@@ -54,20 +55,12 @@ public class House_Modify extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String editName = e1.getText().toString().trim().replace("/", "|");
-                databaseReference.child("Name").setValue(editName);//.addOnCompleteListener(new OnCompleteListener<Void>() {
-                //   @Override
-                //  public void onComplete(@NonNull Task<Void> task) {
-                //     if (task.isSuccessful()) {
+                databaseReference.child("Name").setValue(editName);
                 Toast.makeText(House_Modify.this, "Modified Successfully ! ", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(House_Modify.this, House_List.class);
                 intent.putExtra("Users", users);
                 startActivity(intent);
                 finish();
-                //     }else{
-                //          Toast.makeText(House_Modify.this, "Error .....", Toast.LENGTH_SHORT).show();
-                //     }
-                //   }
-                //  });
 
 
             }

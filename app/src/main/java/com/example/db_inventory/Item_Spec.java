@@ -21,7 +21,7 @@ public class Item_Spec extends AppCompatActivity {
     Button b1, b2;
     DatabaseReference databaseReference;
 
-    //Show item spec
+    //SHOW ITEM SPEC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +34,13 @@ public class Item_Spec extends AppCompatActivity {
         b1 = findViewById(R.id.btn_Item_Spec_Esc);
         b2 = findViewById(R.id.btn_Item_Spec_Enter);
 
+        //GET INTENT DATA
         Intent intent = getIntent();
         final String key = intent.getStringExtra("Key");
         final String key2 = intent.getStringExtra("Key2");
         final String barcode = intent.getStringExtra("Barcode");
+
+        //LINK TO FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
         databaseReference.child(key2).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -59,6 +62,7 @@ public class Item_Spec extends AppCompatActivity {
         String users = getIntent().getStringExtra("Users");
 
 
+        //ESC BUTTON
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +74,7 @@ public class Item_Spec extends AppCompatActivity {
             }
         });
 
+        //SPEC MODIFY BUTTON
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -34,7 +34,7 @@ public class Inventory_step3 extends AppCompatActivity {
     String key2;
     String totaltype;
 
-    //Item cost and price for new good added when adding inventory
+    //ITEM COST AND PRICE FOR NEW GOOD ADDED WHEN ADDING INVENTORY
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,6 +161,7 @@ public class Inventory_step3 extends AppCompatActivity {
 
                 databaseReference.child("TotalType").setValue(totaltype);
 
+                //INTENT TO STEP 4
                 Intent page = new Intent(Inventory_step3.this, Inventory_step4.class);
                 page.putExtra("barcode", barcode);
                 page.putExtra("Key", key);

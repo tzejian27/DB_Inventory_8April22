@@ -40,7 +40,8 @@ public class Inventory_step5 extends AppCompatActivity {
     String currentDateandTime, currentDateandTime2;
     String itemName;
 
-    //Modify Inventory qty
+    //MODIFY INVENTORY QTY
+    //STOKE TAKE
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +65,7 @@ public class Inventory_step5 extends AppCompatActivity {
         //b2=(Button)findViewById(R.id.btn_Inventory_step5_add);
         b3 = findViewById(R.id.btn_Inventory_step5_change);
 
-        //Initial stoke take table
+        //INITIAL STOKE TAKE TABLE
         StockTakeRef = FirebaseDatabase.getInstance().getReference().child("InventoryStockTakeNo");
 
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
@@ -85,6 +86,7 @@ public class Inventory_step5 extends AppCompatActivity {
         });
         String users = getIntent().getStringExtra("Users");
 
+        //CANCEL BUTTON
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,6 +152,7 @@ public class Inventory_step5 extends AppCompatActivity {
             }
         });*/
 
+        //STOKE TAKE ENTER
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,12 +175,12 @@ public class Inventory_step5 extends AppCompatActivity {
 
                     databaseReference.child(key2).child("User").setValue(username1);
 
-                    //save stock adjustment to stock in and out
-                    //date for data store
+                    //SAVE STOCK ADJUSTMENT TO STOCK IN AND OUT
+                    //DATE FOR DATA STORE
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
                     currentDateandTime = sdf.format(new Date());
 
-                    //date for parent name
+                    //DATE FOR PARENT NAME
                     SimpleDateFormat sdf2 = new SimpleDateFormat("dd_MM_yyyy_HH:mm:ss");
                     currentDateandTime2 = sdf2.format(new Date());
 

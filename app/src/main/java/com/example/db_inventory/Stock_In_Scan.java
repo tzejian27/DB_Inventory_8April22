@@ -61,8 +61,7 @@ public class Stock_In_Scan extends AppCompatActivity {
         }
     };
 
-    //Scan barcode for stock in
-
+    //SCAN BARCODE FOR STOCK IN
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +80,7 @@ public class Stock_In_Scan extends AppCompatActivity {
 
         setTitle("eStock_Stock In Scan");
 
-        //Barcode Scanning
+        //BARCODE SCANNING
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         IntentFilter filter = new IntentFilter();
         filter.addAction(ScanReader.ACTION_SCAN_RESULT);
@@ -136,11 +135,6 @@ public class Stock_In_Scan extends AppCompatActivity {
     private void add() {
         final String barcode = edt_barcode.getText().toString().trim().replace("/", "|");
         String users = getIntent().getStringExtra("Users");
-        // final String barcode1 = e1.getText().toString().trim();
-        //final String barcode_ref = barcode1 + "/";
-
-        //databaseReference3=FirebaseDatabase.getInstance().getReference("House").child(key).push();
-        //final String key2 = databaseReference3.getKey();
 
         if (TextUtils.isEmpty(barcode)) {
             edt_barcode.setError("Required Field...");

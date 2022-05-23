@@ -32,7 +32,7 @@ public class Inventory_Delete_Confirm extends AppCompatActivity {
     int sum3;
     String sum4;
 
-    //communicate with Inventory_Data_Clear for making data clear confrimation
+    //COMMUNICATE WITH INVENTORY_DATA_CLEAR FOR MAKING DATA CLEAR CONFIRMATION
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +51,7 @@ public class Inventory_Delete_Confirm extends AppCompatActivity {
 
         setTitle("eStock_Delete_" + name);
 
+        //LINK FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
 
@@ -61,7 +62,6 @@ public class Inventory_Delete_Confirm extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 totaltype = dataSnapshot.child("TotalType").getValue().toString().trim();
                 totalQty = dataSnapshot.child("TotalQty").getValue().toString().trim();
-
             }
 
             @Override
@@ -82,15 +82,10 @@ public class Inventory_Delete_Confirm extends AppCompatActivity {
             }
         });
 
-
+        //CANCEL BUTTON
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //  Intent intent = new Intent(Inventory_Delete_Comfirm.this,Inventory_List.class);
-                // intent.putExtra("name",name);
-                //  intent.putExtra("Key",key);
-                //   intent.putExtra("Key2",key2);
-                //     startActivity(intent);
                 finish();
             }
         });

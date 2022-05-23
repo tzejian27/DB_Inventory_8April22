@@ -64,6 +64,7 @@ public class InventoryList_Adapter extends RecyclerView.Adapter<InventoryList_Ad
                 builder.setItems(option, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int position) {
+                        //ENTER ITEM SPEC
                         if (position == 0) {
 
                             Intent intent = new Intent(mContext, Item_Spec.class);
@@ -72,8 +73,8 @@ public class InventoryList_Adapter extends RecyclerView.Adapter<InventoryList_Ad
                             intent.putExtra("name", name);
                             mContext.startActivity(intent);
 
-
                         }
+                        //DELETE CONFIRMATION
                         if (position == 1) {
                             Intent intent = new Intent(mContext, Inventory_Delete_Confirm.class);
                             intent.putExtra("Key", key);
@@ -81,7 +82,7 @@ public class InventoryList_Adapter extends RecyclerView.Adapter<InventoryList_Ad
                             intent.putExtra("name", name);
                             mContext.startActivity(intent);
                         }
-
+                        //ITEM MODIFY
                         if (position == 2) {
 
 
@@ -112,6 +113,7 @@ public class InventoryList_Adapter extends RecyclerView.Adapter<InventoryList_Ad
         return mData.size();
     }
 
+    //VIEW HOLDER
     public class MyViewHolder extends RecyclerView.ViewHolder {
         View mView;
 

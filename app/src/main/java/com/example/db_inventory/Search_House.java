@@ -16,7 +16,7 @@ public class Search_House extends AppCompatActivity {
     Button b1, b2;
     String name;
 
-    //text box for search house
+    //TEXT BOX FOR SEARCH HOUSE
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ public class Search_House extends AppCompatActivity {
         setTitle("eStock_Search House");
 
 
+        //CANCEL SEARCH "HOUSE"
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +42,7 @@ public class Search_House extends AppCompatActivity {
         String users = getIntent().getStringExtra("Users");
 
 
+        //ENTER SEARCH HOUSE PAGE
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

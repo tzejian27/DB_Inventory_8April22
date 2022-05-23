@@ -5,7 +5,8 @@ import android.content.Intent;
 
 public class ScanReader {
 
-    //communicate with scan setting
+    //COMMUNICATE WITH SCAN SETTING AND SDK
+    //SDK WAS SAVE IN "SDK_release_v2.1.1.jar"
     public static final String ACTION_SCAN_RESULT = "com.action.SCAN_RESULT";
 
     public static final String SCAN_RESULT = "scanContext";

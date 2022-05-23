@@ -50,6 +50,7 @@ public class Inventory_List extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory_list);
 
+        //DECLARE AND LINK
         recyclerView = findViewById(R.id.recyclerView_Inventory_List);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
@@ -65,8 +66,10 @@ public class Inventory_List extends AppCompatActivity {
 
         setTitle("eStock_Inventory List_" + name);
 
+        //LINK ACCESS RIGHT FIREBASE
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
 
+        //BACK IMAGE OF INVENTORY LIST
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +82,7 @@ public class Inventory_List extends AppCompatActivity {
             }
         });
 
+        //INTENT TO SEARCH
         iv_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,6 +95,7 @@ public class Inventory_List extends AppCompatActivity {
             }
         });
 
+        //LINK TO ITEM LIST OF CURRENT HOUSE BY USING HOUSE KEY
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
         switchRef = FirebaseDatabase.getInstance().getReference("Switch");
@@ -99,7 +104,6 @@ public class Inventory_List extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 totaltype = dataSnapshot.child("TotalType").getValue().toString().trim();
-
             }
 
             @Override
@@ -173,6 +177,7 @@ public class Inventory_List extends AppCompatActivity {
                                     builder.setItems(option, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int position) {
+                                            //INTENT TO EDIT AND VIEW ITEM SPEC PAGE
                                             if (position == 0) {
                                                 if (switch1.equals("Need")) {
                                                     Intent intent = new Intent(Inventory_List.this, Item_Spec.class);
@@ -189,6 +194,7 @@ public class Inventory_List extends AppCompatActivity {
 
 
                                             }
+                                            //ITEM DELETE CONFIRMATION
                                             if (position == 1) {
                                                 Intent intent = new Intent(Inventory_List.this, Inventory_Delete_Confirm.class);
                                                 intent.putExtra("Key", key);
@@ -200,7 +206,7 @@ public class Inventory_List extends AppCompatActivity {
                                             }
                                             if (position == 2) {
 
-                                                //Modify Inventory
+                                                //MODIFY INVENTORY
                                                 Intent intent = new Intent(Inventory_List.this, Inventory_step5.class);
                                                 intent.putExtra("name", name);
                                                 intent.putExtra("barcode", model.getBarcode());

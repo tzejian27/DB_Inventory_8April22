@@ -51,6 +51,8 @@ public class Inventory extends AppCompatActivity {
     String inventory_key;
     ScanReader scanReader;
     private String barcodeStr;
+
+    //GET SCANNED BARCODE
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -84,7 +86,7 @@ public class Inventory extends AppCompatActivity {
         String users = getIntent().getStringExtra("Users");
 
 
-        //Barcode Scanning
+        //BARCODE SCANNING
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         IntentFilter filter = new IntentFilter();
         filter.addAction(ScanReader.ACTION_SCAN_RESULT);
@@ -108,6 +110,7 @@ public class Inventory extends AppCompatActivity {
             }
         });
 
+        //EXIT
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,19 +203,10 @@ public class Inventory extends AppCompatActivity {
                                     dataMap.put("Date_and_Time", currentDateandTime);
                                     dataMap.put("User", username1);
 
+                                    databaseReference3.updateChildren(dataMap);
 
-                                    //   Map dataMap2 = new HashMap();
-                                    //   dataMap2.put(maxid-3 + "/" ,dataMap);
+                                    databaseReference.child("TotalType").setValue(totaltype);
 
-
-                                    databaseReference3.updateChildren(dataMap);//.addOnCompleteListener(new OnCompleteListener() {
-                                    //   @Override
-                                    //       public void onComplete(@NonNull Task task) {
-                                    //       if (task.isSuccessful()){
-                                    databaseReference.child("TotalType").setValue(totaltype);//.addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    //   @Override
-                                    //     public void onComplete(@NonNull Task<Void> task) {
-                                    //     if (task.isSuccessful()){
                                     Intent page = new Intent(Inventory.this, Inventory_step4.class);
                                     page.putExtra("barcode", barcode);
                                     page.putExtra("name", name);
@@ -221,16 +215,6 @@ public class Inventory extends AppCompatActivity {
                                     page.putExtra("Users", users);
                                     startActivity(page);
                                     finish();
-                                    //     }else{
-                                    //       Toast.makeText(Inventory.this, "Error", Toast.LENGTH_SHORT).show();
-                                    //     }
-
-                                    //    }
-                                    //  });
-                                    //     }
-
-                                    //    }
-                                    //  });
                                 } else if (!dataSnapshot3.exists()) {
                                     databaseReference2 = FirebaseDatabase.getInstance().getReference("Switch");
                                     databaseReference2.keepSynced(true);

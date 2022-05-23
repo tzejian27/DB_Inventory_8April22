@@ -26,6 +26,7 @@ public class Inventory_step2 extends AppCompatActivity {
     private String itemCodeStr;
     public static String itemcode;
 
+    //GET SCANNED BARCODE
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -40,7 +41,7 @@ public class Inventory_step2 extends AppCompatActivity {
         }
     };
 
-    //Define item code and item description to new inventory
+    //DEFINE ITEM CODE AND ITEM DESCRIPTION TO NEW INVENTORY
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,7 @@ public class Inventory_step2 extends AppCompatActivity {
         e1 = findViewById(R.id.editText_Inventory_name);
         e2 = findViewById(R.id.editText_input_itemcode);
 
-        //Barcode Scanning
+        //BARCODE SCANNING
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         IntentFilter filter = new IntentFilter();
         filter.addAction(ScanReader.ACTION_SCAN_RESULT);
@@ -60,6 +61,7 @@ public class Inventory_step2 extends AppCompatActivity {
         scanReader = new ScanReader(this);
         scanReader.init();
 
+        //GET INTENT
         Intent intent = getIntent();
         final String key = intent.getStringExtra("Key");
         final String key2 = intent.getStringExtra("Key2");
@@ -72,6 +74,7 @@ public class Inventory_step2 extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
 
+        //BACK BUTTON
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +90,7 @@ public class Inventory_step2 extends AppCompatActivity {
             }
         });
 
+        //NEXT BUTTON
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

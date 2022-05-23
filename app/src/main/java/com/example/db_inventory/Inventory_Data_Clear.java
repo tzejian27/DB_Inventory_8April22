@@ -18,7 +18,7 @@ public class Inventory_Data_Clear extends AppCompatActivity {
     String totaltype;
     int t_type;
 
-    //house clear pages
+    //HOUSE CLEAR PAGES
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +37,7 @@ public class Inventory_Data_Clear extends AppCompatActivity {
 
         String users = getIntent().getStringExtra("Users");
 
-
+        //CANCEL DATA CLEAR
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,14 +50,11 @@ public class Inventory_Data_Clear extends AppCompatActivity {
             }
         });
 
+        //CONFIRM DATA CLEAR
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseReference.child(key).removeValue();//.addOnCompleteListener(new OnCompleteListener<Void>() {
-                // @Override
-                // public void onComplete(@NonNull Task<Void> task) {
-                //    if (task.isSuccessful()){
-
+                databaseReference.child(key).removeValue();
                 Toast.makeText(Inventory_Data_Clear.this, "Delete Successful ! !", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Inventory_Data_Clear.this, MainActivity.class);
                 intent.putExtra("Users", users);

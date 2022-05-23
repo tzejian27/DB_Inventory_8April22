@@ -17,16 +17,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class House_New_Goods extends AppCompatActivity {
 
-    //Barcode
+    //BARCODE
     public static String barcode;
     Button b1, b2;
     EditText e1, e2, e3;
     ScanReader scanReader;
     private String barcodeStr;
 
-    //give priority the barcode scan to the barcode column
-    //then if the barcode already exist, the scanned data will be given to the item code column
-
+    //RETURN WHAT SCANNER GET
+    //GIVE PRIORITY THE BARCODE SCAN TO THE BARCODE COLUMN
+    //THEN IF THE BARCODE ALREADY EXIST, THE SCANNED DATA WILL BE GIVEN TO THE ITEM CODE COLUMN
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -48,7 +48,7 @@ public class House_New_Goods extends AppCompatActivity {
         }
     };
 
-    //Adding new good
+    //ADDING NEW GOOD
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +64,7 @@ public class House_New_Goods extends AppCompatActivity {
 
         setTitle("eStock_Add New Good");
 
-        //Barcode Scanning
+        //BARCODE SCANNING
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         IntentFilter filter = new IntentFilter();
         filter.addAction(ScanReader.ACTION_SCAN_RESULT);
@@ -76,7 +76,7 @@ public class House_New_Goods extends AppCompatActivity {
         String users = getIntent().getStringExtra("Users");
 
 
-        //back button
+        //BACK BUTTON
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +87,7 @@ public class House_New_Goods extends AppCompatActivity {
             }
         });
 
-        //Intent to add new goods step 2
+        //INTENT TO ADD NEW GOODS STEP 2
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,6 +115,7 @@ public class House_New_Goods extends AppCompatActivity {
                     Toast.makeText(House_New_Goods.this, "Please enter barcode", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(House_New_Goods.this, New_Goods_step2.class);
+                    //PASSING DATA TO STEP 2
                     intent.putExtra("barcode", barcode);
                     intent.putExtra("name", name);
                     intent.putExtra("Users", users);

@@ -21,7 +21,8 @@ public class Search extends AppCompatActivity {
     ScanReader scanReader;
     private String barcodeStr;
 
-    //setting scanned item to edit text box
+    //SEARCHING ITEM WITH BARCODE
+    //SETTING SCANNED ITEM TO EDIT TEXT BOX
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -33,8 +34,8 @@ public class Search extends AppCompatActivity {
             }
         }
     };
-    //searching barcode
 
+    //SEARCHING BARCODE
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +48,7 @@ public class Search extends AppCompatActivity {
 
         String users = getIntent().getStringExtra("Users");
 
-        //Barcode Scanning
+        //BARCODE SCANNING
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         IntentFilter filter = new IntentFilter();
         filter.addAction(ScanReader.ACTION_SCAN_RESULT);
@@ -56,6 +57,7 @@ public class Search extends AppCompatActivity {
         scanReader = new ScanReader(this);
         scanReader.init();
 
+        //CANCEL SEARCH
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +73,7 @@ public class Search extends AppCompatActivity {
             }
         });
 
+        //ENTER SEARCH
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
