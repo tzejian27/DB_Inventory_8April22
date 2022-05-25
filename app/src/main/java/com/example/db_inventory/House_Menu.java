@@ -42,6 +42,7 @@ public class House_Menu extends AppCompatActivity {
         b2 = findViewById(R.id.btn_inventory_list);
         b3 = findViewById(R.id.btn_export_inventory_HM);
         b4 = findViewById(R.id.btn_data_clear);
+        b4.setText("Delete House");
         b5 = findViewById(R.id.btn_House_Menu_Back);
         b6 = findViewById(R.id.btn_export_Inventory);
         b6.setVisibility(View.INVISIBLE);

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,12 +12,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 public class Inventory_Data_Clear extends AppCompatActivity {
 
     Button b1, b2;
     DatabaseReference databaseReference;
     String totaltype;
     int t_type;
+    TextView t1, t2;
 
     //HOUSE CLEAR PAGES
     @Override
@@ -27,13 +31,22 @@ public class Inventory_Data_Clear extends AppCompatActivity {
         b1 = findViewById(R.id.btn_Inventory_dataClear_Cencel);
         b2 = findViewById(R.id.btn_Inventory_dataClear_Enter);
 
+        t1 = findViewById(R.id.textView22);
+        t2 = findViewById(R.id.textView24);
+
+        //GET INTENT DATA
         Intent intent = getIntent();
         final String name = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
+
+        //CONNECT FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference("House");
         databaseReference.keepSynced(true);
 
+        //SET TITLE
         setTitle("eStock_Data Clear_" + name);
+        t1.setText("Delete House (" + name + ") ?");
+        t2.setText("Delete House");
 
         String users = getIntent().getStringExtra("Users");
 

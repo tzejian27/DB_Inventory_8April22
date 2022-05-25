@@ -59,7 +59,7 @@
         android:layout_marginRight="8dp"
         android:text="@string/data_clear"
         android:textColor="@color/blue"
-        android:textSize="100px"
+        android:textSize="80px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
