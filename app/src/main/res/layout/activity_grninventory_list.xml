@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="10dp"
-    tools:context=".Sales_Order">
-
-    <TextView
-        android:id="@+id/txt_so_name"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:text="Sales Order List"
-        android:textSize="50px" />
+    tools:context=".GRNInventoryList">
 
     <RelativeLayout
+        android:id="@+id/layout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_SaleOrderList"
+            android:id="@+id/listView_GRN"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_above="@+id/recordlayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:id="@+id/recordlayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true">
+            android:layout_height="wrap_content">
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,16 +35,13 @@
 
             <TextView
                 android:layout_marginLeft="10dp"
-                android:id="@+id/record_SO"
+                android:id="@+id/record_GRN"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""/>
 
         </LinearLayout>
 
-
     </RelativeLayout>
 
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

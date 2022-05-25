@@ -23,6 +23,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
 
     Button btn_stock_take, btn_stock_adjustment;
     Button btn_sales_order, btn_maintain_users;
+    Button btn_grn;
     Button btn_stockIn, btn_stockOut;
     CardView cardView;
 
@@ -47,6 +48,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
 
         btn_stockIn = findViewById(R.id.btn_stock_in);
         btn_stockOut = findViewById(R.id.btn_stock_out);
+        btn_grn = findViewById(R.id.btn_GRN);
 
         btn_stockIn.setOnClickListener(this);
         btn_stockOut.setOnClickListener(this);
@@ -54,6 +56,8 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         btn_stock_adjustment.setOnClickListener(this);
         btn_sales_order.setOnClickListener(this);
         btn_maintain_users.setOnClickListener(this);
+        btn_grn.setOnClickListener(this);
+
 
         //LINKING TO ACCESS RIGHT FIREBASE PARENT
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
@@ -90,7 +94,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
             //Intent to Sale Order List
             //THE SALE ORDER DATA CAN BE IMPORT BY EXCEL FILE AT SIDE SERVER
             case R.id.btn_sales_order:
-                Intent intent2salesorder = new Intent(Home_Page.this, Sales_Order.class);
+                Intent intent2salesorder = new Intent(Home_Page.this, SaleOrderList.class);
                 intent2salesorder.putExtra("Users", role);
                 startActivity(intent2salesorder);
                 break;
@@ -178,6 +182,12 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 }
 
                 //RECORD THE QUANTITY OF STOCK GOING OUT
+                break;
+
+                //GOOD RETURN
+            case R.id.btn_GRN:
+                Intent intent2grn = new Intent(getApplicationContext(), GRN_Home.class);
+                startActivity(intent2grn);
                 break;
         }
     }

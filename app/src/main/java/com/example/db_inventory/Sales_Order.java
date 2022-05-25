@@ -21,21 +21,29 @@ public class Sales_Order extends AppCompatActivity {
 
     DatabaseReference saleOrderRef;
     RecyclerView recyclerView;
-    TextView totalrecord;
+    TextView totalrecord, tv_so_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_order);
-        setTitle("eStock_Sales Order List");
 
         //DECLARE AND LINK THE RECYCLE LIST
         recyclerView = findViewById(R.id.recyclerView_SaleOrderList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
+        //GET SALE ORDER NO FROM "SALEORDERLIST"
+        Intent intent = getIntent();
+        final String SONum = intent.getStringExtra("SONum");
+
+        //SET TITLE
+        tv_so_name = findViewById(R.id.txt_so_name);
+        tv_so_name.setText("SO: " + SONum);
+        setTitle("eStock_Sales Order " + SONum);
+
         //LINKED WITH SALE ORDER LIST IN FIREBASE
-        saleOrderRef = FirebaseDatabase.getInstance().getReference("SalesOrderImport").child("Stock");
+        saleOrderRef = FirebaseDatabase.getInstance().getReference("InventorySalesOrderNo").child(SONum);
 
         totalrecord = findViewById(R.id.record_SO);
 

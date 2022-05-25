@@ -13,6 +13,45 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DB_Inventory">
         <activity
+            android:name=".GRNList2"
+            android:exported="false" />
+        <activity
+            android:name=".GRN_Search"
+            android:exported="false" />
+        <activity
+            android:name=".GRNInventory_step5"
+            android:exported="false" />
+        <activity
+            android:name=".GRNInventory_step4"
+            android:exported="false" />
+        <activity
+            android:name=".SearchInventoryQtyAdjustment"
+            android:exported="false" />
+        <activity
+            android:name=".GRNInventory_step2"
+            android:exported="false" />
+        <activity
+            android:name=".GRNInventoryList"
+            android:exported="false" />
+        <activity
+            android:name=".GRNInventory"
+            android:exported="false" />
+        <activity
+            android:name=".SaleOrderList"
+            android:exported="false" />
+        <activity
+            android:name=".GoodReturnNo_Menu"
+            android:exported="false" />
+        <activity
+            android:name=".GRNList"
+            android:exported="false" />
+        <activity
+            android:name=".NewGRN"
+            android:exported="false" />
+        <activity
+            android:name=".GRN_Home"
+            android:exported="false" />
+        <activity
             android:name=".Stock_Adjustment_List"
             android:exported="false" />
         <activity

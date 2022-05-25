@@ -10,13 +10,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@color/white"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_SAHouse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:width="60dp"
+            android:width="100dp"
             android:text="SA_No:"
             android:textSize="16dp"
             android:textColor="@color/black" />
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="SA No"
             android:textSize="16dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/teal_700" />
 
 
     </LinearLayout>

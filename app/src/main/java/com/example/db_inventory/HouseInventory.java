@@ -9,12 +9,13 @@ public class HouseInventory {
     private String Barcode, Quantity, ItemName, HouseKey, Price, Cost, Date_and_Time, Key2;
     private String ItemCode;
     private String User;
+    private String salesOrderNo;
 
     //doesn't be used
     public HouseInventory() {
     }
 
-    public HouseInventory(String name, String totalQty, String totalType, String key, String barcode, String quantity, String itemName, String houseKey, String price, String cost, String date_and_Time, String key2, String itemCode, String user) {
+    public HouseInventory(String name, String totalQty, String totalType, String key, String barcode, String quantity, String itemName, String houseKey, String price, String cost, String date_and_Time, String key2, String itemCode, String user, String salesOrderNo) {
         Name = name;
         TotalQty = totalQty;
         TotalType = totalType;
@@ -29,6 +30,7 @@ public class HouseInventory {
         Key2 = key2;
         ItemCode = itemCode;
         User = user;
+        this.salesOrderNo = salesOrderNo;
     }
 
     public String getName() {
@@ -141,5 +143,13 @@ public class HouseInventory {
 
     public void setUser(String user) {
         User = user;
+    }
+
+    public String getSalesOrderNo() {
+        return salesOrderNo;
+    }
+
+    public void setSalesOrderNo(String salesOrderNo) {
+        this.salesOrderNo = salesOrderNo;
     }
 }
