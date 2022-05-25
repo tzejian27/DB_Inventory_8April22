@@ -51,7 +51,7 @@ public class Wireless_Export extends AppCompatActivity {
     private static HSSFRow hssfRow;
     private static HSSFCell hssfCell;
     Button Export;
-    TextView n1, k1;
+    TextView n1;
     TextView stockTake_no;
     DatabaseReference houseRef;
     DatabaseReference stockTakeRef;
@@ -80,7 +80,6 @@ public class Wireless_Export extends AppCompatActivity {
 
         Export = findViewById(R.id.button_export_inventory);
         n1 = findViewById(R.id.name_export2);
-        k1 = findViewById(R.id.key1_export2);
         stockTake_no = findViewById(R.id.stock_take_num);
 
         setTitle("eStock_Export Stoke Take");
@@ -126,7 +125,6 @@ public class Wireless_Export extends AppCompatActivity {
                 Manifest.permission.READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
         n1.setText(name);
-        k1.setText(key);
 
         Export.setOnClickListener(new View.OnClickListener() {
             @Override

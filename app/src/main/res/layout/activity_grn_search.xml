@@ -52,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView48" />
 
     <Button
-        android:background="@color/blue"
+        android:backgroundTint="@color/grn"
         android:textColor="@color/white"
         android:id="@+id/btn_search_cancel"
         android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:background="@color/blue"
+        android:backgroundTint="@color/grn"
         android:textColor="@color/white"
         android:id="@+id/btn_search_enter"
         android:layout_width="wrap_content"

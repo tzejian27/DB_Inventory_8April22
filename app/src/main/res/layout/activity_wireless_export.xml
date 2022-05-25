@@ -11,101 +11,73 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="20dp">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="House Name:"
-            android:layout_weight="1"
             android:textColor="@color/black"/>
 
 
         <TextView
             android:id="@+id/name_export2"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="House Name"
-            android:layout_weight="2"
-            android:textColor="@color/black"/>
+            android:textColor="@color/grn"
+            android:textSize="20dp"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="20dp">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="House Key:"
-            android:layout_weight="1"
-            android:textColor="@color/black"/>
-
-
-        <TextView
-            android:id="@+id/key1_export2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="House Key"
-            android:layout_weight="2"
-            android:textColor="@color/black"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-
-        <TextView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Stock Take Number:"
-            android:layout_weight="1"
             android:textColor="@color/black"/>
 
 
         <TextView
             android:id="@+id/stock_take_num"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Stock Take Number"
-            android:layout_weight="2"
-            android:textColor="@color/black"/>
+            android:textColor="@color/grn"
+            android:textSize="20dp"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="40dp">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Username:"
-            android:layout_weight="1"
             android:textColor="@color/black"/>
 
 
         <TextView
             android:id="@+id/stock_take_username"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Username"
-            android:layout_weight="2"
-            android:textColor="@color/black"/>
+            android:textColor="@color/grn"
+            android:textSize="20dp"/>
 
     </LinearLayout>
 
