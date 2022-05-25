@@ -78,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_Inventory_step5_totalQty_grn" />
 
     <Button
-        android:background="@color/blue"
+        android:backgroundTint="@color/grn"
         android:textColor="@color/white"
         android:id="@+id/btn_Inventory_step5_cancel_grn"
         android:layout_width="wrap_content"
@@ -91,7 +91,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editText_Inventory_step5_Qty_grn" />
 
     <Button
-        android:background="@color/blue"
+        android:backgroundTint="@color/grn"
         android:textColor="@color/white"
         android:id="@+id/btn_Inventory_step5_change_grn"
         android:layout_width="wrap_content"
@@ -104,7 +104,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editText_Inventory_step5_Qty_grn" />
 
     <Button
-        android:background="@color/blue"
+        android:backgroundTint="@color/grn"
         android:textColor="@color/white"
         android:id="@+id/btn_Inventory_step5_add_grn"
         android:layout_width="wrap_content"

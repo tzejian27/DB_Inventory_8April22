@@ -196,7 +196,7 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
-            android:background="@color/blue"
+            android:backgroundTint="@color/grn"
             android:text="Back"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -204,7 +204,7 @@
             app:layout_constraintTop_toBottomOf="@+id/spinner_Inventory_size" />
 
         <Button
-            android:background="@color/blue"
+            android:backgroundTint="@color/grn"
             android:textColor="@color/white"
             android:id="@+id/btn_next2"
             android:layout_width="wrap_content"

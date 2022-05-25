@@ -510,7 +510,7 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="32dp"
-            android:background="@color/blue"
+            android:backgroundTint="@color/grn"
             android:text="Esc"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -519,7 +519,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <Button
-            android:background="@color/blue"
+            android:backgroundTint="@color/grn"
             android:textColor="@color/white"
             android:id="@+id/btn_Inventory_enter_GRN"
             android:layout_width="wrap_content"

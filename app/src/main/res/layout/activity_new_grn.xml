@@ -58,7 +58,7 @@
             android:layout_marginRight="32dp"
             android:layout_weight="1"
             android:width="300dp"
-            android:backgroundTint="@color/blue"
+            android:backgroundTint="@color/grn"
             android:text="@string/cancel"
             android:textColor="@color/white" />
 
@@ -70,7 +70,7 @@
             android:layout_marginRight="32dp"
             android:layout_weight="1"
             android:width="300dp"
-            android:backgroundTint="@color/blue"
+            android:backgroundTint="@color/grn"
             android:text="@string/enter"
             android:textColor="@color/white" />
 
