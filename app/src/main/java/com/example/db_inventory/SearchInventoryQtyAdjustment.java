@@ -215,9 +215,7 @@ public class SearchInventoryQtyAdjustment extends AppCompatActivity {
                             for(DataSnapshot ds: ss.getChildren())
                             {
                                 CheckKey = ds.getKey();
-
                             }
-
                             InventoryGoodReturnsNo.child(goodReturnsNo).child(CheckKey).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -124,7 +124,7 @@ public class Sales_Order extends AppCompatActivity {
         final String key = intent.getStringExtra("Key");
 
         super.onBackPressed();
-        Intent page = new Intent(Sales_Order.this, Home_Page.class);
+        Intent page = new Intent(Sales_Order.this, SaleOrderList.class);
         page.putExtra("name", name);
         page.putExtra("Key", key);
         page.putExtra("Users", users);
