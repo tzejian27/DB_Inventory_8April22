@@ -14,7 +14,8 @@
         android:layout_height="40dp"
         android:gravity="center"
         android:text="Sales Order List"
-        android:textSize="50px" />
+        android:textSize="50px"
+        android:textColor="@color/black"/>
 
     <RelativeLayout
         android:id="@+id/layout2"

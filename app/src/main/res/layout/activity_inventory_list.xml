@@ -14,23 +14,24 @@
         <ImageView
             android:id="@+id/imageView_IL_back"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:src="@drawable/ic_action_back" />
 
         <TextView
 
             android:id="@+id/txt_IL_list"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/inventory_list"
+            android:textColor="@color/black"
             android:textSize="50px" />
 
         <ImageView
             android:id="@+id/imageView_IL_search"
             android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
             android:src="@drawable/ic_action_search" />
 
     </LinearLayout>

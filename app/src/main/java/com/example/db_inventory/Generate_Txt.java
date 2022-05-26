@@ -92,7 +92,7 @@ public class Generate_Txt extends AppCompatActivity {
         houseListClassList = new ArrayList<>();
         newGoodsList = new ArrayList<>();
 
-        //fetch house details;
+        //FETCH HOUSE DETAILS;
         fetchHouse();
         fetchNewGoods();
 
@@ -102,7 +102,7 @@ public class Generate_Txt extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
-        //Export House List Excel
+        //EXPORT HOUSE LIST EXCEL
         btn_excel_export.setOnClickListener(new View.OnClickListener() {
             final FileOutputStream fileOutputStream = null;
 

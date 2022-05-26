@@ -77,8 +77,8 @@
 
         <Button
             android:id="@+id/btn_Item_Spec_Esc"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="160dp"
+            android:layout_height="55dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:layout_weight="1"
@@ -89,8 +89,8 @@
 
         <Button
             android:id="@+id/btn_Item_Spec_Enter"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="160dp"
+            android:layout_height="55dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:layout_weight="1"
