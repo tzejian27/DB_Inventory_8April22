@@ -35,7 +35,7 @@ public class House_New_House extends AppCompatActivity {
         setTitle("eStock_Create New House");
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("House").push();
+        myRef = FirebaseDatabase.getInstance().getReference("House");
         myRef.keepSynced(true);
 
         edt_house_name = findViewById(R.id.editText_house_name);
@@ -72,7 +72,7 @@ public class House_New_House extends AppCompatActivity {
     private void add() {
         String name = edt_house_name.getText().toString().trim().replace("/","|");
         String users = getIntent().getStringExtra("Users");
-        myRef.child("Name").orderByChild("Name").equalTo(name).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.orderByChild("Name").equalTo(name).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final String key = myRef.getKey();
@@ -80,7 +80,7 @@ public class House_New_House extends AppCompatActivity {
 
                 //CHECK IS HOUSE ALREADY EXIST
                 if (dataSnapshot.exists()) {
-                    Toast.makeText(House_New_House.this, "Data Exists !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(House_New_House.this, "House Already Exists !", Toast.LENGTH_SHORT).show();
                 } else {
                     Map dataMap = new HashMap();
                     dataMap.put("Name", name);
