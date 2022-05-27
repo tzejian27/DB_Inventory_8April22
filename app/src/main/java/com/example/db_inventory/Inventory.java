@@ -178,7 +178,6 @@ public class Inventory extends AppCompatActivity {
                                     String name = intent.getStringExtra("name");
                                     k = maxid - 3;
                                     totaltype = Long.toString(k);
-                                    // final String key2 =Long.toString(k);
 
                                     databaseReference3 = FirebaseDatabase.getInstance().getReference("House").child(key).push();
                                     databaseReference3.keepSynced(true);
