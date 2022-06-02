@@ -89,7 +89,7 @@ public class House_Menu extends AppCompatActivity {
             }
         });
 
-        //DATA CLEAR
+        //DATA CLEAR/DELETE
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

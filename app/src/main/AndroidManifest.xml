@@ -127,9 +127,6 @@
             android:name=".Item_Spec"
             android:exported="false" />
         <activity
-            android:name=".Delete_House"
-            android:exported="false" />
-        <activity
             android:name=".House_Modify"
             android:exported="false" />
         <activity
@@ -170,9 +167,6 @@
             android:exported="false" />
         <activity
             android:name=".Generate_Txt"
-            android:exported="false" />
-        <activity
-            android:name=".House_Delete"
             android:exported="false" />
         <activity
             android:name=".House_List"
