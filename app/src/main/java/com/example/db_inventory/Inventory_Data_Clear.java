@@ -12,14 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
-
 public class Inventory_Data_Clear extends AppCompatActivity {
 
     Button b1, b2;
     DatabaseReference databaseReference;
-    String totaltype;
-    int t_type;
     TextView t1, t2;
 
     //HOUSE CLEAR PAGES

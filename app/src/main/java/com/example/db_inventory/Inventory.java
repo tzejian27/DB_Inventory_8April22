@@ -45,7 +45,6 @@ public class Inventory extends AppCompatActivity {
     String name;
     String key;
     String ItemCode;
-    String key2;
     String totaltype;
     long k;
     String inventory_key;

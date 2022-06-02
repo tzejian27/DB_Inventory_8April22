@@ -60,7 +60,6 @@ public class Wireless_Export extends AppCompatActivity {
     String currentDateandTime2;
     private File housefile;
     FirebaseUser user;
-    DatabaseReference userRef;
 
 
     private static boolean isExternalStorageReadOnly() {

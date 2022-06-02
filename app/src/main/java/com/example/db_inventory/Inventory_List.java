@@ -25,25 +25,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.List;
-
 public class Inventory_List extends AppCompatActivity {
 
     DatabaseReference databaseReference, switchRef;
     RecyclerView recyclerView;
     ImageView iv_back, iv_search;
-    String barcode;
     String totaltype;
-    int t_type;
-    int sum;
-    String sum2, switch1;
-    InventoryList_Adapter InventoryList_Adapter;
-    List<Inventory_class> postList;
+    String switch1;
     TextView totalrecord;
 
     DatabaseReference arightRef;
     String Switch1;
-    String Switch2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -104,7 +104,6 @@ public class Generate_Txt extends AppCompatActivity {
 
         //EXPORT HOUSE LIST EXCEL
         btn_excel_export.setOnClickListener(new View.OnClickListener() {
-            final FileOutputStream fileOutputStream = null;
 
             @Override
             public void onClick(View view) {

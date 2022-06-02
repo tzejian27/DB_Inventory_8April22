@@ -2,7 +2,6 @@ package com.example.db_inventory;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -35,9 +34,7 @@ public class Access_Right extends AppCompatActivity {
     String Switch7;
     String Switch8;
 
-    Button btn_confirm;
-
-    //USER ACCESS RIGHT FOR ESTOCK
+    //USER ACCESS RIGHT FOR E-STOCK
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,24 +162,6 @@ public class Access_Right extends AppCompatActivity {
         });
 
         String users = getIntent().getStringExtra("Users");
-
-        /*btn_confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                arightRef.child("SW_NewHouse").setValue(Switch1).toString().trim();
-                arightRef.child("SW_EditSpec").setValue(Switch2).toString().trim();
-                arightRef.child("SW_DataClear").setValue(Switch3).toString().trim();
-                arightRef.child("SW_StockIn").setValue(Switch4).toString().trim();
-                arightRef.child("SW_StockOut").setValue(Switch5).toString().trim();
-                arightRef.child("SW_ModifyDelete").setValue(Switch6).toString().trim();
-                arightRef.child("SW_Setting").setValue(Switch7).toString().trim();
-                Intent page = new Intent(Access_Right.this, Maintain_User.class);
-                page.putExtra("Users", users);
-                startActivity(page);
-
-            }
-        });*/
-
 
     }
 

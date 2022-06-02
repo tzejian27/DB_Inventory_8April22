@@ -55,8 +55,6 @@ public class Inventory_Delete_Confirm extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
 
-        String users = getIntent().getStringExtra("Users");
-
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -27,7 +27,6 @@ public class Inventory_step4 extends AppCompatActivity {
     String ItemCode;
     String TotalQty;
     String name;
-    int sum;
     String ItemName;
 
     DatabaseReference databaseReference;

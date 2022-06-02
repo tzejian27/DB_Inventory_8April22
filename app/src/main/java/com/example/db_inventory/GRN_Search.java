@@ -29,10 +29,10 @@ public class GRN_Search extends AppCompatActivity {
         setContentView(R.layout.activity_grn_search);
         setTitle("Search Good Returns No");
 
-        e1=(EditText)findViewById(R.id.editText_good_return_no_Search_code);
+        e1= findViewById(R.id.editText_good_return_no_Search_code);
 
-        b1=(Button)findViewById(R.id.btn_search_cancel);
-        b2=(Button)findViewById(R.id.btn_search_enter);
+        b1= findViewById(R.id.btn_search_cancel);
+        b2= findViewById(R.id.btn_search_enter);
 
 
         GoodReturnsNo= FirebaseDatabase.getInstance().getReference().child("GoodReturnsNo");

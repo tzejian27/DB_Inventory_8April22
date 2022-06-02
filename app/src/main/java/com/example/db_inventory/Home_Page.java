@@ -30,7 +30,6 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
     DatabaseReference arightRef;
     String Switch1;
     String Switch2;
-    String Switch3;
 
     //Home page
     @Override

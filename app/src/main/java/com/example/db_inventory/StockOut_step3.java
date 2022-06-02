@@ -34,7 +34,6 @@ public class StockOut_step3 extends AppCompatActivity {
     String TotalQty;
     String itemcode;
     String name;
-    int sum;
     String Quantity;
     String totalQty;
     String currentDateandTime, currentDateandTime2;

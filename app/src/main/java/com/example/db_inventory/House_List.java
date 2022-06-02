@@ -29,7 +29,7 @@ public class House_List extends AppCompatActivity {
     List<House_list_class> postList;
     TextView t1;
 
-    //HOUSELIST TO ENTER STOCK TAKE AND INVENTORY MENU
+    //HOUSE LIST TO ENTER STOCK TAKE AND INVENTORY MENU
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

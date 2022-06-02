@@ -26,7 +26,6 @@ public class GRNInventory_step5 extends AppCompatActivity {
     String barcode;
     String goodReturnsNo;
     String Qty;
-    String shelfcode;
     String itemCode;
     TextView textViewItemCode;
     String Key;
@@ -48,15 +47,15 @@ public class GRNInventory_step5 extends AppCompatActivity {
         Key = intent1.getStringExtra("Key");
 
         textViewItemCode = findViewById(R.id.textView15);
-        t1= (TextView)findViewById(R.id.textView_Inventory_step5_totalQty_grn);
+        t1= findViewById(R.id.textView_Inventory_step5_totalQty_grn);
         textViewItemCode.setText("Item Code: "+itemCode);
         t1.setText(Qty);
 
-        e1=(EditText)findViewById(R.id.editText_Inventory_step5_Qty_grn);
+        e1= findViewById(R.id.editText_Inventory_step5_Qty_grn);
 
-        b1=(Button)findViewById(R.id.btn_Inventory_step5_cancel_grn);
-        b2=(Button)findViewById(R.id.btn_Inventory_step5_add_grn);
-        b3=(Button)findViewById(R.id.btn_Inventory_step5_change_grn);
+        b1= findViewById(R.id.btn_Inventory_step5_cancel_grn);
+        b2= findViewById(R.id.btn_Inventory_step5_add_grn);
+        b3= findViewById(R.id.btn_Inventory_step5_change_grn);
 
         //CONNECT FIREBASE
         InventoryGoodReturnsNo= FirebaseDatabase.getInstance().getReference().child("InventoryGoodReturnsNo");

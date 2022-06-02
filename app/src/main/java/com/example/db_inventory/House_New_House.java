@@ -34,7 +34,6 @@ public class House_New_House extends AppCompatActivity {
         setContentView(R.layout.activity_house_new_house);
         setTitle("eStock_Create New House");
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = FirebaseDatabase.getInstance().getReference("House");
         myRef.keepSynced(true);
 

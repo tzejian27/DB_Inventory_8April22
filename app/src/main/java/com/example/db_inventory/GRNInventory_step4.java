@@ -7,7 +7,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.device.ScanDevice;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,11 +26,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class GRNInventory_step4 extends AppCompatActivity {
-    TextView tb, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30, t31, colorText, sizeText, qtyText, shelfText;
+    TextView tb, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26, t27, t28, t29, t30, t31, colorText, sizeText, qtyText;
     public static EditText e1;
     Button b1, b2;
-    public static String barcode, goodReturnsNo, itemcode, sizecode, brandcode, colorcode;
-    String itemname;
+    public static String barcode, goodReturnsNo, itemcode;
     String Qty;
     String size;
     String color;
@@ -39,24 +37,6 @@ public class GRNInventory_step4 extends AppCompatActivity {
     String currentDateandTime;
     String Key;
 
-    public static String Id;
-    public static String SPECTEXT1 = "";
-    public static String SPECTEXT2 = "";
-    public static String SPECTEXT3 = "";
-    public static String SPECTEXT4 = "";
-    public static String SPECTEXT5 = "";
-    public static String SPECTEXT6 = "";
-    public static String SPECTEXT7 = "";
-    public static String SPECTEXT8 = "";
-    public static String SPECTEXT9 = "";
-    public static String SPECTEXT10 = "";
-    public static String SPECTEXT11 = "";
-    public static String SPECTEXT12 = "";
-    public static String SPECTEXT13 = "";
-    public static String SPECTEXT14 = "";
-    String column1, column2, column3, column4, column5, column6, column7, column8, column9, column10, column11, column12, column13, column14;
-    ScanDevice sm;
-    private final static String SCAN_ACTION = "scan.rcv.message";
     private String barcodeStr;
     private ScanReader scanReader ;
     public static String code;

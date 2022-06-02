@@ -26,10 +26,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class GRNInventoryList extends AppCompatActivity {
 
     public static String goodReturnNo;
-    public static String Id;
     RecyclerView recyclerView;
     TextView t1;
     LinearLayoutManager layoutManager;
@@ -79,7 +80,6 @@ public class GRNInventoryList extends AppCompatActivity {
                 holder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        final String bc = model.getBarcode();
                         AlertDialog.Builder builder = new AlertDialog.Builder(GRNInventoryList.this);
                         builder.setTitle("Are you sure you want to delete: " + model.getBarcode() + "")
                                 .setCancelable(true)
@@ -89,7 +89,7 @@ public class GRNInventoryList extends AppCompatActivity {
                                         dialogInterface.dismiss();
                                     }
                                 })
-                                .setPositiveButton("Confrim Delete", new DialogInterface.OnClickListener() {
+                                .setPositiveButton("Confirm Delete", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         InventoryGoodReturnsNo.child(goodReturnNo).orderByChild("ItemCode").equalTo(model.getItemCode()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -97,7 +97,7 @@ public class GRNInventoryList extends AppCompatActivity {
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 if (snapshot.exists()){
                                                     for (DataSnapshot ds: snapshot.getChildren()){
-                                                        InventoryGoodReturnsNo.child(goodReturnNo).child(ds.getKey()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        InventoryGoodReturnsNo.child(goodReturnNo).child(Objects.requireNonNull(ds.getKey())).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                             @Override
                                                             public void onComplete(@NonNull Task<Void> task) {
                                                                 if (task.isComplete()){
@@ -147,7 +147,7 @@ public class GRNInventoryList extends AppCompatActivity {
 
     }
 
-    public class GRNMyViewHolder extends RecyclerView.ViewHolder {
+    public static class GRNMyViewHolder extends RecyclerView.ViewHolder {
         TextView Barcode, ItemName, Quantity, Date_and_Time, Color, Size;
         View mView;
 

@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class House_List_Stock_Out extends AppCompatActivity {
 
     ImageView btn_back, btn_search;
@@ -94,7 +96,7 @@ public class House_List_Stock_Out extends AppCompatActivity {
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            final String name = dataSnapshot.child("Name").getValue().toString().trim();
+                            final String name = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString().trim();
 
                             //ENTER STOCK OUT OF SELECTED HOUSE
                             Intent intent = new Intent(getApplicationContext(), Stock_Out_Scan.class);

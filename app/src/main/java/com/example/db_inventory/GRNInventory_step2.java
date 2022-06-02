@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,7 +26,6 @@ import com.example.db_inventory.Class.Shelf_class;
 import com.example.db_inventory.Class.Size_class;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,7 +41,6 @@ public class GRNInventory_step2 extends AppCompatActivity {
     Button b1,b2;
     Spinner s1,s2,s3,sItemCode;
     TextView barcodeView ,colorTextview, sizeTextView, noteTextView;
-    FloatingActionButton floatbtn;
     EditText itemcode;
     ArrayList<String> listItem =new ArrayList<>();
     ArrayList<String> listItem2 =new ArrayList<>();
@@ -53,7 +50,6 @@ public class GRNInventory_step2 extends AppCompatActivity {
     ArrayAdapter<String> adapter2;
     ArrayAdapter<String> adapter3;
     ArrayAdapter<String> itemcodeadapter;
-    private String barcodeStr;
     private  String barcode;
     private String goodReturnsNo;
     ArrayList<String> listItemCode = new ArrayList<>();
@@ -65,13 +61,13 @@ public class GRNInventory_step2 extends AppCompatActivity {
     DatabaseReference InventoryGoodReturnsNo;
     DatabaseReference Maintain;
 
-    private BroadcastReceiver resultReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             byte[] barcode = intent.getByteArrayExtra(ScanReader.SCAN_RESULT);
             Log.e("MainActivity", "barcode = " + new String(barcode)) ;
             if (barcode != null) {
-                barcodeStr = new String(barcode);
+                String barcodeStr = new String(barcode);
                 itemcode.setText(barcodeStr);
             }
         }
@@ -94,8 +90,8 @@ public class GRNInventory_step2 extends AppCompatActivity {
 
         //DECLARATION
         noteTextView = findViewById(R.id.textView6);
-        b1=(Button)findViewById(R.id.btn_back2);
-        b2=(Button)findViewById(R.id.btn_next2);
+        b1= findViewById(R.id.btn_back2);
+        b2= findViewById(R.id.btn_next2);
         itemcode = findViewById(R.id.itemcodetext);
         s1=findViewById(R.id.spinner_Inventory_brand);
         s2=findViewById(R.id.spinner_Inventory_color);

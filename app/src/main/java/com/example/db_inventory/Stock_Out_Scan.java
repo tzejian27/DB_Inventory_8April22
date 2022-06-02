@@ -33,21 +33,11 @@ public class Stock_Out_Scan extends AppCompatActivity {
     Button btn_back, btn_next;
     DatabaseReference databaseReference, databaseReference2;
     long maxid = 0;
-    String Quantity = "0";
     String currentDateandTime;
-    String Name;
-    String Price;
-    String Cost;
     String name;
     String key;
-    String key2;
-    String totaltype;
-    long k;
     String inventory_key;
     ScanReader scanReader;
-
-    DatabaseReference allowNRef;
-    String Switch1;
 
     private String barcodeStr;
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {

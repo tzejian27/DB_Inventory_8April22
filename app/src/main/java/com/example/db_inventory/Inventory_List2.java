@@ -33,9 +33,6 @@ public class Inventory_List2 extends AppCompatActivity {
     RecyclerView recyclerView;
     ImageView imageView1, imageView2;
     String totaltype;
-    int t_type;
-    int sum;
-    String sum2;
     TextView totalrecord;
     DatabaseReference arightRef;
     String Switch1;
@@ -99,7 +96,6 @@ public class Inventory_List2 extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String barcode = intent.getStringExtra("Barcode");
-        final String name = intent.getStringExtra("name");
         final String key = intent.getStringExtra("Key");
 
         //SEARCH FOR ITEM START WITH "NAME"
