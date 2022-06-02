@@ -72,7 +72,7 @@
                     android:layout_gravity="center_horizontal"
                     android:backgroundTint="@color/grn"
                     android:text="Inventory"
-                    android:textSize="14dp"
+                    android:textSize="13dp"
                     android:textStyle="bold" />
 
 
@@ -109,7 +109,7 @@
                     android:layout_gravity="center_horizontal"
                     android:backgroundTint="@color/grn"
                     android:text="Inventory List"
-                    android:textSize="14dp"
+                    android:textSize="13dp"
                     android:textStyle="bold" />
 
 
@@ -146,7 +146,7 @@
                     android:layout_gravity="center_horizontal"
                     android:backgroundTint="@color/grn"
                     android:text="Data Clear"
-                    android:textSize="14dp"
+                    android:textSize="13dp"
                     android:textStyle="bold" />
 
 
@@ -183,7 +183,7 @@
                     android:layout_gravity="center_horizontal"
                     android:backgroundTint="@color/grn"
                     android:text="Back"
-                    android:textSize="14dp"
+                    android:textSize="13dp"
                     android:textStyle="bold" />
 
 

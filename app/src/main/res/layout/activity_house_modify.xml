@@ -50,7 +50,7 @@
 
     <Button
         android:id="@+id/btn_House_Modify_Cancel"
-        android:layout_width="150dp"
+        android:layout_width="120dp"
         android:layout_height="55dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
@@ -63,7 +63,7 @@
 
     <Button
         android:id="@+id/btn_House_Modify_Enter"
-        android:layout_width="150dp"
+        android:layout_width="120dp"
         android:layout_height="55dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
