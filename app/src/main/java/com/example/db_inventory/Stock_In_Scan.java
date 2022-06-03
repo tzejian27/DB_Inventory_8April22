@@ -9,8 +9,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,8 +26,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Stock_In_Scan extends AppCompatActivity {
@@ -47,6 +52,11 @@ public class Stock_In_Scan extends AppCompatActivity {
     long k;
     String inventory_key;
     ScanReader scanReader;
+
+    //SPINNER
+    Spinner spinner;
+    List<String> barcode_list;
+
     private String barcodeStr;
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
@@ -102,6 +112,49 @@ public class Stock_In_Scan extends AppCompatActivity {
 
             }
         });
+
+        //SPINNER
+        spinner = findViewById(R.id.spinner_stock_in);
+        barcode_list = new ArrayList<>();
+
+        databaseReference2 = FirebaseDatabase.getInstance().getReference("New_Goods");
+        databaseReference2.keepSynced(true);
+
+        databaseReference2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot snapshot1: snapshot.getChildren()){
+                    String spinnerbarcode = snapshot1.child("Barcode").getValue(String.class);
+                    barcode_list.add(spinnerbarcode);
+
+                }
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(Stock_In_Scan.this, android.R.layout.simple_list_item_1, barcode_list);
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+                spinner.setAdapter(arrayAdapter);
+                String barcodes = spinner.getSelectedItem().toString().trim();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //SET SELECTED ITEM IN LISTENER TO EDIT TEXT BOXES
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Object item = adapterView.getItemAtPosition(i);
+                edt_barcode.setText(item.toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         String users = getIntent().getStringExtra("Users");
 
         btn_back.setOnClickListener(new View.OnClickListener() {

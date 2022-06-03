@@ -31,12 +31,20 @@
         android:id="@+id/editText_barcode_SO"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/blue_border"
         android:ems="10"
         android:hint="@string/enter_scan_barcode"
         android:inputType="number"
         android:paddingLeft="20dp" />
+
+    <Spinner
+        android:id="@+id/spinner_stock_out"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="80dp"
+        android:spinnerMode="dropdown"
+        android:autofillHints="Select Barcode"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

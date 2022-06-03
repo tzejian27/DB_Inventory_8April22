@@ -20,22 +20,35 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SaleOrderList extends AppCompatActivity {
 
+    //PENDING
     TextView totalrecord;
     RecyclerView recyclerView;
     DatabaseReference SaleOrderNo;
+
+    //COMPLETE
+    TextView totalrecord2;
+    RecyclerView recyclerView2;
+    DatabaseReference SaleOrderNo2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sale_order_list);
 
-        //DECLARE RECYCLE VIEW
+        //DECLARE RECYCLE VIEW (PENDING)
         recyclerView = findViewById(R.id.recycle_so);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
+        //DECLARE RECYCLE VIEW (COMPLETE)
+        recyclerView2 = findViewById(R.id.recycle_so_complete);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView2.setHasFixedSize(true);
+
         //DECLARE TOTAL SO RECORD
         totalrecord = findViewById(R.id.record_total_so);
+
+        totalrecord2 = findViewById(R.id.record_total_so_complete);
 
         setTitle("eStock_SalesOrder");
 
@@ -47,7 +60,7 @@ public class SaleOrderList extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        //GRN ADAPTER
+        //SALES ORDER ADAPTER (PENDING)
         FirebaseRecyclerOptions<HouseInventory> SO_Adapter = new FirebaseRecyclerOptions.Builder<HouseInventory>()
                 .setQuery(SaleOrderNo.orderByChild("status").equalTo("pending"), HouseInventory.class)
                 .setLifecycleOwner(this)
@@ -82,6 +95,43 @@ public class SaleOrderList extends AppCompatActivity {
 
         recyclerView.setAdapter(firebaseRecyclerAdapter);
         firebaseRecyclerAdapter.startListening();
+
+        //SALES ORDER ADAPTER (COMPLETE)
+        FirebaseRecyclerOptions<HouseInventory> SO_COM_Adapter = new FirebaseRecyclerOptions.Builder<HouseInventory>()
+                .setQuery(SaleOrderNo.orderByChild("status").equalTo("completed"), HouseInventory.class)
+                .setLifecycleOwner(this)
+                .build();
+
+        FirebaseRecyclerAdapter<HouseInventory, SOViewHolder> firebaseRecyclerAdapter1 = new FirebaseRecyclerAdapter<HouseInventory, SOViewHolder>(SO_COM_Adapter) {
+            @Override
+            protected void onBindViewHolder(@NonNull SOViewHolder holder, int position, @NonNull HouseInventory model) {
+                holder.setSalesOrderNo(model.getSalesOrderNo());
+                totalrecord2.setText(String.valueOf(getItemCount()));
+
+                holder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext(), Sales_Order.class);
+                        //PASSING THE PARENT NAME (SALE ORDER ID)
+                        intent.putExtra("SONum", model.getSalesOrderNo());
+                        Toast.makeText(getApplicationContext(), "Entering " + model.getSalesOrderNo(), Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                    }
+                });
+
+            }
+
+            @NonNull
+            @Override
+            public SOViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                //LINKING THE RECYCLE LAYOUT
+                View view2 = LayoutInflater.from(parent.getContext()).inflate(R.layout.sa_recycle, parent, false);
+                return new SOViewHolder(view2);
+            }
+        };
+
+        recyclerView2.setAdapter(firebaseRecyclerAdapter1);
+        firebaseRecyclerAdapter1.startListening();
 
     }
 

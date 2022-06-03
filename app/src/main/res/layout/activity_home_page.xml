@@ -290,7 +290,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_horizontal"
                         android:background="@color/blue"
-                        android:text="Maintain"
+                        android:text="RFID Reg"
                         android:textStyle="bold" />
 
 
