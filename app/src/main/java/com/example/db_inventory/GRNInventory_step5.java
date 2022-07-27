@@ -98,10 +98,10 @@ public class GRNInventory_step5 extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             Toast.makeText(GRNInventory_step5.this, "Add Successfully", Toast.LENGTH_SHORT).show();
-                            Intent page = new Intent(GRNInventory_step5.this, GRNInventory_step4.class);
+                            Intent page = new Intent(GRNInventory_step5.this, GRNInventory.class);
                             page.putExtra("goodReturnNo",goodReturnsNo);
-                            page.putExtra("Barcode",barcode);
-                            page.putExtra("itemCode",itemCode);
+                            /*page.putExtra("Barcode",barcode);
+                            page.putExtra("itemCode",itemCode);*/
                             startActivity(page);
                             finish();
                         }
@@ -128,10 +128,10 @@ public class GRNInventory_step5 extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             Toast.makeText(GRNInventory_step5.this, "Change Successfully", Toast.LENGTH_SHORT).show();
-                            Intent page = new Intent(GRNInventory_step5.this, GRNInventory_step4.class);
+                            Intent page = new Intent(GRNInventory_step5.this, GRNInventory.class);
                             page.putExtra("goodReturnNo",goodReturnsNo);
-                            page.putExtra("Barcode",barcode);
-                            page.putExtra("itemCode",itemCode);
+                            /*page.putExtra("Barcode",barcode);
+                            page.putExtra("itemCode",itemCode);*/
                             startActivity(page);
                             finish();
                         }

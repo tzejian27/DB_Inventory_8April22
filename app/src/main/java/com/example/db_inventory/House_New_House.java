@@ -69,13 +69,13 @@ public class House_New_House extends AppCompatActivity {
     }
 
     private void add() {
-        String name = edt_house_name.getText().toString().trim().replace("/","|");
+        String name = edt_house_name.getText().toString().trim().replace("/", "|");
         String users = getIntent().getStringExtra("Users");
         myRef.orderByChild("Name").equalTo(name).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final String key = myRef.getKey();
-                String name = edt_house_name.getText().toString().trim().replace("/","|");
+                String name = edt_house_name.getText().toString().trim().replace("/", "|");
 
                 //CHECK IS HOUSE ALREADY EXIST
                 if (dataSnapshot.exists()) {
@@ -87,8 +87,14 @@ public class House_New_House extends AppCompatActivity {
                     dataMap.put("TotalType", TotalType);
                     dataMap.put("Key", key);
 
+                    String key_ref = key + "/";
+                    Map dataMap2 = new HashMap();
+                    dataMap2.put(key_ref + "/", dataMap);
+
                     //ADDING THE NEW HOUSE WHEN HOUSE NOT EXISTED
-                    myRef.updateChildren(dataMap);
+                    myRef.updateChildren(dataMap2);
+
+                    //INTENT TO ANOTHER PAGE
                     Intent intent = new Intent(House_New_House.this, House_Menu.class);
                     intent.putExtra("name", name);
                     intent.putExtra("Key", key);

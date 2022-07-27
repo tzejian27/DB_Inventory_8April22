@@ -123,14 +123,11 @@ public class GRNInventory extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()){
 
-
                             Intent page = new Intent(getApplicationContext(), GRNInventory_step2.class);
                             page.putExtra("Barcode",barcode);
                             page.putExtra("goodReturnNo",grnno);
                             startActivity(page);
                             finish();
-
-
                         }
                         else
                         {
