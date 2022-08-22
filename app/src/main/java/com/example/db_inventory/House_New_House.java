@@ -94,8 +94,6 @@ public class House_New_House extends AppCompatActivity {
 
                     //ADDING THE NEW HOUSE WHEN HOUSE NOT EXISTED
                     myRef.updateChildren(dataMap2);
-
-                    //INTENT TO ANOTHER PAGE
                     Intent intent = new Intent(House_New_House.this, House_Menu.class);
                     intent.putExtra("name", name);
                     intent.putExtra("Key", key);
