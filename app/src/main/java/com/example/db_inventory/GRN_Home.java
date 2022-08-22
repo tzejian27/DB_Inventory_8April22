@@ -51,6 +51,7 @@ public class GRN_Home extends AppCompatActivity implements View.OnClickListener 
             case R.id.btn_grn_back:
                 Intent intent2GRN_back = new Intent(getApplicationContext(), Home_Page.class);
                 startActivity(intent2GRN_back);
+                finish();
                 break;
         }
     }
@@ -59,5 +60,6 @@ public class GRN_Home extends AppCompatActivity implements View.OnClickListener 
     public void onBackPressed() {
         Intent intent2GRN_back = new Intent(getApplicationContext(), Home_Page.class);
         startActivity(intent2GRN_back);
+        finish();
     }
 }

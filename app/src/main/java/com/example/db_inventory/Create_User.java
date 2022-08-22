@@ -181,6 +181,7 @@ public class Create_User extends AppCompatActivity {
                 Intent intent2MaintainUser = new Intent(getApplicationContext(), Maintain_User.class);
                 intent2MaintainUser.putExtra("Users", users);
                 startActivity(intent2MaintainUser);
+                finish();
             }
         });
 
@@ -193,5 +194,6 @@ public class Create_User extends AppCompatActivity {
         Intent intent2back = new Intent(getApplicationContext(), Maintain_User.class);
         intent2back.putExtra("Users", users);
         startActivity(intent2back);
+        finish();
     }
 }

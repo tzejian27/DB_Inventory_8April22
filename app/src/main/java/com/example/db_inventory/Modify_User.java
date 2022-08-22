@@ -130,6 +130,7 @@ public class Modify_User extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Maintain_User.class);
                 intent.putExtra("Users", users);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -141,5 +142,6 @@ public class Modify_User extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), Maintain_User.class);
         intent.putExtra("Users", users);
         startActivity(intent);
+        finish();
     }
 }

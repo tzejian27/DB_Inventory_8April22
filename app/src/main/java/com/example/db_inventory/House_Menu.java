@@ -143,5 +143,6 @@ public class House_Menu extends AppCompatActivity {
         Intent intent = new Intent(House_Menu.this, House_List.class);
         intent.putExtra("Users", users);
         startActivity(intent);
+        finish();
     }
 }

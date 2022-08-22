@@ -60,6 +60,7 @@ public class House_List extends AppCompatActivity {
                 Intent intent2home = new Intent(House_List.this, MainActivity.class);
                 intent2home.putExtra("Users", users);
                 startActivity(intent2home);
+                finish();
             }
         });
 

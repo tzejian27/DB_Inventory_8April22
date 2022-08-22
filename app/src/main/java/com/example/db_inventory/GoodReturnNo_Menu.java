@@ -113,6 +113,7 @@ public class GoodReturnNo_Menu extends AppCompatActivity implements View.OnClick
             case R.id.btn_grn_menu_back:
                 Intent intent2GRN_back = new Intent(getApplicationContext(), GRN_Home.class);
                 startActivity(intent2GRN_back);
+                finish();
                 break;
         }
 
@@ -122,6 +123,7 @@ public class GoodReturnNo_Menu extends AppCompatActivity implements View.OnClick
     public void onBackPressed() {
         Intent intent2GRN_back = new Intent(getApplicationContext(), GRN_Home.class);
         startActivity(intent2GRN_back);
+        finish();
     }
 
 }
