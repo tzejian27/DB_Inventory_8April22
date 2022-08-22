@@ -323,6 +323,7 @@ public class Stock_In_Scan extends AppCompatActivity {
                                                 intent.putExtra("Users", users);
                                                 startActivity(intent);
                                                 Toast.makeText(Stock_In_Scan.this, "Data Save", Toast.LENGTH_SHORT).show();
+                                                finish();
                                             }
 
                                             finish();

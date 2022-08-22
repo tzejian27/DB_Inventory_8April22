@@ -58,6 +58,7 @@ public class House_List_Stock_In extends AppCompatActivity {
             Intent intent2home = new Intent(House_List_Stock_In.this, Home_Page.class);
             intent2home.putExtra("Users", users);
             startActivity(intent2home);
+            finish();
         });
 
         //SEARCH BUTTON

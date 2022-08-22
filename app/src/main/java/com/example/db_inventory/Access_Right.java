@@ -270,5 +270,6 @@ public class Access_Right extends AppCompatActivity {
         Intent intent2back = new Intent(getApplicationContext(), Maintain_User.class);
         intent2back.putExtra("Users", users);
         startActivity(intent2back);
+        finish();
     }
 }

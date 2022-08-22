@@ -275,7 +275,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:cardElevation="8dp">
 
                 <LinearLayout
@@ -286,6 +286,7 @@
                     android:orientation="vertical">
 
                     <Button
+                        android:id="@+id/btn_RFID"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_horizontal"

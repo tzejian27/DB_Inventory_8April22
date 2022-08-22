@@ -59,6 +59,7 @@ public class House_List_Stock_Out extends AppCompatActivity {
             Intent intent2home = new Intent(House_List_Stock_Out.this, Home_Page.class);
             intent2home.putExtra("Users", users);
             startActivity(intent2home);
+            finish();
         });
 
         //SEARCH BUTTON

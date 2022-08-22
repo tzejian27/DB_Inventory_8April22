@@ -51,7 +51,7 @@ public class GRNInventory_step4 extends AppCompatActivity {
             Log.e("MainActivity", "barcode = " + new String(barcode)) ;
             if (barcode != null) {
                 barcodeStr = new String(barcode);
-                add();
+                //add();
             }
         }
     };

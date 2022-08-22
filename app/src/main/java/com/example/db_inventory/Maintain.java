@@ -137,6 +137,7 @@ public class Maintain extends AppCompatActivity implements View.OnClickListener{
         Intent intent2homepage = new Intent(getApplicationContext(), Home_Page.class);
         intent2homepage.putExtra("Users", users);
         startActivity(intent2homepage);
+        finish();
     }
 
 

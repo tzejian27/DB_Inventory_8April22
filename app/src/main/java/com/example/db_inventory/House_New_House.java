@@ -50,6 +50,7 @@ public class House_New_House extends AppCompatActivity {
                 Intent intent2home = new Intent(House_New_House.this, MainActivity.class);
                 intent2home.putExtra("Users", users);
                 startActivity(intent2home);
+                finish();
             }
         });
 
@@ -69,13 +70,13 @@ public class House_New_House extends AppCompatActivity {
     }
 
     private void add() {
-        String name = edt_house_name.getText().toString().trim().replace("/","|");
+        String name = edt_house_name.getText().toString().trim().replace("/", "|");
         String users = getIntent().getStringExtra("Users");
         myRef.orderByChild("Name").equalTo(name).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final String key = myRef.getKey();
-                String name = edt_house_name.getText().toString().trim().replace("/","|");
+                String name = edt_house_name.getText().toString().trim().replace("/", "|");
 
                 //CHECK IS HOUSE ALREADY EXIST
                 if (dataSnapshot.exists()) {

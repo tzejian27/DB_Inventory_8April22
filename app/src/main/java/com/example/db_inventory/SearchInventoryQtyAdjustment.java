@@ -74,7 +74,7 @@ public class SearchInventoryQtyAdjustment extends AppCompatActivity {
             Log.e("MainActivity", "barcode = " + new String(barcode)) ;
             if (barcode != null) {
                 barcodeStr = new String(barcode);
-                add();
+                //add();
             }
         }
     };
@@ -216,7 +216,7 @@ public class SearchInventoryQtyAdjustment extends AppCompatActivity {
                             {
                                 CheckKey = ds.getKey();
                             }
-                            InventoryGoodReturnsNo.child(goodReturnsNo).child(CheckKey).addValueEventListener(new ValueEventListener() {
+                            InventoryGoodReturnsNo.child(goodReturnsNo).child(CheckKey).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     if(snapshot.exists())
@@ -243,8 +243,10 @@ public class SearchInventoryQtyAdjustment extends AppCompatActivity {
                                 }
                             });
 
+                        }else{
+                            autoadd();
                         }
-                        autoadd();
+
                     }
 
                     @Override

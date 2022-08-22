@@ -25,6 +25,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
     Button btn_sales_order, btn_maintain_users;
     Button btn_grn;
     Button btn_stockIn, btn_stockOut;
+    Button btn_RFID;
     CardView cardView;
 
     DatabaseReference arightRef;
@@ -48,6 +49,9 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         btn_stockIn = findViewById(R.id.btn_stock_in);
         btn_stockOut = findViewById(R.id.btn_stock_out);
         btn_grn = findViewById(R.id.btn_GRN);
+
+        //BUTTON OF RFID
+        btn_RFID = findViewById(R.id.btn_RFID);
 
         btn_stockIn.setOnClickListener(this);
         btn_stockOut.setOnClickListener(this);
@@ -186,7 +190,8 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 //GOOD RETURN
             case R.id.btn_GRN:
                 Intent intent2grn = new Intent(getApplicationContext(), GRN_Home.class);
-                startActivity(intent2grn);
+
+                finish();
                 break;
         }
     }
@@ -203,6 +208,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Intent intent2login = new Intent(Home_Page.this, Login_Menu.class);
                         startActivity(intent2login);
+                        finish();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

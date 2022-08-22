@@ -84,7 +84,8 @@ public class New_Goods_step2 extends AppCompatActivity {
 
                 Map dataMap2 = new HashMap();
                 dataMap2.put(barcode_ref + "/", dataMap);
-                databaseReference.updateChildren(dataMap2);//.addOnCompleteListener(new OnCompleteListener() {
+                databaseReference.updateChildren(dataMap2);
+                //.addOnCompleteListener(new OnCompleteListener() {
                 //    @Override
                 //     public void onComplete(@NonNull Task task) {
                 //       if (task.isSuccessful()) {
