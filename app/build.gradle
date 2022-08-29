@@ -26,6 +26,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildToolsVersion '32.0.0'
 }
 
 dependencies {
@@ -42,9 +43,11 @@ dependencies {
 
     implementation 'org.apache.poi:poi:3.17'
     //implementation files('libs\\scanSDK.jar')
+    //BARCODE SDK
     implementation files('libs/SDK_release_v2.1.1.jar')
-    //R-FID sdk
+    //R-FID SDK
     implementation files('libs/iodev2.jar')
+    implementation files('libs/uhf_lib.jar')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

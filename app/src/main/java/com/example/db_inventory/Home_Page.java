@@ -60,6 +60,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         btn_sales_order.setOnClickListener(this);
         btn_maintain_users.setOnClickListener(this);
         btn_grn.setOnClickListener(this);
+        btn_RFID.setOnClickListener(this);
 
 
         //LINKING TO ACCESS RIGHT FIREBASE PARENT
@@ -190,8 +191,14 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 //GOOD RETURN
             case R.id.btn_GRN:
                 Intent intent2grn = new Intent(getApplicationContext(), GRN_Home.class);
-
+                startActivity(intent2grn);
                 finish();
+                break;
+                //RFID
+            case R.id.btn_RFID:
+//                Intent intent2rfid = new Intent(getApplicationContext(), RFID_Main.class);
+//                startActivity(intent2rfid);
+//                finish();
                 break;
         }
     }
