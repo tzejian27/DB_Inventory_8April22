@@ -1,6 +1,7 @@
 package com.example.db_inventory;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.firebase.client.collection.LLRBNode;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -277,7 +279,8 @@ public class StockIn_step3 extends AppCompatActivity {
                     //     }
                     //    });
                     Toast.makeText(StockIn_step3.this, "Add Successfully !!!", Toast.LENGTH_SHORT).show();
-                    btn_esc.setClickable(true);
+                    btn_esc.setEnabled(true);
+                    btn_esc.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
                 }
             }
         });

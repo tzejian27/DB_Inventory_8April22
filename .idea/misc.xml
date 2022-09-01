@@ -3,15 +3,240 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStockTest/eStock/app/src/main/res/drawable/ic_baseline_add_home_24.xml" value="0.1615" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStockTest/eStock/app/src/main/res/layout/activity_home_page.xml" value="0.36302083333333335" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStockTest/eStock/app/src/main/res/layout/activity_house_list_stock_in.xml" value="0.36302083333333335" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStockTest/eStock/app/src/main/res/layout/activity_house_new_house.xml" value="0.36302083333333335" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStockTest/eStock/app/src/main/res/layout/activity_stock_in_scan.xml" value="0.36302083333333335" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStockTest/eStock/app/src/main/res/layout/activity_stock_in_step2.xml" value="0.36302083333333335" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStockTest/eStock/app/src/main/res/layout/activity_stock_in_step3.xml" value="0.36302083333333335" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStockTest/eStock/app/src/main/res/layout/activity_stock_out_scan.xml" value="0.36302083333333335" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStockTest/eStock/app/src/main/res/layout/activity_stock_out_step3.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/drawable-anydpi/ic_action_back.xml" value="0.2335" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/drawable-anydpi/ic_action_search.xml" value="0.2335" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/drawable-mdpi/grey_border.xml" value="0.1" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1495" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/drawable-xxhdpi/blue_border.xml" value="0.1" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1495" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_create_user.xml" value="0.338768115942029" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_delete_house.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_generate_inventory.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_generate_txt.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_home_page.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_home_page_user.xml" value="0.36141304347826086" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_delete.xml" value="0.18059777102330293" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_list.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_list2.xml" value="0.37135416666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_list_stock_in.xml" value="0.333786231884058" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_menu.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_modify.xml" value="0.37135416666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_new_goods.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_new_house.xml" value="0.18" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_house_setting.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory.xml" value="0.15" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory__list.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory_data_clear.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory_delete_confirm.xml" value="0.37135416666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory_list.xml" value="0.2611464968152866" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory_list2.xml" value="0.18" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory_step2.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory_step3.xml" value="0.2265193370165746" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory_step4.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_inventory_step5.xml" value="0.25076452599388377" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_item_spec.xml" value="0.2554517133956386" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_item_spec_modify.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_login_menu.xml" value="0.33061594202898553" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_login_user.xml" value="0.33061594202898553" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_main_menu.xml" value="0.33061594202898553" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_maintain_user.xml" value="0.338768115942029" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_new_goods_step2.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_search.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_search_house.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_stock_adjustment_home.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_stock_in_scan.xml" value="0.333786231884058" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_stock_in_step2.xml" value="0.333786231884058" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_stock_in_step3.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/activity_wireless_export.xml" value="0.33061594202898553" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/house_list_item.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/inventory_recycle_list_item.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/layout/user_recycle_list.xml" value="0.36186594202898553" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1495" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1585" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/drawable-mdpi/grey_border.xml" value="0.1905" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/drawable-xxhdpi/blue_border.xml" value="0.196" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_access_right.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_create_user.xml" value="0.28532608695652173" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_delete_house.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_generate_txt.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_home_page.xml" value="0.3328804347826087" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_house_delete.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_house_list.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_house_list2.xml" value="0.3328804347826087" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_house_list_stock_in.xml" value="0.3328804347826087" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_house_list_stock_out.xml" value="0.28532608695652173" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_house_menu.xml" value="0.28532608695652173" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_house_modify.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_house_new_goods.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_house_new_house.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_house_setting.xml" value="0.3328804347826087" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory.xml" value="0.3328804347826087" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_data_clear.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_delete_confirm.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_list.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_list2.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_step2.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_step3.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_step4.xml" value="0.3328804347826087" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_step5.xml" value="0.3328804347826087" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_item_spec.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_item_spec_modify.xml" value="0.18059777102330293" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_login.xml" value="0.18059777102330293" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_login_menu.xml" value="0.28532608695652173" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_login_user.xml" value="0.18059777102330293" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_maintain.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_maintain_user.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_modify_user.xml" value="0.28532608695652173" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_new_goods_step2.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_sales_order.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_search.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_search_house.xml" value="0.3328804347826087" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_stock_adjustment_home.xml" value="0.3328804347826087" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_stock_adjustment_list.xml" value="0.30978260869565216" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_stock_in_out_list.xml" value="0.31929347826086957" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_stock_in_scan.xml" value="0.3328804347826087" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_stock_in_step2.xml" value="0.3328804347826087" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_stock_in_step3.xml" value="0.3328804347826087" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_stock_movement.xml" value="0.31929347826086957" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_stock_out_scan.xml" value="0.28532608695652173" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_stock_out_step3.xml" value="0.28532608695652173" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_wireless_export.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/house_list_item.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/inventory_recycle_list_item.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/sa_list_recycle.xml" value="0.30978260869565216" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/sa_recycle.xml" value="0.30978260869565216" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/sales_order.xml" value="0.2907608695652174" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/stock_inout_list.xml" value="0.31929347826086957" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/user_recycle_list.xml" value="0.3283514492753623" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_access_right.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_generate_txt.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_grn_home.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_grninventory.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_grninventory_list.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_grninventory_step2.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_grninventory_step4.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_grninventory_step5.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_home_page.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_house_list.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_house_list_stock_in.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_house_menu.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_inventory.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_inventory_step5.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_main.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_new_goods_step2.xml" value="0.3226851851851852" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_new_grn.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_search.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_stock_in_scan.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_stock_in_step3.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_stock_movement.xml" value="0.30570652173913043" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_stock_out_scan.xml" value="0.3226851851851852" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_stock_out_step3.xml" value="0.3226851851851852" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/house_list_item.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/iso1800_6c.xml" value="0.23055555555555557" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/listview_item.xml" value="0.23055555555555557" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/main.xml" value="0.1" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/reader_iso1800_6c.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/reader_listview_item.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/reader_main.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/reader_parameter.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/reader_setting_activity.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/reader_setting_power.xml" value="0.20925925925925926" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_iso1800_6c.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_listview_item.xml" value="0.5" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_main.xml" value="0.1" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_parameter.xml" value="0.1" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/sa_list_recycle.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/setting_activity.xml" value="0.23055555555555557" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/setting_power.xml" value="0.15172101449275363" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/menu/main.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock/app/src/main/res/layout/activity_grn_home.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock/app/src/main/res/layout/activity_home_page.xml" value="0.31521739130434784" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock/app/src/main/res/layout/activity_house_list.xml" value="0.2866847826086957" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock/app/src/main/res/layout/activity_inventory_data_clear.xml" value="0.34074074074074073" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock/app/src/main/res/layout/activity_inventory_delete_confirm.xml" value="0.34074074074074073" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock/app/src/main/res/layout/activity_item_spec.xml" value="0.2866847826086957" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock/app/src/main/res/layout/activity_item_spec_modify.xml" value="0.2866847826086957" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock/app/src/main/res/layout/activity_maintain_user.xml" value="0.31657608695652173" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock/app/src/main/res/layout/activity_sale_order_list.xml" value="0.31521739130434784" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock/app/src/main/res/layout/activity_sales_order.xml" value="0.31657608695652173" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock/app/src/main/res/layout/activity_stock_in_scan.xml" value="0.31521739130434784" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock/app/src/main/res/layout/activity_stock_out_scan.xml" value="0.31521739130434784" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock/app/src/main/res/layout/goodretuns_list_item.xml" value="0.34074074074074073" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/drawable-anydpi/ic_action_back.xml" value="0.1815" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/drawable-anydpi/ic_action_search.xml" value="0.1815" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/drawable-mdpi/grey_border.xml" value="0.1815" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/drawable-xxhdpi/blue_border.xml" value="0.1575" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/drawable/ic_action_back.xml" value="0.205" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.205" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_access_right.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_create_user.xml" value="0.2826086956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_delete_house.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_generate_txt.xml" value="0.2826086956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_good_return_no_menu.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_grn_home.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_grn_search.xml" value="0.2644927536231884" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_grninventory.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_grninventory_list.xml" value="0.3663949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_grninventory_step2.xml" value="0.30570652173913043" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_grninventory_step4.xml" value="0.30570652173913043" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_grninventory_step5.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_grnlist.xml" value="0.28125" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_home_page.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_house_delete.xml" value="0.2826086956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_house_list.xml" value="0.3138586956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_house_list2.xml" value="0.2826086956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_house_list_stock_in.xml" value="0.2826086956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_house_list_stock_out.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_house_menu.xml" value="0.32608695652173914" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_house_modify.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_house_new_goods.xml" value="0.2826086956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_house_new_house.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_house_setting.xml" value="0.2826086956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_inventory.xml" value="0.37135416666666665" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_inventory_data_clear.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_inventory_delete_confirm.xml" value="0.32608695652173914" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_inventory_list.xml" value="0.3138586956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_inventory_list2.xml" value="0.3138586956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_inventory_step2.xml" value="0.29347826086956524" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_inventory_step3.xml" value="0.2826086956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_inventory_step4.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_inventory_step5.xml" value="0.30570652173913043" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_item_spec.xml" value="0.2826086956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_item_spec_modify.xml" value="0.2826086956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_login_menu.xml" value="0.3555253623188406" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_login_user.xml" value="0.32608695652173914" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_main.xml" value="0.28125" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_maintain.xml" value="0.29347826086956524" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_maintain_user.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_modify_user.xml" value="0.2826086956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_new_goods_step2.xml" value="0.2826086956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_new_grn.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_sale_order_list.xml" value="0.28125" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_sales_order.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_search.xml" value="0.29347826086956524" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_search_house.xml" value="0.2826086956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_search_inventory_qty_adjustment.xml" value="0.30570652173913043" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_stock_adjustment_home.xml" value="0.2826086956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_stock_adjustment_list.xml" value="0.29347826086956524" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_stock_in_scan.xml" value="0.29347826086956524" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_stock_in_step2.xml" value="0.2826086956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_stock_in_step3.xml" value="0.29347826086956524" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_stock_movement.xml" value="0.29347826086956524" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_stock_out_scan.xml" value="0.3555253623188406" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_stock_out_step3.xml" value="0.29347826086956524" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/activity_wireless_export.xml" value="0.2826086956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/goodretuns_list_item.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/house_list_item.xml" value="0.32608695652173914" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/inventory_recycle_list_item.xml" value="0.2644927536231884" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/sa_list_recycle.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/sa_recycle.xml" value="0.3138586956521739" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/sales_order.xml" value="0.32608695652173914" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/user_recycle_list.xml" value="0.30480072463768115" />
       </map>
     </option>
   </component>

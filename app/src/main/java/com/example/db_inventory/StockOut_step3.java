@@ -1,7 +1,9 @@
 package com.example.db_inventory;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -266,6 +268,7 @@ public class StockOut_step3 extends AppCompatActivity {
                                 //     }
                                 //    });
                                 Toast.makeText(StockOut_step3.this, "Add Successfully !!!", Toast.LENGTH_SHORT).show();
+                                b1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
                             }
                         }else {
 
@@ -372,7 +375,7 @@ public class StockOut_step3 extends AppCompatActivity {
                                 //     }
                                 //    });
                                 Toast.makeText(StockOut_step3.this, "Add Successfully !!!", Toast.LENGTH_SHORT).show();
-
+                                b1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
                             }else{
                                 Toast.makeText(StockOut_step3.this, "Execute actual Quantity \n"+ total1 + " < " + qty11, Toast.LENGTH_SHORT).show();
                             }

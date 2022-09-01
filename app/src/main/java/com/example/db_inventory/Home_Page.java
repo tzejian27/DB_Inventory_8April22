@@ -38,7 +38,6 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         setTitle("eStock_Home Page");
-
         //DECLARE AND LINK THE VARIABLE
         btn_stock_take = findViewById(R.id.btn_stock_take);
         btn_stock_adjustment = findViewById(R.id.btn_stock_adjustment);
@@ -60,6 +59,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         btn_sales_order.setOnClickListener(this);
         btn_maintain_users.setOnClickListener(this);
         btn_grn.setOnClickListener(this);
+        btn_RFID.setOnClickListener(this);
 
 
         //LINKING TO ACCESS RIGHT FIREBASE PARENT
@@ -190,13 +190,15 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 //GOOD RETURN
             case R.id.btn_GRN:
                 Intent intent2grn = new Intent(getApplicationContext(), GRN_Home.class);
+                startActivity(intent2grn);
                 finish();
                 break;
-            /*case R.id.btn_RFID:
+                //RFID
+            case R.id.btn_RFID:
                 Intent intent2rfid = new Intent(getApplicationContext(), RFID_MainActivity.class);
                 startActivity(intent2rfid);
                 finish();
-                break;*/
+                break;
         }
     }
 
