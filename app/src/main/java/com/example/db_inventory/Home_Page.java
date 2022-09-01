@@ -190,9 +190,13 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 //GOOD RETURN
             case R.id.btn_GRN:
                 Intent intent2grn = new Intent(getApplicationContext(), GRN_Home.class);
-
                 finish();
                 break;
+            /*case R.id.btn_RFID:
+                Intent intent2rfid = new Intent(getApplicationContext(), RFID_MainActivity.class);
+                startActivity(intent2rfid);
+                finish();
+                break;*/
         }
     }
 
