@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical"
+    tools:context=".House_New_Goods">
+
+    <TextView
+        android:id="@+id/txt_new_goods"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/new_goods"
+        android:textColor="@color/blue"
+        android:textSize="100px" />
+
+    <TextView
+        android:id="@+id/txt_new_good_barcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/barcode"
+        android:textColor="@color/blue"
+        android:textSize="50px" />
+
+    <EditText
+        android:id="@+id/editText_new_goods_barcode"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/blue_border"
+        android:ems="10"
+        android:hint="@string/enter_barcode"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp" />
+
+    <TextView
+        android:id="@+id/txt_new_good_itemcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Item code"
+        android:textColor="@color/blue"
+        android:textSize="50px" />
+
+    <EditText
+        android:id="@+id/editText_new_goods_itemcode"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/blue_border"
+        android:ems="10"
+        android:hint="Scan/Enter Item Code(Optional)"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp" />
+
+    <TextView
+        android:id="@+id/txt_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/good_s_name"
+        android:textColor="@color/blue"
+        android:textSize="50px" />
+
+    <EditText
+        android:id="@+id/editText_new_goods_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/blue_border"
+        android:ems="10"
+        android:hint="@string/enter_description"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_new_goods_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_weight="1"
+            android:width="250dp"
+            android:backgroundTint="@color/blue"
+            android:text="Back"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_new_goods_next"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_weight="1"
+            android:width="250dp"
+            android:backgroundTint="@color/blue"
+            android:text="Next"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

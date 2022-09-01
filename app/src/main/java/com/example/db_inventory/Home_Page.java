@@ -38,7 +38,6 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         setTitle("eStock_Home Page");
-
         //DECLARE AND LINK THE VARIABLE
         btn_stock_take = findViewById(R.id.btn_stock_take);
         btn_stock_adjustment = findViewById(R.id.btn_stock_adjustment);
@@ -196,9 +195,9 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 break;
                 //RFID
             case R.id.btn_RFID:
-//                Intent intent2rfid = new Intent(getApplicationContext(), RFID_Main.class);
-//                startActivity(intent2rfid);
-//                finish();
+                Intent intent2rfid = new Intent(getApplicationContext(), RFID_MainActivity.class);
+                startActivity(intent2rfid);
+                finish();
                 break;
         }
     }

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical"
+    tools:context=".Inventory_step3">
+
+    <TextView
+        android:id="@+id/txt_input_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/input_price_rm"
+        android:textColor="@color/blue"
+        android:textSize="50px" />
+
+    <EditText
+        android:id="@+id/editText_Inventory_price"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/blue_border"
+        android:ems="10"
+        android:hint="@string/enter_price"
+        android:inputType="numberDecimal"
+        android:paddingLeft="20dp" />
+
+    <TextView
+        android:id="@+id/txt_input_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:inputType="numberDecimal"
+        android:text="Item Cost :"
+        android:textColor="@color/blue"
+        android:textSize="50px" />
+
+    <EditText
+        android:id="@+id/editText_Inventory_cost"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/blue_border"
+        android:ems="10"
+        android:hint="Enter cost"
+        android:inputType="numberDecimal"
+        android:paddingLeft="20dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_back3"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:backgroundTint="@color/blue"
+            android:text="@string/back"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_next3"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:backgroundTint="@color/blue"
+            android:text="@string/next"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</LinearLayout>
