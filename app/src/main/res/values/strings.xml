@@ -99,9 +99,10 @@
     <string name="item_cost">Item Cost (RM):</string>
     <string name="qty_in">Qty in</string>
     <string name="add_qty_in">Add qty in</string>
-    <string name="house_qty">House Qty</string>
+    <string name="house_qty">House Qty:</string>
     <string name="stock_out">Stock Out</string>
     <string name="stock_in">Stock In</string>
     <string name="input_price_rm">Input price (RM):</string>
     <string name="enter_description">Enter Description</string>
+    <string name="new_btn">New</string>
 </resources>

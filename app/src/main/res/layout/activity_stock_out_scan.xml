@@ -36,7 +36,8 @@
         android:ems="10"
         android:hint="@string/enter_scan_barcode"
         android:inputType="number"
-        android:paddingLeft="20dp" />
+        android:paddingLeft="20dp"
+        android:drawableLeft="@drawable/icon_barcode"/>
 
     <Spinner
         android:id="@+id/spinner_stock_out"

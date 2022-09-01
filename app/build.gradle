@@ -44,7 +44,7 @@ dependencies {
     //implementation files('libs\\scanSDK.jar')
     implementation files('libs/SDK_release_v2.1.1.jar')
     //R-FID sdk
-    implementation files('libs/iodev2.jar')
+    //implementation files('libs/iodev2.jar')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
