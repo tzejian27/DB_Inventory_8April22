@@ -41,7 +41,8 @@ public class RFID_MainActivity extends Activity implements OnClickListener ,OnIt
 
 	private Button buttonClear;
 	private Button buttonConnect;
-	private Button buttonStart;
+	private Button buttonRead;
+	private Button buttonAdd;
 	private Button buttonPowerOn;
 	private Button buttonPowerOff;
 	private TextView textVersion ;
@@ -82,15 +83,16 @@ public class RFID_MainActivity extends Activity implements OnClickListener ,OnIt
 		if(reader == null){
 			textVersion.setText("serialport init fail");
 			setButtonClickable(buttonClear, false);
-			setButtonClickable(buttonStart, false);
+			setButtonClickable(buttonRead, false);
 			setButtonClickable(buttonConnect, false);
+			setButtonClickable(buttonAdd, false);
 			return ;
 		}
 		if (readerDevice == null)
 		{
 			textVersion.setText("UHF reader power on failed");
 //			setButtonClickable(buttonClear, false);
-//			setButtonClickable(buttonStart, false);
+//			setButtonClickable(buttonRead, false);
 //			setButtonClickable(buttonConnect, false);
 //			return ;
 		}
@@ -135,19 +137,20 @@ public class RFID_MainActivity extends Activity implements OnClickListener ,OnIt
 	}
 
 	private void initView(){
-		buttonStart = (Button) findViewById(R.id.button_start);
+		buttonRead = (Button) findViewById(R.id.button_read);
+		buttonAdd = (Button) findViewById(R.id.button_add);
 		buttonConnect = (Button) findViewById(R.id.button_connect);
 		buttonClear = (Button) findViewById(R.id.button_clear);
 		buttonPowerOn = (Button) findViewById(R.id.button_power_on);
 		buttonPowerOff = (Button) findViewById(R.id.button_power_off);
 		listViewData = (ListView) findViewById(R.id.listView_data);
 		textVersion = (TextView) findViewById(R.id.textView_version);
-		buttonStart.setOnClickListener(this);
+		buttonRead.setOnClickListener(this);
+		buttonAdd.setOnClickListener(this);
 		buttonConnect.setOnClickListener(this);
 		buttonClear.setOnClickListener(this);
 		buttonPowerOn.setOnClickListener(this);
 		buttonPowerOff.setOnClickListener(this);
-		//setButtonClickable(buttonStart, false);
 		listEPC = new ArrayList<EPC>();
 		listViewData.setOnItemClickListener(this);
 
@@ -241,11 +244,7 @@ public class RFID_MainActivity extends Activity implements OnClickListener ,OnIt
 					idcount++;
 					listMap.add(map);
 
-					Map<String, Object> datamap = new HashMap<String, Object>();
-					datamap.put("ID", idcount);
-					datamap.put("EPC", epcdata.getEpc());
-					RFIDDatabase = FirebaseDatabase.getInstance().getReference("RFID_database").child(epcdata.getEpc());
-					RFIDDatabase.setValue(datamap);
+
 				}
 				listViewData.setAdapter(new SimpleAdapter(RFID_MainActivity.this,
 						listMap, R.layout.rfid_listview_item,
@@ -306,19 +305,41 @@ public class RFID_MainActivity extends Activity implements OnClickListener ,OnIt
 	public void onClick(View v) {
 
 		switch (v.getId()) {
-			case R.id.button_start:
+			case R.id.button_read:
 				if(!startFlag){
 					startFlag = true ;
-					buttonStart.setText(R.string.stop_inventory);
+					buttonRead.setText(R.string.stop_inventory);
 				}else{
 					startFlag = false;
-					buttonStart.setText(R.string.inventory);
+					buttonRead.setText(R.string.start_inventory);
 				}
 				break;
 
 			case R.id.button_clear:
 				clearData();
 				break;
+
+			case R.id.button_add:
+				Intent intent1 = getIntent();
+				String barcode = intent1.getStringExtra("barcode");
+				String name = intent1.getStringExtra("name");
+				String key = intent1.getStringExtra("Key");
+				String key2 = intent1.getStringExtra("Key2");
+				String users = intent1.getStringExtra("Users");
+				int idcount = 1;
+				List<EPC> list = listEPC;
+				for(EPC epcdata:list){
+					Map<String, Object> datamap = new HashMap<String, Object>();
+					datamap.put("ID", idcount);
+					datamap.put("EPC", epcdata.getEpc());
+					datamap.put("Key", key);
+					datamap.put("House", name);
+					datamap.put("Barcode", barcode);
+					idcount++;
+					RFIDDatabase = FirebaseDatabase.getInstance().getReference("RFID_database").child(epcdata.getEpc());
+					RFIDDatabase.setValue(datamap);
+					break;
+				}
 
 			default:
 				break;
@@ -414,7 +435,7 @@ public class RFID_MainActivity extends Activity implements OnClickListener ,OnIt
 	public void onBackPressed() {
 		String users = getIntent().getStringExtra("Users");
 		super.onBackPressed();
-		Intent intent = new Intent(getApplicationContext(), Home_Page.class);
+		Intent intent = new Intent(getApplicationContext(), House_List_Stock_In.class);
 		intent.putExtra("Users", users);
 		startActivity(intent);
 		finish();

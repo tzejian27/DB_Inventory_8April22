@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DB_Inventory">
         <activity
+            android:name=".Stock_In_Scan_RFID"
+            android:exported="false" />
+        <activity
             android:name=".StockIn_Menu"
             android:exported="false" />
         <activity
