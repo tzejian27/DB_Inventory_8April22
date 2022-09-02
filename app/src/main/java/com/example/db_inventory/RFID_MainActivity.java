@@ -24,6 +24,10 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.magicrf.uhfreaderlib.reader.Tools;
@@ -243,8 +247,6 @@ public class RFID_MainActivity extends Activity implements OnClickListener ,OnIt
 					map.put("COUNT", epcdata.getCount());
 					idcount++;
 					listMap.add(map);
-
-
 				}
 				listViewData.setAdapter(new SimpleAdapter(RFID_MainActivity.this,
 						listMap, R.layout.rfid_listview_item,
@@ -320,29 +322,45 @@ public class RFID_MainActivity extends Activity implements OnClickListener ,OnIt
 				break;
 
 			case R.id.button_add:
-				Intent intent1 = getIntent();
-				String barcode = intent1.getStringExtra("barcode");
-				String name = intent1.getStringExtra("name");
-				String key = intent1.getStringExtra("Key");
-				String key2 = intent1.getStringExtra("Key2");
-				String users = intent1.getStringExtra("Users");
-				int idcount = 1;
-				List<EPC> list = listEPC;
-				for(EPC epcdata:list){
-					Map<String, Object> datamap = new HashMap<String, Object>();
-					datamap.put("ID", idcount);
-					datamap.put("EPC", epcdata.getEpc());
-					datamap.put("Key", key);
-					datamap.put("House", name);
-					datamap.put("Barcode", barcode);
-					idcount++;
-					RFIDDatabase = FirebaseDatabase.getInstance().getReference("RFID_database").child(epcdata.getEpc());
-					RFIDDatabase.setValue(datamap);
-					break;
-				}
-
+				addRFID();
+				break;
 			default:
 				break;
+		}
+	}
+
+	public void addRFID(){
+		Intent intent1 = getIntent();
+		String barcode = intent1.getStringExtra("barcode");
+		String name = intent1.getStringExtra("name");
+		String key = intent1.getStringExtra("Key");
+		String key2 = intent1.getStringExtra("Key2");
+		String users = intent1.getStringExtra("Users");
+
+		//connect to EPC List
+		List<EPC> list = listEPC;
+		for (EPC epcdata : list) {
+			Map<String, Object> datamap = new HashMap<String, Object>();
+			datamap.put("EPC", epcdata.getEpc());
+			datamap.put("Key", key);
+			datamap.put("House", name);
+			datamap.put("Barcode", barcode);
+
+			RFIDDatabase = FirebaseDatabase.getInstance().getReference("RFID_database").child(epcdata.getEpc());
+			RFIDDatabase.setValue(datamap).addOnCompleteListener(new OnCompleteListener<Void>() {
+				@Override
+				public void onComplete(@NonNull Task<Void> task) {
+					Toast.makeText(getApplicationContext(), String.valueOf(list.size()) + " data added to " +barcode, Toast.LENGTH_SHORT).show();
+					Intent intent = new Intent(getApplicationContext(), RFID_MainActivity.class);
+					intent.putExtra("barcode", barcode);
+					intent.putExtra("name", name); //HOUSE'S NAME
+					intent.putExtra("Key", key); //HOUSE'S RANDOM KEY
+					intent.putExtra("Key2", key2); //BARCODE'S RANDOM KEY
+					intent.putExtra("Users", users);
+					startActivity(intent);
+					finish();
+				}
+			});
 		}
 	}
 
