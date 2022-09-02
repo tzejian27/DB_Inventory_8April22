@@ -170,7 +170,7 @@ public class StockIn_step3 extends AppCompatActivity {
 
 
                 if (qty.isEmpty()) {
-                    Toast.makeText(StockIn_step3.this, "Please enter  Qty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StockIn_step3.this, "Please enter Qty", Toast.LENGTH_SHORT).show();
                 } else {
                     final int total = Integer.parseInt(qty);
                     final int qty1 = Integer.parseInt(Quantity);
