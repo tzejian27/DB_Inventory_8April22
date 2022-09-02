@@ -46,7 +46,7 @@ public class StockIn_Menu extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btn_rfid_stockin_menu:
                 //ENTER STOCK IN OF SELECTED HOUSE WITH RFID
-                Intent intent2rfid = new Intent(getApplicationContext(), RFID_MainActivity.class);
+                Intent intent2rfid = new Intent(getApplicationContext(), Stock_In_Scan_RFID.class);
                 intent2rfid.putExtra("Key", key);
                 intent2rfid.putExtra("name", name);
                 intent2rfid.putExtra("Users", users);

@@ -4,6 +4,11 @@
     <item
         android:id="@+id/action_settings"
         app:showAsAction="never"
-        android:title="设置"/>
+        android:title="RFID Setting"/>
+
+    <item
+        android:id="@+id/setting_stock_in"
+        app:showAsAction="never"
+        android:title="Stock In Setting"/>
 
 </menu>

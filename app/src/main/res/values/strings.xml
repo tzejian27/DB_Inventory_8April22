@@ -111,8 +111,8 @@
     <string name="connect">connect MCU</string>
     <string name="id">ID</string>
     <string name="count">count</string>
-    <string name="start_inventory">Start Inventory</string>
-    <string name="stop_inventory">Stop Inventory</string>
+    <string name="start_inventory">Read</string>
+    <string name="stop_inventory">Stop</string>
     <string name="clear">clear</string>
     <string name="membank">Membank</string>
     <string name="accesspassword">Access Password</string>

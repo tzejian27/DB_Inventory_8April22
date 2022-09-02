@@ -74,19 +74,18 @@
     	 android:text=""
     	 android:textSize="18sp" />
 	</LinearLayout>
-     
-     <ListView 
-         android:id="@+id/listView_data"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_below="@+id/receive_txt"
-         android:layout_marginLeft="2dp"
-         android:layout_marginRight="2dp"
-         android:divider="#0a0f0b"
-         android:dividerHeight="1dp"
-         android:layout_above="@+id/linearLayout1"
-         android:background="@drawable/corners_background"
-         ></ListView>
+
+	<ListView
+		android:id="@+id/listView_data"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_above="@+id/linearLayout1"
+		android:layout_below="@+id/receive_txt"
+		android:layout_marginLeft="2dp"
+		android:layout_marginRight="2dp"
+		android:background="@drawable/corners_background"
+		android:divider="#0a0f0b"
+		android:dividerHeight="1dp"></ListView>
     
 
     <LinearLayout
@@ -96,11 +95,18 @@
         android:layout_alignParentBottom="true" >
 
         <Button
-            android:id="@+id/button_start"
+            android:id="@+id/button_read"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:text="@string/start_inventory" />
+
+		<Button
+			android:id="@+id/button_add"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="Add"/>
 
         <Button
             android:id="@+id/button_clear"
@@ -108,6 +114,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/clear" />
+
+
     </LinearLayout>
 
 
