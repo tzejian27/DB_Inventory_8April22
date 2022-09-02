@@ -92,15 +92,15 @@ public class House_List_Stock_In extends AppCompatActivity {
                 holder.mView.setOnClickListener(v -> {
 
                     final String key = model.getKey();
+                    final String name = model.getName();
                     databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
                     databaseReference.keepSynced(true);
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            final String name = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString().trim();
 
                             //ENTER STOCK IN OF SELECTED HOUSE
-                            Intent intent = new Intent(getApplicationContext(), Stock_In_Scan.class);
+                            Intent intent = new Intent(getApplicationContext(), StockIn_Menu.class);
                             intent.putExtra("Key", key);
                             intent.putExtra("name", name);
                             intent.putExtra("Users", users);

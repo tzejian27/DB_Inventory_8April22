@@ -227,6 +227,8 @@ public class RFID_SettingActivity extends Activity implements OnClickListener{
 
 	}
 
+
+
 //	@Override
 //	public void onItemSelected(AdapterView<?> adapter, View view, int position, long id) {
 //

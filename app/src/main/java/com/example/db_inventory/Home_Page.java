@@ -4,7 +4,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -18,6 +23,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public class Home_Page extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,6 +46,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         setTitle("eStock_Home Page");
+        setOverflowShowingAlways();
         //DECLARE AND LINK THE VARIABLE
         btn_stock_take = findViewById(R.id.btn_stock_take);
         btn_stock_adjustment = findViewById(R.id.btn_stock_adjustment);
@@ -190,16 +199,71 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 //GOOD RETURN
             case R.id.btn_GRN:
                 Intent intent2grn = new Intent(getApplicationContext(), GRN_Home.class);
+                intent2grn.putExtra("Users", role);
                 startActivity(intent2grn);
                 finish();
                 break;
                 //RFID
             case R.id.btn_RFID:
                 Intent intent2rfid = new Intent(getApplicationContext(), RFID_MainActivity.class);
+                intent2rfid.putExtra("Users", role);
                 startActivity(intent2rfid);
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main,menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
+            if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
+                try {
+                    Method m = menu.getClass().getDeclaredMethod(
+                            "setOptionalIconsVisible", Boolean.TYPE);
+                    m.setAccessible(true);
+                    m.invoke(menu, true);
+                } catch (Exception e) {
+                }
+            }
+        }
+        return super.onMenuOpened(featureId, menu);
+    }
+    //
+//	/**
+//	 * 在actionbar上显示菜单按钮
+//	 */
+    private void setOverflowShowingAlways() {
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("obj");
+            if(menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, true);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_settings:
+//                Intent intent = new Intent(this, SettingPower.class);
+//                startActivity(intent);
+//                this.finish();
+//                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
