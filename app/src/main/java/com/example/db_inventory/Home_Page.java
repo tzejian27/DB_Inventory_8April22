@@ -204,12 +204,12 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 finish();
                 break;
                 //RFID
-            case R.id.btn_RFID:
-                Intent intent2rfid = new Intent(getApplicationContext(), RFID_MainActivity.class);
-                intent2rfid.putExtra("Users", role);
-                startActivity(intent2rfid);
-                finish();
-                break;
+//            case R.id.btn_RFID:
+//                Intent intent2rfid = new Intent(getApplicationContext(), RFID_MainActivity.class);
+//                intent2rfid.putExtra("Users", role);
+//                startActivity(intent2rfid);
+//                finish();
+//                break;
         }
     }
 
