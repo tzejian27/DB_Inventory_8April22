@@ -28,8 +28,11 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.magicrf.uhfreaderlib.reader.Tools;
 import com.magicrf.uhfreaderlib.reader.UhfReader;
 import com.znht.iodev2.PowerCtl;
@@ -65,6 +68,8 @@ public class RFID_MainActivity extends Activity implements OnClickListener ,OnIt
 	private RFID_ScreenStateReceiver screenReceiver ;
 
 	DatabaseReference RFIDDatabase;
+	DatabaseReference HouseDatabase;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -329,7 +334,7 @@ public class RFID_MainActivity extends Activity implements OnClickListener ,OnIt
 		}
 	}
 
-	public void addRFID(){
+	public void addRFID() {
 		Intent intent1 = getIntent();
 		String barcode = intent1.getStringExtra("barcode");
 		String name = intent1.getStringExtra("name");
@@ -339,45 +344,55 @@ public class RFID_MainActivity extends Activity implements OnClickListener ,OnIt
 
 		//connect to EPC List
 		List<EPC> list = listEPC;
-		for (EPC epcdata : list) {
-			//for(int i = 0;i<list.size(); i++) {
-				//final int[] j = {i};
-				Map<String, Object> datamap = new HashMap<String, Object>();
-				datamap.put("EPC", epcdata.getEpc());
-				datamap.put("Key", key);
-				datamap.put("House", name);
-				datamap.put("Barcode", barcode);
+		for(EPC epcdata : list){
+			Map<String, Object> datamap = new HashMap<String, Object>();
+			datamap.put("EPC", epcdata.getEpc());
+			datamap.put("Key", key); //House Key
+			datamap.put("House", name);
+			datamap.put("Barcode", barcode);
+			RFIDDatabase = FirebaseDatabase.getInstance().getReference("RFID_database");
+			RFIDDatabase.child(epcdata.getEpc()).addListenerForSingleValueEvent(new ValueEventListener() {
+				int i =0;
+				@Override
+				public void onDataChange(@NonNull DataSnapshot snapshotRFID) {
+					//CHECK IS EPC EXIST IN DATABASE
+					if (snapshotRFID.exists()) {
+						Toast.makeText(getApplicationContext(), epcdata.getEpc() + " existed!", Toast.LENGTH_SHORT).show();
 
-				RFIDDatabase = FirebaseDatabase.getInstance().getReference("RFID_database").child(epcdata.getEpc());
-				RFIDDatabase.setValue(datamap).addOnCompleteListener(new OnCompleteListener<Void>() {
-					@Override
-					public void onComplete(@NonNull Task<Void> task) {
-						Toast.makeText(getApplicationContext(),  epcdata.getEpc()+ " data added to " + barcode, Toast.LENGTH_SHORT).show();
-						//j[0]++;
-						Intent intent = new Intent(getApplicationContext(), RFID_MainActivity.class);
-						intent.putExtra("barcode", barcode);
-						intent.putExtra("name", name); //HOUSE'S NAME
-						intent.putExtra("Key", key); //HOUSE'S RANDOM KEY
-						intent.putExtra("Key2", key2); //BARCODE'S RANDOM KEY
-						intent.putExtra("Users", users);
-						startActivity(intent);
-						finish();
+					} else {
+						//SAVE WHEN EPC NOT EXIST
+						HouseDatabase = FirebaseDatabase.getInstance().getReference("House").child(key).child(key2);
+						HouseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+							@Override
+							public void onDataChange(@NonNull DataSnapshot snapshot) {
+								if (snapshot != null) {
+									i++;
+									RFIDDatabase.child(epcdata.getEpc()).setValue(datamap).addOnCompleteListener(new OnCompleteListener<Void>() {
+										@Override
+										public void onComplete(@NonNull Task<Void> task) {
+											Toast.makeText(getApplicationContext(), i + " data added to " + barcode, Toast.LENGTH_LONG).show();
+
+										}
+									});
+								} else {
+									Toast.makeText(getApplicationContext(), barcode + "not exist!", Toast.LENGTH_SHORT).show();
+								}
+							}
+
+							@Override
+							public void onCancelled(@NonNull DatabaseError error) {
+
+							}
+						});
 					}
-				});
+				}
 
-//				if(i== list.size()){
-//					Toast.makeText(getApplicationContext(),  epcdata.getEpc()+ " data added to " + barcode, Toast.LENGTH_SHORT).show();
-//					Intent intent = new Intent(getApplicationContext(), RFID_MainActivity.class);
-//					intent.putExtra("barcode", barcode);
-//					intent.putExtra("name", name); //HOUSE'S NAME
-//					intent.putExtra("Key", key); //HOUSE'S RANDOM KEY
-//					intent.putExtra("Key2", key2); //BARCODE'S RANDOM KEY
-//					intent.putExtra("Users", users);
-//					startActivity(intent);
-//					finish();
-//				}
-			//}
+				@Override
+				public void onCancelled(@NonNull DatabaseError error) {
 
+				}
+
+			});
 		}
 	}
 
