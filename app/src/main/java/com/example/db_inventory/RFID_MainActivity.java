@@ -340,27 +340,44 @@ public class RFID_MainActivity extends Activity implements OnClickListener ,OnIt
 		//connect to EPC List
 		List<EPC> list = listEPC;
 		for (EPC epcdata : list) {
-			Map<String, Object> datamap = new HashMap<String, Object>();
-			datamap.put("EPC", epcdata.getEpc());
-			datamap.put("Key", key);
-			datamap.put("House", name);
-			datamap.put("Barcode", barcode);
+			//for(int i = 0;i<list.size(); i++) {
+				//final int[] j = {i};
+				Map<String, Object> datamap = new HashMap<String, Object>();
+				datamap.put("EPC", epcdata.getEpc());
+				datamap.put("Key", key);
+				datamap.put("House", name);
+				datamap.put("Barcode", barcode);
 
-			RFIDDatabase = FirebaseDatabase.getInstance().getReference("RFID_database").child(epcdata.getEpc());
-			RFIDDatabase.setValue(datamap).addOnCompleteListener(new OnCompleteListener<Void>() {
-				@Override
-				public void onComplete(@NonNull Task<Void> task) {
-					Toast.makeText(getApplicationContext(), String.valueOf(list.size()) + " data added to " +barcode, Toast.LENGTH_SHORT).show();
-					Intent intent = new Intent(getApplicationContext(), RFID_MainActivity.class);
-					intent.putExtra("barcode", barcode);
-					intent.putExtra("name", name); //HOUSE'S NAME
-					intent.putExtra("Key", key); //HOUSE'S RANDOM KEY
-					intent.putExtra("Key2", key2); //BARCODE'S RANDOM KEY
-					intent.putExtra("Users", users);
-					startActivity(intent);
-					finish();
-				}
-			});
+				RFIDDatabase = FirebaseDatabase.getInstance().getReference("RFID_database").child(epcdata.getEpc());
+				RFIDDatabase.setValue(datamap).addOnCompleteListener(new OnCompleteListener<Void>() {
+					@Override
+					public void onComplete(@NonNull Task<Void> task) {
+						Toast.makeText(getApplicationContext(),  epcdata.getEpc()+ " data added to " + barcode, Toast.LENGTH_SHORT).show();
+						//j[0]++;
+						Intent intent = new Intent(getApplicationContext(), RFID_MainActivity.class);
+						intent.putExtra("barcode", barcode);
+						intent.putExtra("name", name); //HOUSE'S NAME
+						intent.putExtra("Key", key); //HOUSE'S RANDOM KEY
+						intent.putExtra("Key2", key2); //BARCODE'S RANDOM KEY
+						intent.putExtra("Users", users);
+						startActivity(intent);
+						finish();
+					}
+				});
+
+//				if(i== list.size()){
+//					Toast.makeText(getApplicationContext(),  epcdata.getEpc()+ " data added to " + barcode, Toast.LENGTH_SHORT).show();
+//					Intent intent = new Intent(getApplicationContext(), RFID_MainActivity.class);
+//					intent.putExtra("barcode", barcode);
+//					intent.putExtra("name", name); //HOUSE'S NAME
+//					intent.putExtra("Key", key); //HOUSE'S RANDOM KEY
+//					intent.putExtra("Key2", key2); //BARCODE'S RANDOM KEY
+//					intent.putExtra("Users", users);
+//					startActivity(intent);
+//					finish();
+//				}
+			//}
+
 		}
 	}
 
