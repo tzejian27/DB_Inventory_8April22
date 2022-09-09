@@ -61,6 +61,7 @@ public class RFID_MainActivity_Stock_Out extends Activity implements OnClickList
     DatabaseReference HouseDatabase2;
     DatabaseReference stockMovRef;
     DatabaseReference BarcodeRef;
+    TextView countid;
     private Button buttonClear;
     private Button buttonConnect;
     private Button buttonRead;
@@ -81,9 +82,8 @@ public class RFID_MainActivity_Stock_Out extends Activity implements OnClickList
     private PowerCtl powerCtl;
     private RFID_ScreenStateReceiver screenReceiver;
     private int value = 2600;
-
     private String barcode;
-    private String name;
+    private String housename;
     private String key;
     private String key2;
     private String users;
@@ -92,13 +92,18 @@ public class RFID_MainActivity_Stock_Out extends Activity implements OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setOverflowShowingAlways();
-        setContentView(R.layout.rfid_main);
+        //setOverflowShowingAlways();
+        setContentView(R.layout.rfid_main_so);
+
+        //SET THE COUNT AS HOUSE LOCATION
+        countid = findViewById(R.id.count_id);
+        countid.setText("house");
+
 
         //GET DATA FROM PREVIOUS PAGE
         Intent intent1 = getIntent();
         barcode = intent1.getStringExtra("barcode");
-        name = intent1.getStringExtra("name");
+        housename = intent1.getStringExtra("name");
         key = intent1.getStringExtra("Key");
         key2 = intent1.getStringExtra("Key2");
         users = intent1.getStringExtra("Users");
@@ -214,12 +219,16 @@ public class RFID_MainActivity_Stock_Out extends Activity implements OnClickList
                 RFIDDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                         if (snapshot.exists()) {
+                            String housename = snapshot.child("House").getValue().toString();
+                            String status = snapshot.child("Status").getValue().toString();
                             //第一次读入数据
                             if (list.isEmpty()) {
                                 EPC epcTag = new EPC();
                                 epcTag.setEpc(epc);
-                                epcTag.setCount(1);
+                                epcTag.setCount(housename);
+                                epcTag.setStatus(status);
                                 list.add(epcTag);
                             } else {
                                 for (int i = 0; i < list.size(); i++) {
@@ -234,7 +243,8 @@ public class RFID_MainActivity_Stock_Out extends Activity implements OnClickList
                                         //list中没有此epc
                                         EPC newEPC = new EPC();
                                         newEPC.setEpc(epc);
-                                        newEPC.setCount(1);
+                                        newEPC.setCount(housename);
+                                        newEPC.setStatus(status);
                                         list.add(newEPC);
                                     }
                                 }
@@ -247,13 +257,14 @@ public class RFID_MainActivity_Stock_Out extends Activity implements OnClickList
                                 map.put("ID", idcount);
                                 map.put("EPC", epcdata.getEpc());
                                 map.put("COUNT", epcdata.getCount());
+                                map.put("STATUS", epcdata.getStatus());
                                 idcount++;
                                 listMap.add(map);
                             }
                             listViewData.setAdapter(new SimpleAdapter(RFID_MainActivity_Stock_Out.this,
-                                    listMap, R.layout.rfid_listview_item,
-                                    new String[]{"ID", "EPC", "COUNT"},
-                                    new int[]{R.id.textView_id, R.id.textView_epc, R.id.textView_count}));
+                                    listMap, R.layout.rfid_listview_item_out,
+                                    new String[]{"ID", "EPC", "COUNT", "STATUS"},
+                                    new int[]{R.id.textView_id, R.id.textView_epc, R.id.textView_count, R.id.textView_status}));
                         }
 
                     }
@@ -349,142 +360,145 @@ public class RFID_MainActivity_Stock_Out extends Activity implements OnClickList
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot != null) {
-                //LOOP FOR THE RFID LIST
+                    //LOOP FOR THE RFID LIST
                     for (EPC epcdata : list) {
                         //SET THE COUNT FOR THE LOOP
                         count = 0;
                         toast = 0;
-                        RFIDDatabase = FirebaseDatabase.getInstance().getReference("RFID_database").child(name).child(epcdata.getEpc());
+                        RFIDDatabase = FirebaseDatabase.getInstance().getReference("RFID_database").child(epcdata.getEpc());
                         //TODO CHECK RFID STATUS
                         RFIDDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshotRFID) {
                                 //CHECK IS EPC EXIST IN HOUSE
                                 if (snapshotRFID.exists()) {
-                                    if(snapshotRFID != null && snapshotRFID.child("Status").exists()){
+                                    if (snapshotRFID != null && snapshotRFID.child("Status").exists()) {
                                         String Status1 = snapshotRFID.child("Status").getValue().toString();
                                         String Barcode1 = snapshotRFID.child("Barcode").getValue().toString();
+                                        String HouseOfEpc = snapshotRFID.child("House").getValue().toString();
 
-                                        //CHECK THE STATUS AND
-                                        if (!Status1.equals("Stock Out") && Barcode1.equals(barcode)){
-                                            //UPDATE STATUS WHEN EPC EXIST
-                                            //STATUS NOT EQUAL TO STOCK OUT AND EPC'S BARCODE EQUAL TO BARCODE
-                                            RFIDDatabase = FirebaseDatabase.getInstance().getReference("RFID_database").child(name).child(epcdata.getEpc());
-                                            RFIDDatabase.child("Status").setValue("Stock Out").addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    count++;
-                                                    //GET CURRENT USER FROM LOCAL DB
-                                                    final DBHandler dbHandler = new DBHandler(getApplicationContext());
-                                                    Cursor cursor = dbHandler.fetch();
-                                                    cursor.moveToLast();
-                                                    String username1 = cursor.getString(1);
+                                        //CHECK IS CURRENT EPC BELONG TO SELECTED EPC
+                                        if (HouseOfEpc.equals(housename)) {
+                                            //CHECK THE STATUS AND BARCODE REFER TO
+                                            if (!Status1.equals("Stock Out") && Barcode1.equals(barcode)) {
+                                                //UPDATE STATUS WHEN EPC EXIST
+                                                //STATUS NOT EQUAL TO STOCK OUT AND EPC'S BARCODE EQUAL TO BARCODE
+                                                RFIDDatabase = FirebaseDatabase.getInstance().getReference("RFID_database").child(epcdata.getEpc());
+                                                RFIDDatabase.child("Status").setValue("Stock Out").addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        count++;
+                                                        //GET CURRENT USER FROM LOCAL DB
+                                                        final DBHandler dbHandler = new DBHandler(getApplicationContext());
+                                                        Cursor cursor = dbHandler.fetch();
+                                                        cursor.moveToLast();
+                                                        String username1 = cursor.getString(1);
 
-                                                    //UPDATE USER WHO MAKE STOCK OUT IN 'HOUSE'
-                                                    HouseDatabase2 = FirebaseDatabase.getInstance().getReference("House").child(key);
-                                                    HouseDatabase2.child(key2).child("User").setValue(username1);
+                                                        //UPDATE USER WHO MAKE STOCK OUT IN 'HOUSE'
+                                                        HouseDatabase2 = FirebaseDatabase.getInstance().getReference("House").child(key);
+                                                        HouseDatabase2.child(key2).child("User").setValue(username1);
 
-                                                    //RECORD MOVEMENT OF THE STOCK AFTER THE DATA INSERT'S LOOP SUCCESS
-                                                    stockMovRef = FirebaseDatabase.getInstance().getReference("StockMovement");
+                                                        //RECORD MOVEMENT OF THE STOCK AFTER THE DATA INSERT'S LOOP SUCCESS
+                                                        stockMovRef = FirebaseDatabase.getInstance().getReference("StockMovement");
 
-                                                    //SAVE STOCK IN DATE IN DIFFERENT FORMAT***
-                                                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
-                                                    String currentDateandTime = sdf.format(new Date());
+                                                        //SAVE STOCK IN DATE IN DIFFERENT FORMAT***
+                                                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
+                                                        String currentDateandTime = sdf.format(new Date());
 
-                                                    SimpleDateFormat sdf2 = new SimpleDateFormat("dd_MM_yyyy_HH:mm:ss");
-                                                    String currentDateandTime2 = sdf2.format(new Date());
+                                                        SimpleDateFormat sdf2 = new SimpleDateFormat("dd_MM_yyyy_HH:mm:ss");
+                                                        String currentDateandTime2 = sdf2.format(new Date());
 
-                                                    SimpleDateFormat sdf3 = new SimpleDateFormat("yyyyMMddHHmmss");
-                                                    String currentDateandTime3 = sdf3.format(new Date());
+                                                        SimpleDateFormat sdf3 = new SimpleDateFormat("yyyyMMddHHmmss");
+                                                        String currentDateandTime3 = sdf3.format(new Date());
 
-                                                    //***SAVE STOCK IN DATE IN DIFFERENT FORMAT
+                                                        //***SAVE STOCK IN DATE IN DIFFERENT FORMAT
 
-                                                    //GET CURRENT STOCK DATA WHICH IS ITEM NAME AND THE CURRENT QUANTITY OF BARCODE
-                                                    String ItemName = snapshot.child("ItemName").getValue().toString().trim();
-                                                    String Quantity = snapshot.child("Quantity").getValue().toString().trim();
+                                                        //GET CURRENT STOCK DATA WHICH IS ITEM NAME AND THE CURRENT QUANTITY OF BARCODE
+                                                        String ItemName = snapshot.child("ItemName").getValue().toString().trim();
+                                                        String Quantity = snapshot.child("Quantity").getValue().toString().trim();
 
-                                                    //SET THE STOCK MOVEMENT PARENT NAME IN FORMAT BARCODE_dd_MM_yyyy_HH:mm:ss
-                                                    // TO MAKE SURE THE SORTING AND DATA FILTER IN SIDE SERVER EASIER
-                                                    String parentname = barcode + "_" + currentDateandTime2;
+                                                        //SET THE STOCK MOVEMENT PARENT NAME IN FORMAT BARCODE_dd_MM_yyyy_HH:mm:ss
+                                                        // TO MAKE SURE THE SORTING AND DATA FILTER IN SIDE SERVER EASIER
+                                                        String parentname = barcode + "_" + currentDateandTime2;
 
-                                                    //NEW QTY EQUAL TO CURRENT QTY - NUMBER OF RFID (NOT EXIST IN FIREBASE)
-                                                    int qty = Integer.parseInt(Quantity) - count;
+                                                        //NEW QTY EQUAL TO CURRENT QTY - NUMBER OF RFID (NOT EXIST IN FIREBASE)
+                                                        int qty = Integer.parseInt(Quantity) - count;
 
-                                                    //INSERT STOCK MOVEMENT
-                                                    Map dataMap4 = new HashMap();
-                                                    dataMap4.put("ParentName", parentname);
-                                                    dataMap4.put("Barcode", barcode);
-                                                    dataMap4.put("Name", ItemName);
-                                                    dataMap4.put("QtyIn", 0);
-                                                    dataMap4.put("QtyOut", count);
-                                                    dataMap4.put("QtyInOut_Date", currentDateandTime);
-                                                    dataMap4.put("QtyInOut_Date2", currentDateandTime3);
-                                                    //QUANTITY BEFORE STOCK IN
-                                                    dataMap4.put("Qty", Quantity);
-                                                    //QUANTITY AFTER STOCK IN
-                                                    dataMap4.put("TotalQty", qty);
-                                                    dataMap4.put("HouseName", name);
-                                                    dataMap4.put("User", users);
-                                                    stockMovRef.child(name).child(parentname).updateChildren(dataMap4);
+                                                        //INSERT STOCK MOVEMENT
+                                                        Map dataMap4 = new HashMap();
+                                                        dataMap4.put("ParentName", parentname);
+                                                        dataMap4.put("Barcode", barcode);
+                                                        dataMap4.put("Name", ItemName);
+                                                        dataMap4.put("QtyIn", 0);
+                                                        dataMap4.put("QtyOut", count);
+                                                        dataMap4.put("QtyInOut_Date", currentDateandTime);
+                                                        dataMap4.put("QtyInOut_Date2", currentDateandTime3);
+                                                        //QUANTITY BEFORE STOCK IN
+                                                        dataMap4.put("Qty", Quantity);
+                                                        //QUANTITY AFTER STOCK IN
+                                                        dataMap4.put("TotalQty", qty);
+                                                        dataMap4.put("HouseName", housename);
+                                                        dataMap4.put("User", users);
+                                                        stockMovRef.child(housename).child(parentname).updateChildren(dataMap4);
 
 
-                                                    BarcodeRef = FirebaseDatabase.getInstance().getReference("House").child(key).child(key2);
+                                                        BarcodeRef = FirebaseDatabase.getInstance().getReference("House").child(key).child(key2);
 
-                                                    //TODO 3: UPDATE BASED ON TOTAL ENTERED
-                                                    //UPDATE STOCK DATA IN HOUSE_BARCODE (NEW QTY!!!)
-                                                    Map dataMapHouse = new HashMap();
-                                                    dataMapHouse.put("QtyOut", count);
-                                                    dataMapHouse.put("QtyOut_Date", currentDateandTime);
-                                                    dataMapHouse.put("Quantity", qty);
-                                                    BarcodeRef.updateChildren(dataMapHouse);
+                                                        //TODO 3: UPDATE BASED ON TOTAL ENTERED
+                                                        //UPDATE STOCK DATA IN HOUSE_BARCODE (NEW QTY!!!)
+                                                        Map dataMapHouse = new HashMap();
+                                                        dataMapHouse.put("QtyOut", count);
+                                                        dataMapHouse.put("QtyOut_Date", currentDateandTime);
+                                                        dataMapHouse.put("Quantity", qty);
+                                                        BarcodeRef.updateChildren(dataMapHouse);
 
-                                                    //GET THE TOTAL QTY OF BARCODE IN THE HOUSE
-                                                    int totalQty = Integer.parseInt(totalqtyh);
-                                                    //SUM-UP THE INSERTED NUMBER WITH THE TOTAL QUANTITY IN HOUSE
-                                                    int sum = totalQty - count;
-                                                    String sum2 = String.valueOf(sum);
+                                                        //GET THE TOTAL QTY OF BARCODE IN THE HOUSE
+                                                        int totalQty = Integer.parseInt(totalqtyh);
+                                                        //SUM-UP THE INSERTED NUMBER WITH THE TOTAL QUANTITY IN HOUSE
+                                                        int sum = totalQty - count;
+                                                        String sum2 = String.valueOf(sum);
 
-                                                    HouseDatabase2.child("TotalQty").setValue(sum2);
+                                                        HouseDatabase2.child("TotalQty").setValue(sum2);
 
-                                                    //ADD HOUSE WHEN HOUSE NOT EXIST IN STOCK MOVEMENT DATABASE
-                                                    stockMovRef.child(name).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                            if (!snapshot.child("housename").exists()) {
-                                                                Map map = new HashMap();
-                                                                map.put("housename", name);
-                                                                stockMovRef.child(name).updateChildren(map);
+                                                        //ADD HOUSE WHEN HOUSE NOT EXIST IN STOCK MOVEMENT DATABASE
+                                                        stockMovRef.child(housename).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                if (!snapshot.child("housename").exists()) {
+                                                                    Map map = new HashMap();
+                                                                    map.put("housename", housename);
+                                                                    stockMovRef.child(housename).updateChildren(map);
+                                                                }
                                                             }
-                                                        }
 
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError error) {
+                                                            @Override
+                                                            public void onCancelled(@NonNull DatabaseError error) {
 
-                                                        }
-                                                    });
+                                                            }
+                                                        });
 
-                                                    buttonAdd.setEnabled(false);
+                                                        buttonAdd.setEnabled(false);
 
-                                                    int count1 = (count * 120);
-                                                    Toast success = Toast.makeText(getApplicationContext(), epcdata.getEpc() + " in " + Barcode1 + " was stock outed ", Toast.LENGTH_LONG);
-                                                    success.setGravity(Gravity.CENTER | Gravity.TOP, 0, count1);
-                                                    success.show();
+                                                        int count1 = (count * 120);
+                                                        Toast success = Toast.makeText(getApplicationContext(), epcdata.getEpc() + " in " + Barcode1 + " was stock outed ", Toast.LENGTH_LONG);
+                                                        success.setGravity(Gravity.CENTER | Gravity.TOP, 0, count1);
+                                                        success.show();
 
-                                                    Intent intent2SOrfid = new Intent(getApplicationContext(), Stock_Out_Success_View.class);
-                                                    intent2SOrfid.putExtra("barcode", barcode);
-                                                    intent2SOrfid.putExtra("name", name); //HOUSE'S NAME
-                                                    intent2SOrfid.putExtra("Key", key); //HOUSE'S RANDOM KEY
-                                                    intent2SOrfid.putExtra("Key2", key2); //BARCODE'S RANDOM KEY
-                                                    intent2SOrfid.putExtra("Users", users);
-                                                    startActivity(intent2SOrfid);
-                                                    finish();
-
-                                                }
-                                            });
-                                        }else if (!Barcode1.equals(barcode)){
-                                            Toast.makeText(getApplicationContext(), epcdata.getEpc() + " is belong to " +Barcode1, Toast.LENGTH_LONG).show();
-                                        }else if (Status1.equals("Stock Out")){
-                                            Toast.makeText(getApplicationContext(), epcdata.getEpc() + " is already " + Status1, Toast.LENGTH_LONG).show();
+                                                        Intent intent2SOrfid = new Intent(getApplicationContext(), Stock_Out_Success_View.class);
+                                                        intent2SOrfid.putExtra("barcode", barcode);
+                                                        intent2SOrfid.putExtra("name", housename); //HOUSE'S NAME
+                                                        intent2SOrfid.putExtra("Key", key); //HOUSE'S RANDOM KEY
+                                                        intent2SOrfid.putExtra("Key2", key2); //BARCODE'S RANDOM KEY
+                                                        intent2SOrfid.putExtra("Users", users);
+                                                        startActivity(intent2SOrfid);
+                                                        finish();
+                                                    }
+                                                });
+                                            } else if (!Barcode1.equals(barcode)) {
+                                                Toast.makeText(getApplicationContext(), epcdata.getEpc() + " is belong to " + Barcode1, Toast.LENGTH_LONG).show();
+                                            } else if (Status1.equals("Stock Out")) {
+                                                Toast.makeText(getApplicationContext(), epcdata.getEpc() + " is already " + Status1, Toast.LENGTH_LONG).show();
+                                            }
                                         }
 
                                     }
@@ -492,7 +506,7 @@ public class RFID_MainActivity_Stock_Out extends Activity implements OnClickList
                                 } else {
                                     toast++;
                                     int toast1 = (toast * 120);
-                                    Toast note = Toast.makeText(getApplicationContext(), epcdata.getEpc() + " not exist in " + name, Toast.LENGTH_LONG);
+                                    Toast note = Toast.makeText(getApplicationContext(), epcdata.getEpc() + " not registered", Toast.LENGTH_LONG);
                                     note.setGravity(Gravity.CENTER | Gravity.TOP, 0, toast1);
                                     note.show();
                                 }
@@ -509,7 +523,7 @@ public class RFID_MainActivity_Stock_Out extends Activity implements OnClickList
                     }
 
                 } else {
-                    Toast.makeText(getApplicationContext(), barcode + "not exist in House: " + name, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), barcode + "not exist in House: " + housename, Toast.LENGTH_SHORT).show();
                 }
             }
 

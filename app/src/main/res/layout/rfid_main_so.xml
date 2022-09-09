@@ -50,7 +50,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:gravity="center"
             android:text="@string/id"
             android:textSize="18sp" />
@@ -64,11 +64,20 @@
             android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/count_id"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.60"
+            android:layout_weight="1.5"
             android:gravity="center"
             android:text="@string/count"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.50"
+            android:gravity="center"
+            android:text="status"
             android:textSize="18sp" />
 
         <TextView

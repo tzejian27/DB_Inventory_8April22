@@ -149,8 +149,10 @@
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/reader_setting_activity.xml" value="0.1685185185185185" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/reader_setting_power.xml" value="0.20925925925925926" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_iso1800_6c.xml" value="0.22" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_listview_item.xml" value="0.5" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_main.xml" value="0.33" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_listview_item.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_listview_item_out.xml" value="0.25324074074074077" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_main.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_main_so.xml" value="0.25324074074074077" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_parameter.xml" value="0.1" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/sa_list_recycle.xml" value="0.1685185185185185" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/setting_activity.xml" value="0.23055555555555557" />

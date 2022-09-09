@@ -79,7 +79,7 @@ public class RFID_MainActivity_Stock_In extends Activity implements OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setOverflowShowingAlways();
+        //setOverflowShowingAlways();
         setContentView(R.layout.rfid_main);
 
         initView();
@@ -189,7 +189,7 @@ public class RFID_MainActivity_Stock_In extends Activity implements OnClickListe
                 if (list.isEmpty()) {
                     EPC epcTag = new EPC();
                     epcTag.setEpc(epc);
-                    epcTag.setCount(1);
+                    epcTag.setCount(String.valueOf(1));
                     list.add(epcTag);
                 } else {
                     for (int i = 0; i < list.size(); i++) {
@@ -204,7 +204,7 @@ public class RFID_MainActivity_Stock_In extends Activity implements OnClickListe
                             //list中没有此epc
                             EPC newEPC = new EPC();
                             newEPC.setEpc(epc);
-                            newEPC.setCount(1);
+                            newEPC.setCount(String.valueOf(1));
                             list.add(newEPC);
                         }
                     }
