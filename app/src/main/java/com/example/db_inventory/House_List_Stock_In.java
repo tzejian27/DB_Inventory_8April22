@@ -88,11 +88,11 @@ public class House_List_Stock_In extends AppCompatActivity {
                 holder.Total_type.setText(model.getTotalType());
                 totalRecord.setText(String.valueOf(getItemCount()));
 
-
                 holder.mView.setOnClickListener(v -> {
 
                     final String key = model.getKey();
                     final String name = model.getName();
+                    final String totalqtyh = model.getTotalQty();
                     databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
                     databaseReference.keepSynced(true);
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -104,6 +104,7 @@ public class House_List_Stock_In extends AppCompatActivity {
                             intent.putExtra("Key", key);
                             intent.putExtra("name", name);
                             intent.putExtra("Users", users);
+                            intent.putExtra("TotalQtyH", totalqtyh);
                             Toast.makeText(getApplicationContext(), "Enter " + name, Toast.LENGTH_SHORT).show();
                             startActivity(intent);
                         }

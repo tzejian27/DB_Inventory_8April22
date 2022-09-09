@@ -141,5 +141,6 @@
     <string name="freqNotNull">Frequency not null</string>
     <string name="PowerOn">PowerOn</string>
     <string name="PowerOff">PowerOff</string>
-    <string name="new_btn">New</string>s
+    <string name="new_btn">New</string>
+    <string name="qty_out">Qty out</string>s
 </resources>

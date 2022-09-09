@@ -86,9 +86,9 @@ public class House_New_House extends AppCompatActivity {
                     dataMap.put("Name", name);
                     dataMap.put("TotalQty", TotalQty);
                     dataMap.put("TotalType", TotalType);
-                    dataMap.put("Key", key);
+                    dataMap.put("Key", name);
 
-                    String key_ref = key + "/";
+                    String key_ref = name + "/";
                     Map dataMap2 = new HashMap();
                     dataMap2.put(key_ref + "/", dataMap);
 
@@ -96,7 +96,7 @@ public class House_New_House extends AppCompatActivity {
                     myRef.updateChildren(dataMap2);
                     Intent intent = new Intent(House_New_House.this, House_Menu.class);
                     intent.putExtra("name", name);
-                    intent.putExtra("Key", key);
+                    intent.putExtra("Key", name);
                     intent.putExtra("Users", users);
                     startActivity(intent);
                     finish();
