@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -84,6 +86,11 @@ public class House_List_Stock_Out extends AppCompatActivity {
         FirebaseRecyclerAdapter<House_list_class, House_List_Stock_Out.HouseViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<House_list_class, House_List_Stock_Out.HouseViewHolder>(houseAdapter) {
             @Override
             protected void onBindViewHolder(@NonNull House_List_Stock_Out.HouseViewHolder holder, int position, @NonNull House_list_class model) {
+                //RECYCLE VIEW SLIDE FROM LEFT ANIMATION
+                Animation animation = AnimationUtils.loadAnimation(holder.mView.getContext(), android.R.anim.slide_in_left);
+                animation.setDuration(1200);
+                holder.mView.startAnimation(animation);
+
                 holder.Name.setText(model.getName());
                 holder.TotalQty.setText(model.getTotalQty());
                 holder.Total_type.setText(model.getTotalType());

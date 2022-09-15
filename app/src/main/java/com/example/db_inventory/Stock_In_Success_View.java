@@ -36,8 +36,6 @@ public class Stock_In_Success_View extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_in_success_view);
 
-        setTitle("eStock_Stock In_RFID_" + barcode);
-
         t1 = findViewById(R.id.textView_Inventory_TotalQty_SI_RFID);
         t2 = findViewById(R.id.textView_Inventory_Qty_SI_RFID);
         t3 = findViewById(R.id.textView_Inventory_name_SI_RFID);
@@ -55,6 +53,8 @@ public class Stock_In_Success_View extends AppCompatActivity {
         key = intent1.getStringExtra("Key");
         key2 = intent1.getStringExtra("Key2");
         itemcode = intent1.getStringExtra("ItemCode");
+
+        setTitle("eStock_Stock In_RFID_" + barcode);
 
         e1.setText(barcode);
         e1.setEnabled(false);

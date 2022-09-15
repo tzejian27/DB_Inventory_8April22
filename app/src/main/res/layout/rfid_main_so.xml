@@ -64,12 +64,12 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/count_id"
+            android:id="@+id/house_rfid"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:text="@string/count"
+            android:text="House"
             android:textSize="18sp" />
 
         <TextView
@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.50"
             android:gravity="center"
-            android:text="status"
+            android:text="Status"
             android:textSize="18sp" />
 
         <TextView

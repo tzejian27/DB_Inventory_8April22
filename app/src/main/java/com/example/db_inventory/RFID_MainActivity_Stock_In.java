@@ -75,6 +75,7 @@ public class RFID_MainActivity_Stock_In extends Activity implements OnClickListe
     private RFID_ScreenStateReceiver screenReceiver;
     private int value = 2600;
     static int count = 0;
+    String rfid_status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,46 +185,69 @@ public class RFID_MainActivity_Stock_In extends Activity implements OnClickListe
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                //CHECK EPC STATUS IN DATABASE, IF NOT EXIST IT SHOW 'Valid' as status
+                //else it will be the real status of the epc
+                RFIDDatabase = FirebaseDatabase.getInstance().getReference("RFID_database").child(epc);
+                RFIDDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            rfid_status = snapshot.child("Status").getValue().toString();
+                        }else{
+                            rfid_status = "Valid";
+                        }
 
-                //第一次读入数据
-                if (list.isEmpty()) {
-                    EPC epcTag = new EPC();
-                    epcTag.setEpc(epc);
-                    epcTag.setCount(String.valueOf(1));
-                    list.add(epcTag);
-                } else {
-                    for (int i = 0; i < list.size(); i++) {
-                        EPC mEPC = list.get(i);
-                        //list中有此EPC
-                        if (epc.equals(mEPC.getEpc())) {
+                        //第一次读入数据
+                        if (list.isEmpty()) {
+                            EPC epcTag = new EPC();
+                            epcTag.setEpc(epc);
+                            epcTag.setCount(String.valueOf(1));
+                            epcTag.setStatus(rfid_status);
+                            list.add(epcTag);
+                        } else {
+                            for (int i = 0; i < list.size(); i++) {
+                                EPC mEPC = list.get(i);
+                                //list中有此EPC
+                                if (epc.equals(mEPC.getEpc())) {
 //							mEPC.setCount(mEPC.getCount() + 1);
 //							list.set(i, mEPC);
-                            break;
-                        } else if (i == (list.size() - 1)) {
-                            mediaPlayer.start();
-                            //list中没有此epc
-                            EPC newEPC = new EPC();
-                            newEPC.setEpc(epc);
-                            newEPC.setCount(String.valueOf(1));
-                            list.add(newEPC);
+                                    break;
+                                } else if (i == (list.size() - 1)) {
+                                    mediaPlayer.start();
+                                    //list中没有此epc
+                                    EPC newEPC = new EPC();
+                                    newEPC.setEpc(epc);
+                                    newEPC.setCount(String.valueOf(1));
+                                    newEPC.setStatus(rfid_status);
+                                    list.add(newEPC);
+                                }
+                            }
                         }
+                        //将数据添加到ListView
+                        listMap = new ArrayList<Map<String, Object>>();
+                        int idcount = 1;
+                        for (EPC epcdata : list) {
+                            Map<String, Object> map = new HashMap<String, Object>();
+                            map.put("ID", idcount);
+                            map.put("EPC", epcdata.getEpc());
+                            map.put("COUNT", epcdata.getCount());
+                            map.put("STATUS", epcdata.getStatus());
+                            idcount++;
+                            listMap.add(map);
+                        }
+                        listViewData.setAdapter(new SimpleAdapter(RFID_MainActivity_Stock_In.this,
+                                listMap, R.layout.rfid_listview_item,
+                                new String[]{"ID", "EPC", "STATUS"},
+                                new int[]{R.id.textView_id, R.id.textView_epc, R.id.textView_count}));
                     }
-                }
-                //将数据添加到ListView
-                listMap = new ArrayList<Map<String, Object>>();
-                int idcount = 1;
-                for (EPC epcdata : list) {
-                    Map<String, Object> map = new HashMap<String, Object>();
-                    map.put("ID", idcount);
-                    map.put("EPC", epcdata.getEpc());
-                    map.put("COUNT", epcdata.getCount());
-                    idcount++;
-                    listMap.add(map);
-                }
-                listViewData.setAdapter(new SimpleAdapter(RFID_MainActivity_Stock_In.this,
-                        listMap, R.layout.rfid_listview_item,
-                        new String[]{"ID", "EPC", "COUNT"},
-                        new int[]{R.id.textView_id, R.id.textView_epc, R.id.textView_count}));
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
             }
         });
     }

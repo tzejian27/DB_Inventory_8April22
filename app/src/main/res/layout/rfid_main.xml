@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.60"
             android:gravity="center"
-            android:text="@string/count"
+            android:text="Status"
             android:textSize="18sp" />
 
         <TextView

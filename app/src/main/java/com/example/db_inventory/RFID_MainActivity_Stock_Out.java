@@ -61,7 +61,6 @@ public class RFID_MainActivity_Stock_Out extends Activity implements OnClickList
     DatabaseReference HouseDatabase2;
     DatabaseReference stockMovRef;
     DatabaseReference BarcodeRef;
-    TextView countid;
     private Button buttonClear;
     private Button buttonConnect;
     private Button buttonRead;
@@ -94,10 +93,6 @@ public class RFID_MainActivity_Stock_Out extends Activity implements OnClickList
         super.onCreate(savedInstanceState);
         //setOverflowShowingAlways();
         setContentView(R.layout.rfid_main_so);
-
-        //SET THE COUNT AS HOUSE LOCATION
-        countid = findViewById(R.id.count_id);
-        countid.setText("house");
 
 
         //GET DATA FROM PREVIOUS PAGE

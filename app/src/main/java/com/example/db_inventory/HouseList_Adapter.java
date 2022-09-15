@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +49,12 @@ public class HouseList_Adapter extends RecyclerView.Adapter<HouseList_Adapter.My
 
     @Override
     public void onBindViewHolder(@NonNull HouseList_Adapter.MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+
+        //RECYCLE VIEW SLIDE FROM LEFT ANIMATION
+        Animation animation = AnimationUtils.loadAnimation(holder.mView.getContext(), android.R.anim.slide_in_left);
+        animation.setDuration(1200);
+        holder.mView.startAnimation(animation);
+
         holder.Name.setText(mData.get(position).getName());
         holder.TotalQty.setText(mData.get(position).getTotalQty());
         holder.Total_type.setText(mData.get(position).getTotalType());

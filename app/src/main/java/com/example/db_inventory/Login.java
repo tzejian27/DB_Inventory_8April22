@@ -109,8 +109,9 @@ public class Login extends AppCompatActivity {
                         //WILL BE USED TO CHECK USER ACCESS RIGHT
                         dbHandler.addUserInfo(userName, userRole);
 
-
                         startActivity(intent);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
                         finish();
                         //EMPTY TEXT BOX WHEN LOGIN IS SUCCESS
                         txtName.setText("");
