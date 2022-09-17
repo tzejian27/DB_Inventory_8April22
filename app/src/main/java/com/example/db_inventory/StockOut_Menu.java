@@ -1,14 +1,14 @@
 package com.example.db_inventory;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class StockIn_Menu extends AppCompatActivity implements View.OnClickListener {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class StockOut_Menu extends AppCompatActivity implements View.OnClickListener {
 
     Button btn_scan, btn_rfid;
 
@@ -16,7 +16,7 @@ public class StockIn_Menu extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_in_menu);
-        setTitle("Stock In Menu");
+        setTitle("Stock Out Menu");
 
         btn_scan = findViewById(R.id.btn_scan_stockin_menu);
         btn_rfid = findViewById(R.id.btn_rfid_stockin_menu);
@@ -28,7 +28,7 @@ public class StockIn_Menu extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         onStart();
-        //GET DATA FROM "House_List_Stock_In"
+        //GET DATA FROM "House_List_Stock_Out"
         String key = getIntent().getStringExtra("Key");
         String name = getIntent().getStringExtra("name");
         String users = getIntent().getStringExtra("Users");
@@ -37,7 +37,7 @@ public class StockIn_Menu extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.btn_scan_stockin_menu:
                 //ENTER STOCK IN OF SELECTED HOUSE WITH SCAN BARCODE
-                Intent intent = new Intent(getApplicationContext(), Stock_In_Scan.class);
+                Intent intent = new Intent(getApplicationContext(), Stock_Out_Scan.class);
                 intent.putExtra("Key", key);
                 intent.putExtra("name", name);
                 intent.putExtra("Users", users);
@@ -47,7 +47,7 @@ public class StockIn_Menu extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btn_rfid_stockin_menu:
                 //ENTER STOCK IN OF SELECTED HOUSE WITH RFID
-                Intent intent2rfid = new Intent(getApplicationContext(), Stock_In_Scan_RFID.class);
+                Intent intent2rfid = new Intent(getApplicationContext(), Stock_Out_Scan_RFID.class);
                 intent2rfid.putExtra("Key", key);
                 intent2rfid.putExtra("name", name);
                 intent2rfid.putExtra("Users", users);
@@ -63,7 +63,7 @@ public class StockIn_Menu extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         String users = getIntent().getStringExtra("Users");
         super.onBackPressed();
-        Intent intent2back = new Intent(this, House_List_Stock_In.class);
+        Intent intent2back = new Intent(this, House_List_Stock_Out.class);
         intent2back.putExtra("Users", users);
         startActivity(intent2back);
         finish();

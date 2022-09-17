@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -61,6 +63,12 @@ public class Sales_Order extends AppCompatActivity {
         FirebaseRecyclerAdapter<HouseInventory, SaleOrderViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<HouseInventory, SaleOrderViewHolder>(saleOrderAdapter) {
             @Override
             protected void onBindViewHolder(@NonNull SaleOrderViewHolder holder, int position, @NonNull HouseInventory model) {
+
+                //RECYCLE VIEW SLIDE FROM LEFT ANIMATION
+                Animation animation = AnimationUtils.loadAnimation(holder.mView.getContext(), android.R.anim.fade_in);
+                animation.setDuration(1500);
+                holder.mView.startAnimation(animation);
+
                 holder.setBarcode(model.getBarcode());
                 holder.setItemName(model.getItemName());
                 holder.setQuantity(model.getQuantity());

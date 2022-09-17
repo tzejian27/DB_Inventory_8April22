@@ -3,7 +3,8 @@ package com.example.db_inventory;
 public class EPC {
 	private int id;
 	private String epc;
-	private int count;
+	private String count;
+	private String status;
 	
 	/**
 	 * @return the id
@@ -32,13 +33,13 @@ public class EPC {
 	/**
 	 * @return the count
 	 */
-	public int getCount() {
+	public String getCount() {
 		return count;
 	}
 	/**
 	 * @param count the count to set
 	 */
-	public void setCount(int count) {
+	public void setCount(String count) {
 		this.count = count;
 	}
 	/* (non-Javadoc)
@@ -48,7 +49,12 @@ public class EPC {
 	public String toString() {
 		return "EPC [id=" + id + ", epc=" + epc + ", count=" + count + "]";
 	}
-	
-	
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }

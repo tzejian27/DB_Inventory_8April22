@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +71,12 @@ public class SaleOrderList extends AppCompatActivity {
         FirebaseRecyclerAdapter<HouseInventory, SOViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<HouseInventory, SOViewHolder>(SO_Adapter) {
             @Override
             protected void onBindViewHolder(@NonNull SOViewHolder holder, int position, @NonNull HouseInventory model) {
+
+                //RECYCLE VIEW SLIDE FROM LEFT ANIMATION
+                Animation animation = AnimationUtils.loadAnimation(holder.mView.getContext(), android.R.anim.fade_in);
+                animation.setDuration(1000);
+                holder.mView.startAnimation(animation);
+
                 holder.setSalesOrderNo(model.getSalesOrderNo());
                 totalrecord.setText(String.valueOf(getItemCount()));
 
@@ -105,6 +113,11 @@ public class SaleOrderList extends AppCompatActivity {
         FirebaseRecyclerAdapter<HouseInventory, SOViewHolder> firebaseRecyclerAdapter1 = new FirebaseRecyclerAdapter<HouseInventory, SOViewHolder>(SO_COM_Adapter) {
             @Override
             protected void onBindViewHolder(@NonNull SOViewHolder holder, int position, @NonNull HouseInventory model) {
+
+                //RECYCLE VIEW SLIDE FROM LEFT ANIMATION
+                Animation animation = AnimationUtils.loadAnimation(holder.mView.getContext(), android.R.anim.fade_in);
+                holder.mView.startAnimation(animation);
+
                 holder.setSalesOrderNo(model.getSalesOrderNo());
                 totalrecord2.setText(String.valueOf(getItemCount()));
 

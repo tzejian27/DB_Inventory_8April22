@@ -18,6 +18,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DB_Inventory">
         <activity
+            android:name=".Stock_Out_Success_View"
+            android:exported="false" />
+        <activity
+            android:name=".Stock_In_Success_View"
+            android:exported="false" />
+        <activity
+            android:name=".RFID_MainActivity_Stock_Out"
+            android:exported="false" />
+        <activity
+            android:name=".Stock_Out_Scan_RFID"
+            android:exported="false" />
+        <activity
+            android:name=".StockOut_Menu"
+            android:exported="false" />
+        <activity
             android:name=".Stock_In_Scan_RFID"
             android:exported="false" />
         <activity
@@ -26,7 +41,7 @@
         <activity
             android:name=".RFID_SettingActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".RFID_MoreHandleActivity"
             android:launchMode="singleTask"
@@ -36,7 +51,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".RFID_MainActivity"
+            android:name=".RFID_MainActivity_Stock_In"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

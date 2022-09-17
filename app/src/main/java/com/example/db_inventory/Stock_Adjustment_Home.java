@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +59,10 @@ public class Stock_Adjustment_Home extends AppCompatActivity {
         FirebaseRecyclerAdapter<SA_class, SAViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<SA_class, SAViewHolder>(SA_Adapter) {
             @Override
             protected void onBindViewHolder(@NonNull SAViewHolder holder, int position, @NonNull SA_class model) {
+                //RECYCLE VIEW SLIDE FROM LEFT ANIMATION
+                Animation animation = AnimationUtils.loadAnimation(holder.mView.getContext(), android.R.anim.slide_in_left);
+                holder.mView.startAnimation(animation);
+
                 holder.setSAHouse(model.getSAHouse());
                 totalrecord.setText(String.valueOf(getItemCount()));
 

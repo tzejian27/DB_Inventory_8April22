@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -83,16 +85,21 @@ public class House_List_Stock_In extends AppCompatActivity {
         FirebaseRecyclerAdapter<House_list_class, HouseViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<House_list_class, HouseViewHolder>(houseAdapter) {
             @Override
             protected void onBindViewHolder(@NonNull HouseViewHolder holder, int position, @NonNull House_list_class model) {
+                //RECYCLE VIEW SLIDE FROM LEFT ANIMATION
+                Animation animation = AnimationUtils.loadAnimation(holder.mView.getContext(), android.R.anim.slide_in_left);
+                animation.setDuration(1200);
+                holder.mView.startAnimation(animation);
+
                 holder.Name.setText(model.getName());
                 holder.TotalQty.setText(model.getTotalQty());
                 holder.Total_type.setText(model.getTotalType());
                 totalRecord.setText(String.valueOf(getItemCount()));
 
-
                 holder.mView.setOnClickListener(v -> {
 
                     final String key = model.getKey();
                     final String name = model.getName();
+                    final String totalqtyh = model.getTotalQty();
                     databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
                     databaseReference.keepSynced(true);
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -104,6 +111,7 @@ public class House_List_Stock_In extends AppCompatActivity {
                             intent.putExtra("Key", key);
                             intent.putExtra("name", name);
                             intent.putExtra("Users", users);
+                            intent.putExtra("TotalQtyH", totalqtyh);
                             Toast.makeText(getApplicationContext(), "Enter " + name, Toast.LENGTH_SHORT).show();
                             startActivity(intent);
                         }

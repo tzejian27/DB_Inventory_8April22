@@ -185,10 +185,6 @@ public class StockIn_step3 extends AppCompatActivity {
                     String username1 = cursor.getString(1);
 
                     databaseReference.child(key2).child("User").setValue(username1);
-                    //.addOnCompleteListener(new OnCompleteListener<Void>() {
-                    //   @Override
-                    //    public void onComplete(@NonNull Task<Void> task) {
-                    //       if (task.isSuccessful()){
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -199,6 +195,7 @@ public class StockIn_step3 extends AppCompatActivity {
                             sum = totalQty1 + total;
                             String sum2 = String.valueOf(sum);
 
+                            //UPDATE THE LASTED QUANTITY OF HOUSE
                             databaseReference.child("TotalQty").setValue(sum2).toString().trim();
 
                             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
@@ -208,7 +205,7 @@ public class StockIn_step3 extends AppCompatActivity {
                             t1.setText(sum2);
                             t2.setText(Quantity);
 
-
+                            //CHANGE QUANTITY WHEN UPDATED
                             Map dataMap = new HashMap();
                             dataMap.put("QtyIn", qty);
                             dataMap.put("QtyIn_Date", currentDateandTime);

@@ -125,18 +125,25 @@
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_house_list_stock_in.xml" value="0.3038949275362319" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_house_menu.xml" value="0.3038949275362319" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_inventory.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_inventory_list.xml" value="0.3226851851851852" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_inventory_step5.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_login.xml" value="0.3226851851851852" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_main.xml" value="0.3038949275362319" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_new_goods_step2.xml" value="0.3226851851851852" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_new_grn.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_sales_order.xml" value="0.3226851851851852" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_search.xml" value="0.3038949275362319" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_stock_adjustment_home.xml" value="0.3226851851851852" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_stock_in_menu.xml" value="0.33" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_stock_in_scan.xml" value="0.25" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_stock_in_step3.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_stock_in_success_view.xml" value="0.3226851851851852" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_stock_movement.xml" value="0.30570652173913043" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_stock_out_scan.xml" value="0.3226851851851852" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_stock_out_step3.xml" value="0.3226851851851852" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/activity_stock_out_success_view.xml" value="0.3226851851851852" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/house_list_item.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/inventory_recycle_list_item.xml" value="0.5" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/iso1800_6c.xml" value="0.23055555555555557" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/listview_item.xml" value="0.23055555555555557" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/main.xml" value="0.1" />
@@ -147,8 +154,10 @@
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/reader_setting_activity.xml" value="0.1685185185185185" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/reader_setting_power.xml" value="0.20925925925925926" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_iso1800_6c.xml" value="0.22" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_listview_item.xml" value="0.5" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_main.xml" value="0.22" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_listview_item.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_listview_item_out.xml" value="0.25324074074074077" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_main.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_main_so.xml" value="0.25324074074074077" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/rfid_parameter.xml" value="0.1" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/sa_list_recycle.xml" value="0.1685185185185185" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStock - RFID/app/src/main/res/layout/setting_activity.xml" value="0.23055555555555557" />

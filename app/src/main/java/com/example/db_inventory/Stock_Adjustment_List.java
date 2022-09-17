@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -66,6 +68,10 @@ public class Stock_Adjustment_List extends AppCompatActivity {
         FirebaseRecyclerAdapter<SA_class, SAListViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<SA_class, SAListViewHolder>(SAList_Adapter) {
             @Override
             protected void onBindViewHolder(@NonNull SAListViewHolder holder, int position, @NonNull SA_class model) {
+                //RECYCLE VIEW SLIDE FROM LEFT ANIMATION
+                Animation animation = AnimationUtils.loadAnimation(holder.mView.getContext(), android.R.anim.slide_in_left);
+                holder.mView.startAnimation(animation);
+
                 //GET THE DATA TO BE SHOWED IN EACH DATA OF VIEW HOLDER
                 holder.setBarcode(model.getBarcode());
                 holder.setBookQty(model.getBookQty());

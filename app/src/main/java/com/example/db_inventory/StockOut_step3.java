@@ -255,6 +255,7 @@ public class StockOut_step3 extends AppCompatActivity {
                                         //QUANTITY AFTER STOCK OUT
                                         dataMap4.put("TotalQty", Quantity);
                                         dataMap4.put("HouseName", name);
+                                        dataMap4.put("User", users);
                                         stockInOutRef.child(name).child(parentname).updateChildren(dataMap4);
 
                                     }
