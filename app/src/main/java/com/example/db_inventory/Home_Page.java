@@ -32,8 +32,9 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
     Button btn_stock_take, btn_stock_adjustment;
     Button btn_sales_order, btn_maintain_users;
     Button btn_grn;
+    Button btn_Inventory;
     Button btn_stockIn, btn_stockOut;
-    Button btn_RFID;
+
     CardView cardView;
 
     DatabaseReference arightRef;
@@ -53,13 +54,10 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         btn_sales_order = findViewById(R.id.btn_sales_order);
         btn_maintain_users = findViewById(R.id.btn_maintain_user);
         cardView = findViewById(R.id.cv_maintain_user);
-
+        btn_Inventory = findViewById(R.id.btn_Inventory);
         btn_stockIn = findViewById(R.id.btn_stock_in);
         btn_stockOut = findViewById(R.id.btn_stock_out);
         btn_grn = findViewById(R.id.btn_GRN);
-
-        //BUTTON OF RFID
-        btn_RFID = findViewById(R.id.btn_RFID);
 
         btn_stockIn.setOnClickListener(this);
         btn_stockOut.setOnClickListener(this);
@@ -68,7 +66,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
         btn_sales_order.setOnClickListener(this);
         btn_maintain_users.setOnClickListener(this);
         btn_grn.setOnClickListener(this);
-        btn_RFID.setOnClickListener(this);
+        btn_Inventory.setOnClickListener(this);
 
 
         //LINKING TO ACCESS RIGHT FIREBASE PARENT
@@ -190,7 +188,7 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                         }
                     });
                 } else {
-                    Toast.makeText(Home_Page.this, "Something go wrong, pls sign in again", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Home_Page.this, "Something go wrong, sign in again", Toast.LENGTH_LONG).show();
                 }
 
                 //RECORD THE QUANTITY OF STOCK GOING OUT
@@ -203,13 +201,14 @@ public class Home_Page extends AppCompatActivity implements View.OnClickListener
                 startActivity(intent2grn);
                 finish();
                 break;
-                //RFID
-//            case R.id.btn_RFID:
-//                Intent intent2rfid = new Intent(getApplicationContext(), RFID_MainActivity.class);
-//                intent2rfid.putExtra("Users", role);
-//                startActivity(intent2rfid);
-//                finish();
-//                break;
+
+                //View Inventory (All)
+            case R.id.btn_Inventory:
+                Intent intentInventory = new Intent(getApplicationContext(), Inventory_List_All.class);
+                intentInventory.putExtra("Users", role);
+                startActivity(intentInventory);
+                finish();
+                break;
         }
     }
 

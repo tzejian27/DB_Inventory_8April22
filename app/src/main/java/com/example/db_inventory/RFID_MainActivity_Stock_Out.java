@@ -339,6 +339,10 @@ public class RFID_MainActivity_Stock_Out extends Activity implements OnClickList
                 break;
 
             case R.id.button_add:
+                if(buttonRead.getText().equals("Stop")){
+                    Toast.makeText(this, "Please stop reading before adding", Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 addRFID();
                 break;
             default:

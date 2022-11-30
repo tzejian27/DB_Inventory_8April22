@@ -115,6 +115,7 @@ public class Inventory_List2 extends AppCompatActivity {
                 viewHolder.setDate_and_Time(model.getDate_and_Time());
                 viewHolder.setPrice(model.getPrice());
                 viewHolder.setItemCode(model.getItemCode());
+                viewHolder.setCost(model.getCost());
                 totalrecord.setText(String.valueOf(getItemCount()));
 
                 arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -242,6 +243,11 @@ public class Inventory_List2 extends AppCompatActivity {
         public void setItemCode(String itemCode){
             TextView ItemCode = mView.findViewById(R.id.textView_InventoryList_itemCode);
             ItemCode.setText(itemCode);
+        }
+
+        public void setCost(String cost) {
+            TextView Cost = mView.findViewById(R.id.textView_InventoryList_Cost);
+            Cost.setText(cost);
         }
 
 

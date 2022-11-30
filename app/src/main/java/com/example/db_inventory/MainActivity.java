@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (role != null && role.equals("Admin")) {
                     Intent intent2new_house = new Intent(MainActivity.this, House_New_House.class);
                     intent2new_house.putExtra("Users", role);
+                    intent2new_house.putExtra("from", "StockTake");
                     startActivity(intent2new_house);
                 } else if (role.equals("User")) {
                     arightRef.addListenerForSingleValueEvent(new ValueEventListener() {

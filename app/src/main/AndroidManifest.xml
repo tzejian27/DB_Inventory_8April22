@@ -223,6 +223,9 @@
             android:name=".Login"
             android:exported="false" />
         <activity
+            android:name=".Inventory_List_All"
+            android:exported="false" />
+        <activity
             android:name=".Login_Menu"
             android:exported="true">
             <intent-filter>

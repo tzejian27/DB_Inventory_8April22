@@ -30,7 +30,7 @@ public class Inventory_List extends AppCompatActivity {
     DatabaseReference databaseReference, switchRef;
     RecyclerView recyclerView;
     ImageView iv_back, iv_search;
-    String totaltype;
+    Long totaltype;
     String switch1;
     TextView totalrecord;
 
@@ -95,7 +95,7 @@ public class Inventory_List extends AppCompatActivity {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                totaltype = dataSnapshot.child("TotalType").getValue().toString().trim();
+                totaltype = Long.parseLong((String)dataSnapshot.child("TotalType").getValue());
             }
 
             @Override

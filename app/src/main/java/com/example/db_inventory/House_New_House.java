@@ -47,7 +47,14 @@ public class House_New_House extends AppCompatActivity {
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2home = new Intent(House_New_House.this, MainActivity.class);
+                Intent intent2home=null;
+                if(getIntent().getStringExtra("from").equals("StockTake")){
+                    intent2home = new Intent(House_New_House.this, MainActivity.class);
+                }
+                else if(getIntent().getStringExtra("from").equals("Maintain")){
+                    intent2home = new Intent(House_New_House.this, Maintain.class);
+                }
+
                 intent2home.putExtra("Users", users);
                 startActivity(intent2home);
                 finish();

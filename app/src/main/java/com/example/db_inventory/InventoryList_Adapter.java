@@ -17,11 +17,11 @@ import java.util.List;
 //No more used
 public class InventoryList_Adapter extends RecyclerView.Adapter<InventoryList_Adapter.MyViewHolder> {
 
-    Inventory_List mContext;
+    Inventory_List_All mContext;
     List<Inventory_class> mData;
 
 
-    public InventoryList_Adapter(Inventory_List mContext, List<Inventory_class> mData) {
+    public InventoryList_Adapter(Inventory_List_All mContext, List<Inventory_class> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -38,15 +38,16 @@ public class InventoryList_Adapter extends RecyclerView.Adapter<InventoryList_Ad
         final Inventory_class model = mData.get(position);
 
 
-        Intent intent = getIntent();
-        final String name = intent.getStringExtra("name");
-        final String key = intent.getStringExtra("Key");
+//        Intent intent = getIntent();
+        final String name = "";
+        final String key = "";
 
         viewHolder.setBarcode(model.getBarcode());
         viewHolder.setQuanlity(model.getQuantity());
         viewHolder.setItemName(model.getItemName());
         viewHolder.setDate_and_Time(model.getDate_and_Time());
         viewHolder.setPrice(model.getPrice());
+        viewHolder.setCost(model.getCost());
         viewHolder.setItemCode(model.getItemCode());
 
         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
@@ -154,7 +155,10 @@ public class InventoryList_Adapter extends RecyclerView.Adapter<InventoryList_Ad
             ItemCode.setText(itemCode);
         }
 
-
+        public void setCost(String cost) {
+            TextView Cost = mView.findViewById(R.id.textView_InventoryList_Cost);
+            Cost.setText(cost);
+        }
 
     }
 }

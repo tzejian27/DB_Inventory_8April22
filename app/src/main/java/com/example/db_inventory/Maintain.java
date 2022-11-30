@@ -57,6 +57,7 @@ public class Maintain extends AppCompatActivity implements View.OnClickListener{
                 if (role != null && role.equals("Admin")) {
                     Intent intent2new_house = new Intent(Maintain.this, House_New_House.class);
                     intent2new_house.putExtra("Users", role);
+                    intent2new_house.putExtra("from","Maintain");
                     startActivity(intent2new_house);
                 } else if (role.equals("User")) {
                     arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
