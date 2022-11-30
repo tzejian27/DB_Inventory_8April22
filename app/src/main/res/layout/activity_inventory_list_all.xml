@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,19 +21,21 @@
         <TextView
 
             android:id="@+id/txt_IL_list"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
+            android:layout_width="324dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/inventory_list"
             android:textColor="@color/black"
             android:textSize="50px" />
 
-        <ImageView
-            android:id="@+id/imageView_IL_search"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_action_search" />
+        <Button
+            android:id="@+id/exportButton"
+            android:layout_width="52dp"
+            android:layout_height="50dp"
+            android:baselineAligned="false"
+            android:insetLeft="0dp"
+            app:icon="@android:drawable/stat_sys_download_done" />
 
     </LinearLayout>
 
@@ -45,33 +48,40 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_Inventory_List"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="357dp"
+            android:layout_height="636dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="26dp" />
 
         <LinearLayout
-            android:layout_alignParentBottom="true"
             android:id="@+id/recordlayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="2dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total record :"/>
+                android:text="Total record :" />
 
             <TextView
-                android:layout_marginLeft="10dp"
                 android:id="@+id/record_IL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""/>
+                android:layout_marginLeft="10dp"
+                android:text="" />
 
         </LinearLayout>
 
 
     </RelativeLayout>
-
-
 
 
 </LinearLayout>

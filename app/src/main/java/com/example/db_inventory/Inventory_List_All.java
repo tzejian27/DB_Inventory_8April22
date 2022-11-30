@@ -1,25 +1,27 @@
 package com.example.db_inventory;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,19 +29,38 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Inventory_List_All extends AppCompatActivity {
 
     DatabaseReference databaseReference, switchRef;
     RecyclerView recyclerView;
-    ImageView iv_back, iv_search;
+    ImageView iv_back;
+    Button export;
     Long totaltype;
     String switch1;
-    TextView totalrecord;
+    public static TextView totalrecord;
     Inventory_List_All context = this;
     DatabaseReference arightRef;
     String Switch1;
+    private static ArrayList<Inventory_class> list;
+    private static ArrayList <houseArrayList> houselist = new ArrayList();
+    InventoryList_Adapter adapter;
+    private SearchView searchView;
+    ScanReader scanReader;
+    private String barcodeStr;
 
+    private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            byte[] barcode = intent.getByteArrayExtra(ScanReader.SCAN_RESULT);
+            Log.e("MainActivity", "barcode = " + new String(barcode));
+            if (barcode != null) {
+                barcodeStr = new String(barcode);
+                searchView.setQuery(barcodeStr,true);
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,13 +74,19 @@ public class Inventory_List_All extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         iv_back = findViewById(R.id.imageView_IL_back);
-        iv_search = findViewById(R.id.imageView_IL_search);
         totalrecord = findViewById(R.id.record_IL);
+        export = findViewById(R.id.exportButton);
 
         Intent intent = getIntent();
         String users = getIntent().getStringExtra("Users"); //
 
 
+        export.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new exportInventory(list,houselist,users);
+            }
+        });
 
         //LINK ACCESS RIGHT FIREBASE
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
@@ -75,11 +102,11 @@ public class Inventory_List_All extends AppCompatActivity {
             }
         });
 
-//        //INTENT TO SEARCH
+        //INTENT TO SEARCH
 //        iv_search.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                Intent intent = new Intent(Inventory_List_All.this, Search.class);
+//                Intent intent = new Intent(Inventory_List_All.this, SearchAll.class);
 //                intent.putExtra("Users", users);
 //                startActivity(intent);
 //                finish();
@@ -90,19 +117,21 @@ public class Inventory_List_All extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("House");
         databaseReference.keepSynced(true);
         switchRef = FirebaseDatabase.getInstance().getReference("Switch");
-        ArrayList <inventoryItem> daref = new ArrayList<>();
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 //                totaltype = Long.parseLong((String)dataSnapshot.child("TotalType").getValue());
-                ArrayList<Inventory_class> list = new ArrayList<>();
+                 list = new ArrayList<>();
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
 
+                    houseArrayList temp_house = new houseArrayList(ds.getKey());
+
                     for(DataSnapshot dss : ds.getChildren()) {
-                        if (dss.exists()&&!dss.getValue().getClass().equals(String.class)) {
+                        if (dss.exists() && !dss.getValue().getClass().equals(String.class)) {
                             final Inventory_class item = dss.getValue(Inventory_class.class);
                             if (item != null) {
+                                temp_house.add(item);
                                 String tempBarcode = item.getBarcode();
                                 final Inventory_class[] temp = new Inventory_class[1];
                                 if(list.stream().anyMatch(b -> {
@@ -114,13 +143,22 @@ public class Inventory_List_All extends AppCompatActivity {
                                             );
                                     continue;
                                 }
+
                                 list.add(item);
                             }
                         }
                     }
+                    houselist.add(temp_house);
                 }
+                list.sort(new Comparator<Inventory_class>() {
+                    @Override
+                    public int compare(Inventory_class inventory_class, Inventory_class t1) {
+                        return inventory_class.getBarcode().compareTo(t1.getBarcode());
+                    }
+                });
                 final InventoryList_Adapter inventoryAdapter = new InventoryList_Adapter(context,list);
-                recyclerView.setAdapter(inventoryAdapter);
+                adapter = inventoryAdapter;
+                recyclerView.setAdapter(adapter);
             }
 
             @Override
@@ -143,10 +181,72 @@ public class Inventory_List_All extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // below line is to get our inflater
+        MenuInflater inflater = getMenuInflater();
+
+        // inside inflater we are inflating our menu file.
+        inflater.inflate(R.menu.search_menu, menu);
+
+        // below line is to get our menu item.
+        MenuItem searchItem = menu.findItem(R.id.actionSearch);
+
+        // getting search view of our item.
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        this.searchView = searchView;
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ScanReader.ACTION_SCAN_RESULT);
+        registerReceiver(resultReceiver, filter);
+
+        scanReader = new ScanReader(this);
+        scanReader.init();
+        // below line is to call set on query text listener method.
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // inside on query text change method we are
+                // calling a method to filter our recycler view.
+                filter(newText);
+                return false;
+            }
+        });
+        return true;
+    }
+
+    private void filter(String text) {
+        // creating a new array list to filter our data.
+        ArrayList<Inventory_class> filteredlist = new ArrayList<>();
+
+        // running a for loop to compare elements.
+        for (Inventory_class item : list) {
+            // checking if the entered string matched with any item of our recycler view.
+            if (item.getBarcode().toLowerCase().contains(text.toLowerCase())) {
+                // if the item is matched we are
+                // adding it to our filtered list.
+                filteredlist.add(item);
+            }
+        }
+        if (filteredlist.isEmpty()) {
+            // if no item is added in filtered list we are
+            // displaying a toast message as no data found.
+            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
+        } else {
+            // at last we are passing that filtered
+            // list to our adapter class.
+            adapter.filterList(filteredlist);
+        }
+    }
+
     public void onStart() {
         super.onStart();
         String users = getIntent().getStringExtra("Users");
-
         // final String name = getActivity().getIntent().getExtras().get("visit_hairstylist").toString();
         Intent intent = getIntent();
 
@@ -331,7 +431,19 @@ public class Inventory_List_All extends AppCompatActivity {
 
     }
 
-    class inventoryItem{
+    public static class houseArrayList extends ArrayList<Inventory_class> {
+        String HouseName;
 
+        public houseArrayList(String houseName) {
+            HouseName = houseName;
+        }
+
+        public String getHouseName() {
+            return HouseName;
+        }
+
+        public void setHouseName(String houseName) {
+            HouseName = houseName;
+        }
     }
 }
