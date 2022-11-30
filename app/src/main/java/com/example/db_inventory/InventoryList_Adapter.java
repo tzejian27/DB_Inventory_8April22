@@ -1,5 +1,7 @@
 package com.example.db_inventory;
 
+import static com.example.db_inventory.Inventory_List_All.totalrecord;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //No more used
@@ -33,6 +36,14 @@ public class InventoryList_Adapter extends RecyclerView.Adapter<InventoryList_Ad
         return new MyViewHolder(row);
     }
 
+    public void filterList(ArrayList<Inventory_class> filterlist) {
+        // below line is to add our filtered
+        // list in our course array list.
+        mData = filterlist;
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged();
+    }
     public void onBindViewHolder(@NonNull InventoryList_Adapter.MyViewHolder viewHolder, @SuppressLint("RecyclerView") int position) {
 
         final Inventory_class model = mData.get(position);
@@ -41,7 +52,7 @@ public class InventoryList_Adapter extends RecyclerView.Adapter<InventoryList_Ad
 //        Intent intent = getIntent();
         final String name = "";
         final String key = "";
-
+        totalrecord.setText(String.valueOf(mData.size()));
         viewHolder.setBarcode(model.getBarcode());
         viewHolder.setQuanlity(model.getQuantity());
         viewHolder.setItemName(model.getItemName());
@@ -49,57 +60,54 @@ public class InventoryList_Adapter extends RecyclerView.Adapter<InventoryList_Ad
         viewHolder.setPrice(model.getPrice());
         viewHolder.setCost(model.getCost());
         viewHolder.setItemCode(model.getItemCode());
-
-        viewHolder.mView.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View v) {
-                final String key2 = mData.get(position).getKey();
-                CharSequence[] option = new CharSequence[]{
-                        "Spec", "Delete", "Modify"
-                };
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setTitle("Select Option");
-                builder.setItems(option, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int position) {
-                        //ENTER ITEM SPEC
-                        if (position == 0) {
-
-                            Intent intent = new Intent(mContext, Item_Spec.class);
-                            intent.putExtra("Key", key);
-                            intent.putExtra("Key2", key2);
-                            intent.putExtra("name", name);
-                            mContext.startActivity(intent);
-
-                        }
-                        //DELETE CONFIRMATION
-                        if (position == 1) {
-                            Intent intent = new Intent(mContext, Inventory_Delete_Confirm.class);
-                            intent.putExtra("Key", key);
-                            intent.putExtra("Key2", key2);
-                            intent.putExtra("name", name);
-                            mContext.startActivity(intent);
-                        }
-                        //ITEM MODIFY
-                        if (position == 2) {
-
-
-                            Intent intent = new Intent(mContext, Item_Spec_Modify.class);
-                            intent.putExtra("name", name);
-                            intent.putExtra("Barcode", model.getBarcode());
-                            intent.putExtra("Key", key);
-                            intent.putExtra("Key2", key2);
-                            mContext.startActivity(intent);
-
-                        }
-                    }
-                });
-                builder.show();
-            }
-        });
+//        viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final String key2 = mData.get(position).getKey();
+//                CharSequence[] option = new CharSequence[]{
+//                        "Spec", "Delete", "Modify"
+//                };
+//
+//                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+//                builder.setTitle("Select Option");
+//                builder.setItems(option, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int position) {
+//                        //ENTER ITEM SPEC
+//                        if (position == 0) {
+//
+//                            Intent intent = new Intent(mContext, Item_Spec.class);
+//                            intent.putExtra("Key", key);
+//                            intent.putExtra("Key2", key2);
+//                            intent.putExtra("name", name);
+//                            mContext.startActivity(intent);
+//
+//                        }
+//                        //DELETE CONFIRMATION
+//                        if (position == 1) {
+//                            Intent intent = new Intent(mContext, Inventory_Delete_Confirm.class);
+//                            intent.putExtra("Key", key);
+//                            intent.putExtra("Key2", key2);
+//                            intent.putExtra("name", name);
+//                            mContext.startActivity(intent);
+//                        }
+//                        //ITEM MODIFY
+//                        if (position == 2) {
+//
+//
+//                            Intent intent = new Intent(mContext, Item_Spec_Modify.class);
+//                            intent.putExtra("name", name);
+//                            intent.putExtra("Barcode", model.getBarcode());
+//                            intent.putExtra("Key", key);
+//                            intent.putExtra("Key2", key2);
+//                            mContext.startActivity(intent);
+//
+//                        }
+//                    }
+//                });
+//                builder.show();
+//            }
+//        });
     }
 
     private Intent getIntent() {

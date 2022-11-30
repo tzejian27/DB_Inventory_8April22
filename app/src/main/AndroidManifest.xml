@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DB_Inventory">
         <activity
+            android:name=".SearchAll"
+            android:exported="false" />
+        <activity
             android:name=".Stock_Out_Success_View"
             android:exported="false" />
         <activity
