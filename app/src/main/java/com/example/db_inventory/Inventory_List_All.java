@@ -131,7 +131,11 @@ public class Inventory_List_All extends AppCompatActivity {
                         if (dss.exists() && !dss.getValue().getClass().equals(String.class)) {
                             final Inventory_class item = dss.getValue(Inventory_class.class);
                             if (item != null) {
-                                temp_house.add(item);
+                                try {
+                                    temp_house.add((Inventory_class) item.clone());
+                                } catch (CloneNotSupportedException e) {
+                                    e.printStackTrace();
+                                }
                                 String tempBarcode = item.getBarcode();
                                 final Inventory_class[] temp = new Inventory_class[1];
                                 if(list.stream().anyMatch(b -> {
@@ -148,6 +152,7 @@ public class Inventory_List_All extends AppCompatActivity {
                             }
                         }
                     }
+                    System.out.println(temp_house.toString());
                     houselist.add(temp_house);
                 }
                 list.sort(new Comparator<Inventory_class>() {
@@ -236,6 +241,7 @@ public class Inventory_List_All extends AppCompatActivity {
         if (filteredlist.isEmpty()) {
             // if no item is added in filtered list we are
             // displaying a toast message as no data found.
+            adapter.filterList(filteredlist);
             Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
         } else {
             // at last we are passing that filtered
@@ -445,5 +451,7 @@ public class Inventory_List_All extends AppCompatActivity {
         public void setHouseName(String houseName) {
             HouseName = houseName;
         }
+
+
     }
 }

@@ -21,7 +21,7 @@ public class exportInventory {
     ArrayList <Inventory_List_All.houseArrayList> houseList = new ArrayList<>();
     private static final String EXCEL_SHEET_NAME = "Master Inventory List";
     private String username;
-    private File housefile;
+    private static File housefile, filepath;
     private String currentDateandTime2;
     private HSSFSheet hssfSheet;
     private HSSFRow hssfRow;
@@ -35,6 +35,9 @@ public class exportInventory {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         currentDateandTime2 = sdf.format(new Date());
         housefile = new File("/storage/emulated/0/Report/" + "eStock" + currentDateandTime2);
+        if (!housefile.exists()) {
+            housefile.mkdirs();
+        }
         exportExcel();
     }
 
@@ -42,59 +45,68 @@ public class exportInventory {
         HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
 
         hssfSheet = hssfWorkbook.createSheet(EXCEL_SHEET_NAME);
-        hssfSheet.setColumnWidth(0, (15 * 100));
-        hssfSheet.setColumnWidth(1, (15 * 400));
-        hssfSheet.setColumnWidth(2, (15 * 400));
-        hssfSheet.setColumnWidth(3, (15 * 400));
-        hssfSheet.setColumnWidth(4, (15 * 400));
-        hssfSheet.setColumnWidth(5, (15 * 400));
-        hssfSheet.setColumnWidth(6, (15 * 400));
-        hssfSheet.setColumnWidth(7, (15 * 400));
-        hssfSheet.setColumnWidth(8, (15 * 400));
-        hssfSheet.setColumnWidth(9, (15 * 400));
 
         // Set header value
         int columnIndex =0;
         hssfRow = hssfSheet.createRow(0);
 
+        hssfSheet.setColumnWidth(columnIndex, (15 * 100));
         hssfCell = hssfRow.createCell(columnIndex++);
         hssfCell.setCellValue("No");
 
+        hssfSheet.setColumnWidth(columnIndex, (15 * 400));
         hssfCell = hssfRow.createCell(columnIndex++);
         hssfCell.setCellValue("Barcode");
 
+        hssfSheet.setColumnWidth(columnIndex, (15 * 400));
         hssfCell = hssfRow.createCell(columnIndex++);
         hssfCell.setCellValue("Item_Code");
 
+        hssfSheet.setColumnWidth(columnIndex, (15 * 400));
         hssfCell = hssfRow.createCell(columnIndex++);
         hssfCell.setCellValue("Item");
 
+        hssfSheet.setColumnWidth(columnIndex, (15 * 400));
         hssfCell = hssfRow.createCell(columnIndex++);
         hssfCell.setCellValue("Cost");
 
+        hssfSheet.setColumnWidth(columnIndex, (15 * 400));
         hssfCell = hssfRow.createCell(columnIndex++);
         hssfCell.setCellValue("Price");
 
+        hssfSheet.setColumnWidth(columnIndex, (15 * 200));
         hssfCell = hssfRow.createCell(columnIndex);
         hssfCell.setCellValue("House");
+
+
+//        HSSFCellStyle style1 = hssfWorkbook.createCellStyle();
+//        style1.cloneStyleFrom(hssfCell.getCellStyle());
+//        HSSFCellStyle styleOri = hssfWorkbook.createCellStyle();
+//        styleOri.cloneStyleFrom(style1);
+//        style1.setAlignment(HorizontalAlignment.CENTER);
+//        style1.getFont(hssfWorkbook).setBold(true);
+//        hssfCell.setCellStyle(style1);
         houseFieldStart = columnIndex;
 
         HSSFRow houseRow = hssfSheet.createRow(1);
         for (int i = 0; i < houseList.size(); i++) {
+            hssfSheet.setColumnWidth(columnIndex, (15 * 200));
             hssfCell = houseRow.createCell(columnIndex++);
             hssfCell.setCellValue(houseList.get(i).getHouseName());
 
         }
+//        hssfCell.setCellStyle(styleOri);
         houseFieldEnd=columnIndex-1;
-        hssfSheet.addMergedRegion(new CellRangeAddress(1,1,houseFieldStart,houseFieldEnd));
+        hssfSheet.addMergedRegion(new CellRangeAddress(0,0,houseFieldStart,houseFieldEnd));
 
+        hssfSheet.setColumnWidth(columnIndex, (15 * 200));
         hssfCell = hssfRow.createCell(columnIndex);
         hssfCell.setCellValue("Total Qty");
 
         hssfSheet.addMergedRegion(new CellRangeAddress(0,1,columnIndex,columnIndex));
 
         // Merge cells in header
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             hssfSheet.addMergedRegion(new CellRangeAddress(0, 1, i, i));
         }
 
@@ -125,13 +137,13 @@ public class exportInventory {
             HSSFCell [] houseCell = new HSSFCell[houseList.size()];
 
             for (int j = 0; j < houseList.size() ; j++) {
-                houseCell[j] = rowData.createCell(j+houseFieldStart-1);
+                houseCell[j] = rowData.createCell(j+houseFieldStart);
             }
 
             for (int j = 0; j < houseList.size(); j++) {
                 for (Inventory_class temp: houseList.get(j)) {
                     if (temp.getBarcode().equals(item.getBarcode())){
-                        houseCell[j].setCellValue(temp.getQuantity());
+                        houseCell[j].setCellValue(Integer.parseInt(temp.getQuantity()));
                         break;
                     }else{
                         houseCell[j].setCellValue(0);
@@ -142,19 +154,19 @@ public class exportInventory {
             String endAddress = houseCell[houseCell.length-1].getAddress().formatAsString();
             hssfCell = rowData.createCell(houseList.size()+6);
             hssfCell.setCellFormula("SUM("+ startAddress + ":" + endAddress +")");
-            hssfCell.setCellType(HSSFCell.CELL_TYPE_FORMULA);
+//            hssfCell.setCellType(HSSFCell.CELL_TYPE_FORMULA);
 
         }
 
-        File filePath = new File(housefile, "Inventory as at_" + currentDateandTime2 + ".xls");
+        filepath = new File(housefile, "Inventory as at_" + currentDateandTime2 + ".xls");
         FileOutputStream fileOutputStream = null;
 
         boolean isSuccess;
 
         try {
-            fileOutputStream = new FileOutputStream(filePath);
+            fileOutputStream = new FileOutputStream(filepath);
             hssfWorkbook.write(fileOutputStream);
-            Log.e("", "Writing file" + filePath);
+            Log.e("", "Writing file" + filepath);
             isSuccess = true;
         } catch (IOException e) {
             Log.e("", "Error writing Exception: ", e);
