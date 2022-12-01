@@ -8,13 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.firebase.client.collection.LLRBNode;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +31,7 @@ public class StockIn_step3 extends AppCompatActivity {
     TextView t1, t2, t3, t4, t5, tv_qtyIn;
     EditText e1, e2_quantity_in;
     Button btn_esc, btn_enter, btn_back;
+    ImageView btn_reset;
     String key;
     String key2;
     String barcode;
@@ -63,6 +64,7 @@ public class StockIn_step3 extends AppCompatActivity {
         btn_esc = findViewById(R.id.btn_Inventory_esc_SI);
         btn_enter = findViewById(R.id.btn_Inventory_enter_SI);
         btn_back = findViewById(R.id.btn_back_SI);
+        btn_reset = findViewById(R.id.resetButton);
 
         Intent intent1 = getIntent();
         barcode = intent1.getStringExtra("barcode");
@@ -91,7 +93,6 @@ public class StockIn_step3 extends AppCompatActivity {
                     String Cost = dataSnapshot.child("Cost").getValue().toString().trim();
                     String Quantity_In = dataSnapshot.child("QtyIn").getValue().toString().trim();
 
-                    // t1.setText(TotalQty);
                     t2.setText(Quantity);
                     t3.setText(Name);
                     t4.setText(Price);
@@ -128,6 +129,13 @@ public class StockIn_step3 extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        btn_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
             }
         });

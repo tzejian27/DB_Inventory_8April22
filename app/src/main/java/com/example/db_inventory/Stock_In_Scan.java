@@ -236,19 +236,10 @@ public class Stock_In_Scan extends AppCompatActivity {
                                     dataMap.put("Quantity", Quantity);
                                     dataMap.put("Date_and_Time", currentDateandTime);
 
-
-                                    //   Map dataMap2 = new HashMap();
-                                    //   dataMap2.put(maxid-3 + "/" ,dataMap);
-
-
                                     databaseReference3.updateChildren(dataMap);//.addOnCompleteListener(new OnCompleteListener() {
-                                    //   @Override
-                                    //       public void onComplete(@NonNull Task task) {
-                                    //       if (task.isSuccessful()){
+
                                     databaseReference.child("TotalType").setValue(totaltype);//.addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    //   @Override
-                                    //     public void onComplete(@NonNull Task<Void> task) {
-                                    //     if (task.isSuccessful()){
+
                                     Intent page = new Intent(Stock_In_Scan.this, StockIn_step3.class);
                                     page.putExtra("barcode", barcode);
                                     page.putExtra("name", name);
@@ -257,16 +248,7 @@ public class Stock_In_Scan extends AppCompatActivity {
                                     page.putExtra("Users", users);
                                     startActivity(page);
                                     finish();
-                                    //     }else{
-                                    //       Toast.makeText(Inventory.this, "Error", Toast.LENGTH_SHORT).show();
-                                    //     }
 
-                                    //    }
-                                    //  });
-                                    //     }
-
-                                    //    }
-                                    //  });
                                 } else if (!dataSnapshot3.exists()) {
                                     databaseReference2 = FirebaseDatabase.getInstance().getReference("Switch");
                                     databaseReference2.keepSynced(true);
