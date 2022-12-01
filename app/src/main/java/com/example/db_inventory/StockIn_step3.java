@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class StockIn_step3 extends AppCompatActivity {
 
-    TextView t1, t2, t3, t4, t5, tv_qtyIn;
+    TextView t1, t2, t3, t4, t5, tv_qtyIn, batchNoField;
     EditText e1, e2_quantity_in;
     Button btn_esc, btn_enter, btn_back;
     ImageView btn_reset;
@@ -57,6 +57,7 @@ public class StockIn_step3 extends AppCompatActivity {
         t4 = findViewById(R.id.textView_Inventory_price_SI);
         t5 = findViewById(R.id.textView_Inventory_cost_SI);
         tv_qtyIn = findViewById(R.id.textView_quantity_in_SI);
+        batchNoField = findViewById(R.id.editText_BatchNumber);
 
         e1 = findViewById(R.id.editText_Inventory_barcode_SI);
         e2_quantity_in = findViewById(R.id.editText_Inventory_step5_Qty_SI);
@@ -77,6 +78,8 @@ public class StockIn_step3 extends AppCompatActivity {
 
         e1.setText(barcode);
         e1.setEnabled(false);
+
+        batchNoField.setText(getBatchNo());
 
         databaseReference2 = FirebaseDatabase.getInstance().getReference("House").child(key).child(key2);
 
@@ -290,6 +293,11 @@ public class StockIn_step3 extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String getBatchNo() {
+        DatabaseReference tempReference = FirebaseDatabase.getInstance().getReference("Batch").child("");
+        return "";
     }
 
     @Override
