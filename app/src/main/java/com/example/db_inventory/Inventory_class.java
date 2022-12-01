@@ -1,9 +1,14 @@
 package com.example.db_inventory;
 
-public class Inventory_class {
+public class Inventory_class implements Cloneable {
     private String Barcode, Quantity, ItemName, HouseKey, Price, Cost, Date_and_Time, Key, ItemCode;
 
     public Inventory_class() {
+    }
+
+    public Object clone() throws CloneNotSupportedException
+    {
+        return super.clone();
     }
 
     public Inventory_class(String barcode, String quantity, String itemName, String houseKey, String price, String cost, String date_and_Time, String key, String itemCode) {

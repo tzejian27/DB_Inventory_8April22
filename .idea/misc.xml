@@ -248,10 +248,18 @@
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/sa_recycle.xml" value="0.3138586956521739" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/sales_order.xml" value="0.32608695652173914" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/user_recycle_list.xml" value="0.30480072463768115" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_house_list2.xml" value="0.17119565217391305" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_house_menu.xml" value="0.17119565217391305" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_list.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_list_all.xml" value="0.2" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_search_all.xml" value="0.17119565217391305" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_wireless_export.xml" value="0.17119565217391305" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/menu/main.xml" value="0.246875" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/menu/search_menu.xml" value="0.246875" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
