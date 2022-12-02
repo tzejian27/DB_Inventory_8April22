@@ -150,13 +150,28 @@ public class exportInventory {
                     }
                 }
             }
+
+            // Total of the quantity of respective item
             String startAddress = houseCell[0].getAddress().formatAsString();
             String endAddress = houseCell[houseCell.length-1].getAddress().formatAsString();
             hssfCell = rowData.createCell(houseList.size()+6);
             hssfCell.setCellFormula("SUM("+ startAddress + ":" + endAddress +")");
-//            hssfCell.setCellType(HSSFCell.CELL_TYPE_FORMULA);
 
         }
+
+        HSSFRow rowData = hssfSheet.createRow(listOfItem.size()+2);
+        columnIndex = houseFieldStart-1;
+        HSSFCell hssfCell = rowData.createCell(columnIndex++);
+        hssfCell.setCellValue("Grand Total");
+
+        for (int i = 0; i < houseList.size(); i++) {
+            String addressStart = hssfSheet.getRow(2).getCell(columnIndex).getAddress().formatAsString();
+            String addressEnd = hssfSheet.getRow(listOfItem.size()+1).getCell(columnIndex).getAddress().formatAsString();
+            hssfCell = rowData.createCell(columnIndex++);
+            hssfCell.setCellFormula("SUM("+ addressStart + ":" + addressEnd +")");
+        }
+
+
 
         filepath = new File(housefile, "Inventory as at_" + currentDateandTime2 + ".xls");
         FileOutputStream fileOutputStream = null;
