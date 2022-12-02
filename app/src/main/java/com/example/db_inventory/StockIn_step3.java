@@ -5,6 +5,8 @@ import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,25 +24,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class StockIn_step3 extends AppCompatActivity {
 
-    TextView t1, t2, t3, t4, t5, tv_qtyIn, batchNoField;
+    TextView t1, t2, t3, t4, t5, tv_qtyIn, batchNoField, err_BatchNo;
     EditText e1, e2_quantity_in;
     Button btn_esc, btn_enter, btn_back;
     ImageView btn_reset;
-    String key;
-    String key2;
-    String barcode;
-    String itemcode;
-    String TotalQty;
-    String name;
-    String Quantity;
-    String totalQty;
-    String currentDateandTime, currentDateandTime2;
+    String key,key2,barcode,itemcode,TotalQty,name,Quantity,totalQty,currentDateandTime, currentDateandTime2;
+    private String batchNumberPreset;
+    ArrayList <String> batchNoList = new ArrayList<>();
 
     DatabaseReference databaseReference, databaseReference2;
     DatabaseReference stockMovRef;
@@ -58,6 +55,7 @@ public class StockIn_step3 extends AppCompatActivity {
         t5 = findViewById(R.id.textView_Inventory_cost_SI);
         tv_qtyIn = findViewById(R.id.textView_quantity_in_SI);
         batchNoField = findViewById(R.id.editText_BatchNumber);
+        err_BatchNo = findViewById(R.id.Error_BatchNo);
 
         e1 = findViewById(R.id.editText_Inventory_barcode_SI);
         e2_quantity_in = findViewById(R.id.editText_Inventory_step5_Qty_SI);
@@ -79,7 +77,38 @@ public class StockIn_step3 extends AppCompatActivity {
         e1.setText(barcode);
         e1.setEnabled(false);
 
-        batchNoField.setText(getBatchNo());
+        getBatchNo();
+        batchNoField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String inputText = charSequence.toString();
+
+                for(String text : batchNoList){
+                    if(inputText.matches(text)){
+                        batchNoField.setBackgroundResource(R.drawable.red_border);
+                        err_BatchNo.setVisibility(View.VISIBLE);
+                        btn_enter.setEnabled(false);
+                        btn_enter.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#bbbbbb")));
+                    }
+                    else{
+                        batchNoField.setBackgroundResource(R.drawable.blue_border);
+                        err_BatchNo.setVisibility(View.INVISIBLE);
+                        btn_enter.setEnabled(true);
+                        btn_enter.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         databaseReference2 = FirebaseDatabase.getInstance().getReference("House").child(key).child(key2);
 
@@ -139,7 +168,7 @@ public class StockIn_step3 extends AppCompatActivity {
         btn_reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                batchNoField.setText(batchNumberPreset);
             }
         });
 
@@ -275,6 +304,23 @@ public class StockIn_step3 extends AppCompatActivity {
                                 }
                             });
 
+                            DatabaseReference batchNoRef = FirebaseDatabase.getInstance().getReference("Batch");
+                            Map batchData = new HashMap();
+                            batchData.put("Barcode", barcode);
+                            batchData.put("ItemCode", itemcode);
+                            batchData.put("Qty In", qty);
+                            batchData.put("Quantity",qty);
+                            Map batchKey = new HashMap();
+                            batchKey.put(key+"/"+batchNoField.getText().toString() + "/" , batchData);
+                            batchNoRef.updateChildren(batchKey);
+
+                            if(batchNoField.getText().equals(batchNumberPreset)){
+                                batchNoRef.child("Latest Batch").setValue(batchNumberPreset);
+                            }
+
+                            Map usedValue = new HashMap();
+                            usedValue.put(batchNumberPreset, batchNumberPreset);
+                            batchNoRef.child("Used Value").updateChildren(usedValue);
 
                         }
 
@@ -283,9 +329,7 @@ public class StockIn_step3 extends AppCompatActivity {
 
                         }
                     });
-                    //   }
-                    //     }
-                    //    });
+
                     Toast.makeText(StockIn_step3.this, "Add Successfully !!!", Toast.LENGTH_SHORT).show();
                     btn_esc.setEnabled(true);
                     btn_esc.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
@@ -295,9 +339,42 @@ public class StockIn_step3 extends AppCompatActivity {
 
     }
 
-    private String getBatchNo() {
-        DatabaseReference tempReference = FirebaseDatabase.getInstance().getReference("Batch").child("");
-        return "";
+    private void getBatchNo() {
+        DatabaseReference tempReference = FirebaseDatabase.getInstance().getReference("Batch");
+        final String[] latestBatchNumber = new String[1];
+        tempReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                // Retrieve the latest used batch number
+                latestBatchNumber[0] = snapshot.child("Latest Batch").getValue().toString().trim();
+                String[] batchNo= latestBatchNumber[0].split("-");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyMM");
+
+                String prefix = sdf.format(new Date()); // Current prefix of the batch number
+                String suffix;
+                if(prefix.equals(batchNo[0])){
+                    suffix = String.format("%04d",Integer.parseInt(batchNo[1])+1);
+                }else{
+                    suffix = "0001";
+                }
+                batchNumberPreset = prefix+"-"+suffix;
+                batchNoField.setText(batchNumberPreset);
+
+                // Retrieve the used value of Batch Number into ArrayList
+                DataSnapshot snapshot1 = snapshot.child("Used Value");
+                for(DataSnapshot dss : snapshot1.getChildren()){
+                    batchNoList.add((String) dss.getValue());
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     @Override

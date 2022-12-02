@@ -78,10 +78,23 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
+            android:layout_height="84dp"
             android:isScrollContainer="false"
             android:scrollbarAlwaysDrawHorizontalTrack="false"
             android:scrollbarAlwaysDrawVerticalTrack="false">
+
+            <TextView
+                android:id="@+id/Error_BatchNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="Batch Number Existed. Try Again."
+                android:textColor="#FF0000"
+                android:textSize="12sp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/editText_BatchNumber"
+                app:layout_constraintTop_toBottomOf="@+id/editText_BatchNumber" />
 
             <ImageButton
                 android:id="@+id/resetButton"
@@ -97,12 +110,13 @@
             <EditText
                 android:id="@+id/editText_BatchNumber"
                 android:layout_width="287dp"
-                android:layout_height="56dp"
+                android:layout_height="0dp"
                 android:background="@drawable/blue_border"
                 android:ems="10"
                 android:hint="Enter Batch Number"
                 android:inputType="textPersonName"
                 android:paddingLeft="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/Error_BatchNo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/resetButton"
                 app:layout_constraintTop_toTopOf="parent" />
