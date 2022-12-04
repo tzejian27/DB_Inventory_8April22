@@ -1,11 +1,16 @@
 package com.example.db_inventory;
 
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,7 +18,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,22 +36,27 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class Stock_Out_Scan extends AppCompatActivity {
 
     //Barcode
     public static String barcode;
     EditText edt_barcode;
+    TextView txt_batchNumField;
     Button btn_back, btn_next;
     DatabaseReference databaseReference, databaseReference2;
+    Dialog dialog;
     long maxid = 0;
     String currentDateandTime;
     String name;
     String key;
     String inventory_key;
     ScanReader scanReader;
-
+    private HashMap<String, String> BatchQty;
     //SPINNER
     Spinner spinner;
     List<String> barcode_list;
@@ -61,6 +74,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
         }
     };
 
+
     //Scan barcode for stock out
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +84,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
         edt_barcode = findViewById(R.id.editText_barcode_SO);
         btn_back = findViewById(R.id.btn_inventory_back_SO);
         btn_next = findViewById(R.id.btn_inventory_next_SO);
+        txt_batchNumField = findViewById(R.id.txtView_BatchNumber);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
         currentDateandTime = sdf.format(new Date());
@@ -88,6 +103,8 @@ public class Stock_Out_Scan extends AppCompatActivity {
 
         scanReader = new ScanReader(this);
         scanReader.init();
+
+        getBatchNumberList();// Get the list of the batch number
 
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
@@ -130,6 +147,65 @@ public class Stock_Out_Scan extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+        });
+
+        txt_batchNumField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getBatchNumberList();
+                dialog = new Dialog(Stock_Out_Scan.this);
+                dialog.setContentView(R.layout.dialog_batch_spinner);
+                dialog.getWindow().setLayout(650, 800);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+                // Initialize the item to the list
+                EditText editText = dialog.findViewById(R.id.edit_text);
+                ListView listView = dialog.findViewById(R.id.list_view);
+
+                // Set adapter
+                List<HashMap<String, String>> listItem = new ArrayList<>();
+                SimpleAdapter simpleAdapter = new SimpleAdapter(Stock_Out_Scan.this, listItem, R.layout.list_batchno,
+                        new String[]{"First Line", "Second Line"},
+                        new int[]{R.id.text1, R.id.text2});
+
+                Iterator it = BatchQty.entrySet().iterator();
+                while (it.hasNext()) {
+                    HashMap<String, String> resultMap = new HashMap<>();
+                    Map.Entry pair = (Map.Entry) it.next();
+                    resultMap.put("First Line", pair.getKey().toString());
+                    resultMap.put("Second Line", pair.getValue().toString());
+                    listItem.add(resultMap);
+                }
+                listView.setAdapter(simpleAdapter);
+
+                editText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        simpleAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        txt_batchNumField.setText(simpleAdapter.getItem(i).toString());
+                        dialog.dismiss();
+                    }
+                });
+
+            }
+
         });
 
         //SET SELECTED ITEM IN LISTENER TO EDIT TEXT BOXES
@@ -175,6 +251,40 @@ public class Stock_Out_Scan extends AppCompatActivity {
                 }
             }
         });
+
+
+    }
+
+    private void getBatchNumberList() {
+        HashMap<String , String > BatchQty = new HashMap<>();
+        DatabaseReference batchRef = FirebaseDatabase.getInstance().getReference("Batch").child(key);
+        batchRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot dss : snapshot.getChildren()){
+                    String batchNum = dss.getKey();
+                    String temp_barcode = (String) dss.child("Barcode").getValue();
+                    String temp_qty ;
+                    String barcodeTest = edt_barcode.getText().toString();
+                    if(temp_barcode.equalsIgnoreCase(edt_barcode.getText().toString())){
+                        temp_qty = (String) dss.child("Quantity").getValue();
+                        BatchQty.put(batchNum, "Quantity left: " + temp_qty);
+
+                    }
+                }
+
+                Stock_Out_Scan.this.BatchQty = BatchQty;
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
     }
 
     private void add() {
@@ -200,47 +310,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
 
                                 if (dataSnapshot2.exists() && !dataSnapshot3.exists()) {
                                     Toast.makeText(Stock_Out_Scan.this, "Barcode doesn't exist in House, Please make a stock take", Toast.LENGTH_SHORT).show();
-                                                /*Name = dataSnapshot.child("Name").getValue().toString().trim();
-                                                Price = dataSnapshot.child("Price").getValue().toString().trim();
-                                                Cost = dataSnapshot.child("Cost").getValue().toString().trim();
-                                                Quantity = dataSnapshot3.child("Quantity").getValue().toString().trim();
-                                                int qty = Integer.parseInt(Quantity);
-                                                if(0>=qty){
-                                                    Toast.makeText(Stock_Out_Scan.this, "Execute actual Qty" + qty, Toast.LENGTH_SHORT).show();
-                                                }
 
-
-                                                Intent intent = getIntent();
-                                                String name = intent.getStringExtra("name");
-                                                k = maxid - 3;
-                                                totaltype = Long.toString(k);
-
-                                                databaseReference3 = FirebaseDatabase.getInstance().getReference("House").child(key).push();
-                                                databaseReference3.keepSynced(true);
-                                                final String key2 = databaseReference3.getKey();
-
-                                                Map dataMap = new HashMap();
-                                                dataMap.put("Key", key2);
-                                                dataMap.put("HouseKey", key);
-                                                dataMap.put("Barcode", barcode);
-                                                dataMap.put("ItemName", Name);
-                                                dataMap.put("Price", Price);
-                                                dataMap.put("Cost", Cost);
-                                                dataMap.put("Quantity", Quantity);
-                                                dataMap.put("Date_and_Time", currentDateandTime);
-
-                                                databaseReference3.updateChildren(dataMap);
-
-                                                databaseReference.child("TotalType").setValue(totaltype);
-
-                                                Intent page = new Intent(Stock_Out_Scan.this, StockOut_step3.class);
-                                                page.putExtra("barcode", barcode);
-                                                page.putExtra("name", name);
-                                                page.putExtra("Key", key);
-                                                page.putExtra("Key2", key2);
-                                                page.putExtra("Users", users);
-                                                startActivity(page);
-                                                finish();*/
                                 } else if (!dataSnapshot3.exists()) {
                                     Toast.makeText(Stock_Out_Scan.this, "Barcode doesn't exist in House", Toast.LENGTH_SHORT).show();
 

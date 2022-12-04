@@ -155,6 +155,7 @@ public class Inventory_List_All extends AppCompatActivity {
                     System.out.println(temp_house.toString());
                     houselist.add(temp_house);
                 }
+
                 list.sort(new Comparator<Inventory_class>() {
                     @Override
                     public int compare(Inventory_class inventory_class, Inventory_class t1) {
