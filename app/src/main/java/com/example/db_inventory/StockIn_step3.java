@@ -314,7 +314,7 @@ public class StockIn_step3 extends AppCompatActivity {
                             batchKey.put(key+"/"+batchNoField.getText().toString() + "/" , batchData);
                             batchNoRef.updateChildren(batchKey);
 
-                            if(batchNoField.getText().equals(batchNumberPreset)){
+                            if(batchNoField.getText().toString().equals(batchNumberPreset)){
                                 batchNoRef.child("Latest Batch").setValue(batchNumberPreset);
                             }
 

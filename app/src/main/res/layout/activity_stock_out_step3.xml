@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
     android:orientation="vertical"
-    tools:context=".StockOut_step3">
-
+    android:layout_margin="10dp">
     <TextView
         android:id="@+id/txt_new_house_SO"
         android:layout_width="wrap_content"
@@ -61,6 +63,54 @@
         android:hint="@string/enter_scan_barcode"
         android:inputType="textPersonName"
         android:paddingLeft="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="177dp"
+                android:layout_height="wrap_content"
+                android:text="Selected Batch: " />
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="195dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="103dp"
+                android:text="Batch Quantity" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="41dp">
+
+            <TextView
+                android:id="@+id/txt_batch_field"
+                android:layout_width="178dp"
+                android:layout_height="match_parent"
+                android:text="text"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/txt_batch_qty_field"
+                android:layout_width="195dp"
+                android:layout_height="match_parent"
+                android:text="text"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -210,7 +260,8 @@
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_margin="30dp">
 
         <Button
             android:id="@+id/btn_back_SO"
@@ -243,11 +294,11 @@
             android:layout_weight="1"
             android:width="100dp"
             android:backgroundTint="@color/grey"
+            android:enabled="false"
             android:text="@string/new_btn"
-            android:textColor="@color/white"
-            android:enabled="false"/>
+            android:textColor="@color/white" />
 
 
     </LinearLayout>
-
 </LinearLayout>
+</ScrollView>

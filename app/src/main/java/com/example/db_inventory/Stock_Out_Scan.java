@@ -46,7 +46,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
     //Barcode
     public static String barcode;
     EditText edt_barcode;
-    TextView txt_batchNumField;
+    TextView txt_batchNumField, txt_QtyField;
     Button btn_back, btn_next;
     DatabaseReference databaseReference, databaseReference2;
     Dialog dialog;
@@ -85,6 +85,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
         btn_back = findViewById(R.id.btn_inventory_back_SO);
         btn_next = findViewById(R.id.btn_inventory_next_SO);
         txt_batchNumField = findViewById(R.id.txtView_BatchNumber);
+        txt_QtyField = findViewById(R.id.QtyField);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
         currentDateandTime = sdf.format(new Date());
@@ -149,10 +150,28 @@ public class Stock_Out_Scan extends AppCompatActivity {
             }
         });
 
+        edt_barcode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                getBatchNumberList();
+                txt_batchNumField.setText("");
+                txt_QtyField.setText("");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         txt_batchNumField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getBatchNumberList();
                 dialog = new Dialog(Stock_Out_Scan.this);
                 dialog.setContentView(R.layout.dialog_batch_spinner);
                 dialog.getWindow().setLayout(650, 800);
@@ -168,6 +187,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
                 SimpleAdapter simpleAdapter = new SimpleAdapter(Stock_Out_Scan.this, listItem, R.layout.list_batchno,
                         new String[]{"First Line", "Second Line"},
                         new int[]{R.id.text1, R.id.text2});
+
 
                 Iterator it = BatchQty.entrySet().iterator();
                 while (it.hasNext()) {
@@ -199,7 +219,9 @@ public class Stock_Out_Scan extends AppCompatActivity {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        txt_batchNumField.setText(simpleAdapter.getItem(i).toString());
+                        HashMap<String, String> result = (HashMap<String, String>) simpleAdapter.getItem(i);
+                        txt_batchNumField.setText(result.get("First Line").toString());
+                        txt_QtyField.setText(result.get("Second Line").toString().split(": ")[1]);
                         dialog.dismiss();
                     }
                 });
@@ -332,6 +354,9 @@ public class Stock_Out_Scan extends AppCompatActivity {
                                                 intent.putExtra("Key", key);
                                                 intent.putExtra("Key2", inventory_key);
                                                 intent.putExtra("Users", users);
+                                                intent.putExtra("batchNum", txt_batchNumField.getText().toString());
+                                                intent.putExtra("batchQty", txt_QtyField.getText());
+
                                                 startActivity(intent);
                                                 finish();
                                             }

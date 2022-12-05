@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,28 +28,22 @@ import java.util.Map;
 
 public class StockOut_step3 extends AppCompatActivity {
 
-    TextView t1, t2, t3, t4, t5, tv_qtyOut;
+    TextView t1, t2, t3, t4, t5, tv_qtyOut, txt_batchNum, txt_batchQty;
     EditText e1, e2_quantity_out;
     Button b1, b2, b3;
-    String key;
-    String key2;
-    String barcode;
-    String TotalQty;
-    String itemcode;
-    String name;
-    String Quantity;
-    String totalQty;
-    String currentDateandTime, currentDateandTime2;
+    String key,key2,barcode,TotalQty,itemcode,name,Quantity,totalQty,currentDateandTime, currentDateandTime2;
+    String batchQty, batchNum;
     DatabaseReference allowNRef;
     String Switch1;
 
     DatabaseReference databaseReference, databaseReference2;
-    DatabaseReference stockInOutRef;
+    DatabaseReference stockInOutRef,batchRef;
 
     //Stock out qty out and get the detail display
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_stock_out_step3);
 
         t1 = findViewById(R.id.textView_Inventory_TotalQty_SO);
@@ -57,6 +52,8 @@ public class StockOut_step3 extends AppCompatActivity {
         t4 = findViewById(R.id.textView_Inventory_price_SO);
         t5 = findViewById(R.id.textView_Inventory_cost_SO);
         tv_qtyOut = findViewById(R.id.textView_quantity_in_SO);
+        txt_batchNum = findViewById(R.id.txt_batch_field);
+        txt_batchQty = findViewById(R.id.txt_batch_qty_field);
 
         e1 = findViewById(R.id.editText_Inventory_barcode_SO);
         e2_quantity_out = findViewById(R.id.editText_Inventory_step5_Qty_SO);
@@ -71,6 +68,10 @@ public class StockOut_step3 extends AppCompatActivity {
         key = intent1.getStringExtra("Key");
         key2 = intent1.getStringExtra("Key2");
         itemcode = intent1.getStringExtra("ItemCode");
+        batchNum = intent1.getStringExtra("batchNum");
+        txt_batchNum.setText(batchNum);
+        batchQty= intent1.getStringExtra("batchQty");
+        txt_batchQty.setText(batchQty);
 
         setTitle("eStock_Stock Out_" + barcode);
 
@@ -161,6 +162,7 @@ public class StockOut_step3 extends AppCompatActivity {
             }
         });
 
+        // Done button
         b2.setOnClickListener(new View.OnClickListener() {
             final String users = getIntent().getStringExtra("Users");
 
@@ -168,7 +170,7 @@ public class StockOut_step3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final String qty = e2_quantity_out.getText().toString().trim().replace("/", "|");
-
+                int qty_in_number = Integer.parseInt(qty);
                 allowNRef = FirebaseDatabase.getInstance().getReference("Switch");
                 allowNRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -178,23 +180,20 @@ public class StockOut_step3 extends AppCompatActivity {
                             if (qty.isEmpty()) {
                                 Toast.makeText(StockOut_step3.this, "Please enter Qty out", Toast.LENGTH_SHORT).show();
                             } else {
-                                final int total = Integer.parseInt(qty);
-                                final int qty1 = Integer.parseInt(Quantity);
-                                int sum = qty1 - total;
+
+                                final int total = Integer.parseInt(qty); // Value from user's input
+                                final int qty1 = Integer.parseInt(Quantity); // Value from firebase
+                                int sum = qty1 - total; // Value of actual quantity after deducted the input value
                                 String sum2 = String.valueOf(sum);
-                                databaseReference.child(key2).child("Quantity").setValue(sum2);
+                                databaseReference.child(key2).child("Quantity").setValue(sum2); // Update the value of the item quantity
 
                                 //RECORD PERSON INSERT
                                 final DBHandler dbHandler = new DBHandler(getApplicationContext());
                                 Cursor cursor = dbHandler.fetch();
                                 cursor.moveToLast();
                                 String username1 = cursor.getString(1);
-
                                 databaseReference.child(key2).child("User").setValue(username1);
-                                //.addOnCompleteListener(new OnCompleteListener<Void>() {
-                                //   @Override
-                                //    public void onComplete(@NonNull Task<Void> task) {
-                                //       if (task.isSuccessful()){
+
                                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -265,27 +264,34 @@ public class StockOut_step3 extends AppCompatActivity {
 
                                     }
                                 });
-                                //   }
-                                //     }
-                                //    });
+
                                 Toast.makeText(StockOut_step3.this, "Add Successfully !!!", Toast.LENGTH_SHORT).show();
                                 b1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
                             }
                         }else {
+                            // Only positive quantity is allowed.
+                            // In other words, user is only allowed to stock out based on the
+                            // quantity available in the house
 
-                            final int total1 = Integer.parseInt(qty);
-                            final int qty11 = Integer.parseInt(Quantity);
+                            final int total1 = Integer.parseInt(qty); // User input quantity
+                            final int qty11 = Integer.parseInt(Quantity); // Quantity value get from firebase
                             if (qty.isEmpty()) {
                                 Toast.makeText(StockOut_step3.this, "Please enter Qty out", Toast.LENGTH_SHORT).show();
-                            }else if(total1<=qty11){
+
+                            }
+                            // If the stocked out value less than the current available quantity
+                            else if((total1<=qty11) && (total1 <= Integer.parseInt(txt_batchQty.getText().toString()))){
+                                // Update the quantity value in the database
                                 final int total = Integer.parseInt(qty);
                                 final int qty1 = Integer.parseInt(Quantity);
                                 int sum = qty1 - total;
+                                int batchQuantity = Integer.parseInt(txt_batchQty.getText().toString());
+                                int batchQtyResult = batchQuantity-total1;
                                 String sum2 = String.valueOf(sum);
-                                databaseReference.child(key2).child("Quantity").setValue(sum2);//.addOnCompleteListener(new OnCompleteListener<Void>() {
-                                //   @Override
-                                //    public void onComplete(@NonNull Task<Void> task) {
-                                //       if (task.isSuccessful()){
+                                databaseReference.child(key2).child("Quantity").setValue(sum2);
+                                batchRef = FirebaseDatabase.getInstance().getReference("Batch").child(key).child(batchNum).child("Quantity");
+                                batchRef.setValue(((batchQtyResult>=0)?batchQtyResult:0)+"");
+
                                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -372,12 +378,14 @@ public class StockOut_step3 extends AppCompatActivity {
 
                                     }
                                 });
-                                //   }
-                                //     }
-                                //    });
                                 Toast.makeText(StockOut_step3.this, "Add Successfully !!!", Toast.LENGTH_SHORT).show();
                                 b1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
-                            }else{
+                            }
+                            else if((total1<=qty11) && (total1 > Integer.parseInt(txt_batchQty.getText().toString()))){
+
+                            }
+
+                            else{
                                 Toast.makeText(StockOut_step3.this, "Execute actual Quantity \n"+ total1 + " < " + qty11, Toast.LENGTH_SHORT).show();
                             }
 
@@ -389,10 +397,7 @@ public class StockOut_step3 extends AppCompatActivity {
 
                     }
                 });
-
-
-
-            }
+         }
         });
 
 

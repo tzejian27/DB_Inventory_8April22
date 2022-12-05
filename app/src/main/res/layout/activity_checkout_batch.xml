@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="15dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:text="Checkout"
+        android:textColor="#03A9F4"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Add Batch"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/txtView_BatchNumber2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/blue_border"
+        android:drawableRight="@android:drawable/arrow_down_float"
+        android:drawableTint="#3C3C3C"
+        android:editable="false"
+        android:ems="10"
+        android:enabled="true"
+        android:hint="Select Batch Number"
+        android:inputType="none"
+        android:paddingLeft="20dp"
+        android:paddingRight="15dp" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="23dp"
+        android:backgroundTint="#D51111">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="22dp">
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="211dp"
+                android:layout_height="wrap_content"
+                android:text="Batch" />
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:text="Qty" />
+
+        </TableRow>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
