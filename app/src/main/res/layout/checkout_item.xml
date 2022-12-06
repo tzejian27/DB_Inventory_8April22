@@ -1,30 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="10dp">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="168dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textView34"
-            android:layout_width="441dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Batch Num"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView35"
+        <LinearLayout
+            android:id="@+id/batchColumnField"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
             android:layout_weight="1"
-            android:text="Qty"
-            android:textColor="#000000"
-            android:textSize="20sp" />
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_BatchNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Batch Num"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView35"
+                    android:layout_width="78dp"
+                    android:layout_height="wrap_content"
+                    android:text="Available: " />
+
+                <TextView
+                    android:id="@+id/txt_quantityValue"
+                    android:layout_width="210dp"
+                    android:layout_height="wrap_content"
+                    android:text="Qty"
+                    android:textColor="#2196F3" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editText_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/corners_background"
+            android:ems="10"
+            android:hint="Qty"
+            android:inputType="number"
+            android:numeric="integer"
+            android:paddingLeft="10dp" />
+
     </LinearLayout>
-</LinearLayout>
+
+</androidx.cardview.widget.CardView>

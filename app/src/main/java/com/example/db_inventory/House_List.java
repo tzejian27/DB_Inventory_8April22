@@ -25,7 +25,7 @@ public class House_List extends AppCompatActivity {
     ImageView btn_back, btn_search;
     DatabaseReference databaseReference;
     RecyclerView recyclerView;
-    HouseList_Adapter HouseList_Adapter;
+    com.example.db_inventory.HouseList_Adapter HouseList_Adapter;
     List<House_list_class> postList;
     TextView t1;
 

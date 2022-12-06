@@ -51,12 +51,10 @@ public class Stock_Out_Scan extends AppCompatActivity {
     DatabaseReference databaseReference, databaseReference2;
     Dialog dialog;
     long maxid = 0;
-    String currentDateandTime;
-    String name;
-    String key;
-    String inventory_key;
+    String currentDateandTime,name,key,inventory_key;
     ScanReader scanReader;
     private HashMap<String, String> BatchQty;
+    public static SimpleAdapter simpleAdapter;
     //SPINNER
     Spinner spinner;
     List<String> barcode_list;
@@ -197,6 +195,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
                     resultMap.put("Second Line", pair.getValue().toString());
                     listItem.add(resultMap);
                 }
+                Stock_Out_Scan.this.simpleAdapter = simpleAdapter;
                 listView.setAdapter(simpleAdapter);
 
                 editText.addTextChangedListener(new TextWatcher() {

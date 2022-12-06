@@ -382,6 +382,14 @@ public class StockOut_step3 extends AppCompatActivity {
                                 b1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
                             }
                             else if((total1<=qty11) && (total1 > Integer.parseInt(txt_batchQty.getText().toString()))){
+                                Intent intent = new Intent(StockOut_step3.this, StockOut_Checkout.class);
+                                intent.putExtra("Users", users);
+                                intent.putExtra("Key", key);
+                                intent.putExtra("Barcode", barcode);
+                                intent.putExtra("Batch", batchNum);
+                                intent.putExtra("Qty", batchQty);
+                                intent.putExtra("StockoutQty", qty);
+                                startActivity(intent);
 
                             }
 
