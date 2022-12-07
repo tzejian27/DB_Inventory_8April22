@@ -1,10 +1,18 @@
 package com.example.db_inventory;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,20 +24,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 public class Inventory_step4 extends AppCompatActivity {
 
     TextView t1, t2, t3, t4, t5;
     EditText e1;
     Button b1, b2;
-    String key;
-    String key2;
-    String barcode;
-    String ItemCode;
-    String TotalQty;
-    String name;
-    String ItemName;
-
+    String key,key2,barcode,ItemCode,TotalQty,name,ItemName;
+    private HashMap<String, String> BatchQty;
     DatabaseReference databaseReference;
+    Dialog dialog;
+    SimpleAdapter simpleAdapter;
 
     //SHOW ITEM DETAIL
     @Override
@@ -54,7 +64,7 @@ public class Inventory_step4 extends AppCompatActivity {
         key = intent1.getStringExtra("Key");
         key2 = intent1.getStringExtra("Key2");
         ItemCode = intent1.getStringExtra("ItemCode");
-
+        getBatchNumberList();
         setTitle("eStock_Inventory_Step4");
 
         e1.setText(barcode);
@@ -125,17 +135,120 @@ public class Inventory_step4 extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Inventory_step4.this, Inventory_step5.class);
-                intent.putExtra("barcode", barcode);
-                intent.putExtra("Key", key);
-                intent.putExtra("Key2", key2);
-                intent.putExtra("name", name);
-                intent.putExtra("ItemName", ItemName);
-                intent.putExtra("Users", users);
-                startActivity(intent);
-                finish();
+            public void onClick(View view) {
+
+                // Prompt dialog to show all the batch relatively to the item selected
+                dialog = new Dialog(Inventory_step4.this);
+                dialog.setContentView(R.layout.dialog_batch_spinner);
+                dialog.getWindow().setLayout(650, 800);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+                // Retrieve data from firebase (Batch) & build hashmap
+                getBatchNumberList();
+
+                // Set up the adapter and put in the dialog (simple adapter)
+                // Initialize the item to the list
+                EditText editText = dialog.findViewById(R.id.edit_text);
+                ListView listView = dialog.findViewById(R.id.list_view);
+                List<HashMap<String, String>> listItem = new ArrayList<>();
+                SimpleAdapter simpleAdapter = new SimpleAdapter(Inventory_step4.this, listItem, R.layout.list_batchno,
+                        new String[]{"First Line", "Second Line"},
+                        new int[]{R.id.text1, R.id.text2});
+
+                // Fill in the data in the recycler view
+                Iterator it = BatchQty.entrySet().iterator();
+                while (it.hasNext()) {
+                    HashMap<String, String> resultMap = new HashMap<>();
+                    Map.Entry pair = (Map.Entry) it.next();
+                    resultMap.put("First Line", pair.getKey().toString());
+                    resultMap.put("Second Line", pair.getValue().toString());
+                    listItem.add(resultMap);
+                }
+                Inventory_step4.this.simpleAdapter = simpleAdapter;
+                listView.setAdapter(simpleAdapter);
+
+                editText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        simpleAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+                // Define onClick listener
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        // After selected prompt another dialog to ask user whether confirm to proceed to next process
+                        // - onClick Proceed option, initialize the intent for the next activity with essential data needed
+                        // (Inventory_step5)
+
+
+                        // TO DO
+                        // After dialog item selected only new activity start
+
+                        Intent intent = new Intent(Inventory_step4.this, Inventory_step5.class);
+                        intent.putExtra("barcode", barcode);
+                        intent.putExtra("Key", key);
+                        intent.putExtra("Key2", key2);
+                        intent.putExtra("name", name);
+                        intent.putExtra("ItemName", ItemName);
+                        intent.putExtra("Users", users);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+
+
+
+
+
+
+
+
+
+            }
+
+        });
+    }
+
+    private void getBatchNumberList() {
+        HashMap<String , String > BatchQty = new HashMap<>();
+        DatabaseReference batchRef = FirebaseDatabase.getInstance().getReference("Batch").child(key);
+        batchRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot dss : snapshot.getChildren()){
+                    String batchNum = dss.getKey();
+                    String temp_barcode = (String) dss.child("Barcode").getValue();
+                    String temp_qty ;
+                    if(temp_barcode.equalsIgnoreCase(barcode)){
+                        temp_qty = (String) dss.child("Quantity").getValue();
+                        BatchQty.put(batchNum, "Current quantity: " + temp_qty);
+                    }
+                }
+
+                Inventory_step4.this.BatchQty = BatchQty;
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+
+
     }
 }
