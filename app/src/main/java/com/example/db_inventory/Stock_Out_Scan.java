@@ -35,9 +35,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -287,15 +289,18 @@ public class Stock_Out_Scan extends AppCompatActivity {
                     String batchNum = dss.getKey();
                     String temp_barcode = (String) dss.child("Barcode").getValue();
                     String temp_qty ;
-                    String barcodeTest = edt_barcode.getText().toString();
                     if(temp_barcode.equalsIgnoreCase(edt_barcode.getText().toString())){
                         temp_qty = (String) dss.child("Quantity").getValue();
+                        if (temp_qty.equals("0")){
+                            continue;
+                        }
                         BatchQty.put(batchNum, "Quantity left: " + temp_qty);
 
                     }
                 }
 
                 Stock_Out_Scan.this.BatchQty = BatchQty;
+                sortMap();
 
             }
 
@@ -305,6 +310,25 @@ public class Stock_Out_Scan extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void sortMap() {
+        ArrayList<String> list = new ArrayList<>();
+        LinkedHashMap<String, String> sortedMap = new LinkedHashMap<>();
+        for (Map.Entry<String, String> entry : BatchQty.entrySet()) {
+            list.add(entry.getKey());
+        }
+        Collections.sort(list);
+        for (String key : list) {
+            for (Map.Entry<String, String> entry : BatchQty.entrySet()) {
+                if (entry.getKey().equals(key)) {
+                    sortedMap.put(key, entry.getValue());
+                }
+            }
+        }
+
+        BatchQty = sortedMap;
 
     }
 

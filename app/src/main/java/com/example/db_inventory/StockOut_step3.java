@@ -385,6 +385,7 @@ public class StockOut_step3 extends AppCompatActivity {
                                 Intent intent = new Intent(StockOut_step3.this, StockOut_Checkout.class);
                                 intent.putExtra("Users", users);
                                 intent.putExtra("Key", key);
+                                intent.putExtra("Key2", key2);
                                 intent.putExtra("Barcode", barcode);
                                 intent.putExtra("Batch", batchNum);
                                 intent.putExtra("Qty", batchQty);

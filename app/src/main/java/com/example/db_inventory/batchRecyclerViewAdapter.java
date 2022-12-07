@@ -3,14 +3,14 @@ package com.example.db_inventory;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,7 +28,7 @@ import java.util.List;
 public class batchRecyclerViewAdapter extends RecyclerView.Adapter<batchRecyclerViewAdapter.MyViewHolder> {
 
     StockOut_Checkout mContext;
-    List<batchItem> mData;
+    public static List<batchItem> mData;
     DatabaseReference arightRef;
     String Switch1;
     String Switch2;
@@ -49,6 +49,7 @@ public class batchRecyclerViewAdapter extends RecyclerView.Adapter<batchRecycler
         return new MyViewHolder(row).linkAdapter(this);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull batchRecyclerViewAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
@@ -66,72 +67,58 @@ public class batchRecyclerViewAdapter extends RecyclerView.Adapter<batchRecycler
             @Override
             public void afterTextChanged(Editable editable) {
                 FinalSubTotal = 0;
-                if (isOnTextChanged) {
-                    isOnTextChanged = false;
-
-                    try {
-                        FinalSubTotal = 0;
-
-
-                        for (int i = 0; i <= position; i++) {
-
-                            int inposition1 = position;
-                            if (i != position) {
-                                //store 0  where user select position in not equal/
-                                ExpAmtArray.add("0");
-
-                            } else {
-
-                                // store user entered value to Array list (ExpAmtArray) at particular position
-                                ExpAmtArray.add("0");
-                                ExpAmtArray.set(inposition1, editable.toString());
-
-                                break;
-                            }
-
-                        }
-
-                        // for statement to loop to the array, to calculate the Expense total.
-                        for (int i = 0; i <= ExpAmtArray.size() - 1; i++) {
-
-                            int tempTotalExpenase = Integer.parseInt(ExpAmtArray.get(i));
-                            FinalSubTotal = FinalSubTotal + tempTotalExpenase;
-
-                        }
-
-                        StockOut_Checkout.txt_subtotal.setText(FinalSubTotal+"");
-                    } catch (NumberFormatException e) {
-                        // catch is used because, when used enter value in editText and remove the value it
-                        // it will trigger NumberFormatException, so to prevent it and remove data value from array ExpAmtArray
-                        //then
-                        // re-perform loop total expense calculation and display the total.
-
-                        FinalSubTotal = 0;
-                        for (int i = 0; i <= position; i++) {
-                            Log.d("TimesRemoved", " : " + i);
-                            int newposition = position;
-                            if (i == newposition) {
-                                ExpAmtArray.set(newposition, "0");
-
-                            }
-
-                        }
-                        for (int i = 0; i <= ExpAmtArray.size() - 1; i++) {
-
-                            int tempTotalExpenase = Integer.parseInt(ExpAmtArray.get(i));
-                            FinalSubTotal = FinalSubTotal + tempTotalExpenase;
-
-                        }
-                        StockOut_Checkout.txt_subtotal.setText(FinalSubTotal+"");
-                    }
-
+                int ammendValue = (editable.toString().equals(""))?0:Integer.parseInt(editable.toString());
+                int availableValueBatch = mData.get(position).getNumericQuantity();
+                if(ammendValue>availableValueBatch){
+                    holder.batchQtyIpt.setText(availableValueBatch+"");
+                    mData.get(position).setPreset_ipt_qty(availableValueBatch);
+                }else{
+                    mData.get(position).setPreset_ipt_qty(ammendValue);
                 }
+
+                computeResult();
             }
         });
         // Set data of the list
         holder.batchNum.setText(mData.get(position).getBatchNum());
         holder.batchQuantity.setText(mData.get(position).getStringQuantity());
         holder.batchQtyIpt.setText(mData.get(position).getPreset_ipt_qty()+"");
+
+        holder.buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CharSequence[] option = new CharSequence[]{
+                        "Confirm", "Cancel"
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Remove from the list ?");
+                builder.setItems(option, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        switch(i){
+                            case 0 : {
+                                //Remove the item from the recycler view
+                                if(position!= 0 ) {
+                                    mData.remove(position);
+                                    computeResult();
+                                    notifyItemRemoved(position);
+                                }
+                                break;
+                            }
+                            case 1:{
+                                dialogInterface.dismiss();
+                                break;
+                            }
+                        }
+                    }
+                });
+                AlertDialog alrtBuilder = builder.create();
+                alrtBuilder.show();
+
+            }
+        });
 
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
         arightRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -148,6 +135,26 @@ public class batchRecyclerViewAdapter extends RecyclerView.Adapter<batchRecycler
             }
         });
 
+    }
+
+    private void computeResult() {
+        // Compute the required quantity
+        int stockOutAmount = Integer.parseInt(StockOut_Checkout.txt_totalStockout.getText().toString());
+        int sumOfAll=0;
+
+        for (batchItem item
+             : mData) {
+            sumOfAll += item.getPreset_ipt_qty();
+        }
+        StockOut_Checkout.txt_subtotal.setText(sumOfAll+"");
+        int stockRequired = stockOutAmount - sumOfAll;
+        StockOut_Checkout.txt_totalRequired.setText(stockRequired+"");
+        if(stockRequired<0){
+            StockOut_Checkout.txt_totalRequired.setTextColor(Color.RED);
+        }
+        else{
+            StockOut_Checkout.txt_totalRequired.setTextColor(Color.GRAY);
+        }
     }
 
     @Override
@@ -185,6 +192,10 @@ public class batchRecyclerViewAdapter extends RecyclerView.Adapter<batchRecycler
             return preset_ipt_qty;
         }
 
+        public void setPreset_ipt_qty(int preset_ipt_qty) {
+            this.preset_ipt_qty = preset_ipt_qty;
+        }
+
         @Override
         public String toString() {
             return "batchItem{" +
@@ -199,7 +210,7 @@ public class batchRecyclerViewAdapter extends RecyclerView.Adapter<batchRecycler
         View mView;
         TextView batchNum, batchQuantity;
         EditText batchQtyIpt;
-        LinearLayout layout;
+        ImageButton buttonDelete;
         batchRecyclerViewAdapter adapter;
 
         public MyViewHolder(View itemView) {
@@ -209,38 +220,7 @@ public class batchRecyclerViewAdapter extends RecyclerView.Adapter<batchRecycler
             batchNum = itemView.findViewById(R.id.txt_BatchNum);
             batchQuantity = itemView.findViewById(R.id.txt_quantityValue);
             batchQtyIpt = itemView.findViewById(R.id.editText_quantity);
-            layout = itemView.findViewById(R.id.batchColumnField);
-
-            layout.setOnClickListener(view-> {
-                CharSequence[] option = new CharSequence[]{
-                        "Confirm", "Cancel"
-                };
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setTitle("Remove from the list ?");
-                builder.setItems(option, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        switch(i){
-                            case 0 : {
-                                //Remove the item from the recycler view
-                                if(getAdapterPosition() != 0 ) {
-                                    mData.remove(getAdapterPosition());
-                                    adapter.notifyItemRemoved(getAdapterPosition());
-                                }
-                                break;
-                            }
-                            case 1:{
-                                dialogInterface.dismiss();
-                                break;
-                            }
-                        }
-                    }
-                });
-
-
-            });
+            buttonDelete = itemView.findViewById(R.id.deleteButton);
 
         }
 
