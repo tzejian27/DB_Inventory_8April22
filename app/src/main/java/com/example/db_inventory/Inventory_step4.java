@@ -1,6 +1,8 @@
 package com.example.db_inventory;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -188,23 +190,49 @@ public class Inventory_step4 extends AppCompatActivity {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        // After selected prompt another dialog to ask user whether confirm to proceed to next process
+                        HashMap<String, String> result = (HashMap<String, String>) simpleAdapter.getItem(i);
+                        String selectedBatchNum = result.get("First Line").toString();
+                        String selectedBatchQty = result.get("Second Line").toString().replaceAll("[^0-9]+","");
+
+                        // Prompt another dialog to ask user whether confirm to proceed to next process
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Inventory_step4.this);
+                        builder.setTitle(selectedBatchNum + "\nProceed?");
+                        builder.setItems(new String []{"Confirm", "Cancel"}, new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                switch(i){
+                                    case 0 : {
+                                        // If user confirm proceed, go to next page
+                                        Intent intent = new Intent(Inventory_step4.this, Inventory_step5_bo.class);
+                                        intent.putExtra("barcode", barcode);
+                                        intent.putExtra("Key", key);
+                                        intent.putExtra("Key2", key2);
+                                        intent.putExtra("name", name);
+                                        intent.putExtra("ItemName", ItemName);
+                                        intent.putExtra("Users", users);
+                                        intent.putExtra("batchNum", selectedBatchNum);
+                                        intent.putExtra("batchQty", selectedBatchQty);
+
+                                        startActivity(intent);
+                                        finish();
+                                        // add value for the batch number
+                                        // add field for current quantity of the respective batch
+                                        break;
+                                    }
+                                    case 1:{
+                                        dialogInterface.dismiss();
+                                        break;
+                                    }
+                                }
+                            }
+                        });
+                        AlertDialog alrtBuilder = builder.create();
+                        alrtBuilder.show();
                         // - onClick Proceed option, initialize the intent for the next activity with essential data needed
                         // (Inventory_step5)
 
 
-                        // TO DO
-                        // After dialog item selected only new activity start
-
-                        Intent intent = new Intent(Inventory_step4.this, Inventory_step5.class);
-                        intent.putExtra("barcode", barcode);
-                        intent.putExtra("Key", key);
-                        intent.putExtra("Key2", key2);
-                        intent.putExtra("name", name);
-                        intent.putExtra("ItemName", ItemName);
-                        intent.putExtra("Users", users);
-                        startActivity(intent);
-                        finish();
                     }
                 });
 
