@@ -30,8 +30,7 @@ public class Inventory_step5_bo extends AppCompatActivity {
     EditText e1;
     int batchQty;
     String key,barcode,Quantity,key2,totalQty,name,currentDateandTime, currentDateandTime2,itemName, batchNum;
-    DatabaseReference databaseReference, StockTakeRef;
-    DatabaseReference stockInOutRef;
+    DatabaseReference databaseReference, StockTakeRef, stockInOutRef;
 
 
     //MODIFY INVENTORY QTY

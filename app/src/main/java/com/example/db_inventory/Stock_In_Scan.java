@@ -159,7 +159,6 @@ public class Stock_In_Scan extends AppCompatActivity {
 
         btn_back.setOnClickListener(new View.OnClickListener() {
 
-
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Stock_In_Scan.this, House_List_Stock_In.class);

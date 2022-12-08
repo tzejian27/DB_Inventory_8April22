@@ -139,114 +139,109 @@ public class Inventory_step4 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // Prompt dialog to show all the batch relatively to the item selected
-                dialog = new Dialog(Inventory_step4.this);
-                dialog.setContentView(R.layout.dialog_batch_spinner);
-                dialog.getWindow().setLayout(650, 800);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-
-                // Retrieve data from firebase (Batch) & build hashmap
-                getBatchNumberList();
-
-                // Set up the adapter and put in the dialog (simple adapter)
-                // Initialize the item to the list
-                EditText editText = dialog.findViewById(R.id.edit_text);
-                ListView listView = dialog.findViewById(R.id.list_view);
-                List<HashMap<String, String>> listItem = new ArrayList<>();
-                SimpleAdapter simpleAdapter = new SimpleAdapter(Inventory_step4.this, listItem, R.layout.list_batchno,
-                        new String[]{"First Line", "Second Line"},
-                        new int[]{R.id.text1, R.id.text2});
-
-                // Fill in the data in the recycler view
-                Iterator it = BatchQty.entrySet().iterator();
-                while (it.hasNext()) {
-                    HashMap<String, String> resultMap = new HashMap<>();
-                    Map.Entry pair = (Map.Entry) it.next();
-                    resultMap.put("First Line", pair.getKey().toString());
-                    resultMap.put("Second Line", pair.getValue().toString());
-                    listItem.add(resultMap);
-                }
-                Inventory_step4.this.simpleAdapter = simpleAdapter;
-                listView.setAdapter(simpleAdapter);
-
-                editText.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        simpleAdapter.getFilter().filter(charSequence);
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-
-                    }
-                });
-                // Define onClick listener
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        HashMap<String, String> result = (HashMap<String, String>) simpleAdapter.getItem(i);
-                        String selectedBatchNum = result.get("First Line").toString();
-                        String selectedBatchQty = result.get("Second Line").toString().replaceAll("[^0-9]+","");
-
-                        // Prompt another dialog to ask user whether confirm to proceed to next process
-                        AlertDialog.Builder builder = new AlertDialog.Builder(Inventory_step4.this);
-                        builder.setTitle(selectedBatchNum + "\nProceed?");
-                        builder.setItems(new String []{"Confirm", "Cancel"}, new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                switch(i){
-                                    case 0 : {
-                                        // If user confirm proceed, go to next page
-                                        Intent intent = new Intent(Inventory_step4.this, Inventory_step5_bo.class);
-                                        intent.putExtra("barcode", barcode);
-                                        intent.putExtra("Key", key);
-                                        intent.putExtra("Key2", key2);
-                                        intent.putExtra("name", name);
-                                        intent.putExtra("ItemName", ItemName);
-                                        intent.putExtra("Users", users);
-                                        intent.putExtra("batchNum", selectedBatchNum);
-                                        intent.putExtra("batchQty", selectedBatchQty);
-
-                                        startActivity(intent);
-                                        finish();
-                                        // add value for the batch number
-                                        // add field for current quantity of the respective batch
-                                        break;
-                                    }
-                                    case 1:{
-                                        dialogInterface.dismiss();
-                                        break;
-                                    }
-                                }
-                            }
-                        });
-                        AlertDialog alrtBuilder = builder.create();
-                        alrtBuilder.show();
-                        // - onClick Proceed option, initialize the intent for the next activity with essential data needed
-                        // (Inventory_step5)
-
-
-                    }
-                });
-
-
-
-
-
-
-
-
-
+                enterBatchStockTake(users);
 
             }
 
+        });
+    }
+
+    private void enterBatchStockTake(String users) {
+        // Prompt dialog to show all the batch relatively to the item selected
+        dialog = new Dialog(Inventory_step4.this);
+        dialog.setContentView(R.layout.dialog_batch_spinner);
+        dialog.getWindow().setLayout(650, 800);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        // Retrieve data from firebase (Batch) & build hashmap
+        getBatchNumberList();
+
+        // Set up the adapter and put in the dialog (simple adapter)
+        // Initialize the item to the list
+        EditText editText = dialog.findViewById(R.id.edit_text);
+        ListView listView = dialog.findViewById(R.id.list_view);
+        List<HashMap<String, String>> listItem = new ArrayList<>();
+        SimpleAdapter simpleAdapter = new SimpleAdapter(Inventory_step4.this, listItem, R.layout.list_batchno,
+                new String[]{"First Line", "Second Line"},
+                new int[]{R.id.text1, R.id.text2});
+
+        // Fill in the data in the recycler view
+        Iterator it = BatchQty.entrySet().iterator();
+        while (it.hasNext()) {
+            HashMap<String, String> resultMap = new HashMap<>();
+            Map.Entry pair = (Map.Entry) it.next();
+            resultMap.put("First Line", pair.getKey().toString());
+            resultMap.put("Second Line", pair.getValue().toString());
+            listItem.add(resultMap);
+        }
+        Inventory_step4.this.simpleAdapter = simpleAdapter;
+        listView.setAdapter(simpleAdapter);
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                simpleAdapter.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        // Define onClick listener
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                HashMap<String, String> result = (HashMap<String, String>) simpleAdapter.getItem(i);
+                String selectedBatchNum = result.get("First Line").toString();
+                String selectedBatchQty = result.get("Second Line").toString().replaceAll("[^0-9]+","");
+
+                // Prompt another dialog to ask user whether confirm to proceed to next process
+                AlertDialog.Builder builder = new AlertDialog.Builder(Inventory_step4.this);
+                builder.setTitle(selectedBatchNum + "\nProceed?");
+                builder.setItems(new String []{"Confirm", "Cancel"}, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        switch(i){
+                            case 0 : {
+                                // If user confirm proceed, go to next page
+                                Intent intent = new Intent(Inventory_step4.this, Inventory_step5_bo.class);
+                                intent.putExtra("barcode", barcode);
+                                intent.putExtra("Key", key);
+                                intent.putExtra("Key2", key2);
+                                intent.putExtra("name", name);
+                                intent.putExtra("ItemName", ItemName);
+                                intent.putExtra("Users", users);
+                                intent.putExtra("batchNum", selectedBatchNum);
+                                intent.putExtra("batchQty", selectedBatchQty);
+
+                                startActivity(intent);
+                                finish();
+                                // add value for the batch number
+                                // add field for current quantity of the respective batch
+                                break;
+                            }
+                            case 1:{
+                                dialogInterface.dismiss();
+                                break;
+                            }
+                        }
+                    }
+                });
+                AlertDialog alrtBuilder = builder.create();
+                alrtBuilder.show();
+                // - onClick Proceed option, initialize the intent for the next activity with essential data needed
+                // (Inventory_step5)
+
+
+            }
         });
     }
 
