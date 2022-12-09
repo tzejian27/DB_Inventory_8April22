@@ -37,6 +37,7 @@ public class Inventory_step4 extends AppCompatActivity {
     TextView t1, t2, t3, t4, t5;
     EditText e1;
     Button b1, b2;
+    boolean isItemBatchEnabled;
     String key,key2,barcode,ItemCode,TotalQty,name,ItemName;
     private HashMap<String, String> BatchQty;
     DatabaseReference databaseReference;
@@ -71,6 +72,21 @@ public class Inventory_step4 extends AppCompatActivity {
 
         e1.setText(barcode);
         e1.setEnabled(false);
+
+        // Check whether the item enable for batch
+        DatabaseReference newGoodsRef = FirebaseDatabase.getInstance().getReference("New_Goods");
+        newGoodsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean isBatchEnabled = (boolean)(snapshot.child(barcode).child("isBatchEnabled").getValue());
+                isItemBatchEnabled = isBatchEnabled;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
@@ -139,7 +155,20 @@ public class Inventory_step4 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                enterBatchStockTake(users);
+                if(isItemBatchEnabled) {
+                    enterBatchStockTake(users);
+                }else{
+                    // Start the page without requesting the batch number
+                    Intent intent = new Intent(Inventory_step4.this, Inventory_step5.class);
+                    intent.putExtra("barcode", barcode);
+                    intent.putExtra("Key", key);
+                    intent.putExtra("Key2", key2);
+                    intent.putExtra("name", name);
+                    intent.putExtra("ItemName", ItemName);
+                    intent.putExtra("Users", users);
+                    startActivity(intent);
+                    finish();
+                }
 
             }
 

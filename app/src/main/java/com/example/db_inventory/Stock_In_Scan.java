@@ -39,7 +39,7 @@ public class Stock_In_Scan extends AppCompatActivity {
     EditText edt_barcode;
     Button btn_back, btn_next;
     DatabaseReference databaseReference, databaseReference2, databaseReference3;
-    long maxid = 0;
+    long numOfItem = 0;
     String Quantity = "0";
     String currentDateandTime;
     String Name;
@@ -104,7 +104,7 @@ public class Stock_In_Scan extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists())
-                    maxid = (dataSnapshot.getChildrenCount());
+                    numOfItem = (dataSnapshot.getChildrenCount());
             }
 
             @Override
@@ -194,39 +194,41 @@ public class Stock_In_Scan extends AppCompatActivity {
 
         databaseReference2 = FirebaseDatabase.getInstance().getReference("New_Goods");
         databaseReference2.keepSynced(true);
+        // Reference to firebase New Goods which contains all the inventory
         databaseReference2.child(barcode).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull final DataSnapshot dataFromNEWGOODS) {
+                // Find the record "barcode"
                 databaseReference2.orderByChild("Barcode").equalTo(barcode).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull final DataSnapshot dataSnapshot2) {
+                    public void onDataChange(@NonNull final DataSnapshot queryResultNewGoods) {
                         databaseReference.orderByChild("Barcode").equalTo(barcode).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot3) {
-                                if (dataSnapshot2.exists() && !dataSnapshot3.exists()) {
-                                    Name = dataSnapshot.child("Name").getValue().toString().trim();
-                                    Price = dataSnapshot.child("Price").getValue().toString().trim();
-                                    Cost = dataSnapshot.child("Cost").getValue().toString().trim();
+                            public void onDataChange(@NonNull DataSnapshot queryResultHouse) {
+                                // Exist in NEW GOODS but does not exist in the respective HOUSE
+                                if (queryResultNewGoods.exists() && !queryResultHouse.exists()) {
+                                    Name = dataFromNEWGOODS.child("Name").getValue().toString().trim();
+                                    Price = dataFromNEWGOODS.child("Price").getValue().toString().trim();
+                                    Cost = dataFromNEWGOODS.child("Cost").getValue().toString().trim();
 
-                                    if (dataSnapshot.child("ItemCode").exists()) {
-                                        ItemCode = dataSnapshot.child("ItemCode").getValue().toString().trim();
+                                    if (dataFromNEWGOODS.child("ItemCode").exists()) {
+                                        ItemCode = dataFromNEWGOODS.child("ItemCode").getValue().toString().trim();
                                     } else {
                                         ItemCode = "-";
                                     }
 
                                     Intent intent = getIntent();
                                     String name = intent.getStringExtra("name");
-                                    k = maxid - 3;
-                                    totaltype = Long.toString(k);
-                                    // final String key2 =Long.toString(k);
+                                    k = numOfItem - 3; // Equivalent to (NumofItem - 4[Non-Item Child] + 1[New Item])
+                                    totaltype = Long.toString(k); // Final number of item in the house
 
                                     databaseReference3 = FirebaseDatabase.getInstance().getReference("House").child(key).push();
                                     databaseReference3.keepSynced(true);
                                     final String key2 = databaseReference3.getKey();
 
                                     Map dataMap = new HashMap();
-                                    dataMap.put("Key", key2);
-                                    dataMap.put("HouseKey", key);
+                                    dataMap.put("Key", key2);       // Unique key
+                                    dataMap.put("HouseKey", key);   // House Key
                                     dataMap.put("Barcode", barcode);
                                     dataMap.put("ItemName", Name);
                                     dataMap.put("ItemCode", ItemCode);
@@ -235,10 +237,9 @@ public class Stock_In_Scan extends AppCompatActivity {
                                     dataMap.put("Quantity", Quantity);
                                     dataMap.put("Date_and_Time", currentDateandTime);
 
-                                    databaseReference3.updateChildren(dataMap);//.addOnCompleteListener(new OnCompleteListener() {
-
-                                    databaseReference.child("TotalType").setValue(totaltype);//.addOnCompleteListener(new OnCompleteListener<Void>() {
-
+                                    databaseReference3.updateChildren(dataMap);
+                                    // Update House quantity value
+                                    databaseReference.child("TotalType").setValue(totaltype);
                                     Intent page = new Intent(Stock_In_Scan.this, StockIn_step3.class);
                                     page.putExtra("barcode", barcode);
                                     page.putExtra("name", name);
@@ -248,14 +249,17 @@ public class Stock_In_Scan extends AppCompatActivity {
                                     startActivity(page);
                                     finish();
 
-                                } else if (!dataSnapshot3.exists()) {
+                                }
+
+                                // Does not exist in both NEW GOODS and respective HOUSE
+                                else if (!queryResultHouse.exists()) {
                                     databaseReference2 = FirebaseDatabase.getInstance().getReference("Switch");
                                     databaseReference2.keepSynced(true);
                                     databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             String s1 = dataSnapshot.child("NoNeed").getValue().toString().trim();
-
+                                            // Check whether the system allow to edit spec of item
                                             if (s1.equals("Need")) {
                                                 String barcode = edt_barcode.getText().toString().trim().replace("/", "|");
                                                 Intent intent = new Intent(Stock_In_Scan.this, StockIn_step2.class);
@@ -265,16 +269,11 @@ public class Stock_In_Scan extends AppCompatActivity {
                                                 intent.putExtra("Users", users);
                                                 startActivity(intent);
                                             } else {
-
+                                                // Insert item to the HOUSE without key in the details of the item
+                                                // The details here is either default value or NULL value
                                                 databaseReference3 = FirebaseDatabase.getInstance().getReference("House").child(key).push();
                                                 databaseReference3.keepSynced(true);
                                                 final String key2 = databaseReference3.getKey();
-
-                                                //RECORD PERSON INSERT
-                                                /*final DBHandler dbHandler = new DBHandler(getApplicationContext());
-                                                Cursor cursor = dbHandler.fetch();
-                                                cursor.moveToLast();
-                                                String username1 = cursor.getString(1);*/
 
                                                 String barcode = edt_barcode.getText().toString().trim().replace("/", "|");
                                                 Map dataMap = new HashMap();
@@ -287,15 +286,15 @@ public class Stock_In_Scan extends AppCompatActivity {
                                                 dataMap.put("Cost", "0");
                                                 dataMap.put("Quantity", Quantity);
                                                 dataMap.put("Date_and_Time", currentDateandTime);
-                                                /*dataMap.put("User", username1);*/
 
                                                 //calculate total type
-                                                k = maxid - 3;
+                                                k = numOfItem - 3;
                                                 totaltype = Long.toString(k);
 
                                                 databaseReference3.updateChildren(dataMap);
                                                 databaseReference.child("TotalType").setValue(totaltype);
 
+                                                // Go to the page where to key in the quantity to be stocked in
                                                 Intent intent = new Intent(Stock_In_Scan.this, StockIn_step3.class);
                                                 intent.putExtra("barcode", barcode);
                                                 intent.putExtra("name", name);
@@ -316,16 +315,15 @@ public class Stock_In_Scan extends AppCompatActivity {
                                         }
                                     });
 
+                                    // Condition where the item is existed in the HOUSE
+                                } else if (queryResultHouse.exists()) {
 
-                                } else if (dataSnapshot3.exists()) {
-                                    // k = maxid -3;
-                                    // key2 =Long.toString(k);
-                                    // databaseReference3=FirebaseDatabase.getInstance().getReference("House").child(key).push();
-                                    //  key2 = databaseReference3.getKey();
                                     final String barcode = edt_barcode.getText().toString().trim().replace("/", "|");
                                     databaseReference.orderByChild("Barcode").equalTo(barcode).addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            // The loop is TO AVOID duplication of ITEM in the HOUSE using the data differently
+                                            // Generally, the loop only run once, more than one time is an exception.
                                             for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                                                 inventory_key = childSnapshot.getKey();
                                                 Intent intent = new Intent(Stock_In_Scan.this, StockIn_step3.class);

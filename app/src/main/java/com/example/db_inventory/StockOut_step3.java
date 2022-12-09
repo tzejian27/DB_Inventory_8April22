@@ -278,126 +278,238 @@ public class StockOut_step3 extends AppCompatActivity {
                             if (qty.isEmpty()) {
                                 Toast.makeText(StockOut_step3.this, "Please enter Qty out", Toast.LENGTH_SHORT).show();
 
+                            }else if(!txt_batchQty.getText().toString().equals("")){
+                                updateFirebaseWithBNum(total1, qty11);
+                            }else if(txt_batchQty.getText().toString().equals("")){
+                                updateFirebaseWOBNum(total1, qty11);
                             }
-                            // If the stocked out value less than the current available quantity
-                            else if((total1<=qty11) && (total1 <= Integer.parseInt(txt_batchQty.getText().toString()))){
-                                // Update the quantity value in the database
-                                final int total = Integer.parseInt(qty);
-                                final int qty1 = Integer.parseInt(Quantity);
-                                int sum = qty1 - total;
-                                int batchQuantity = Integer.parseInt(txt_batchQty.getText().toString());
-                                int batchQtyResult = batchQuantity-total1;
-                                String sum2 = String.valueOf(sum);
-                                databaseReference.child(key2).child("Quantity").setValue(sum2);
-                                batchRef = FirebaseDatabase.getInstance().getReference("Batch").child(key).child(batchNum).child("Quantity");
-                                batchRef.setValue(((batchQtyResult>=0)?batchQtyResult:0)+"");
+                        }
+                    }
 
-                                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        totalQty = dataSnapshot.child("TotalQty").getValue().toString().trim();
+                    private void updateFirebaseWOBNum(int total1, int qty11) {
+                        if(total1 <= qty11){
+                           final int total = Integer.parseInt(qty);
+                           final int qty1 = Integer.parseInt(Quantity);
+                           int sum = qty1 - total;
+                           String sum2 = String.valueOf(sum);
+                           databaseReference.child(key2).child("Quantity").setValue(sum2);//.addOnCompleteListener(new OnCompleteListener<Void>() {
+                           //   @Override
+                           //    public void onComplete(@NonNull Task<Void> task) {
+                           //       if (task.isSuccessful()){
+                           databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                               @Override
+                               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                   totalQty = dataSnapshot.child("TotalQty").getValue().toString().trim();
 
-                                        int sum = 0;
-                                        int totalQty1 = Integer.parseInt(totalQty);
-                                        sum = totalQty1 - total;
-                                        String sum2 = String.valueOf(sum);
+                                   int sum = 0;
+                                   int totalQty1 = Integer.parseInt(totalQty);
+                                   sum = totalQty1 - total;
+                                   String sum2 = String.valueOf(sum);
 
-                                        databaseReference.child("TotalQty").setValue(sum2).toString().trim();
+                                   databaseReference.child("TotalQty").setValue(sum2).toString().trim();
 
-                                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
-                                        currentDateandTime = sdf.format(new Date());
+                                   SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
+                                   currentDateandTime = sdf.format(new Date());
 
-                                        Map dataMap = new HashMap();
-                                        dataMap.put("QtyOut", qty);
-                                        dataMap.put("QtyOut_Date", currentDateandTime);
+                                   Map dataMap = new HashMap();
+                                   dataMap.put("QtyOut", qty);
+                                   dataMap.put("QtyOut_Date", currentDateandTime);
 
-                                        databaseReference2.updateChildren(dataMap);
+                                   databaseReference2.updateChildren(dataMap);
 
-                                        tv_qtyOut.setText(qty);
-                                        e2_quantity_out.setEnabled(false);
-                                        b2.setClickable(false);
-
-
-                                        String Quantity = dataSnapshot.child(key2).child("Quantity").getValue().toString().trim();
-                                        t1.setText(sum2);
-                                        t2.setText(Quantity);
-
-                                        String ItemName = dataSnapshot.child(key2).child("ItemName").getValue().toString().trim();
+                                   tv_qtyOut.setText(qty);
+                                   e2_quantity_out.setEnabled(false);
+                                   b2.setClickable(false);
 
 
-                                        //Create stock in record
-                                        barcode = intent1.getStringExtra("barcode");
-                                        name = intent1.getStringExtra("name");
+                                   String Quantity = dataSnapshot.child(key2).child("Quantity").getValue().toString().trim();
+                                   t1.setText(sum2);
+                                   t2.setText(Quantity);
 
-                                        //record stock in and out record;
-                                        stockInOutRef = FirebaseDatabase.getInstance().getReference("StockMovement");
+                                   String ItemName = dataSnapshot.child(key2).child("ItemName").getValue().toString().trim();
 
-                                        SimpleDateFormat sdf3 = new SimpleDateFormat("yyyyMMddHHmmss");
-                                        String currentDateandTime3 = sdf3.format(new Date());
 
-                                        SimpleDateFormat sdf2 = new SimpleDateFormat("dd_MM_yyyy_HH:mm:ss");
-                                        currentDateandTime2 = sdf2.format(new Date());
-                                        String parentname = barcode + "_" + currentDateandTime2;
+                                   //Create stock in record
+                                   barcode = intent1.getStringExtra("barcode");
+                                   name = intent1.getStringExtra("name");
 
-                                        Map dataMap4 = new HashMap();
-                                        dataMap4.put("ParentName", parentname);
-                                        dataMap4.put("Barcode", barcode);
-                                        dataMap4.put("Name", ItemName);
-                                        dataMap4.put("QtyOut", qty);
-                                        dataMap4.put("QtyIn", 0);
-                                        dataMap4.put("QtyInOut_Date", currentDateandTime);
-                                        dataMap4.put("QtyInOut_Date2", currentDateandTime3);
-                                        //QUANTITY BEFORE STOCK OUT
-                                        dataMap4.put("Qty", qty1);
-                                        //QUANTITY AFTER STOCK OUT
-                                        dataMap4.put("TotalQty", Quantity);
-                                        dataMap4.put("HouseName", name);
-                                        stockInOutRef.child(name).child(parentname).updateChildren(dataMap4);
+                                   //record stock in and out record;
+                                   stockInOutRef = FirebaseDatabase.getInstance().getReference("StockMovement");
 
-                                        stockInOutRef.child(name).addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                if (!snapshot.child("housename").exists()) {
-                                                    Map map = new HashMap();
-                                                    map.put("housename", name);
-                                                    stockInOutRef.child(name).updateChildren(map);
-                                                }
+                                   SimpleDateFormat sdf3 = new SimpleDateFormat("yyyyMMddHHmmss");
+                                   String currentDateandTime3 = sdf3.format(new Date());
+
+                                   SimpleDateFormat sdf2 = new SimpleDateFormat("dd_MM_yyyy_HH:mm:ss");
+                                   currentDateandTime2 = sdf2.format(new Date());
+                                   String parentname = barcode + "_" + currentDateandTime2;
+
+                                   Map dataMap4 = new HashMap();
+                                   dataMap4.put("ParentName", parentname);
+                                   dataMap4.put("Barcode", barcode);
+                                   dataMap4.put("Name", ItemName);
+                                   dataMap4.put("QtyOut", qty);
+                                   dataMap4.put("QtyIn", 0);
+                                   dataMap4.put("QtyInOut_Date", currentDateandTime);
+                                   dataMap4.put("QtyInOut_Date2", currentDateandTime3);
+                                   //QUANTITY BEFORE STOCK OUT
+                                   dataMap4.put("Qty", qty1);
+                                   //QUANTITY AFTER STOCK OUT
+                                   dataMap4.put("TotalQty", Quantity);
+                                   dataMap4.put("HouseName", name);
+                                   stockInOutRef.child(name).child(parentname).updateChildren(dataMap4);
+
+                                   stockInOutRef.child(name).addListenerForSingleValueEvent(new ValueEventListener() {
+                                       @Override
+                                       public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                           if (!snapshot.child("housename").exists()) {
+                                               Map map = new HashMap();
+                                               map.put("housename", name);
+                                               stockInOutRef.child(name).updateChildren(map);
+                                           }
+                                       }
+
+                                       @Override
+                                       public void onCancelled(@NonNull DatabaseError error) {
+
+                                       }
+                                   });
+
+
+                               }
+
+                               @Override
+                               public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                               }
+                           });
+                           //   }
+                           //     }
+                           //    });
+                           Toast.makeText(StockOut_step3.this, "Add Successfully !!!", Toast.LENGTH_SHORT).show();
+                           b1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
+                       }
+                        else{
+                           Toast.makeText(StockOut_step3.this, "Execute actual Quantity \n"+ total1 + " < " + qty11, Toast.LENGTH_SHORT).show();
+                       }
+                    }
+
+                    private void updateFirebaseWithBNum(int total1, int qty11) {
+                        // If the stocked out value less than the current available quantity
+                        if((total1 <= qty11) && (total1 <= Integer.parseInt(txt_batchQty.getText().toString()))){
+                            // Update the quantity value in the database
+                            final int total = Integer.parseInt(qty);
+                            final int qty1 = Integer.parseInt(Quantity);
+                            int sum = qty1 - total;
+                            int batchQuantity = Integer.parseInt(txt_batchQty.getText().toString());
+                            int batchQtyResult = batchQuantity- total1;
+                            String sum2 = String.valueOf(sum);
+                            databaseReference.child(key2).child("Quantity").setValue(sum2);
+                            batchRef = FirebaseDatabase.getInstance().getReference("Batch").child(key).child(batchNum).child("Quantity");
+                            batchRef.setValue(((batchQtyResult>=0)?batchQtyResult:0)+"");
+
+                            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    totalQty = dataSnapshot.child("TotalQty").getValue().toString().trim();
+
+                                    int sum = 0;
+                                    int totalQty1 = Integer.parseInt(totalQty);
+                                    sum = totalQty1 - total;
+                                    String sum2 = String.valueOf(sum);
+
+                                    databaseReference.child("TotalQty").setValue(sum2).toString().trim();
+
+                                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
+                                    currentDateandTime = sdf.format(new Date());
+
+                                    Map dataMap = new HashMap();
+                                    dataMap.put("QtyOut", qty);
+                                    dataMap.put("QtyOut_Date", currentDateandTime);
+
+                                    databaseReference2.updateChildren(dataMap);
+
+                                    tv_qtyOut.setText(qty);
+                                    e2_quantity_out.setEnabled(false);
+                                    b2.setClickable(false);
+
+
+                                    String Quantity = dataSnapshot.child(key2).child("Quantity").getValue().toString().trim();
+                                    t1.setText(sum2);
+                                    t2.setText(Quantity);
+
+                                    String ItemName = dataSnapshot.child(key2).child("ItemName").getValue().toString().trim();
+
+
+                                    //Create stock in record
+                                    barcode = intent1.getStringExtra("barcode");
+                                    name = intent1.getStringExtra("name");
+
+                                    //record stock in and out record;
+                                    stockInOutRef = FirebaseDatabase.getInstance().getReference("StockMovement");
+
+                                    SimpleDateFormat sdf3 = new SimpleDateFormat("yyyyMMddHHmmss");
+                                    String currentDateandTime3 = sdf3.format(new Date());
+
+                                    SimpleDateFormat sdf2 = new SimpleDateFormat("dd_MM_yyyy_HH:mm:ss");
+                                    currentDateandTime2 = sdf2.format(new Date());
+                                    String parentname = barcode + "_" + currentDateandTime2;
+
+                                    Map dataMap4 = new HashMap();
+                                    dataMap4.put("ParentName", parentname);
+                                    dataMap4.put("Barcode", barcode);
+                                    dataMap4.put("Name", ItemName);
+                                    dataMap4.put("QtyOut", qty);
+                                    dataMap4.put("QtyIn", 0);
+                                    dataMap4.put("QtyInOut_Date", currentDateandTime);
+                                    dataMap4.put("QtyInOut_Date2", currentDateandTime3);
+                                    //QUANTITY BEFORE STOCK OUT
+                                    dataMap4.put("Qty", qty1);
+                                    //QUANTITY AFTER STOCK OUT
+                                    dataMap4.put("TotalQty", Quantity);
+                                    dataMap4.put("HouseName", name);
+                                    stockInOutRef.child(name).child(parentname).updateChildren(dataMap4);
+
+                                    stockInOutRef.child(name).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if (!snapshot.child("housename").exists()) {
+                                                Map map = new HashMap();
+                                                map.put("housename", name);
+                                                stockInOutRef.child(name).updateChildren(map);
                                             }
+                                        }
 
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                            }
-                                        });
+                                        }
+                                    });
 
 
-                                    }
+                                }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                    }
-                                });
-                                Toast.makeText(StockOut_step3.this, "Add Successfully !!!", Toast.LENGTH_SHORT).show();
-                                b1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
-                            }
-                            else if((total1<=qty11) && (total1 > Integer.parseInt(txt_batchQty.getText().toString()))){
-                                Intent intent = new Intent(StockOut_step3.this, StockOut_Checkout.class);
-                                intent.putExtra("Users", users);
-                                intent.putExtra("Key", key);
-                                intent.putExtra("Key2", key2);
-                                intent.putExtra("Barcode", barcode);
-                                intent.putExtra("Batch", batchNum);
-                                intent.putExtra("Qty", batchQty);
-                                intent.putExtra("StockoutQty", qty);
-                                startActivity(intent);
+                                }
+                            });
+                            Toast.makeText(StockOut_step3.this, "Add Successfully !!!", Toast.LENGTH_SHORT).show();
+                            b1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
+                        }
+                        else if((total1 <= qty11) && (total1 > Integer.parseInt(txt_batchQty.getText().toString()))){
+                            Intent intent = new Intent(StockOut_step3.this, StockOut_Checkout.class);
+                            intent.putExtra("Users", users);
+                            intent.putExtra("Key", key);
+                            intent.putExtra("Key2", key2);
+                            intent.putExtra("Barcode", barcode);
+                            intent.putExtra("Batch", batchNum);
+                            intent.putExtra("Qty", batchQty);
+                            intent.putExtra("StockoutQty", qty);
+                            startActivity(intent);
 
-                            }
-
-                            else{
-                                Toast.makeText(StockOut_step3.this, "Execute actual Quantity \n"+ total1 + " < " + qty11, Toast.LENGTH_SHORT).show();
-                            }
-
+                        }
+                        else{
+                            Toast.makeText(StockOut_step3.this, "Execute actual Quantity \n"+ total1 + " < " + qty11, Toast.LENGTH_SHORT).show();
                         }
                     }
 

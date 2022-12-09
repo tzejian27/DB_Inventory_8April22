@@ -36,6 +36,7 @@ public class StockIn_step3 extends AppCompatActivity {
     Button btn_esc, btn_enter, btn_back;
     ImageView btn_reset;
     String key,key2,barcode,itemcode,TotalQty,name,Quantity,totalQty,currentDateandTime, currentDateandTime2;
+    boolean isItemBatchEnabled;
     private String batchNumberPreset;
     ArrayList <String> batchNoList = new ArrayList<>();
 
@@ -77,38 +78,58 @@ public class StockIn_step3 extends AppCompatActivity {
         e1.setText(barcode);
         e1.setEnabled(false);
 
-        getBatchNo();
-        batchNoField.addTextChangedListener(new TextWatcher() {
+        // Check whether the item enable for batch
+        DatabaseReference newGoodsRef = FirebaseDatabase.getInstance().getReference("New_Goods");
+        newGoodsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean isBatchEnabled = (boolean)(snapshot.child(barcode).child("isBatchEnabled").getValue());
+                isItemBatchEnabled = isBatchEnabled;
+                if(isBatchEnabled){
+                    getBatchNo();
+                    batchNoField.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
+                        }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String inputText = charSequence.toString();
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                            String inputText = charSequence.toString();
 
-                for(String text : batchNoList){
-                    if(inputText.matches(text)){
-                        batchNoField.setBackgroundResource(R.drawable.red_border);
-                        err_BatchNo.setVisibility(View.VISIBLE);
-                        btn_enter.setEnabled(false);
-                        btn_enter.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#bbbbbb")));
-                    }
-                    else{
-                        batchNoField.setBackgroundResource(R.drawable.blue_border);
-                        err_BatchNo.setVisibility(View.INVISIBLE);
-                        btn_enter.setEnabled(true);
-                        btn_enter.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
-                    }
+                            for(String text : batchNoList){
+                                if(inputText.matches(text)){
+                                    batchNoField.setBackgroundResource(R.drawable.red_border);
+                                    err_BatchNo.setVisibility(View.VISIBLE);
+                                    btn_enter.setEnabled(false);
+                                    btn_enter.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#bbbbbb")));
+                                }
+                                else{
+                                    batchNoField.setBackgroundResource(R.drawable.blue_border);
+                                    err_BatchNo.setVisibility(View.INVISIBLE);
+                                    btn_enter.setEnabled(true);
+                                    btn_enter.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable editable) {
+
+                        }
+                    });
+                }else{
+                    batchNoField.setEnabled(false);
+                    btn_reset.setEnabled(false);
                 }
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
 
         databaseReference2 = FirebaseDatabase.getInstance().getReference("House").child(key).child(key2);
 
@@ -304,23 +325,10 @@ public class StockIn_step3 extends AppCompatActivity {
                                 }
                             });
 
-                            DatabaseReference batchNoRef = FirebaseDatabase.getInstance().getReference("Batch");
-                            Map batchData = new HashMap();
-                            batchData.put("Barcode", barcode);
-                            batchData.put("ItemCode", itemcode);
-                            batchData.put("Qty In", qty);
-                            batchData.put("Quantity",qty);
-                            Map batchKey = new HashMap();
-                            batchKey.put(key+"/"+batchNoField.getText().toString() + "/" , batchData);
-                            batchNoRef.updateChildren(batchKey);
-
-                            if(batchNoField.getText().toString().equals(batchNumberPreset)){
-                                batchNoRef.child("Latest Batch").setValue(batchNumberPreset);
+                            if(isItemBatchEnabled){
+                                UpdateBatchFirebase(qty);
                             }
 
-                            Map usedValue = new HashMap();
-                            usedValue.put(batchNumberPreset, batchNumberPreset);
-                            batchNoRef.child("Used Value").updateChildren(usedValue);
 
                         }
 
@@ -337,6 +345,26 @@ public class StockIn_step3 extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void UpdateBatchFirebase(String qty) {
+        DatabaseReference batchNoRef = FirebaseDatabase.getInstance().getReference("Batch");
+        Map batchData = new HashMap();
+        batchData.put("Barcode", barcode);
+        batchData.put("ItemCode", itemcode);
+        batchData.put("Qty In", qty);
+        batchData.put("Quantity", qty);
+        Map batchKey = new HashMap();
+        batchKey.put(key+"/"+batchNoField.getText().toString() + "/" , batchData);
+        batchNoRef.updateChildren(batchKey);
+
+        if(batchNoField.getText().toString().equals(batchNumberPreset)){
+            batchNoRef.child("Latest Batch").setValue(batchNumberPreset);
+        }
+
+        Map usedValue = new HashMap();
+        usedValue.put(batchNumberPreset, batchNumberPreset);
+        batchNoRef.child("Used Value").updateChildren(usedValue);
     }
 
     private void getBatchNo() {

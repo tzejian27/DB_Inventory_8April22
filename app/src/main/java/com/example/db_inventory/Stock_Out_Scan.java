@@ -50,6 +50,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
     EditText edt_barcode;
     TextView txt_batchNumField, txt_QtyField;
     Button btn_back, btn_next;
+    boolean isItemBatchEnabled;
     DatabaseReference databaseReference, databaseReference2;
     Dialog dialog;
     long maxid = 0;
@@ -105,8 +106,6 @@ public class Stock_Out_Scan extends AppCompatActivity {
         scanReader = new ScanReader(this);
         scanReader.init();
 
-        getBatchNumberList();// Get the list of the batch number
-
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -158,77 +157,102 @@ public class Stock_Out_Scan extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                getBatchNumberList();
-                txt_batchNumField.setText("");
-                txt_QtyField.setText("");
+
+                barcode = charSequence.toString();
+
+                // Check whether the item enable for batch
+                DatabaseReference newGoodsRef = FirebaseDatabase.getInstance().getReference("New_Goods");
+                newGoodsRef.orderByChild("Barcode").equalTo(barcode).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            boolean isBatchEnabled = (boolean)(snapshot.child(barcode).child("isBatchEnabled").getValue());
+                            isItemBatchEnabled = isBatchEnabled;
+                            txt_batchNumField.setEnabled(true);
+                            txt_batchNumField.setBackgroundResource(R.drawable.blue_border);
+                            if(isBatchEnabled){
+                                getBatchNumberList();
+                                txt_batchNumField.setText("");
+                                txt_QtyField.setText("");
+                                txt_batchNumField.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        dialog = new Dialog(Stock_Out_Scan.this);
+                                        dialog.setContentView(R.layout.dialog_batch_spinner);
+                                        dialog.getWindow().setLayout(650, 800);
+                                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                        dialog.show();
+
+                                        // Initialize the item to the list
+                                        EditText editText = dialog.findViewById(R.id.edit_text);
+                                        ListView listView = dialog.findViewById(R.id.list_view);
+
+                                        // Set adapter
+                                        List<HashMap<String, String>> listItem = new ArrayList<>();
+                                        SimpleAdapter simpleAdapter = new SimpleAdapter(Stock_Out_Scan.this, listItem, R.layout.list_batchno,
+                                                new String[]{"First Line", "Second Line"},
+                                                new int[]{R.id.text1, R.id.text2});
+
+
+                                        Iterator it = BatchQty.entrySet().iterator();
+                                        while (it.hasNext()) {
+                                            HashMap<String, String> resultMap = new HashMap<>();
+                                            Map.Entry pair = (Map.Entry) it.next();
+                                            resultMap.put("First Line", pair.getKey().toString());
+                                            resultMap.put("Second Line", pair.getValue().toString());
+                                            listItem.add(resultMap);
+                                        }
+                                        Stock_Out_Scan.this.simpleAdapter = simpleAdapter;
+                                        listView.setAdapter(simpleAdapter);
+
+                                        editText.addTextChangedListener(new TextWatcher() {
+                                            @Override
+                                            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                                            }
+
+                                            @Override
+                                            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                                                simpleAdapter.getFilter().filter(charSequence);
+                                            }
+
+                                            @Override
+                                            public void afterTextChanged(Editable editable) {
+
+                                            }
+                                        });
+
+                                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                                HashMap<String, String> result = (HashMap<String, String>) simpleAdapter.getItem(i);
+                                                txt_batchNumField.setText(result.get("First Line").toString());
+                                                txt_QtyField.setText(result.get("Second Line").toString().split(": ")[1]);
+                                                dialog.dismiss();
+                                            }
+                                        });
+
+                                    }
+
+                                });
+                            }else{
+                                txt_batchNumField.setEnabled(false);
+                                txt_batchNumField.setBackgroundResource(R.drawable.corners_background);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
 
             }
-        });
-
-        txt_batchNumField.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog = new Dialog(Stock_Out_Scan.this);
-                dialog.setContentView(R.layout.dialog_batch_spinner);
-                dialog.getWindow().setLayout(650, 800);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-
-                // Initialize the item to the list
-                EditText editText = dialog.findViewById(R.id.edit_text);
-                ListView listView = dialog.findViewById(R.id.list_view);
-
-                // Set adapter
-                List<HashMap<String, String>> listItem = new ArrayList<>();
-                SimpleAdapter simpleAdapter = new SimpleAdapter(Stock_Out_Scan.this, listItem, R.layout.list_batchno,
-                        new String[]{"First Line", "Second Line"},
-                        new int[]{R.id.text1, R.id.text2});
-
-
-                Iterator it = BatchQty.entrySet().iterator();
-                while (it.hasNext()) {
-                    HashMap<String, String> resultMap = new HashMap<>();
-                    Map.Entry pair = (Map.Entry) it.next();
-                    resultMap.put("First Line", pair.getKey().toString());
-                    resultMap.put("Second Line", pair.getValue().toString());
-                    listItem.add(resultMap);
-                }
-                Stock_Out_Scan.this.simpleAdapter = simpleAdapter;
-                listView.setAdapter(simpleAdapter);
-
-                editText.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        simpleAdapter.getFilter().filter(charSequence);
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-
-                    }
-                });
-
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        HashMap<String, String> result = (HashMap<String, String>) simpleAdapter.getItem(i);
-                        txt_batchNumField.setText(result.get("First Line").toString());
-                        txt_QtyField.setText(result.get("Second Line").toString().split(": ")[1]);
-                        dialog.dismiss();
-                    }
-                });
-
-            }
-
         });
 
         //SET SELECTED ITEM IN LISTENER TO EDIT TEXT BOXES
@@ -244,7 +268,6 @@ public class Stock_Out_Scan extends AppCompatActivity {
 
             }
         });
-
 
         String users = getIntent().getStringExtra("Users");
 
@@ -268,12 +291,19 @@ public class Stock_Out_Scan extends AppCompatActivity {
                 String barcode = edt_barcode.getText().toString().trim().replace("/", "|");
                 if (barcode.isEmpty()) {
                     Toast.makeText(Stock_Out_Scan.this, "Please enter/scan barcode  ", Toast.LENGTH_SHORT).show();
-                } else {
+                } else if(isItemBatchEnabled){
+                    if(txt_batchNumField.getText().toString().isEmpty()){
+                        Toast.makeText(Stock_Out_Scan.this, "Please select batch number  ", Toast.LENGTH_SHORT).show();
+                    }else{
+                        add();
+                    }
+                } else{
                     //Toast.makeText(Stock_Out_Scan.this, "Still under construction  ", Toast.LENGTH_SHORT).show();
                     add();
                 }
             }
         });
+
 
 
     }
