@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +32,7 @@ public class StockIn_step2 extends AppCompatActivity {
 
     Button b1, b2;
     EditText e1, e2, e3, e4;
+    Switch isBatchEnabled;
     DatabaseReference databaseReference, databaseReference2, newGoodRef;
     String Quantity = "0";
     long maxid = 0;
@@ -71,6 +73,7 @@ public class StockIn_step2 extends AppCompatActivity {
         e2 = findViewById(R.id.editText_Inventory_price_SI);
         e3 = findViewById(R.id.editText_Inventory_cost_SI);
         e4 = findViewById(R.id.editText_Inventory_itemcode_SI);
+        isBatchEnabled = findViewById(R.id.isBatchEnabled);
 
         setTitle("eStock_Stock In ");
 
@@ -131,6 +134,7 @@ public class StockIn_step2 extends AppCompatActivity {
                 String cost = e3.getText().toString().trim();
                 String itemcode = e4.getText().toString().trim().replace("/", "|");
                 databaseReference2 = FirebaseDatabase.getInstance().getReference("House").child(key).push();
+                boolean isBatchEnabledValue = isBatchEnabled.isEnabled();
                 databaseReference2.keepSynced(true);
                 key2 = databaseReference2.getKey();
                 k = (maxid - 3);
@@ -184,6 +188,7 @@ public class StockIn_step2 extends AppCompatActivity {
                 newGoodRef.child("Cost").setValue(cost);
                 newGoodRef.child("Barcode").setValue(barcode);
                 newGoodRef.child("ItemCode").setValue(itemcode);
+                newGoodRef.child("isBatchEnabled").setValue(isBatchEnabledValue);
 
 
                 databaseReference2.updateChildren(dataMap);

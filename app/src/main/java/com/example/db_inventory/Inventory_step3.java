@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,7 @@ public class Inventory_step3 extends AppCompatActivity {
 
     Button b1, b2;
     EditText e1, e2;
+    Switch isBatchEnabled;
     DatabaseReference databaseReference, databaseReference2, newGoodRef;
     String Quantity = "0";
     long maxid = 0;
@@ -44,6 +46,7 @@ public class Inventory_step3 extends AppCompatActivity {
         b2 = findViewById(R.id.btn_next3);
         e1 = findViewById(R.id.editText_Inventory_price);
         e2 = findViewById(R.id.editText_Inventory_cost);
+        isBatchEnabled = findViewById(R.id.isBatchEnabled1);
 
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss");
@@ -147,6 +150,7 @@ public class Inventory_step3 extends AppCompatActivity {
                             newGoodRef.child("Cost").setValue(cost);
                             newGoodRef.child("Barcode").setValue(barcode);
                             newGoodRef.child("ItemCode").setValue(itemCode);
+                            newGoodRef.child("isBatchEnabled").setValue(isBatchEnabled.isEnabled());
                         }
                     }
 
