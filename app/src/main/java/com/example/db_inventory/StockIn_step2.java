@@ -134,7 +134,7 @@ public class StockIn_step2 extends AppCompatActivity {
                 String cost = e3.getText().toString().trim();
                 String itemcode = e4.getText().toString().trim().replace("/", "|");
                 databaseReference2 = FirebaseDatabase.getInstance().getReference("House").child(key).push();
-                boolean isBatchEnabledValue = isBatchEnabled.isEnabled();
+                boolean isBatchEnabledValue = isBatchEnabled.isChecked();
                 databaseReference2.keepSynced(true);
                 key2 = databaseReference2.getKey();
                 k = (maxid - 3);

@@ -150,7 +150,7 @@ public class Inventory_step3 extends AppCompatActivity {
                             newGoodRef.child("Cost").setValue(cost);
                             newGoodRef.child("Barcode").setValue(barcode);
                             newGoodRef.child("ItemCode").setValue(itemCode);
-                            newGoodRef.child("isBatchEnabled").setValue(isBatchEnabled.isEnabled());
+                            newGoodRef.child("isBatchEnabled").setValue(isBatchEnabled.isChecked());
                         }
                     }
 
