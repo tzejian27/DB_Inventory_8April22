@@ -61,10 +61,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginBottom="2dp"
                 android:orientation="vertical">
 
                 <Button
@@ -98,10 +98,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginBottom="2dp"
                 android:orientation="vertical">
 
                 <Button
@@ -135,11 +135,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginBottom="2dp"
                 android:orientation="vertical">
+
 
                 <Button
                     android:id="@+id/btn_export_inventory_HM"
@@ -150,8 +151,6 @@
                     android:text="@string/export_inventory"
                     android:textSize="13dp"
                     android:textStyle="bold" />
-
-
             </LinearLayout>
 
 
@@ -172,10 +171,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginBottom="2dp"
                 android:orientation="vertical">
 
                 <Button
@@ -209,23 +208,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginBottom="2dp"
                 android:orientation="vertical">
 
+
                 <Button
-                    android:id="@+id/btn_House_Menu_Back"
+                    android:id="@+id/btn_export_Inventory"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:backgroundTint="@color/orange"
-                    android:text="@string/back"
+                    android:text="Export Inventory By Batch"
                     android:textSize="13dp"
                     android:textStyle="bold" />
-
-
             </LinearLayout>
 
 
@@ -239,7 +237,6 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
-            android:visibility="invisible"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
@@ -247,23 +244,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginBottom="2dp"
                 android:orientation="vertical">
 
+
                 <Button
-                    android:id="@+id/btn_export_Inventory"
+                    android:id="@+id/btn_House_Menu_Back"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:background="@color/blue"
-                    android:text="@string/generate_excel"
-                    android:textStyle="bold"
-                    android:visibility="invisible" />
-
-
+                    android:backgroundTint="@color/orange"
+                    android:text="@string/back"
+                    android:textSize="13dp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
 

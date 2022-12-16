@@ -237,6 +237,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
                                 });
                             }else{
                                 txt_batchNumField.setEnabled(false);
+                                txt_batchNumField.setHint("N/A");
                                 txt_batchNumField.setBackgroundResource(R.drawable.corners_background);
                             }
                         }

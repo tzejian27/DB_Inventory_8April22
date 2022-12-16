@@ -45,7 +45,6 @@ public class House_Menu extends AppCompatActivity {
         b4.setText("Delete House");
         b5 = findViewById(R.id.btn_House_Menu_Back);
         b6 = findViewById(R.id.btn_export_Inventory);
-        b6.setVisibility(View.INVISIBLE);
 
         String users = getIntent().getStringExtra("Users");
         arightRef = FirebaseDatabase.getInstance().getReference("Access_Right");
@@ -127,11 +126,11 @@ public class House_Menu extends AppCompatActivity {
             }
         });
 
-        //NO BEEN USED
+        //Export the inventory that with batch number
         b6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(House_Menu.this, "View At Inventory List!!!", Toast.LENGTH_SHORT).show();
+                new exportInventoryByBatch(House_Menu.this, name);
             }
         });
     }

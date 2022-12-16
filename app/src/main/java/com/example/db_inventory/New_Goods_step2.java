@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,7 +60,7 @@ public class New_Goods_step2 extends AppCompatActivity {
                 String itemcode = intent.getStringExtra("ItemCode");
                 String price = e1.getText().toString().trim();
                 String cost = e2.getText().toString().trim();
-
+                boolean isBatchEnabled = ((Switch)findViewById(R.id.isBatchEnabled2)).isChecked();
                 String barcode_ref = barcode + "/";
 
                 if (TextUtils.isEmpty(price)) {
@@ -81,6 +82,7 @@ public class New_Goods_step2 extends AppCompatActivity {
                 dataMap.put("ItemCode", itemcode);
                 dataMap.put("Price", price);
                 dataMap.put("Cost", cost);
+                dataMap.put("isBatchEnabled", isBatchEnabled);
 
                 Map dataMap2 = new HashMap();
                 dataMap2.put(barcode_ref + "/", dataMap);

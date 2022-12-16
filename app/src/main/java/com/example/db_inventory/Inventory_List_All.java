@@ -84,7 +84,7 @@ public class Inventory_List_All extends AppCompatActivity {
         export.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new exportInventory(list,houselist,users);
+                new exportInventory(Inventory_List_All.this, list,houselist,users);
             }
         });
 
@@ -266,9 +266,7 @@ public class Inventory_List_All extends AppCompatActivity {
         final String key = intent.getStringExtra("Key");
 
         super.onBackPressed();
-        Intent page = new Intent(Inventory_List_All.this, House_Menu.class);
-        page.putExtra("name", name);
-        page.putExtra("Key", key);
+        Intent page = new Intent(Inventory_List_All.this, Home_Page.class);
         page.putExtra("Users", users);
         startActivity(page);
         finish();

@@ -199,7 +199,7 @@ public class Inventory_List extends AppCompatActivity {
                                             if (position == 2) {
 
                                                 //MODIFY INVENTORY
-                                                Intent intent = new Intent(Inventory_List.this, Inventory_step5.class);
+                                                Intent intent = new Intent(Inventory_List.this, Inventory_step4.class);
                                                 intent.putExtra("name", name);
                                                 intent.putExtra("barcode", model.getBarcode());
                                                 intent.putExtra("Key", key);

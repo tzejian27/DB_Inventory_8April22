@@ -121,6 +121,8 @@ public class StockIn_step3 extends AppCompatActivity {
                 }else{
                     batchNoField.setEnabled(false);
                     btn_reset.setEnabled(false);
+                    batchNoField.setHint("N/A");
+                    batchNoField.setBackgroundResource(R.drawable.corners_background);
                 }
             }
 
@@ -216,9 +218,16 @@ public class StockIn_step3 extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StockIn_step3.this, Home_Page.class);
+                final String users = getIntent().getStringExtra("Users");
+                Intent intent = new Intent(StockIn_step3.this, Stock_In_Scan.class);
+                intent.putExtra("barcode", barcode);
+                intent.putExtra("Key", key);
+                intent.putExtra("Key2", key2);
+                intent.putExtra("name", name);
                 intent.putExtra("Users", users);
+                intent.putExtra("ItemCode", itemcode);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -326,7 +335,7 @@ public class StockIn_step3 extends AppCompatActivity {
                             });
 
                             if(isItemBatchEnabled){
-                                UpdateBatchFirebase(qty);
+                                UpdateBatchFirebase(qty, currentDateandTime);
                             }
 
 
@@ -347,13 +356,14 @@ public class StockIn_step3 extends AppCompatActivity {
 
     }
 
-    private void UpdateBatchFirebase(String qty) {
+    private void UpdateBatchFirebase(String qty, String DateTime) {
         DatabaseReference batchNoRef = FirebaseDatabase.getInstance().getReference("Batch");
         Map batchData = new HashMap();
         batchData.put("Barcode", barcode);
         batchData.put("ItemCode", itemcode);
         batchData.put("Qty In", qty);
         batchData.put("Quantity", qty);
+        batchData.put("DateTime", DateTime);
         Map batchKey = new HashMap();
         batchKey.put(key+"/"+batchNoField.getText().toString() + "/" , batchData);
         batchNoRef.updateChildren(batchKey);
@@ -363,7 +373,8 @@ public class StockIn_step3 extends AppCompatActivity {
         }
 
         Map usedValue = new HashMap();
-        usedValue.put(batchNumberPreset, batchNumberPreset);
+
+        usedValue.put(batchNoField.getText().toString(),batchNoField.getText().toString() );
         batchNoRef.child("Used Value").updateChildren(usedValue);
     }
 
@@ -407,10 +418,15 @@ public class StockIn_step3 extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        String users = getIntent().getStringExtra("Users");
-        super.onBackPressed();
-        Intent intent = new Intent(StockIn_step3.this, Home_Page.class);
+        final String users = getIntent().getStringExtra("Users");
+        Intent intent = new Intent(StockIn_step3.this, Stock_In_Scan.class);
+        intent.putExtra("barcode", barcode);
+        intent.putExtra("Key", key);
+        intent.putExtra("Key2", key2);
+        intent.putExtra("name", name);
         intent.putExtra("Users", users);
+        intent.putExtra("ItemCode", itemcode);
         startActivity(intent);
+        finish();
     }
 }

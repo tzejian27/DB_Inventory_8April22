@@ -42,6 +42,8 @@ dependencies {
     implementation 'com.firebase:firebase-client-android:2.5.2'
 
     implementation 'org.apache.poi:poi:5.2.3'
+    implementation 'org.apache.poi:poi-ooxml:5.2.3'
+
     //implementation files('libs\\scanSDK.jar')
     //BARCODE SDK
     implementation files('libs/SDK_release_v2.1.1.jar')

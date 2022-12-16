@@ -130,6 +130,7 @@ public class Inventory_step5_bo extends AppCompatActivity {
                     //Update batch
                     DatabaseReference batchRef = FirebaseDatabase.getInstance().getReference("Batch");
                     batchRef.child(key).child(batchNum).child("Quantity").setValue(userInput);
+                    batchRef.child(key).child(batchNum).child("User").setValue(username1);
 
                     //SAVE STOCK ADJUSTMENT TO STOCK IN AND OUT
                     //DATE FOR DATA STORE
@@ -194,41 +195,28 @@ public class Inventory_step5_bo extends AppCompatActivity {
                                 sum = totalQty1 - (oldOverallQty - newOverallQty);
                                 String sum2 = Long.toString(sum);
                                 databaseReference.child("TotalQty").setValue(sum2).toString().trim();
-                                Intent intent = new Intent(Inventory_step5_bo.this, Inventory_step4.class);
-                                intent.putExtra("Key", key);
-                                intent.putExtra("Key2", key2);
-                                intent.putExtra("barcode", barcode);
-                                intent.putExtra("name", name);
-                                intent.putExtra("Users", users);
-                                startActivity(intent);
-                                finish();
+
 
                             } else if (newOverallQty == oldOverallQty) {
                                 sum = totalQty1;
                                 String sum2 = Long.toString(sum);
                                 databaseReference.child("TotalQty").setValue(sum2).toString().trim();
-                                Intent intent = new Intent(Inventory_step5_bo.this, Inventory_step4.class);
-                                intent.putExtra("Key", key);
-                                intent.putExtra("Key2", key2);
-                                intent.putExtra("barcode", barcode);
-                                intent.putExtra("name", name);
-                                intent.putExtra("Users", users);
-                                startActivity(intent);
-                                finish();
+
 
                             } else if (newOverallQty > oldOverallQty) {
                                 sum = totalQty1 + (newOverallQty - oldOverallQty);
                                 String sum2 = Long.toString(sum);
                                 databaseReference.child("TotalQty").setValue(sum2).toString().trim();
-                                Intent intent = new Intent(Inventory_step5_bo.this, Inventory_step4.class);
-                                intent.putExtra("Key", key);
-                                intent.putExtra("Key2", key2);
-                                intent.putExtra("barcode", barcode);
-                                intent.putExtra("name", name);
-                                intent.putExtra("Users", users);
-                                startActivity(intent);
-                                finish();
+
                             }
+                            Intent intent = new Intent(Inventory_step5_bo.this, Inventory_step4.class);
+                            intent.putExtra("Key", key);
+                            intent.putExtra("Key2", key2);
+                            intent.putExtra("barcode", barcode);
+                            intent.putExtra("name", name);
+                            intent.putExtra("Users", users);
+                            startActivity(intent);
+                            finish();
 
                         }
 

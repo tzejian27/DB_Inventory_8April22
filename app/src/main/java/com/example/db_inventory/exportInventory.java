@@ -1,6 +1,8 @@
 package com.example.db_inventory;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -27,11 +29,12 @@ public class exportInventory {
     private HSSFRow hssfRow;
     private HSSFCell hssfCell;
     private int houseFieldStart, houseFieldEnd;
-
-    public exportInventory(ArrayList<Inventory_class> listOfItem, ArrayList<Inventory_List_All.houseArrayList> houseList, String username) {
+    private Context context;
+    public exportInventory(Context context, ArrayList<Inventory_class> listOfItem, ArrayList<Inventory_List_All.houseArrayList> houseList, String username) {
         this.listOfItem = listOfItem;
         this.houseList = houseList;
         this.username = username;
+        this.context = context;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         currentDateandTime2 = sdf.format(new Date());
         housefile = new File("/storage/emulated/0/Report/" + "eStock" + currentDateandTime2);
@@ -79,13 +82,6 @@ public class exportInventory {
         hssfCell.setCellValue("House");
 
 
-//        HSSFCellStyle style1 = hssfWorkbook.createCellStyle();
-//        style1.cloneStyleFrom(hssfCell.getCellStyle());
-//        HSSFCellStyle styleOri = hssfWorkbook.createCellStyle();
-//        styleOri.cloneStyleFrom(style1);
-//        style1.setAlignment(HorizontalAlignment.CENTER);
-//        style1.getFont(hssfWorkbook).setBold(true);
-//        hssfCell.setCellStyle(style1);
         houseFieldStart = columnIndex;
 
         HSSFRow houseRow = hssfSheet.createRow(1);
@@ -97,7 +93,10 @@ public class exportInventory {
         }
 //        hssfCell.setCellStyle(styleOri);
         houseFieldEnd=columnIndex-1;
-        hssfSheet.addMergedRegion(new CellRangeAddress(0,0,houseFieldStart,houseFieldEnd));
+        if(houseFieldStart!=houseFieldEnd){
+            hssfSheet.addMergedRegion(new CellRangeAddress(0,0,houseFieldStart,houseFieldEnd));
+        }
+
 
         hssfSheet.setColumnWidth(columnIndex, (15 * 200));
         hssfCell = hssfRow.createCell(columnIndex);
@@ -193,6 +192,7 @@ public class exportInventory {
             try {
                 if (null != fileOutputStream) {
                     fileOutputStream.close();
+                    Toast.makeText(context, "Exported successfully !", Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();

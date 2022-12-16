@@ -47,6 +47,15 @@
         android:inputType="numberDecimal"
         android:paddingLeft="20dp" />
 
+    <Switch
+        android:id="@+id/isBatchEnabled2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10sp"
+        android:text="Allow Batch"
+        android:textColor="#03A9F4"
+        android:textSize="20sp" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="60dp"
