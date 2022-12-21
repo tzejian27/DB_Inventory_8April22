@@ -281,8 +281,8 @@ public class StockOut_step3 extends AppCompatActivity {
 
                             }else if(!txt_batchQty.getText().toString().equals("")){
                                 updateFirebaseWithBNum(total1, qty11);
-                                b1.setEnabled(true);
-                                b1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
+//                                b1.setEnabled(true);
+//                                b1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
                             }else if(txt_batchQty.getText().toString().equals("")){
                                 updateFirebaseWOBNum(total1, qty11);
                                 b1.setEnabled(true);

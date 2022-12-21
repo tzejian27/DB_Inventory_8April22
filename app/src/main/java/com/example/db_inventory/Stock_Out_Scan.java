@@ -171,6 +171,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
                             txt_batchNumField.setEnabled(true);
                             txt_batchNumField.setBackgroundResource(R.drawable.blue_border);
                             if(isBatchEnabled){
+                                txt_batchNumField.setHint("Select Batch Number");
                                 getBatchNumberList();
                                 txt_batchNumField.setText("");
                                 txt_QtyField.setText("");
@@ -236,6 +237,8 @@ public class Stock_Out_Scan extends AppCompatActivity {
 
                                 });
                             }else{
+                                txt_QtyField.setText("");
+                                txt_batchNumField.setText("");
                                 txt_batchNumField.setEnabled(false);
                                 txt_batchNumField.setHint("N/A");
                                 txt_batchNumField.setBackgroundResource(R.drawable.corners_background);

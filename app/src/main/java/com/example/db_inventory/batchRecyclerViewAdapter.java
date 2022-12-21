@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,7 +46,7 @@ public class batchRecyclerViewAdapter extends RecyclerView.Adapter<batchRecycler
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View row = LayoutInflater.from(mContext).inflate(R.layout.checkout_item, parent, false);
+        View row = LayoutInflater.from(mContext).inflate(R.layout.checkout_itemwith_plusminus, parent, false);
         return new MyViewHolder(row).linkAdapter(this);
     }
 
@@ -83,6 +84,24 @@ public class batchRecyclerViewAdapter extends RecyclerView.Adapter<batchRecycler
         holder.batchNum.setText(mData.get(position).getBatchNum());
         holder.batchQuantity.setText(mData.get(position).getStringQuantity());
         holder.batchQtyIpt.setText(mData.get(position).getPreset_ipt_qty()+"");
+
+        holder.plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int qty = Integer.parseInt(holder.batchQtyIpt.getText().toString())+1;
+                holder.batchQtyIpt.setText(qty+"");
+            }
+        });
+
+        holder.minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int qty = Integer.parseInt(holder.batchQtyIpt.getText().toString());
+                if(qty>0){
+                    holder.batchQtyIpt.setText((qty-1)+"");
+                }
+            }
+        });
 
         holder.buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,7 +231,7 @@ public class batchRecyclerViewAdapter extends RecyclerView.Adapter<batchRecycler
         EditText batchQtyIpt;
         ImageButton buttonDelete;
         batchRecyclerViewAdapter adapter;
-
+        ImageView plus, minus;
         public MyViewHolder(View itemView) {
             super(itemView);
 
@@ -221,6 +240,8 @@ public class batchRecyclerViewAdapter extends RecyclerView.Adapter<batchRecycler
             batchQuantity = itemView.findViewById(R.id.txt_quantityValue);
             batchQtyIpt = itemView.findViewById(R.id.editText_quantity);
             buttonDelete = itemView.findViewById(R.id.deleteButton);
+            plus = itemView.findViewById(R.id.imageView_plus);
+            minus = itemView.findViewById(R.id.imageView_minus);
 
         }
 

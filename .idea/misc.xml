@@ -249,6 +249,10 @@
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/sales_order.xml" value="0.32608695652173914" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/eStokc_17May2022/app/src/main/res/layout/user_recycle_list.xml" value="0.30480072463768115" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/drawable-hdpi/corners_background.xml" value="0.141" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/drawable-mdpi/grey_border.xml" value="0.149" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/drawable/ic_icon_barcode.xml" value="0.149" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/drawable/ic_plus_svgrepo_com.xml" value="0.149" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/drawable/plus_icon.xml" value="0.148" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/drawable/red_border.xml" value="0.168" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout-land/activity_stock_in_step3.xml" value="0.2310405643738977" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_access_right.xml" value="0.22" />
@@ -280,6 +284,8 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_stock_out_step3.xml" value="0.16" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_wireless_export.xml" value="0.17119565217391305" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/checkout_item.xml" value="0.25" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/checkout_itemWithPlusMinus.xml" value="0.25" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/checkout_itemwith_plusminus.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/dialog_batch_spinner.xml" value="0.182518115942029" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/goodretuns_list_item.xml" value="0.182518115942029" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/house_list_item.xml" value="0.1621376811594203" />

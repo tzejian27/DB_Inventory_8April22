@@ -178,17 +178,18 @@ public class StockOut_Checkout extends AppCompatActivity {
                             });
 
                             Toast.makeText(StockOut_Checkout.this, "Item stocked out successfully", Toast.LENGTH_LONG).show();
-                    }
+                    // Back to Stock out scan page
+                    Intent intent = new Intent(StockOut_Checkout.this, Stock_Out_Scan.class);
+                    intent.putExtra("barcode", barcode);
+                    intent.putExtra("Key", house);
+                    intent.putExtra("Key2", txt_key2);
+                    intent.putExtra("name", house);
+                    intent.putExtra("Users", user);
+                    startActivity(intent);
+                    finish();
+                }
 
-                // Back to Stock out scan page
-                Intent intent = new Intent(StockOut_Checkout.this, Stock_Out_Scan.class);
-                intent.putExtra("barcode", barcode);
-                intent.putExtra("Key", house);
-                intent.putExtra("Key2", txt_key2);
-                intent.putExtra("name", house);
-                intent.putExtra("Users", user);
-                startActivity(intent);
-                finish();
+
 
             }
 
@@ -333,10 +334,17 @@ public class StockOut_Checkout extends AppCompatActivity {
             public void onClick(View view) {
                 String tempBatchNum = txt_batchSelector.getText().toString();
                 List <batchRecyclerViewAdapter.batchItem> templist = batchRecyclerViewAdapter.mData;
-                if(templist.stream().anyMatch(b -> !b.getBatchNum().equals(tempBatchNum))){
+
+                if(tempBatchNum.isEmpty()){
+                    Toast.makeText(StockOut_Checkout.this,"Please select batch first!", Toast.LENGTH_LONG).show();
+                }
+                else if(!(templist.stream().anyMatch(b -> (b.getBatchNum()).equals(tempBatchNum)))){
                     templist.add(new batchRecyclerViewAdapter.batchItem(tempBatchNum, selectedBatchQtyfromDialog, 0));
                     Toast.makeText(StockOut_Checkout.this,"Successfully added!", Toast.LENGTH_LONG).show();
                     adapter.notifyItemInserted(templist.size()-1);
+                }else{
+                    Toast.makeText(StockOut_Checkout.this,"This batch has been added!", Toast.LENGTH_LONG).show();
+
                 }
             }
         });
