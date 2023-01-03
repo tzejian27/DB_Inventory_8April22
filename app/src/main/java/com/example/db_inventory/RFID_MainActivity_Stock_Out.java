@@ -28,20 +28,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.magicrf.uhfreaderlib.reader.Tools;
 import com.magicrf.uhfreaderlib.reader.UhfReader;
 import com.znht.iodev2.PowerCtl;
-
-import org.apache.poi.ss.formula.functions.T;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -226,7 +221,9 @@ public class RFID_MainActivity_Stock_Out extends Activity implements OnClickList
                                 epcTag.setStatus(status);
                                 list.add(epcTag);
                             } else {
+                                long start = System.nanoTime();
                                 for (int i = 0; i < list.size(); i++) {
+
                                     EPC mEPC = list.get(i);
                                     //list中有此EPC
                                     if (epc.equals(mEPC.getEpc())) {
@@ -243,6 +240,7 @@ public class RFID_MainActivity_Stock_Out extends Activity implements OnClickList
                                         list.add(newEPC);
                                     }
                                 }
+                                System.out.println(System.nanoTime()-start);
                             }
                             //将数据添加到ListView
                             listMap = new ArrayList<Map<String, Object>>();

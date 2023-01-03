@@ -102,17 +102,6 @@ public class Inventory_List_All extends AppCompatActivity {
             }
         });
 
-        //INTENT TO SEARCH
-//        iv_search.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(Inventory_List_All.this, SearchAll.class);
-//                intent.putExtra("Users", users);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-
         //LINK TO ITEM LIST OF CURRENT HOUSE BY USING HOUSE KEY
         databaseReference = FirebaseDatabase.getInstance().getReference("House");
         databaseReference.keepSynced(true);

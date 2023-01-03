@@ -267,7 +267,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_list2.xml" value="0.1621376811594203" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_list_all.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_step2.xml" value="0.1621376811594203" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_step3.xml" value="0.13072916666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_step3.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_step4.xml" value="0.1621376811594203" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_step5.xml" value="0.1621376811594203" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/activity_inventory_step5_withbo.xml" value="0.33" />
@@ -290,8 +290,13 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/goodretuns_list_item.xml" value="0.182518115942029" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/house_list_item.xml" value="0.1621376811594203" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/list_batchno.xml" value="0.25" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/rfid_listview_item_out.xml" value="0.2" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/rfid_main.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/rfid_main_so.xml" value="0.22" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/layout/rfid_setting_activity.xml" value="0.1621376811594203" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/menu/main.xml" value="0.246875" />
         <entry key="..\:/Users/User/AndroidStudioProjects/DB_Inventory_8April22/app/src/main/res/menu/search_menu.xml" value="0.246875" />
+        <entry key="..\:/Users/User/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.13072916666666667" />
       </map>
     </option>
   </component>

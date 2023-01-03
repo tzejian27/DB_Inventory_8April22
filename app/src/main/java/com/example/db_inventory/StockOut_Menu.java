@@ -1,6 +1,8 @@
 package com.example.db_inventory;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +25,9 @@ public class StockOut_Menu extends AppCompatActivity implements View.OnClickList
 
         btn_scan.setOnClickListener(this);
         btn_rfid.setOnClickListener(this);
+
+        btn_rfid.setEnabled(false);
+        btn_rfid.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#BBBBBB")));
     }
 
     @Override

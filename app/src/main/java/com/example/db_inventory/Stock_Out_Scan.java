@@ -70,7 +70,13 @@ public class Stock_Out_Scan extends AppCompatActivity {
             Log.e("MainActivity", "barcode = " + new String(barcode));
             if (barcode != null) {
                 barcodeStr = new String(barcode);
-                edt_barcode.setText(barcodeStr);
+                if(dialog.isShowing()){
+                    EditText editText = dialog.findViewById(R.id.edit_text);
+                    editText.setText(barcodeStr);
+                }else{
+                    edt_barcode.setText(barcodeStr);
+                }
+
             }
         }
     };
@@ -178,6 +184,7 @@ public class Stock_Out_Scan extends AppCompatActivity {
                                 txt_batchNumField.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
+
                                         dialog = new Dialog(Stock_Out_Scan.this);
                                         dialog.setContentView(R.layout.dialog_batch_spinner);
                                         dialog.getWindow().setLayout(650, 800);

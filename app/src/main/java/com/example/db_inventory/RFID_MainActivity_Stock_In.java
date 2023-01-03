@@ -11,7 +11,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.PowerManager.WakeLock;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -205,7 +204,9 @@ public class RFID_MainActivity_Stock_In extends Activity implements OnClickListe
                             epcTag.setStatus(rfid_status);
                             list.add(epcTag);
                         } else {
+
                             for (int i = 0; i < list.size(); i++) {
+                                long start = System.nanoTime();
                                 EPC mEPC = list.get(i);
                                 //list中有此EPC
                                 if (epc.equals(mEPC.getEpc())) {
@@ -221,7 +222,9 @@ public class RFID_MainActivity_Stock_In extends Activity implements OnClickListe
                                     newEPC.setStatus(rfid_status);
                                     list.add(newEPC);
                                 }
+                                System.out.println(System.nanoTime()-start);
                             }
+
                         }
                         //将数据添加到ListView
                         listMap = new ArrayList<Map<String, Object>>();
@@ -418,12 +421,12 @@ public class RFID_MainActivity_Stock_In extends Activity implements OnClickListe
                                             dataMap4.put("ParentName", parentname);
                                             dataMap4.put("Barcode", barcode);
                                             dataMap4.put("Name", ItemName);
-                                            dataMap4.put("QtyIn", count);
+                                            dataMap4.put("QtyIn", count+"");
                                             dataMap4.put("QtyOut", 0);
                                             dataMap4.put("QtyInOut_Date", currentDateandTime);
                                             dataMap4.put("QtyInOut_Date2", currentDateandTime3);
                                             //QUANTITY BEFORE STOCK IN
-                                            dataMap4.put("Qty", Quantity);
+                                            dataMap4.put("Qty", Quantity+"");
                                             //QUANTITY AFTER STOCK IN
                                             dataMap4.put("TotalQty", qty);
                                             dataMap4.put("HouseName", name);
@@ -436,9 +439,9 @@ public class RFID_MainActivity_Stock_In extends Activity implements OnClickListe
                                             //TODO 3: UPDATE BASED ON TOTAL ENTERED
                                             //UPDATE STOCK DATA IN HOUSE_BARCODE (NEW QTY!!!)
                                             Map dataMapHouse = new HashMap();
-                                            dataMapHouse.put("QtyIn", count);
+                                            dataMapHouse.put("QtyIn", count+"");
                                             dataMapHouse.put("QtyIn_Date", currentDateandTime);
-                                            dataMapHouse.put("Quantity", qty);
+                                            dataMapHouse.put("Quantity", qty+"");
                                             BarcodeRef.updateChildren(dataMapHouse);
 
                                             //GET THE TOTAL QTY OF BARCODE IN THE HOUSE

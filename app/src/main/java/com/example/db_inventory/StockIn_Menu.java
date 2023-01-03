@@ -1,12 +1,12 @@
 package com.example.db_inventory;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class StockIn_Menu extends AppCompatActivity implements View.OnClickListener {
 
@@ -23,6 +23,10 @@ public class StockIn_Menu extends AppCompatActivity implements View.OnClickListe
 
         btn_scan.setOnClickListener(this);
         btn_rfid.setOnClickListener(this);
+        //Disable RFID on 22/12/2022
+//        btn_rfid.setEnabled(false);
+//        btn_rfid.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#BBBBBB")));
+
     }
 
     @Override
