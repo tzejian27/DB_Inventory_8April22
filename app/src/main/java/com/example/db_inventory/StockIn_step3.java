@@ -242,7 +242,10 @@ public class StockIn_step3 extends AppCompatActivity {
 
                 if (qty.isEmpty()) {
                     Toast.makeText(StockIn_step3.this, "Please enter Qty", Toast.LENGTH_SHORT).show();
-                } else {
+                }else if(isItemBatchEnabled && batchNoField.getText().toString().isEmpty()){
+                    Toast.makeText(StockIn_step3.this, "Please enter batch number", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     final int total = Integer.parseInt(qty);
                     final int qty1 = Integer.parseInt(Quantity);
                     int sum = qty1 + total;

@@ -8,57 +8,50 @@
     android:layout_margin="10dp"
     tools:context=".Sales_Order">
 
-    <ScrollView
+    <TextView
+        android:id="@+id/txt_so_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="Sales Order List"
+        android:textSize="50px"
+        android:textColor="@color/black"/>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_SaleOrderList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_alignParentBottom="true">
 
             <TextView
-                android:id="@+id/txt_so_name"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:text="Sales Order List"
-                android:textColor="@color/black"
-                android:textSize="50px" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total record :"/>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView_SaleOrderList"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Total record :" />
-
-                    <TextView
-                        android:id="@+id/record_SO"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="" />
-
-                </LinearLayout>
-
-
-            </RelativeLayout>
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/record_SO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""/>
 
         </LinearLayout>
-    </ScrollView>
+
+
+    </RelativeLayout>
+
 
 
 </LinearLayout>

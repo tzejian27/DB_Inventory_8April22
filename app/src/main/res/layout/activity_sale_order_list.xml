@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_margin="10dp"
+    android:orientation="vertical"
     tools:context=".SaleOrderList">
 
     <ScrollView
@@ -20,32 +20,28 @@
             <TextView
                 android:id="@+id/txt_so_list"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Sales Order List (pending)"
                 android:textColor="@color/black"
                 android:textSize="40px" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/layout2"
                 android:layout_width="match_parent"
-                android:layout_height="280dp"
-                android:layout_below="@+id/layout">
+                android:layout_height="250dp"
+                android:orientation="vertical">
 
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycle_so"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="215dp" />
 
                 <LinearLayout
                     android:id="@+id/recordlayout_so"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true">
+                    android:layout_height="31dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -61,37 +57,33 @@
 
                 </LinearLayout>
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/txt_so_list_complete"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Sales Order List (completed)"
                 android:textColor="@color/black"
                 android:textSize="40px" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/layout3"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/layout">
+                android:layout_height="272dp"
+                android:orientation="vertical">
 
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycle_so_complete"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="225dp" />
 
                 <LinearLayout
                     android:id="@+id/recordlayout_so_complete"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -107,7 +99,7 @@
 
                 </LinearLayout>
 
-            </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

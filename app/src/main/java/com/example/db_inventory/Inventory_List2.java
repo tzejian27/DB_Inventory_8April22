@@ -160,7 +160,7 @@ public class Inventory_List2 extends AppCompatActivity {
                                                 startActivity(intent);
                                             }
                                             if (position == 2) {
-                                                Intent intent = new Intent(Inventory_List2.this, Inventory_step5.class);
+                                                Intent intent = new Intent(Inventory_List2.this, Inventory_step4.class);
                                                 intent.putExtra("name", model.getItemName());
                                                 intent.putExtra("barcode", model.getBarcode());
                                                 intent.putExtra("ItemName", model.getItemName());

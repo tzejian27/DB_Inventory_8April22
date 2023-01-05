@@ -77,9 +77,13 @@ public class Stock_Out_Scan extends AppCompatActivity {
                 if(scanResult.length()>0){
                     barcodeStr = scanResult;
 
-                    if(dialog.isShowing()){
-                        EditText editText = dialog.findViewById(R.id.edit_text);
-                        editText.setText(barcodeStr);
+                    if(dialog!=null){
+                        if(dialog.isShowing()) {
+                            EditText editText = dialog.findViewById(R.id.edit_text);
+                            editText.setText(barcodeStr);
+                        }else{
+                            edt_barcode.setText(barcodeStr);
+                        }
                     }else{
                         edt_barcode.setText(barcodeStr);
                     }
@@ -96,9 +100,13 @@ public class Stock_Out_Scan extends AppCompatActivity {
             if (barcode != null) {
                 barcodeStr = new String(barcode);
                 System.out.println(barcodeStr);
-                if(dialog.isShowing()){
-                    EditText editText = dialog.findViewById(R.id.edit_text);
-                    editText.setText(barcodeStr);
+                if(dialog!=null){
+                    if(dialog.isShowing()) {
+                        EditText editText = dialog.findViewById(R.id.edit_text);
+                        editText.setText(barcodeStr);
+                    }else{
+                        edt_barcode.setText(barcodeStr);
+                    }
                 }else{
                     edt_barcode.setText(barcodeStr);
                 }
