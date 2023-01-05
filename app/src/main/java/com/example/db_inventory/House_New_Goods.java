@@ -24,6 +24,32 @@ public class House_New_Goods extends AppCompatActivity {
     ScanReader scanReader;
     private String barcodeStr;
 
+    private final String RES_ACTION = "android.intent.action.SCANRESULT";
+    private BroadcastReceiver scanReceiver;
+    ScannerInterface  scanner;
+
+    private class ScannerResultReceiver extends BroadcastReceiver{
+        public void onReceive(Context context, Intent intent) {
+            final String scanResult = intent.getStringExtra("value");
+
+            if (intent.getAction().equals(RES_ACTION)){
+
+                if(scanResult.length()>0){
+                    String barcodeScan = e1.getText().toString().trim().replace("/", "|");
+                    String itemCodeScan = e3.getText().toString().trim().replace("/", "|");
+                    barcodeStr = scanResult;
+                    if (TextUtils.isEmpty(barcodeScan) && TextUtils.isEmpty(itemCodeScan)) {
+                        e1.setText(barcodeStr);
+                    } else if (TextUtils.isEmpty(barcodeScan)) {
+                        e1.setText(barcodeStr);
+                    } else {
+                        e3.setText(barcodeStr);
+                    }
+                }
+            }
+        }
+    }
+
     //RETURN WHAT SCANNER GET
     //GIVE PRIORITY THE BARCODE SCAN TO THE BARCODE COLUMN
     //THEN IF THE BARCODE ALREADY EXIST, THE SCANNED DATA WILL BE GIVEN TO THE ITEM CODE COLUMN
@@ -72,6 +98,14 @@ public class House_New_Goods extends AppCompatActivity {
 
         scanReader = new ScanReader(this);
         scanReader.init();
+
+        // Scanner input for iData
+        IntentFilter filter2 = new IntentFilter();
+        filter2.addAction(RES_ACTION);
+        scanReceiver = new ScannerResultReceiver();
+        registerReceiver(scanReceiver, filter2);
+        scanner = new ScannerInterface(this);
+        scanner.setOutputMode(1);
 
         String users = getIntent().getStringExtra("Users");
 

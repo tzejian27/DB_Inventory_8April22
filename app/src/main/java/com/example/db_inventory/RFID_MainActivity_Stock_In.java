@@ -340,6 +340,10 @@ public class RFID_MainActivity_Stock_In extends Activity implements OnClickListe
         String key2 = intent1.getStringExtra("Key2");
         String users = intent1.getStringExtra("Users");
         String totalqtyh = intent1.getStringExtra("TotalQtyH");
+        String batchNum="";
+        if(intent1.hasExtra("batchNum")){
+            batchNum = intent1.getStringExtra("batchNum");
+        }
 
         //DEFINE THE FIREBASE TABLE LINKED
         HouseDatabase = FirebaseDatabase.getInstance().getReference("House").child(key).child(key2);
@@ -358,6 +362,7 @@ public class RFID_MainActivity_Stock_In extends Activity implements OnClickListe
             datamap.put("House", name);
             datamap.put("Barcode", barcode);
             datamap.put("Status", "Stock In");
+            datamap.put("Batch", batchNum);
 
             RFIDDatabase = FirebaseDatabase.getInstance().getReference("RFID_database");
             RFIDDatabase.child(epcdata.getEpc()).addListenerForSingleValueEvent(new ValueEventListener() {

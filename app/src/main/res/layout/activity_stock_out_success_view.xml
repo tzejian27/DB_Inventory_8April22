@@ -8,203 +8,214 @@
     android:orientation="vertical"
     tools:context=".Stock_In_Success_View">
 
-    <TextView
-        android:id="@+id/txt_new_house_SO"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="30dp"
-        android:text="@string/stock_out"
-        android:textColor="@color/blue"
-        android:textSize="80px" />
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_Inventory_TotalQty_SO_RFID"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/house_qty"
-            android:textColor="@color/blue" />
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/textView_Inventory_TotalQty_SO_RFID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:text="@string/total_quantity"
-            android:textColor="@color/blue" />
+            <TextView
+                android:id="@+id/txt_new_house_SO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="30dp"
+                android:text="@string/stock_out"
+                android:textColor="@color/blue"
+                android:textSize="80px" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_Inventory_TotalQty_SO_RFID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/house_qty"
+                    android:textColor="@color/blue" />
 
-    <TextView
-        android:id="@+id/txt_input_barcode4_SO_RFID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="@string/barcode"
-        android:textColor="@color/blue"
-        android:textSize="50px" />
-
-    <EditText
-        android:id="@+id/editText_Inventory_barcode_SO_RFID"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/blue_border"
-        android:ems="10"
-        android:hint="@string/enter_scan_barcode"
-        android:inputType="textPersonName"
-        android:paddingLeft="20dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tv_inventory_quantity_SO_RFID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="100dp"
-            android:text="@string/total_qty"
-            android:textColor="@color/blue" />
-
-        <TextView
-            android:id="@+id/textView_Inventory_Qty_SO_RFID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:text="@string/inventory_s_quantity"
-            android:textColor="@color/blue" />
+                <TextView
+                    android:id="@+id/textView_Inventory_TotalQty_SO_RFID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="@string/total_quantity"
+                    android:textColor="@color/blue" />
 
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:orientation="horizontal">
+            <TextView
+                android:id="@+id/txt_input_barcode4_SO_RFID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/barcode"
+                android:textColor="@color/blue"
+                android:textSize="50px" />
 
-        <TextView
-            android:id="@+id/tv_quantity_out_SO_RFID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="100dp"
-            android:text="@string/qty_out"
-            android:textColor="@color/blue" />
+            <EditText
+                android:id="@+id/editText_Inventory_barcode_SO_RFID"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/blue_border"
+                android:ems="10"
+                android:hint="@string/enter_scan_barcode"
+                android:inputType="textPersonName"
+                android:paddingLeft="20dp" />
 
-        <TextView
-            android:id="@+id/textView_quantity_out_SO_RFID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:text="@string/qty_out"
-            android:textColor="@color/grn" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/tv_inventory_quantity_SO_RFID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="100dp"
+                    android:text="@string/total_qty"
+                    android:textColor="@color/blue" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tv_Inventory_name_SO_RFID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="100dp"
-            android:text="@string/name"
-            android:textColor="@color/blue" />
-
-        <TextView
-            android:id="@+id/textView_Inventory_name_SO_RFID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:text="@string/inventory_s_name"
-            android:textColor="@color/blue" />
+                <TextView
+                    android:id="@+id/textView_Inventory_Qty_SO_RFID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="@string/inventory_s_quantity"
+                    android:textColor="@color/blue" />
 
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_Inventory_price_SO_RFID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="100dp"
-            android:text="@string/price"
-            android:textColor="@color/blue" />
+                <TextView
+                    android:id="@+id/tv_quantity_out_SO_RFID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="100dp"
+                    android:text="@string/qty_out"
+                    android:textColor="@color/blue" />
 
-        <TextView
-            android:id="@+id/textView_Inventory_price_SO_RFID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:text="@string/inventory_s_price"
-            android:textColor="@color/blue" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tv_Inventory_cost_SO_RFID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="100dp"
-            android:text="@string/cost"
-            android:textColor="@color/blue" />
-
-        <TextView
-            android:id="@+id/textView_Inventory_cost_SO_RFID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:text="@string/inventory_s_cost"
-            android:textColor="@color/blue" />
-
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/textView_quantity_out_SO_RFID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="@string/qty_out"
+                    android:textColor="@color/grn" />
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
+            </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_back_SO_RFID"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:width="300dp"
-            android:backgroundTint="@color/blue"
-            android:text="Back"
-            android:textColor="@color/white" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_Inventory_name_SO_RFID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="100dp"
+                    android:text="@string/name"
+                    android:textColor="@color/blue" />
+
+                <TextView
+                    android:id="@+id/textView_Inventory_name_SO_RFID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="@string/inventory_s_name"
+                    android:textColor="@color/blue" />
 
 
-    </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_Inventory_price_SO_RFID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="100dp"
+                    android:text="@string/price"
+                    android:textColor="@color/blue" />
+
+                <TextView
+                    android:id="@+id/textView_Inventory_price_SO_RFID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="@string/inventory_s_price"
+                    android:textColor="@color/blue" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_Inventory_cost_SO_RFID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="100dp"
+                    android:text="@string/cost"
+                    android:textColor="@color/blue" />
+
+                <TextView
+                    android:id="@+id/textView_Inventory_cost_SO_RFID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="@string/inventory_s_cost"
+                    android:textColor="@color/blue" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_back_SO_RFID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:width="300dp"
+                    android:backgroundTint="@color/blue"
+                    android:text="Back"
+                    android:textColor="@color/white" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>

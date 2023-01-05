@@ -7,139 +7,150 @@
     android:orientation="vertical"
     tools:context=".StockIn_step2">
 
-    <TextView
-        android:id="@+id/txt_input_inventory_itemcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="Item code"
-        android:textColor="@color/blue"
-        android:textSize="20sp" />
-
-    <EditText
-        android:id="@+id/editText_Inventory_itemcode_SI"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/blue_border"
-        android:ems="10"
-        android:hint="Scan/Enter Item Code(Optional)"
-        android:inputType="textPersonName"
-        android:paddingLeft="20dp" />
+        android:layout_height="match_parent">
 
-
-    <TextView
-        android:id="@+id/txt_input_inventory_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="@string/input_name"
-        android:textColor="@color/blue"
-        android:textSize="20sp" />
-
-    <EditText
-        android:id="@+id/editText_Inventory_name_SI"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/blue_border"
-        android:ems="10"
-        android:hint="@string/enter_name"
-        android:inputType="textPersonName"
-        android:paddingLeft="20dp" />
-
-    <TextView
-        android:id="@+id/txt_input_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="@string/input_price_rm"
-        android:textColor="@color/blue"
-        android:textSize="50px" />
-
-    <EditText
-        android:id="@+id/editText_Inventory_price_SI"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/blue_border"
-        android:ems="10"
-        android:hint="@string/enter_price"
-        android:inputType="numberDecimal"
-        android:paddingLeft="20dp" />
-
-    <TextView
-        android:id="@+id/txt_input_cost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:inputType="numberDecimal"
-        android:text="@string/item_cost"
-        android:textColor="@color/blue"
-        android:textSize="50px" />
-
-    <EditText
-        android:id="@+id/editText_Inventory_cost_SI"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/blue_border"
-        android:ems="10"
-        android:hint="@string/enter_cost"
-        android:inputType="numberDecimal"
-        android:paddingLeft="20dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView39"
-            android:layout_width="124dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Allow Batch"
-            android:textColor="#2196F3"
-            android:textSize="20sp" />
+            android:orientation="vertical" >
 
-        <Switch
-            android:id="@+id/isBatchEnabled"
-            android:layout_width="16dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/txt_input_inventory_itemcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Item code"
+                android:textColor="@color/blue"
+                android:textSize="20sp" />
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/editText_Inventory_itemcode_SI"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/blue_border"
+                android:ems="10"
+                android:hint="Scan/Enter Item Code(Optional)"
+                android:inputType="textPersonName"
+                android:paddingLeft="20dp" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
+            <TextView
+                android:id="@+id/txt_input_inventory_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/input_name"
+                android:textColor="@color/blue"
+                android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/btn_inventory_back2_SI"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:layout_weight="1"
-            android:width="300dp"
-            android:backgroundTint="@color/blue"
-            android:text="@string/back"
-            android:textColor="@color/white" />
+            <EditText
+                android:id="@+id/editText_Inventory_name_SI"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/blue_border"
+                android:ems="10"
+                android:hint="@string/enter_name"
+                android:inputType="textPersonName"
+                android:paddingLeft="20dp" />
 
-        <Button
-            android:id="@+id/btn_inventory_next2_SI"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:layout_weight="1"
-            android:width="300dp"
-            android:backgroundTint="@color/blue"
-            android:text="@string/next"
-            android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/txt_input_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/input_price_rm"
+                android:textColor="@color/blue"
+                android:textSize="50px" />
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/editText_Inventory_price_SI"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/blue_border"
+                android:ems="10"
+                android:hint="@string/enter_price"
+                android:inputType="numberDecimal"
+                android:paddingLeft="20dp" />
+
+            <TextView
+                android:id="@+id/txt_input_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:inputType="numberDecimal"
+                android:text="@string/item_cost"
+                android:textColor="@color/blue"
+                android:textSize="50px" />
+
+            <EditText
+                android:id="@+id/editText_Inventory_cost_SI"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/blue_border"
+                android:ems="10"
+                android:hint="@string/enter_cost"
+                android:inputType="numberDecimal"
+                android:paddingLeft="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView39"
+                    android:layout_width="124dp"
+                    android:layout_height="wrap_content"
+                    android:text="Allow Batch"
+                    android:textColor="#2196F3"
+                    android:textSize="20sp" />
+
+                <Switch
+                    android:id="@+id/isBatchEnabled"
+                    android:layout_width="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_inventory_back2_SI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_weight="1"
+                    android:width="300dp"
+                    android:backgroundTint="@color/blue"
+                    android:text="@string/back"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btn_inventory_next2_SI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_weight="1"
+                    android:width="300dp"
+                    android:backgroundTint="@color/blue"
+                    android:text="@string/next"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>

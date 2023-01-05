@@ -45,6 +45,24 @@ public class StockIn_step2 extends AppCompatActivity {
     private String itemCodeStr;
     public static String itemcode;
 
+    private final String RES_ACTION = "android.intent.action.SCANRESULT";
+    private BroadcastReceiver scanReceiver;
+    ScannerInterface  scanner;
+
+    private class ScannerResultReceiver extends BroadcastReceiver{
+        public void onReceive(Context context, Intent intent) {
+            final String scanResult = intent.getStringExtra("value");
+
+            if (intent.getAction().equals(RES_ACTION)){
+
+                if(scanResult.length()>0){
+                    itemCodeStr = scanResult;
+                    e4.setText(itemCodeStr);
+                }
+            }
+        }
+    }
+
     //SET SCAN INPUT TO EDIT TEXT
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
@@ -52,7 +70,7 @@ public class StockIn_step2 extends AppCompatActivity {
             byte[] itemcode = intent.getByteArrayExtra(ScanReader.SCAN_RESULT);
             Log.e("MainActivity", "itemcode = " + new String(itemcode));
             if (itemcode != null) {
-                String itemCodeScan = e4.getText().toString().trim().replace("/", "|");
+
                 itemCodeStr = new String(itemcode);
                 e4.setText(itemCodeStr);
 
@@ -88,6 +106,14 @@ public class StockIn_step2 extends AppCompatActivity {
 
         scanReader = new ScanReader(this);
         scanReader.init();
+
+        // Scanner input for iData
+        IntentFilter filter2 = new IntentFilter();
+        filter2.addAction(RES_ACTION);
+        scanReceiver = new ScannerResultReceiver();
+        registerReceiver(scanReceiver, filter2);
+        scanner = new ScannerInterface(this);
+        scanner.setOutputMode(1);
 
         Intent intent = getIntent();
         final String key = intent.getStringExtra("Key");

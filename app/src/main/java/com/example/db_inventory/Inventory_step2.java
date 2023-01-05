@@ -26,6 +26,24 @@ public class Inventory_step2 extends AppCompatActivity {
     private String itemCodeStr;
     public static String itemcode;
 
+    private final String RES_ACTION = "android.intent.action.SCANRESULT";
+    private BroadcastReceiver scanReceiver;
+    ScannerInterface  scanner;
+
+    private class ScannerResultReceiver extends BroadcastReceiver{
+        public void onReceive(Context context, Intent intent) {
+            final String scanResult = intent.getStringExtra("value");
+
+            if (intent.getAction().equals(RES_ACTION)){
+
+                if(scanResult.length()>0){
+                    itemCodeStr = scanResult;
+                    e2.setText(itemCodeStr);
+                }
+            }
+        }
+    }
+
     //GET SCANNED BARCODE
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
@@ -60,6 +78,14 @@ public class Inventory_step2 extends AppCompatActivity {
 
         scanReader = new ScanReader(this);
         scanReader.init();
+
+        // Scanner input for iData
+        IntentFilter filter2 = new IntentFilter();
+        filter2.addAction(RES_ACTION);
+        scanReceiver = new ScannerResultReceiver();
+        registerReceiver(scanReceiver, filter2);
+        scanner = new ScannerInterface(this);
+        scanner.setOutputMode(1);
 
         //GET INTENT
         Intent intent = getIntent();

@@ -39,7 +39,7 @@ public class exportInventory {
         currentDateandTime2 = sdf.format(new Date());
         housefile = new File("/storage/emulated/0/Report/" + "eStock" + currentDateandTime2);
         if (!housefile.exists()) {
-            housefile.mkdirs();
+            System.out.println(housefile.mkdirs());
         }
         exportExcel();
     }
@@ -161,7 +161,7 @@ public class exportInventory {
         HSSFRow rowData = hssfSheet.createRow(listOfItem.size()+2);
         columnIndex = houseFieldStart-1;
         HSSFCell hssfCell = rowData.createCell(columnIndex++);
-        hssfCell.setCellValue("Grand Total");
+        hssfCell.setCellValue("Total by house");
 
         for (int i = 0; i < houseList.size(); i++) {
             String addressStart = hssfSheet.getRow(2).getCell(columnIndex).getAddress().formatAsString();

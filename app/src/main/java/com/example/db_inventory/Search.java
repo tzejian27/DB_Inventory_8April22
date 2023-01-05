@@ -21,6 +21,24 @@ public class Search extends AppCompatActivity {
     ScanReader scanReader;
     private String barcodeStr;
 
+    private final String RES_ACTION = "android.intent.action.SCANRESULT";
+    private BroadcastReceiver scanReceiver;
+    ScannerInterface  scanner;
+
+    private class ScannerResultReceiver extends BroadcastReceiver{
+        public void onReceive(Context context, Intent intent) {
+            final String scanResult = intent.getStringExtra("value");
+
+            if (intent.getAction().equals(RES_ACTION)){
+
+                if(scanResult.length()>0){
+                    barcodeStr = scanResult;
+                    e1.setText(barcodeStr);
+                }
+            }
+        }
+    }
+
     //SEARCHING ITEM WITH BARCODE
     //SETTING SCANNED ITEM TO EDIT TEXT BOX
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
@@ -56,6 +74,14 @@ public class Search extends AppCompatActivity {
 
         scanReader = new ScanReader(this);
         scanReader.init();
+
+        // Scanner input for iData
+        IntentFilter filter2 = new IntentFilter();
+        filter2.addAction(RES_ACTION);
+        scanReceiver = new ScannerResultReceiver();
+        registerReceiver(scanReceiver, filter2);
+        scanner = new ScannerInterface(this);
+        scanner.setOutputMode(1);
 
         //CANCEL SEARCH
         b1.setOnClickListener(new View.OnClickListener() {

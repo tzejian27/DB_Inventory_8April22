@@ -103,6 +103,7 @@ public class StockIn_step3 extends AppCompatActivity {
                                     err_BatchNo.setVisibility(View.VISIBLE);
                                     btn_enter.setEnabled(false);
                                     btn_enter.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#bbbbbb")));
+                                    break;
                                 }
                                 else{
                                     batchNoField.setBackgroundResource(R.drawable.blue_border);

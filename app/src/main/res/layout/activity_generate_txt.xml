@@ -8,33 +8,43 @@
     tools:context=".Generate_Txt">
 
 
-    <Button
-        android:id="@+id/button_excel_report"
-        style="?android:buttonBarButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="48dp"
-        android:width="250dp"
-        android:backgroundTint="@color/blue"
-        android:padding="8dp"
-        android:text="@string/generate_house_excel"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="14sp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/button_excel_newGoods"
-        style="?android:buttonBarButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:width="250dp"
-        android:backgroundTint="@color/blue"
-        android:text="@string/generate_goods_list_excel"
-        android:textColor="@android:color/white"
-        android:textSize="14sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/button_excel_report"
+                style="?android:buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginBottom="48dp"
+                android:width="250dp"
+                android:backgroundTint="@color/blue"
+                android:padding="8dp"
+                android:text="@string/generate_house_excel"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/button_excel_newGoods"
+                style="?android:buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:width="250dp"
+                android:backgroundTint="@color/blue"
+                android:text="@string/generate_goods_list_excel"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

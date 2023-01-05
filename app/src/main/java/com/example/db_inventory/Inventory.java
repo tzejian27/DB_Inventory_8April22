@@ -51,6 +51,24 @@ public class Inventory extends AppCompatActivity {
     ScanReader scanReader;
     private String barcodeStr;
 
+    private final String RES_ACTION = "android.intent.action.SCANRESULT";
+    private BroadcastReceiver scanReceiver;
+    ScannerInterface  scanner;
+
+    private class ScannerResultReceiver extends BroadcastReceiver{
+        public void onReceive(Context context, Intent intent) {
+            final String scanResult = intent.getStringExtra("value");
+
+            if (intent.getAction().equals(RES_ACTION)){
+
+                if(scanResult.length()>0){
+                    barcodeStr = scanResult;
+                    edt_barcode.setText(barcodeStr);
+                }
+            }
+        }
+    }
+
     //GET SCANNED BARCODE
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
@@ -93,6 +111,14 @@ public class Inventory extends AppCompatActivity {
 
         scanReader = new ScanReader(this);
         scanReader.init();
+
+        // Scanner input for iData
+        IntentFilter filter2 = new IntentFilter();
+        filter2.addAction(RES_ACTION);
+        scanReceiver = new ScannerResultReceiver();
+        registerReceiver(scanReceiver, filter2);
+        scanner = new ScannerInterface(this);
+        scanner.setOutputMode(1);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);

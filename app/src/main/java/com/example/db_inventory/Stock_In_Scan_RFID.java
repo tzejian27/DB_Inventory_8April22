@@ -1,11 +1,17 @@
 package com.example.db_inventory;
 
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,7 +19,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class Stock_In_Scan_RFID extends AppCompatActivity {
@@ -36,26 +45,42 @@ public class Stock_In_Scan_RFID extends AppCompatActivity {
     public static String barcode;
     EditText edt_barcode;
     Button btn_back, btn_next;
-    DatabaseReference databaseReference, databaseReference2;
+    DatabaseReference HouseReference, newGoodsReference;
     long maxid = 0;
-    String Quantity = "0";
     String currentDateandTime;
-    String Name;
-    String Price;
-    String Cost;
     String name;
     String key;
-    String totaltype;
-    String ItemCode;
-    long k;
     String inventory_key;
     ScanReader scanReader;
+    HashMap<String, Boolean> isBatchEnabled = new HashMap<>();
+    ArrayList <String> batchNoList = new ArrayList<>();
+    private String batchNumberPreset;
+    private String batchNum;
 
     //SPINNER
     Spinner spinner;
     List<String> barcode_list;
 
     private String barcodeStr;
+
+    private final String RES_ACTION = "android.intent.action.SCANRESULT";
+    private BroadcastReceiver scanReceiver;
+    ScannerInterface  scanner;
+
+    private class ScannerResultReceiver extends BroadcastReceiver{
+        public void onReceive(Context context, Intent intent) {
+            final String scanResult = intent.getStringExtra("value");
+
+            if (intent.getAction().equals(RES_ACTION)){
+
+                if(scanResult.length()>0){
+                    barcodeStr = scanResult;
+                    edt_barcode.setText(barcodeStr);
+                }
+            }
+        }
+    }
+
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -96,9 +121,17 @@ public class Stock_In_Scan_RFID extends AppCompatActivity {
         scanReader = new ScanReader(this);
         scanReader.init();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
-        databaseReference.keepSynced(true);
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        // Scanner input for iData
+        IntentFilter filter2 = new IntentFilter();
+        filter2.addAction(RES_ACTION);
+        scanReceiver = new ScannerResultReceiver();
+        registerReceiver(scanReceiver, filter2);
+        scanner = new ScannerInterface(this);
+        scanner.setOutputMode(1);
+
+        HouseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
+        HouseReference.keepSynced(true);
+        HouseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists())
@@ -115,15 +148,17 @@ public class Stock_In_Scan_RFID extends AppCompatActivity {
         spinner = findViewById(R.id.spinner_stock_in);
         barcode_list = new ArrayList<>();
 
-        databaseReference2 = FirebaseDatabase.getInstance().getReference("New_Goods");
-        databaseReference2.keepSynced(true);
+        newGoodsReference = FirebaseDatabase.getInstance().getReference("New_Goods");
+        newGoodsReference.keepSynced(true);
 
-        databaseReference2.addValueEventListener(new ValueEventListener() {
+        newGoodsReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     String spinnerbarcode = snapshot1.child("Barcode").getValue(String.class);
                     barcode_list.add(spinnerbarcode);
+                    boolean itemBatchEnabled = snapshot1.child("isBatchEnabled").getValue(Boolean.class);
+                    isBatchEnabled.put(spinnerbarcode, itemBatchEnabled);
 
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(Stock_In_Scan_RFID.this, android.R.layout.simple_list_item_1, barcode_list);
@@ -174,7 +209,117 @@ public class Stock_In_Scan_RFID extends AppCompatActivity {
                 if (barcode.isEmpty()) {
                     Toast.makeText(Stock_In_Scan_RFID.this, "Please enter/scan barcode  ", Toast.LENGTH_SHORT).show();
                 } else {
-                    add();
+                    if(isBatchEnabled.get(barcode)){
+                        Dialog dialog = new Dialog(Stock_In_Scan_RFID.this);
+                        dialog.setContentView(R.layout.dialog_rfid_batch);
+                        dialog.getWindow().setLayout(650, 320);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        dialog.show();
+
+                        EditText batchInput = dialog.findViewById(R.id.editText_BatchNumber);
+                        Button confirmBtn, cancelBtn;
+                        ImageButton resetBtn = dialog.findViewById(R.id.resetButton);
+                        TextView errorText = dialog.findViewById(R.id.Error_BatchNo);
+                        confirmBtn = dialog.findViewById(R.id.confirmButton);
+                        cancelBtn = dialog.findViewById(R.id.cancel_button);
+
+                        // Preset batchNumber
+                        
+                            DatabaseReference tempReference = FirebaseDatabase.getInstance().getReference("Batch");
+                            final String[] latestBatchNumber = new String[1];
+                            tempReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    // Retrieve the latest used batch number
+                                    latestBatchNumber[0] = snapshot.child("Latest Batch").getValue().toString().trim();
+                                    String[] batchNo= latestBatchNumber[0].split("-");
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyMM");
+
+                                    String prefix = sdf.format(new Date()); // Current prefix of the batch number
+                                    String suffix;
+                                    if(prefix.equals(batchNo[0])){
+                                        suffix = String.format("%04d",Integer.parseInt(batchNo[1])+1);
+                                    }else{
+                                        suffix = "0001";
+                                    }
+                                    batchNumberPreset = prefix+"-"+suffix;
+                                    batchInput.setText(batchNumberPreset);
+                                    
+                                    // Retrieve the used value of Batch Number into ArrayList
+                                    DataSnapshot snapshot1 = snapshot.child("Used Value");
+                                    for(DataSnapshot dss : snapshot1.getChildren()){
+                                        batchNoList.add((String) dss.getValue());
+                                    }
+            
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
+                        resetBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                batchInput.setText(batchNumberPreset);
+                            }
+                        });
+                        
+                        confirmBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                batchNum = batchInput.getText().toString();
+                                dialog.dismiss();
+                                add();
+                            }
+                        });
+
+                        cancelBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        batchInput.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                                String inputText = charSequence.toString();
+
+                                for(String text : batchNoList){
+                                    if(inputText.matches(text)){
+                                        batchInput.setBackgroundResource(R.drawable.red_border);
+                                        errorText.setVisibility(View.VISIBLE);
+                                        confirmBtn.setEnabled(false);
+                                        confirmBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#bbbbbb")));
+                                        break;
+                                    }
+                                    else{
+                                        batchInput.setBackgroundResource(R.drawable.blue_border);
+                                        errorText.setVisibility(View.INVISIBLE);
+                                        confirmBtn.setEnabled(true);
+                                        confirmBtn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable editable) {
+
+                            }
+                        });
+
+                    }else{
+                        add();
+                    }
+
+
                 }
             }
         });
@@ -190,12 +335,14 @@ public class Stock_In_Scan_RFID extends AppCompatActivity {
             return;
         }
 
-        databaseReference.orderByChild("Barcode").equalTo(barcode).addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+        HouseReference.orderByChild("Barcode").equalTo(barcode).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot3) {
                 if (dataSnapshot3.exists()) {
                     final String barcode = edt_barcode.getText().toString().trim().replace("/", "|");
-                    databaseReference.orderByChild("Barcode").equalTo(barcode).addListenerForSingleValueEvent(new ValueEventListener() {
+                    HouseReference.orderByChild("Barcode").equalTo(barcode).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
@@ -207,6 +354,11 @@ public class Stock_In_Scan_RFID extends AppCompatActivity {
                                 intent.putExtra("Key2", inventory_key); //BARCODE'S RANDOM KEY
                                 intent.putExtra("Users", users);
                                 intent.putExtra("TotalQtyH", totalqtyh);
+                                if(isBatchEnabled.get(barcode)){
+                                    if(!batchNum.isEmpty()){
+                                        intent.putExtra("batchNum", batchNum);
+                                    }
+                                }
                                 startActivity(intent);
                                 finish();
                             }

@@ -1,6 +1,8 @@
 package com.example.db_inventory;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,8 +26,8 @@ public class StockIn_Menu extends AppCompatActivity implements View.OnClickListe
         btn_scan.setOnClickListener(this);
         btn_rfid.setOnClickListener(this);
         //Disable RFID on 22/12/2022
-//        btn_rfid.setEnabled(false);
-//        btn_rfid.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#BBBBBB")));
+        btn_rfid.setEnabled(false);
+        btn_rfid.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#BBBBBB")));
 
     }
 

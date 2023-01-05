@@ -50,6 +50,24 @@ public class Inventory_List_All extends AppCompatActivity {
     ScanReader scanReader;
     private String barcodeStr;
 
+    private BroadcastReceiver scanReceiver;
+    ScannerInterface  scanner;
+    private final String RES_ACTION = "android.intent.action.SCANRESULT";
+
+    private class ScannerResultReceiver extends BroadcastReceiver{
+        public void onReceive(Context context, Intent intent) {
+            final String scanResult = intent.getStringExtra("value");
+
+            if (intent.getAction().equals(RES_ACTION)){
+
+                if(scanResult.length()>0){
+                    barcodeStr = scanResult;
+                    searchView.setQuery(barcodeStr,true);
+                }
+            }
+        }
+    }
+
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -194,6 +212,14 @@ public class Inventory_List_All extends AppCompatActivity {
         IntentFilter filter = new IntentFilter();
         filter.addAction(ScanReader.ACTION_SCAN_RESULT);
         registerReceiver(resultReceiver, filter);
+
+        // Scanner input for iData
+        IntentFilter filter2 = new IntentFilter();
+        filter2.addAction(RES_ACTION);
+        scanReceiver = new ScannerResultReceiver();
+        registerReceiver(scanReceiver, filter2);
+        scanner = new ScannerInterface(this);
+        scanner.setOutputMode(1);
 
         scanReader = new ScanReader(this);
         scanReader.init();

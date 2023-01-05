@@ -56,8 +56,25 @@ public class Stock_In_Scan extends AppCompatActivity {
     //SPINNER
     Spinner spinner;
     List<String> barcode_list;
-
+    private final String RES_ACTION = "android.intent.action.SCANRESULT";
     private String barcodeStr;
+    private BroadcastReceiver scanReceiver;
+    ScannerInterface  scanner;
+    private class ScannerResultReceiver extends BroadcastReceiver{
+        public void onReceive(Context context, Intent intent) {
+            final String scanResult = intent.getStringExtra("value");
+
+            if (intent.getAction().equals(RES_ACTION)){
+
+                if(scanResult.length()>0){
+                    barcodeStr = new String(scanResult);
+                    edt_barcode.setText(scanResult);
+                    }
+                }
+            }
+        }
+
+
     private final BroadcastReceiver resultReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -91,12 +108,22 @@ public class Stock_In_Scan extends AppCompatActivity {
 
         //BARCODE SCANNING
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        // Scanner input for BR620
         IntentFilter filter = new IntentFilter();
         filter.addAction(ScanReader.ACTION_SCAN_RESULT);
         registerReceiver(resultReceiver, filter);
-
         scanReader = new ScanReader(this);
         scanReader.init();
+
+        // Scanner input for iData
+        IntentFilter filter2 = new IntentFilter();
+        filter2.addAction(RES_ACTION);
+        scanReceiver = new ScannerResultReceiver();
+        registerReceiver(scanReceiver, filter2);
+        scanner = new ScannerInterface(this);
+        scanner.setOutputMode(1);
+
 
         databaseReference = FirebaseDatabase.getInstance().getReference("House").child(key);
         databaseReference.keepSynced(true);
