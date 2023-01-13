@@ -391,6 +391,7 @@ public class StockOut_step3 extends AppCompatActivity {
                            //     }
                            //    });
                            Toast.makeText(StockOut_step3.this, "Add Successfully !!!", Toast.LENGTH_SHORT).show();
+                           b1.setEnabled(true);
                            b1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25A1DA")));
                        }
                         else{

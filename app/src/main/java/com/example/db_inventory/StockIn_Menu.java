@@ -26,7 +26,9 @@ public class StockIn_Menu extends AppCompatActivity implements View.OnClickListe
         btn_scan.setOnClickListener(this);
         btn_rfid.setOnClickListener(this);
         //Disable RFID on 22/12/2022
+
         btn_rfid.setEnabled(false);
+        // Color for disable button #BBBBBB
         btn_rfid.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#BBBBBB")));
 
     }

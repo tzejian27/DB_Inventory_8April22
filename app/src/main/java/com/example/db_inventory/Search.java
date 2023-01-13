@@ -11,9 +11,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.symbol.emdk.barcode.ScanDataCollection;
+import com.symbol.emdk.barcode.ScannerResults;
 
-public class Search extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class Search extends zebraScanner {
     //Barcode
     public static String barcode;
     Button b1, b2;
@@ -24,6 +27,24 @@ public class Search extends AppCompatActivity {
     private final String RES_ACTION = "android.intent.action.SCANRESULT";
     private BroadcastReceiver scanReceiver;
     ScannerInterface  scanner;
+
+    @Override
+    public void onData(ScanDataCollection scanDataCollection) {
+        String scanResult = "";
+        if ((scanDataCollection != null) &&   (scanDataCollection.getResult() == ScannerResults.SUCCESS)) {
+            ArrayList<ScanDataCollection.ScanData> scanData =  scanDataCollection.getScanData();
+            // Iterate through scanned data and prepare the data.
+            for (ScanDataCollection.ScanData data :  scanData) {
+                // Get the scanned data
+                scanResult =  data.getData();
+            }
+            // Update EditText with scanned data and type of label on UI thread.
+            if (!scanResult.isEmpty()) {
+                barcodeStr = scanResult;
+                e1.setText(barcodeStr);
+            }
+        }
+    }
 
     private class ScannerResultReceiver extends BroadcastReceiver{
         public void onReceive(Context context, Intent intent) {

@@ -340,10 +340,8 @@ public class RFID_MainActivity_Stock_In extends Activity implements OnClickListe
         String key2 = intent1.getStringExtra("Key2");
         String users = intent1.getStringExtra("Users");
         String totalqtyh = intent1.getStringExtra("TotalQtyH");
-        String batchNum="";
-        if(intent1.hasExtra("batchNum")){
-            batchNum = intent1.getStringExtra("batchNum");
-        }
+        String batchNum=(intent1.hasExtra("batchNum"))?intent1.getStringExtra("batchNum"):"";
+
 
         //DEFINE THE FIREBASE TABLE LINKED
         HouseDatabase = FirebaseDatabase.getInstance().getReference("House").child(key).child(key2);
@@ -412,14 +410,15 @@ public class RFID_MainActivity_Stock_In extends Activity implements OnClickListe
 
                                             //GET CURRENT STOCK DATA WHICH IS ITEM NAME AND THE CURRENT QUANTITY OF BARCODE
                                             String ItemName = snapshot.child("ItemName").getValue().toString().trim();
-                                            String Quantity = snapshot.child("Quantity").getValue().toString().trim();
+                                            String initialQuantity = snapshot.child("Quantity").getValue().toString().trim();
+                                            String itemcode = snapshot.child("ItemCode").getValue().toString().trim();
 
                                             //SET THE STOCK MOVEMENT PARENT NAME IN FORMAT BARCODE_dd_MM_yyyy_HH:mm:ss
                                             // TO MAKE SURE THE SORTING AND DATA FILTER IN SIDE SERVER EASIER
                                             String parentname = barcode + "_" + currentDateandTime2;
 
                                             //NEW QTY EQUAL TO CURRENT QTY + NUMBER OF RFID (NOT EXIST IN FIREBASE)
-                                            int qty = Integer.parseInt(Quantity) + count;
+                                            int qty = Integer.parseInt(initialQuantity) + count;
 
                                             //INSERT STOCK MOVEMENT
                                             Map dataMap4 = new HashMap();
@@ -431,7 +430,7 @@ public class RFID_MainActivity_Stock_In extends Activity implements OnClickListe
                                             dataMap4.put("QtyInOut_Date", currentDateandTime);
                                             dataMap4.put("QtyInOut_Date2", currentDateandTime3);
                                             //QUANTITY BEFORE STOCK IN
-                                            dataMap4.put("Qty", Quantity+"");
+                                            dataMap4.put("Qty", initialQuantity+"");
                                             //QUANTITY AFTER STOCK IN
                                             dataMap4.put("TotalQty", qty);
                                             dataMap4.put("HouseName", name);
@@ -454,6 +453,11 @@ public class RFID_MainActivity_Stock_In extends Activity implements OnClickListe
                                             //SUM-UP THE INSERTED NUMBER WITH THE TOTAL QUANTITY IN HOUSE
                                             int sum = totalQty + count;
                                             String sum2 = String.valueOf(sum);
+
+
+                                            if(intent1.hasExtra("batchNum")) {
+                                                updateFirebaseWithBatch(currentDateandTime, itemcode, qty);
+                                            }
 
                                             HouseDatabase2.child("TotalQty").setValue(sum2);
 
@@ -483,7 +487,25 @@ public class RFID_MainActivity_Stock_In extends Activity implements OnClickListe
                                             startActivity(intent2SIrfid);
                                             finish();
                                         }
-                                    });
+
+                                    private void updateFirebaseWithBatch(String currentDateandTime, String itemcode, int qty) {
+                                        DatabaseReference batchNoRef = FirebaseDatabase.getInstance().getReference("Batch");
+                                        Map batchData = new HashMap();
+                                        batchData.put("Barcode", barcode);
+                                        batchData.put("ItemCode", itemcode);
+                                        batchData.put("Qty In", count);
+                                        batchData.put("Quantity", count);
+                                        batchData.put("DateTime", currentDateandTime);
+                                        Map batchKey = new HashMap();
+                                        batchKey.put(key+"/"+batchNum+ "/" , batchData);
+                                        batchNoRef.updateChildren(batchKey);
+                                        batchNoRef.child("Latest Batch").setValue(batchNum);
+
+                                        Map usedValue = new HashMap();
+                                        usedValue.put(batchNum,batchNum);
+                                        batchNoRef.child("Used Value").updateChildren(usedValue);
+                                    }
+                                });
 
 
 

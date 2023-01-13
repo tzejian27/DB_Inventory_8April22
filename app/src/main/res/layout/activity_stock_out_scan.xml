@@ -59,12 +59,11 @@
 
             <TextView
                 android:id="@+id/textView20"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
                 android:text="Batch"
                 android:textColor="@color/blue"
-                android:textSize="50px" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/txtView_BatchNumber"

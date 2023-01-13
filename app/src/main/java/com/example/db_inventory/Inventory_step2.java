@@ -12,12 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.symbol.emdk.barcode.ScanDataCollection;
+import com.symbol.emdk.barcode.ScannerResults;
 
-public class Inventory_step2 extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class Inventory_step2 extends zebraScanner {
 
     Button b1, b2;
     EditText e1, e2;
@@ -29,6 +31,24 @@ public class Inventory_step2 extends AppCompatActivity {
     private final String RES_ACTION = "android.intent.action.SCANRESULT";
     private BroadcastReceiver scanReceiver;
     ScannerInterface  scanner;
+
+    @Override
+    public void onData(ScanDataCollection scanDataCollection) {
+        String scanResult = "";
+        if ((scanDataCollection != null) &&   (scanDataCollection.getResult() == ScannerResults.SUCCESS)) {
+            ArrayList<ScanDataCollection.ScanData> scanData =  scanDataCollection.getScanData();
+            // Iterate through scanned data and prepare the data.
+            for (ScanDataCollection.ScanData data :  scanData) {
+                // Get the scanned data
+                scanResult =  data.getData();
+            }
+            // Update EditText with scanned data and type of label on UI thread.
+            if (!scanResult.isEmpty()) {
+                itemCodeStr = scanResult;
+                e2.setText(itemCodeStr);
+            }
+        }
+    }
 
     private class ScannerResultReceiver extends BroadcastReceiver{
         public void onReceive(Context context, Intent intent) {

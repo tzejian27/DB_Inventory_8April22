@@ -17,20 +17,21 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.symbol.emdk.barcode.ScanDataCollection;
+import com.symbol.emdk.barcode.ScannerResults;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Stock_Out_Scan_RFID extends AppCompatActivity {
+public class Stock_Out_Scan_RFID extends zebraScanner {
 
     //Barcode
     public static String barcode;
@@ -53,6 +54,24 @@ public class Stock_Out_Scan_RFID extends AppCompatActivity {
     private final String RES_ACTION = "android.intent.action.SCANRESULT";
     private BroadcastReceiver scanReceiver;
     ScannerInterface  scanner;
+
+    @Override
+    public void onData(ScanDataCollection scanDataCollection) {
+        String scanResult = "";
+        if ((scanDataCollection != null) &&   (scanDataCollection.getResult() == ScannerResults.SUCCESS)) {
+            ArrayList<ScanDataCollection.ScanData> scanData =  scanDataCollection.getScanData();
+            // Iterate through scanned data and prepare the data.
+            for (ScanDataCollection.ScanData data :  scanData) {
+                // Get the scanned data
+                scanResult =  data.getData();
+            }
+            // Update EditText with scanned data and type of label on UI thread.
+            if (!scanResult.isEmpty()) {
+                barcodeStr = scanResult;
+                edt_barcode.setText(scanResult);
+            }
+        }
+    }
 
     private class ScannerResultReceiver extends BroadcastReceiver{
         public void onReceive(Context context, Intent intent) {
@@ -80,11 +99,20 @@ public class Stock_Out_Scan_RFID extends AppCompatActivity {
         }
     };
 
+    // todo:
+    // Ammend the sourcecode in RFID scanner to display the respective batch and house of the
+    // scanned EPC
+
     //Scan barcode for stock out
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_out_scan);
+
+        // Remove the visibility of batch option (No needed to choose batch)
+        findViewById(R.id.textView20).setVisibility(View.INVISIBLE);
+        findViewById(R.id.txtView_BatchNumber).setVisibility(View.INVISIBLE);
+        findViewById(R.id.QuantityLayout).setVisibility(View.INVISIBLE);
 
         edt_barcode = findViewById(R.id.editText_barcode_SO);
         btn_back = findViewById(R.id.btn_inventory_back_SO);

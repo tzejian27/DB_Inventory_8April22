@@ -13,18 +13,20 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.symbol.emdk.barcode.ScanDataCollection;
+import com.symbol.emdk.barcode.ScannerResults;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
-public class GRNInventory extends AppCompatActivity {
+public class GRNInventory extends zebraScanner {
 
     public static EditText e1;
     public static String barcode;
@@ -38,6 +40,25 @@ public class GRNInventory extends AppCompatActivity {
     private final String RES_ACTION = "android.intent.action.SCANRESULT";
     private BroadcastReceiver scanReceiver;
     ScannerInterface  scanner;
+
+    @Override
+    public void onData(ScanDataCollection scanDataCollection) {
+        String scanResult = "";
+        if ((scanDataCollection != null) &&   (scanDataCollection.getResult() == ScannerResults.SUCCESS)) {
+            ArrayList<ScanDataCollection.ScanData> scanData =  scanDataCollection.getScanData();
+            // Iterate through scanned data and prepare the data.
+            for (ScanDataCollection.ScanData data :  scanData) {
+                // Get the scanned data
+                scanResult =  data.getData();
+            }
+            // Update EditText with scanned data and type of label on UI thread.
+            if (!scanResult.isEmpty()) {
+                barcodeStr = scanResult;
+                e1.setText(barcodeStr);
+                b2.performClick();
+            }
+        }
+    }
 
     private class ScannerResultReceiver extends BroadcastReceiver{
         public void onReceive(Context context, Intent intent) {

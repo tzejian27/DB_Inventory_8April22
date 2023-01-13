@@ -89,7 +89,6 @@ public class RFID_MainActivity_Stock_Out extends Activity implements OnClickList
         //setOverflowShowingAlways();
         setContentView(R.layout.rfid_main_so);
 
-
         //GET DATA FROM PREVIOUS PAGE
         Intent intent1 = getIntent();
         barcode = intent1.getStringExtra("barcode");

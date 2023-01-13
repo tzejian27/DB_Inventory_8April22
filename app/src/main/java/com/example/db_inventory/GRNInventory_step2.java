@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.db_inventory.Class.Brand_class;
 import com.example.db_inventory.Class.Color_class;
@@ -31,13 +30,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.symbol.emdk.barcode.ScanDataCollection;
+import com.symbol.emdk.barcode.ScannerResults;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class GRNInventory_step2 extends AppCompatActivity {
+public class GRNInventory_step2 extends zebraScanner {
     Button b1,b2;
     Spinner s1,s2,s3,sItemCode;
     TextView barcodeView ,colorTextview, sizeTextView, noteTextView;
@@ -65,6 +66,23 @@ public class GRNInventory_step2 extends AppCompatActivity {
     private BroadcastReceiver scanReceiver;
     ScannerInterface  scanner;
 
+    @Override
+    public void onData(ScanDataCollection scanDataCollection) {
+        String scanResult = "";
+        if ((scanDataCollection != null) &&   (scanDataCollection.getResult() == ScannerResults.SUCCESS)) {
+            ArrayList<ScanDataCollection.ScanData> scanData =  scanDataCollection.getScanData();
+            // Iterate through scanned data and prepare the data.
+            for (ScanDataCollection.ScanData data :  scanData) {
+                // Get the scanned data
+                scanResult =  data.getData();
+            }
+            // Update EditText with scanned data and type of label on UI thread.
+            if (!scanResult.isEmpty()) {
+                String barcodeStr = scanResult;
+                itemcode.setText(barcodeStr);
+            }
+        }
+    }
     private class ScannerResultReceiver extends BroadcastReceiver{
         public void onReceive(Context context, Intent intent) {
             final String scanResult = intent.getStringExtra("value");

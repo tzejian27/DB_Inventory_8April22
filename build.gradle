@@ -3,6 +3,10 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        jcenter()
+        maven {
+            url = "https://zebratech.jfrog.io/artifactory/EMDK-Android/"
+        }
     }
 
     dependencies {

@@ -13,9 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.symbol.emdk.barcode.ScanDataCollection;
+import com.symbol.emdk.barcode.ScannerResults;
 
-public class House_New_Goods extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class House_New_Goods extends zebraScanner {
 
     //BARCODE
     public static String barcode;
@@ -27,6 +30,32 @@ public class House_New_Goods extends AppCompatActivity {
     private final String RES_ACTION = "android.intent.action.SCANRESULT";
     private BroadcastReceiver scanReceiver;
     ScannerInterface  scanner;
+
+    @Override
+    public void onData(ScanDataCollection scanDataCollection) {
+        String scanResult = "";
+        if ((scanDataCollection != null) &&   (scanDataCollection.getResult() == ScannerResults.SUCCESS)) {
+            ArrayList<ScanDataCollection.ScanData> scanData =  scanDataCollection.getScanData();
+            // Iterate through scanned data and prepare the data.
+            for (ScanDataCollection.ScanData data :  scanData) {
+                // Get the scanned data
+                scanResult =  data.getData();
+            }
+            // Update EditText with scanned data and type of label on UI thread.
+            if (!scanResult.isEmpty()) {
+                String barcodeScan = e1.getText().toString().trim().replace("/", "|");
+                String itemCodeScan = e3.getText().toString().trim().replace("/", "|");
+                barcodeStr = scanResult;
+                if (TextUtils.isEmpty(barcodeScan) && TextUtils.isEmpty(itemCodeScan)) {
+                    e1.setText(barcodeStr);
+                } else if (TextUtils.isEmpty(barcodeScan)) {
+                    e1.setText(barcodeStr);
+                } else {
+                    e3.setText(barcodeStr);
+                }
+            }
+        }
+    }
 
     private class ScannerResultReceiver extends BroadcastReceiver{
         public void onReceive(Context context, Intent intent) {

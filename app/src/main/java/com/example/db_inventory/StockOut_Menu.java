@@ -26,7 +26,7 @@ public class StockOut_Menu extends AppCompatActivity implements View.OnClickList
         btn_scan.setOnClickListener(this);
         btn_rfid.setOnClickListener(this);
 
-        btn_rfid.setEnabled(false);
+        btn_rfid.setEnabled(true);
         btn_rfid.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#BBBBBB")));
     }
 
